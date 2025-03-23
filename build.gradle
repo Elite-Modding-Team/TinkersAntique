@@ -10,7 +10,6 @@ buildscript {
     repositories {
         mavenCentral()
 		mavenLocal()
-        jcenter()
         maven {
             name = "forge"
             url = "https://files.minecraftforge.net/maven"
@@ -21,7 +20,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'com.anatawa12.forge:ForgeGradle:2.3-1.0.8'
     }
 }
 /*
@@ -32,31 +31,31 @@ plugins {
 repositories {
     maven {
         name 'DVS1 Maven FS'
-        url 'http://dvs1.progwml6.com/files/maven'
+        url 'https://dvs1.progwml6.com/files/maven'
     }
     maven { // TOP
         name 'tterrag maven'
-        url "https://maven.tterrag.com/"
+        url 'https://maven.tterrag.com'
     }
     maven { // compatlayer
         name 'K-4u maven'
-        url "https://maven.k-4u.nl/"
+        url 'https://maven.k-4u.nl'
     }
     maven {
-        name 'forge'
-        url 'https://files.minecraftforge.net/maven'
+        name 'Forge'
+        url 'https://maven.minecraftforge.net'
     }
     maven {
-         name "Tehnut Maven FS"
-         url "https://maven.tehnut.info"
-    }
-    maven {
-        name = "CoFH Maven"
-        url = "https://maven.covers1624.net"
+        name = 'CoFH Maven'
+        url = 'https://maven.covers1624.net'
     }
     maven { // Quark and ARL
-        name = "BlameJared"
-        url = "https://maven.blamejared.com"
+        name = 'BlameJared'
+        url = 'https://maven.blamejared.com'
+    }
+    maven { // HWYLA
+        name = 'Curse Maven'
+        url = 'https://cursemaven.com'
     }
 }
 
@@ -131,7 +130,7 @@ dependencies {
     // at runtime, use the full JEI jar
     runtime "mezz.jei:jei_${config.minecraft_version}:${config.jei_version}"
 
-    deobfCompile "mcp.mobius.waila:Hwyla:${config.hwyla_version}"
+    deobfCompile "curse.maven:hwyla-253449:${config.hwyla_version}"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:${config.probe_version}"
     deobfCompile "cofh:RedstoneFlux:${config.redstoneflux_version}:universal"
     deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
