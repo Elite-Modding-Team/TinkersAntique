@@ -42,6 +42,7 @@ import slimeknights.tconstruct.library.utils.AmmoHelper;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.Tags;
 import slimeknights.tconstruct.library.utils.ToolHelper;
+import slimeknights.tconstruct.tools.modifiers.ModReinforced;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -371,6 +372,15 @@ public abstract class EntityProjectileBase extends EntityArrow implements IEntit
     }
     else {
       updateInAir();
+    }
+
+    // remove unbreakable projectiles faster
+    if (!this.getEntityWorld().isRemote
+            && this.inGround
+            && this.arrowShake <= 0
+            && TagUtil.getTagSafe(this.tinkerProjectile.getItemStack()).getBoolean(ModReinforced.TAG_UNBREAKABLE)
+            && this.ticksExisted >= 100) {
+      this.setDead();
     }
   }
 
