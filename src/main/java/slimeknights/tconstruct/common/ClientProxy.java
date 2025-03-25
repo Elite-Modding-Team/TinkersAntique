@@ -161,15 +161,12 @@ public abstract class ClientProxy extends CommonProxy {
 
   @Override
   public void spawnParticle(Particles particleType, World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... data) {
-    if(world == null) {
-      world = mc.world;
-    }
-    Particle effect = createParticle(particleType, world, x, y, z, xSpeed, ySpeed, zSpeed, data);
+    Particle effect = createParticle(particleType, mc.world, x, y, z, xSpeed, ySpeed, zSpeed, data);
     mc.effectRenderer.addEffect(effect);
 
     if(particleType == Particles.EFFECT && data[0] > 1) {
       for(int i = 0; i < data[0] - 1; i++) {
-        effect = createParticle(particleType, world, x, y, z, xSpeed, ySpeed, zSpeed, data);
+        effect = createParticle(particleType, mc.world, x, y, z, xSpeed, ySpeed, zSpeed, data);
         mc.effectRenderer.addEffect(effect);
       }
     }
