@@ -65,8 +65,8 @@ public class ContainerPartBuilder extends ContainerTinkerStation<TilePartBuilder
     this.addSlotToContainer(patternSlot = new SlotStencil(craftMatrix, 2, 26, 35, false));
 
     // material slots
-    this.addSlotToContainer(input1 = new Slot(craftMatrix, 0, 48, 26));
-    this.addSlotToContainer(input2 = new Slot(craftMatrix, 1, 48, 44));
+    this.addSlotToContainer(input1 = new SlotPart(craftMatrix, 0, 48, 26, this));
+    this.addSlotToContainer(input2 = new SlotPart(craftMatrix, 1, 48, 44, this));
 
     TilePatternChest chest = detectTE(TilePatternChest.class);
     // TE present?
