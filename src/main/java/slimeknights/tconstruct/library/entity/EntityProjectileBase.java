@@ -373,15 +373,6 @@ public abstract class EntityProjectileBase extends EntityArrow implements IEntit
     else {
       updateInAir();
     }
-
-    // remove unbreakable projectiles faster
-    if (!this.getEntityWorld().isRemote
-            && this.inGround
-            && this.arrowShake <= 0
-            && TagUtil.getTagSafe(this.tinkerProjectile.getItemStack()).getBoolean(ModReinforced.TAG_UNBREAKABLE)
-            && this.ticksExisted >= 100) {
-      this.setDead();
-    }
   }
 
   // Update while we're stuck in a block
@@ -394,7 +385,8 @@ public abstract class EntityProjectileBase extends EntityArrow implements IEntit
     if((block == this.inTile && meta == this.inData) || this.getEntityWorld().collidesWithAnyBlock(ON_BLOCK_AABB.offset(this.getPositionVector()))) {
       ++this.ticksInGround;
 
-      if(this.ticksInGround >= Config.despawnProjectile) {
+      int despawnTicks = TagUtil.getTagSafe(this.tinkerProjectile.getItemStack()).getBoolean(ModReinforced.TAG_UNBREAKABLE) ? Config.despawnProjectile / 10 : Config.despawnProjectile;
+      if(this.ticksInGround >= despawnTicks) {
         this.setDead();
       }
     }
