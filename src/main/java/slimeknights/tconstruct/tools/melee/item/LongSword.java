@@ -70,7 +70,7 @@ public class LongSword extends SwordCore {
       ItemStack offhand = playerIn.getHeldItemOffhand();
       Item offhandItem = offhand.getItem();
       if (!offhand.isEmpty() && (offhandItem == TinkerMeleeWeapons.battleSign || offhandItem.isShield(offhand, playerIn) || offhandItem == TinkerRangedWeapons.shuriken)) {
-        return ActionResult.newResult(EnumActionResult.PASS, itemStackIn);
+        return ActionResult.newResult(EnumActionResult.FAIL, itemStackIn);
       }
     }
     // don't allow free flight when using an elytra, should use fireworks

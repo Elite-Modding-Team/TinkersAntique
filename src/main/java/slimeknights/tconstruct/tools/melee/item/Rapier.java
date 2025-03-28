@@ -101,6 +101,13 @@ public class Rapier extends SwordCore {
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
     ItemStack itemStackIn = playerIn.getHeldItem(hand);
+    if (hand == EnumHand.MAIN_HAND) {
+      ItemStack offhand = playerIn.getHeldItemOffhand();
+      Item offhandItem = offhand.getItem();
+      if (!offhand.isEmpty() && (offhandItem == TinkerMeleeWeapons.battleSign || offhandItem.isShield(offhand, playerIn) || offhandItem == TinkerRangedWeapons.shuriken)) {
+        return ActionResult.newResult(EnumActionResult.FAIL, itemStackIn);
+      }
+    }
     if(playerIn.onGround) {
       playerIn.addExhaustion(0.1f);
       playerIn.motionY += 0.32;
@@ -109,15 +116,7 @@ public class Rapier extends SwordCore {
       playerIn.motionZ = -MathHelper.cos(playerIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(playerIn.rotationPitch / 180.0F * (float) Math.PI) * f;
       playerIn.getCooldownTracker().setCooldown(itemStackIn.getItem(), 4);
     }
-    EnumActionResult result = EnumActionResult.SUCCESS;
-    if (hand == EnumHand.MAIN_HAND) {
-      ItemStack offhand = playerIn.getHeldItemOffhand();
-      Item offhandItem = offhand.getItem();
-      if (!offhand.isEmpty() && (offhandItem == TinkerMeleeWeapons.battleSign || offhandItem.isShield(offhand, playerIn) || offhandItem == TinkerRangedWeapons.shuriken)) {
-        result = EnumActionResult.PASS;
-      }
-    }
-    return ActionResult.newResult(result, itemStackIn);
+    return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
   }
 
   @Override
