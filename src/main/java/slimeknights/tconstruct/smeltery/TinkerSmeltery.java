@@ -1,10 +1,11 @@
 package slimeknights.tconstruct.smeltery;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Maps;
 import com.google.common.eventbus.Subscribe;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.monster.EntityEvoker;
@@ -20,14 +21,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -44,6 +51,7 @@ import slimeknights.mantle.item.ItemBlockMeta;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.mantle.util.RecipeMatchRegistry;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.TinkerIntegration;
 import slimeknights.tconstruct.common.CommonProxy;
 import slimeknights.tconstruct.common.TinkerPulse;
@@ -89,10 +97,11 @@ import slimeknights.tconstruct.smeltery.tileentity.TileTank;
 import slimeknights.tconstruct.smeltery.tileentity.TileTinkerTank;
 import slimeknights.tconstruct.tools.TinkerMaterials;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Pulse(id = TinkerSmeltery.PulseId, description = "The smeltery and items needed for it")
 public class TinkerSmeltery extends TinkerPulse {
@@ -740,8 +749,8 @@ public class TinkerSmeltery extends TinkerPulse {
   }
 
   /**
-   * take all fluids we registered oredicts for and scan all recipies for oredict-recipies that we can apply this to
-   *
+   * take all fluids we registered oredicts for and scan all recipes for oredict recipes that we can apply this to
+   * <p>
    * called in TinkerIntegration
    */
   public static void registerRecipeOredictMelting() {
@@ -751,6 +760,43 @@ public class TinkerSmeltery extends TinkerPulse {
 
     log.info("Started adding oredict melting recipes");
     long start = System.nanoTime();
+
+    // set up cache
+    File cacheFile = new File("config" + File.separator + TConstruct.modID + "_oredictcache.dat");
+    NBTTagCompound cacheNBT = new NBTTagCompound();
+
+    if(cacheFile.exists()) {
+      try {
+        // check mod list
+        cacheNBT = CompressedStreamTools.read(cacheFile);
+        NBTTagList modsNBT = cacheNBT.getTagList("Mods", Constants.NBT.TAG_STRING);
+        Set<String> cachedMods = StreamSupport.stream(modsNBT.spliterator(), false)
+                .map(nbt -> ((NBTTagString) nbt).getString())
+                .collect(Collectors.toSet());
+        Set<String> currentMods = new HashSet<>(Loader.instance().getIndexedModList().keySet());
+        if(!cachedMods.equals(currentMods)) {
+          log.info("Mod list changed, rescanning recipes");
+          cacheNBT = new NBTTagCompound();
+        } else {
+          // load cached recipes
+          NBTTagList recipeList = cacheNBT.getTagList("Recipes", Constants.NBT.TAG_COMPOUND);
+          for(int i = 0; i < recipeList.tagCount(); i++) {
+            NBTTagCompound compound = recipeList.getCompoundTagAt(i);
+            ItemStack item = new ItemStack(compound.getCompoundTag("item"));
+            FluidStack fluid = FluidStack.loadFluidStackFromNBT(compound.getCompoundTag("fluid"));
+            if(!item.isEmpty() && fluid != null) {
+              TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(item, fluid.amount), fluid));
+            }
+          }
+          log.info("Loaded cached oredict melting recipes in {} seconds", (System.nanoTime() - start) / 1000000000D);
+          return;
+        }
+      } catch(IOException e) {
+        log.error("Failed to read cache file, rescanning recipes", e);
+      }
+    } else {
+      log.info("Cache file doesn't exist, scanning recipes");
+    }
 
     // parse the ignore list from the config
     RecipeMatchRegistry oredictMeltingIgnore = new RecipeMatchRegistry();
@@ -769,12 +815,12 @@ public class TinkerSmeltery extends TinkerPulse {
         if(parts.length > 2) {
           try {
             meta = Integer.parseInt(parts[2]);
+            if(meta < 0) {
+              log.error("Invalid oredict melting ignore {}, metadata must be non-negative", ignore);
+              continue;
+            }
           } catch(NumberFormatException e) {
             log.error("Invalid oredict melting ignore {}, metadata must be a number", ignore);
-            continue;
-          }
-          if(meta < 0) {
-            log.error("Invalid oredict melting ignore {}, metadata must be non-negative", ignore);
             continue;
           }
         }
@@ -793,86 +839,109 @@ public class TinkerSmeltery extends TinkerPulse {
       }
     }
 
-    // we go through all recipes, and check if it only consists of one of our known oredict entries
-    recipes:
-    for(IRecipe irecipe : CraftingManager.REGISTRY) {
-      // empty?
-      ItemStack output = irecipe.getRecipeOutput();
-      if(output.isEmpty()) {
-        continue;
-      }
+    // precompute blacklist
+    ObjectOpenHashSet<ItemStack> blacklistSet = new ObjectOpenHashSet<>(meltingBlacklist);
 
-      // blacklisted?
-      for(ItemStack blacklistItem : meltingBlacklist) {
-        if(OreDictionary.itemMatches(blacklistItem, output, false)) {
-          continue recipes;
-        }
-      }
-
-      // recipe already has a melting recipe?
-      if(TinkerRegistry.getMelting(output) != null) {
-        continue;
-      }
-
-      NonNullList<Ingredient> inputs = irecipe.getIngredients();
-
-      // this map holds how much of which fluid is known of the recipe
-      // if an recipe contains an itemstack that can't be mapped to a fluid calculation is aborted
-      Map<Fluid, Integer> known = Maps.newHashMap();
-      for(Ingredient ingredient : inputs) {
-        // can contain empty entries because of shapedrecipe
-        if(ingredient.getMatchingStacks().length == 0) {
-          continue;
-        }
-
-        // process skippable items, such as sticks
-        if(Arrays.stream(ingredient.getMatchingStacks()).anyMatch((stack) -> oredictMeltingIgnore.matches(stack).isPresent())) {
-          continue;
-        }
-
-        // try and find a match from the oredict list
-        boolean found = false;
-        knownOres:
-        for(Map.Entry<Fluid, Set<Pair<String, Integer>>> entry : knownOreFluids.entrySet()) {
-          // check if it's a known oredict (all oredict lists are equal if they match the same oredict)
-          // OR if it's an itemstack contained in one of our oredicts
-          for(Pair<String, Integer> pair : entry.getValue()) {
-            for(ItemStack itemStack : OreDictionary.getOres(pair.getLeft(), false)) {
-              if(ingredientMatches(ingredient, itemStack)) {
-                // matches! Update fluid amount known
-                Integer amount = known.get(entry.getKey()); // what we found for the liquid so far
-                if(amount == null) {
-                  // nothing is what we found so far.
-                  amount = 0;
-                }
-                amount += pair.getRight();
-                known.put(entry.getKey(), amount);
-                found = true;
-                break knownOres;
-              }
+    // precompute ore fluid lookup with wildcard expansion
+    Object2ObjectOpenHashMap<ItemStack, Pair<Fluid, Integer>> oreFluidLookup = new Object2ObjectOpenHashMap<>();
+    NonNullList<ItemStack> subItems = NonNullList.create();
+    for(Map.Entry<Fluid, Set<Pair<String, Integer>>> entry : knownOreFluids.entrySet()) {
+      Fluid fluid = entry.getKey();
+      for(Pair<String, Integer> pair : entry.getValue()) {
+        for(ItemStack stack : OreDictionary.getOres(pair.getLeft(), false)) {
+          if(stack.getMetadata() == OreDictionary.WILDCARD_VALUE) {
+            subItems.clear();
+            stack.getItem().getSubItems(CreativeTabs.SEARCH, subItems);
+            for(ItemStack subStack : subItems) {
+              oreFluidLookup.put(subStack.copy(), Pair.of(fluid, pair.getRight()));
             }
+          } else {
+            oreFluidLookup.put(stack.copy(), Pair.of(fluid, pair.getRight()));
           }
         }
-        // not a recipe we can process, contains an item that can't melt
+      }
+    }
+
+    // process recipes
+    NBTTagList recipeList = new NBTTagList();
+    for(IRecipe recipe : CraftingManager.REGISTRY) {
+      ItemStack output = recipe.getRecipeOutput();
+      if(output.isEmpty() || TinkerRegistry.getMelting(output) != null) continue;
+      if(blacklistSet.stream().anyMatch(blacklist -> OreDictionary.itemMatches(blacklist, output, false))) continue;
+
+      NonNullList<Ingredient> inputs = recipe.getIngredients();
+      Object2IntOpenHashMap<Fluid> knownFluids = new Object2IntOpenHashMap<>(2);
+
+      for(Ingredient ingredient : inputs) {
+        ItemStack[] matchingStacks = ingredient.getMatchingStacks();
+        if(matchingStacks.length == 0) continue;
+
+        boolean found = false;
+        for(ItemStack stack : matchingStacks) {
+          if(oredictMeltingIgnore.matches(stack).isPresent()) {
+            found = true;
+            break;
+          }
+          Pair<Fluid, Integer> fluidData = null;
+          for(ItemStack oreStack : oreFluidLookup.keySet()) {
+            if(ingredientMatches(ingredient, oreStack)) {
+              fluidData = oreFluidLookup.get(oreStack);
+              break;
+            }
+          }
+          if(fluidData != null) {
+            knownFluids.addTo(fluidData.getLeft(), fluidData.getRight());
+            found = true;
+            break;
+          }
+        }
         if(!found) {
-          continue recipes;
+          knownFluids.clear();
+          break;
         }
       }
 
-      // add a melting recipe for it
-      // we only support single-liquid recipes currently :I
-      if(known.keySet().size() == 1) {
-        Fluid fluid = known.keySet().iterator().next();
-        output = output.copy();
-        int amount = known.get(fluid) / output.getCount();
-        output.setCount(1);
-        TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(output, amount), fluid));
-        log.trace("Added automatic melting recipe for {} ({} {})", output.toString(), amount, fluid
-            .getName());
+      if(knownFluids.size() == 1) {
+        Fluid fluid = knownFluids.keySet().iterator().next();
+        int amount = knownFluids.getInt(fluid) / output.getCount();
+        if(amount > 0) {
+          ItemStack outputCopy = output.copy();
+          outputCopy.setCount(1);
+          MeltingRecipe meltingRecipe = new MeltingRecipe(RecipeMatch.of(outputCopy, amount), fluid);
+
+          // register and cache
+          TinkerRegistry.registerMelting(meltingRecipe);
+          ItemStack input = meltingRecipe.input.getInputs().get(0);
+          FluidStack outputFluid = meltingRecipe.output;
+          if(!input.isEmpty() && FluidRegistry.isFluidRegistered(outputFluid.getFluid())) {
+            NBTTagCompound recipeNBT = new NBTTagCompound();
+            recipeNBT.setTag("item", input.serializeNBT());
+            recipeNBT.setTag("fluid", fluidToNBT(outputFluid));
+            recipeList.appendTag(recipeNBT);
+          }
+          log.trace("Added automatic melting recipe for {} ({} {})", outputCopy, amount, fluid.getName());
+        }
       }
     }
+
+    // write cache with mod list
+    cacheNBT.setTag("Recipes", recipeList);
+    NBTTagList modsNBT = new NBTTagList();
+    Loader.instance().getIndexedModList().keySet().stream()
+            .map(NBTTagString::new)
+            .forEach(modsNBT::appendTag);
+    cacheNBT.setTag("Mods", modsNBT);
+    try {
+      if(!cacheFile.exists()) {
+        cacheFile.createNewFile();
+      }
+      CompressedStreamTools.write(cacheNBT, cacheFile);
+      log.info("Cache file written successfully");
+    } catch(IOException e) {
+      log.error("Failed to write cache file", e);
+    }
     // how fast were we?
-    log.info("Oredict melting recipes finished in {} ms", (System.nanoTime() - start) / 1000000D);
+    log.info("Oredict melting recipes finished in {} seconds", (System.nanoTime() - start) / 1000000000D);
   }
 
   /**
@@ -885,6 +954,16 @@ public class TinkerSmeltery extends TinkerPulse {
     NonNullList<ItemStack> stacks = NonNullList.create();
     stack.getItem().getSubItems(CreativeTabs.SEARCH, stacks);
     return stacks.stream().anyMatch(ingredient::apply);
+  }
+
+  private static NBTTagCompound fluidToNBT(FluidStack fluidStack) {
+    NBTTagCompound nbt = new NBTTagCompound();
+    nbt.setString("FluidName", fluidStack.getFluid().getName());
+    nbt.setInteger("Amount", fluidStack.amount);
+    if(fluidStack.tag != null) {
+      nbt.setTag("Tag", fluidStack.tag);
+    }
+    return nbt;
   }
 
   protected static <E extends Enum<E> & EnumBlock.IEnumMeta & IStringSerializable> BlockSearedStairs registerBlockSearedStairsFrom(IForgeRegistry<Block> registry, EnumBlock<E> block, E value, String name) {
