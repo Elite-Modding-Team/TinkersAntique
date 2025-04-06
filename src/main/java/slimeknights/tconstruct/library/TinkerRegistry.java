@@ -3,14 +3,8 @@ package slimeknights.tconstruct.library;
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
-import gnu.trove.map.hash.THashMap;
-import gnu.trove.set.hash.THashSet;
-import gnu.trove.set.hash.TLinkedHashSet;
-
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -85,15 +79,15 @@ public final class TinkerRegistry {
   ---------------------------------------------------------------------------*/
 
   // Identifier to Material mapping. Hashmap so we can look it up directly without iterating
-  private static final Map<String, Material> materials = Maps.newLinkedHashMap();
-  private static final Map<String, ITrait> traits = new THashMap<>();
+  private static final Map<String, Material> materials = new Object2ObjectLinkedOpenHashMap<>();
+  private static final Map<String, ITrait> traits = new Object2ObjectOpenHashMap<>();
   // traceability information who registered what. Used to find errors.
-  private static final Map<String, ModContainer> materialRegisteredByMod = new THashMap<>();
-  private static final Map<String, Map<String, ModContainer>> statRegisteredByMod = new THashMap<>();
-  private static final Map<String, Map<String, ModContainer>> traitRegisteredByMod = new THashMap<>();
+  private static final Map<String, ModContainer> materialRegisteredByMod = new Object2ObjectOpenHashMap<>();
+  private static final Map<String, Map<String, ModContainer>> statRegisteredByMod = new Object2ObjectOpenHashMap<>();
+  private static final Map<String, Map<String, ModContainer>> traitRegisteredByMod = new Object2ObjectOpenHashMap<>();
 
   // contains all cancelled materials, allows us to eat calls regarding the material silently
-  private static final Set<String> cancelledMaterials = new THashSet<>();
+  private static final Set<String> cancelledMaterials = new ObjectOpenHashSet<>();
 
   public static void addMaterial(Material material, IMaterialStats stats, ITrait trait) {
     addMaterial(material, stats);
@@ -331,13 +325,13 @@ public final class TinkerRegistry {
   ---------------------------------------------------------------------------*/
 
   /** This set contains all known tools */
-  private static final Set<ToolCore> tools = new TLinkedHashSet<>();
-  private static final Set<IToolPart> toolParts = new TLinkedHashSet<>();
-  private static final Set<ToolCore> toolStationCrafting = Sets.newLinkedHashSet();
-  private static final Set<ToolCore> toolForgeCrafting = Sets.newLinkedHashSet();
-  private static final List<ItemStack> stencilTableCrafting = Lists.newLinkedList();
-  private static final Set<Item> patternItems = Sets.newHashSet();
-  private static final Set<Item> castItems = Sets.newHashSet();
+  private static final Set<ToolCore> tools = new ObjectLinkedOpenHashSet<>();
+  private static final Set<IToolPart> toolParts = new ObjectLinkedOpenHashSet<>();
+  private static final Set<ToolCore> toolStationCrafting = new ObjectLinkedOpenHashSet<>();
+  private static final Set<ToolCore> toolForgeCrafting = new ObjectLinkedOpenHashSet<>();
+  private static final List<ItemStack> stencilTableCrafting = new ObjectArrayList<>();
+  private static final Set<Item> patternItems = new ObjectOpenHashSet<>();
+  private static final Set<Item> castItems = new ObjectOpenHashSet<>();
   private static Shard shardItem;
 
   /**
@@ -469,8 +463,8 @@ public final class TinkerRegistry {
   /*---------------------------------------------------------------------------
   | Modifiers                                                                 |
   ---------------------------------------------------------------------------*/
-  private static final Map<String, IModifier> modifiers = new THashMap<>();
-  private static final Map<Class<? extends EntityLivingBase>, Function<EntityLivingBase,ItemStack>> headDrops = new THashMap<>();
+  private static final Map<String, IModifier> modifiers = new Object2ObjectOpenHashMap<>();
+  private static final Map<Class<? extends EntityLivingBase>, Function<EntityLivingBase,ItemStack>> headDrops = new Object2ObjectOpenHashMap<>();
 
   public static void registerModifier(IModifier modifier) {
     registerModifierAlias(modifier, modifier.getIdentifier());
@@ -532,12 +526,12 @@ public final class TinkerRegistry {
   /*---------------------------------------------------------------------------
   | Smeltery                                                                  |
   ---------------------------------------------------------------------------*/
-  private static List<MeltingRecipe> meltingRegistry = Lists.newLinkedList();
-  private static List<ICastingRecipe> tableCastRegistry = Lists.newLinkedList();
-  private static List<ICastingRecipe> basinCastRegistry = Lists.newLinkedList();
-  private static List<AlloyRecipe> alloyRegistry = Lists.newLinkedList();
-  private static Map<FluidStack, Integer> smelteryFuels = Maps.newHashMap();
-  private static Map<ResourceLocation, FluidStack> entityMeltingRegistry = Maps.newHashMap();
+  private static List<MeltingRecipe> meltingRegistry = new ObjectArrayList<>();
+  private static List<ICastingRecipe> tableCastRegistry = new ObjectArrayList<>();
+  private static List<ICastingRecipe> basinCastRegistry = new ObjectArrayList<>();
+  private static List<AlloyRecipe> alloyRegistry = new ObjectArrayList<>();
+  private static Map<FluidStack, Integer> smelteryFuels = new Object2IntOpenHashMap<>();
+  private static Map<ResourceLocation, FluidStack> entityMeltingRegistry = new Object2ObjectOpenHashMap<>();
 
   /** Registers this item with all its metadatas to melt into amount of the given fluid. */
   public static void registerMelting(Item item, Fluid fluid, int amount) {
@@ -584,7 +578,7 @@ public final class TinkerRegistry {
     return null;
   }
 
-  public static List<MeltingRecipe> getAllMeltingRecipies() {
+  public static List<MeltingRecipe> getAllMeltingRecipes() {
     return ImmutableList.copyOf(meltingRegistry);
   }
 
@@ -783,7 +777,7 @@ public final class TinkerRegistry {
   /*---------------------------------------------------------------------------
   | Drying Rack                                                               |
   ---------------------------------------------------------------------------*/
-  private static List<DryingRecipe> dryingRegistry = Lists.newLinkedList();
+  private static List<DryingRecipe> dryingRegistry = new ObjectArrayList<>();
 
   /**
    * @return The list of all drying rack recipes

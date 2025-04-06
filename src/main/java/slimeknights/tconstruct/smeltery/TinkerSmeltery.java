@@ -1,9 +1,10 @@
 package slimeknights.tconstruct.smeltery;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.Subscribe;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.monster.EntityEvoker;
@@ -145,15 +146,15 @@ public class TinkerSmeltery extends TinkerPulse {
   public static ItemStack castPlate;
   public static ItemStack castGear;
 
-  private static Map<Fluid, Set<Pair<String, Integer>>> knownOreFluids = Maps.newHashMap();
-  public static List<FluidStack> castCreationFluids = Lists.newLinkedList();
-  public static List<FluidStack> clayCreationFluids = Lists.newLinkedList();
+  private static Map<Fluid, Set<Pair<String, Integer>>> knownOreFluids = new Object2ObjectOpenHashMap<>();
+  public static List<FluidStack> castCreationFluids = new ObjectArrayList<>();
+  public static List<FluidStack> clayCreationFluids = new ObjectArrayList<>();
 
   public static ImmutableSet<Block> validSmelteryBlocks;
   public static ImmutableSet<Block> searedStairsSlabs;
   public static ImmutableSet<Block> validTinkerTankBlocks;
   public static ImmutableSet<Block> validTinkerTankFloorBlocks;
-  public static List<ItemStack> meltingBlacklist = Lists.newLinkedList();
+  public static List<ItemStack> meltingBlacklist = new ObjectArrayList<>();
 
   @SubscribeEvent
   public void registerBlocks(Register<Block> event) {
