@@ -1,14 +1,16 @@
 [{
     "modid": "tconstruct",
-    "name": "Tinkers' Construct",
+    "name": "Tinkers' Construct Legacy",
     "description": "A little of this, a little of that, a lot of tinkering, and a lot of tools",
     "version": "${version}",
     "mcversion": "${MCversion}",
-    "url": "https://github.com/SlimeKnights/TinkersConstruct",
+    "url": "https://github.com/Elite-Modding-Team/TinkersConstructLegacy",
     "updateUrl": "",
     "authorList": [
       "boni",
-      "KnightMiner"
+      "KnightMiner",
+      "ACGaming",
+      "IcarussOne"
     ],
     "credits": "Slime Knights, mDiyo, fuj1n, ProgWML6, Sunstrike, Pillbox",
     "logoFile": "logo.png",
