@@ -366,7 +366,7 @@ public abstract class ModifierAspect {
     @Override
     public void updateNBT(NBTTagCompound root, NBTTagCompound modifierTag) {
       ModifierNBT data = ModifierNBT.readTag(modifierTag);
-      data.level++;
+      data.level = Math.min(data.level + 1, maxLevel);
       data.write(modifierTag);
     }
   }
