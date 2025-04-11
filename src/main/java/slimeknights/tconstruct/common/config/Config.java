@@ -70,6 +70,8 @@ public final class Config {
           "string",
           "minecraft:chest:0"
   };
+  public static String[] materialIgnore = {
+  };
 
   // Worldgen
   public static boolean genSlimeIslands = true;
@@ -260,8 +262,13 @@ public final class Config {
       propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "testIMC", testIMC);
-      prop.setComment("REQUIRES DEBUG MODULE. Tests all IMC integrations with dummy recipes. May significantly impact gameplay, so its advised you disable this outside of dev environements.");
+      prop.setComment("REQUIRES DEBUG MODULE. Tests all IMC integrations with dummy recipes. May significantly impact gameplay, so its advised you disable this outside of dev environments.");
       testIMC = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "materialIgnore", materialIgnore);
+      prop.setComment("List of materials to ignore, effectively preventing registration.");
+      materialIgnore = prop.getStringList();
       propOrder.add(prop.getName());
     }
     // Worldgen

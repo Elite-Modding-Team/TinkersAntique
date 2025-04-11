@@ -25,19 +25,13 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import slimeknights.mantle.client.CreativeTab;
 import slimeknights.mantle.util.RecipeMatch;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.events.MaterialEvent;
 import slimeknights.tconstruct.library.events.TinkerRegisterEvent;
 import slimeknights.tconstruct.library.materials.IMaterialStats;
@@ -111,11 +105,11 @@ public final class TinkerRegistry {
   public static void addMaterial(Material material) {
     // ensure material identifiers are safe
     if(CharMatcher.whitespace().matchesAnyOf(material.getIdentifier())) {
-      error("Could not register Material \"%s\": Material identifier must not contain any spaces.", material.identifier);
+      error("Could not register material \"%s\": Material identifier must not contain any spaces.", material.identifier);
       return;
     }
     if(CharMatcher.javaUpperCase().matchesAnyOf(material.getIdentifier())) {
-      error("Could not register Material \"%s\": Material identifier must be completely lowercase.", material.identifier);
+      error("Could not register material \"%s\": Material identifier must be completely lowercase.", material.identifier);
       return;
     }
 
@@ -123,7 +117,7 @@ public final class TinkerRegistry {
     if(materials.containsKey(material.identifier)) {
       ModContainer registeredBy = materialRegisteredByMod.get(material.identifier);
       error(String.format(
-          "Could not register Material \"%s\": It was already registered by %s",
+          "Could not register material \"%s\": It was already registered by %s",
           material.identifier,
           registeredBy.getName()));
       return;
@@ -133,7 +127,14 @@ public final class TinkerRegistry {
 
     if(MinecraftForge.EVENT_BUS.post(event)) {
       // event cancelled
-      log.trace("Addition of material {} cancelled by event", material.getIdentifier());
+      log.trace("Addition of material \"{}\" cancelled by event", material.getIdentifier());
+      cancelledMaterials.add(material.getIdentifier());
+      return;
+    }
+
+    // ignored material
+    if(Arrays.stream(Config.materialIgnore).anyMatch(mat -> mat.equals(material.getIdentifier()))) {
+      log.trace("Addition of material \"{}\" ignored by config", material.getIdentifier());
       cancelledMaterials.add(material.getIdentifier());
       return;
     }
