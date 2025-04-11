@@ -37,6 +37,9 @@ public class ToolStationTextPacket extends AbstractPacketThreadsafe {
   public void handleServerSafe(NetHandlerPlayServer netHandler) {
     Container container = netHandler.player.openContainer;
     if(container instanceof ContainerToolStation) {
+      if(((ContainerToolStation) container).toolName.equals(text)) {
+        return;
+      }
       ((ContainerToolStation) container).setToolName(text);
 
       // find all people who also have the same gui open and update them too
@@ -45,6 +48,7 @@ public class ToolStationTextPacket extends AbstractPacketThreadsafe {
         if(player.openContainer instanceof ContainerToolStation) {
           if(((ContainerToolStation) container).sameGui((ContainerToolStation) player.openContainer)) {
             // same gui, send him an update
+            ((ContainerToolStation) player.openContainer).setToolName(text);
             TinkerNetwork.sendTo(this, (EntityPlayerMP) player);
           }
         }
