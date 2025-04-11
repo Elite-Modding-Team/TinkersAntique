@@ -81,6 +81,10 @@ public class TraitMagnetic extends AbstractTraitLeveled {
         Vector3d vec = new Vector3d(x, y, z);
         vec.sub(new Vector3d(item.posX, item.posY, item.posZ));
 
+        if(vec.lengthSquared() <= 0.05) {
+          continue;
+        }
+
         vec.normalize();
         vec.scale(strength);
 
