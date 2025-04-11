@@ -50,6 +50,7 @@ public final class Config {
   public static boolean clearGlassSilkTouch = true;
   public static boolean beheadingAffectsWitherSkulls = true;
   public static boolean drainGaseousFluids = true;
+  public static int maxSmelteryItemRenders = -1;
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
   };
@@ -275,6 +276,11 @@ public final class Config {
       prop = configFile.get(cat, "drainGaseousFluids", drainGaseousFluids);
       prop.setComment("If gaseous fluids are being transferable via faucets.");
       drainGaseousFluids = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "maxSmelteryItemRenders", maxSmelteryItemRenders);
+      prop.setComment("Determines the maximum number of possible items to display before not rendering any to prevent substantial lag. 0 to disable rendering items in the smeltery entirely. -1 for the default, which is always rendering items.");
+      maxSmelteryItemRenders = prop.getInt();
       propOrder.add(prop.getName());
     }
     // Worldgen

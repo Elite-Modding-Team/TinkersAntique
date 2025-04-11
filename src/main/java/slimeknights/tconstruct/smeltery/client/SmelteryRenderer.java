@@ -13,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.ForgeHooksClient;
 import javax.annotation.Nonnull;
 
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.client.RenderUtil;
 import slimeknights.tconstruct.smeltery.tileentity.TileSmeltery;
 
@@ -34,6 +35,10 @@ public class SmelteryRenderer extends SmelteryTankRenderer<TileSmeltery> {
     }
 
     renderFluids(smeltery.getTank(), tilePos, minPos, maxPos, x, y, z);
+
+    if(Config.maxSmelteryItemRenders >= 0 && smeltery.getSizeInventory() > Config.maxSmelteryItemRenders) {
+      return;
+    }
 
     // calculate x/z parameters
     double x1 = minPos.getX() - tilePos.getX();
