@@ -49,6 +49,7 @@ public final class Config {
   public static boolean limitPiggybackpack = false;
   public static boolean clearGlassSilkTouch = true;
   public static boolean beheadingAffectsWitherSkulls = true;
+  public static boolean drainGaseousFluids = true;
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
   };
@@ -269,6 +270,11 @@ public final class Config {
       prop = configFile.get(cat, "materialIgnore", materialIgnore);
       prop.setComment("List of materials to ignore, effectively preventing registration.");
       materialIgnore = prop.getStringList();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "drainGaseousFluids", drainGaseousFluids);
+      prop.setComment("If gaseous fluids are being transferable via faucets.");
+      drainGaseousFluids = prop.getBoolean();
       propOrder.add(prop.getName());
     }
     // Worldgen

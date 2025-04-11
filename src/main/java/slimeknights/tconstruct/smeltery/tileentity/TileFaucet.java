@@ -18,6 +18,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.common.TinkerNetwork;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.smeltery.block.BlockFaucet;
 import slimeknights.tconstruct.smeltery.network.FaucetActivationPacket;
@@ -107,7 +108,7 @@ public class TileFaucet extends TileEntity implements ITickable {
     if(toDrain != null && toFill != null) {
       // can we drain?
       FluidStack drained = toDrain.drain(TRANSACTION_AMOUNT, false);
-      if(drained != null) {
+      if(drained != null && (Config.drainGaseousFluids || !drained.getFluid().isGaseous())) {
         // can we fill?
         int filled = toFill.fill(drained, false);
         if(filled > 0) {
