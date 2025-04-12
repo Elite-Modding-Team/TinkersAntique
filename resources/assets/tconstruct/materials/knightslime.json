@@ -1,5 +1,6 @@
 {
     "type": "metal",
+    "suffix": "slime_base",
     "parameters": {
         "color": "685bd0",
         "shinyness": 0,
