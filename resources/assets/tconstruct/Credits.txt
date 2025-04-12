@@ -4,3 +4,5 @@ http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1287648-
 
 Slime Sling and Slime Boots graphics by Futureazoo
 https://github.com/SlimeKnights/TinkersConstruct/pull/2156
+
+Smeltery sounds by PessiMysterio/TechnoMysterio
