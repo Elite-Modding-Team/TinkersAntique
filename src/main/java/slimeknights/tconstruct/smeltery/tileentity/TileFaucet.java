@@ -2,6 +2,7 @@ package slimeknights.tconstruct.smeltery.tileentity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -61,9 +62,9 @@ public class TileFaucet extends TileEntity implements ITickable {
     direction = getWorld().getBlockState(pos).getValue(BlockFaucet.FACING);
     doTransfer();
 
-    if(!getWorld().isRemote) {
+    if(!getWorld().isRemote && drained != null) {
       getWorld().playSound(null, pos, Sounds.faucet_trigger, SoundCategory.BLOCKS, 1.0F, 0.8F + 0.4F * world.rand.nextFloat());
-      if(FMLLaunchHandler.side().isClient()) {
+      if (FMLLaunchHandler.side().isClient()) {
         playActiveSound();
       }
     }
@@ -168,6 +169,10 @@ public class TileFaucet extends TileEntity implements ITickable {
   }
 
   protected void reset() {
+    if (!getWorld().isRemote && isPouring) {
+      getWorld().playSound(null, pos, SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F, 0.8F + 0.4F * world.rand.nextFloat());
+    }
+
     isPouring = false;
     stopPouring = false;
     drained = null;
@@ -175,7 +180,7 @@ public class TileFaucet extends TileEntity implements ITickable {
     lastRedstoneState = false;
 
     // sync to clients
-    if(getWorld() != null && !getWorld().isRemote && getWorld() instanceof WorldServer) {
+    if(!getWorld().isRemote && getWorld() instanceof WorldServer) {
       TinkerNetwork.sendToClients((WorldServer) getWorld(), pos, new FaucetActivationPacket(pos, null));
     }
   }
