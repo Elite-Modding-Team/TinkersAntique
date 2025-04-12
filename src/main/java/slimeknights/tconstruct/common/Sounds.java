@@ -37,6 +37,9 @@ public abstract class Sounds {
 
   public static final SoundEvent crossbow_reload = sound("crossbow_reload");
 
+  public static final SoundEvent faucet_pour_loop = sound("faucet_pour_loop");
+  public static final SoundEvent faucet_trigger = sound("faucet_trigger");
+  public static final SoundEvent smeltery_loop = sound("smeltery_loop");
 
   private static SoundEvent sound(String name) {
     ResourceLocation location = Util.getResource(name);
@@ -50,7 +53,7 @@ public abstract class Sounds {
     entity.getEntityWorld().playSound(null, entity.getPosition(), sound, entity.getSoundCategory(), volume, pitch);
   }
 
-  public static void PlaySoundForPlayer(Entity entity, SoundEvent sound, float volume, float pitch) {
+  public static void playSoundForPlayer(Entity entity, SoundEvent sound, float volume, float pitch) {
     if(entity instanceof EntityPlayerMP) {
       TinkerNetwork.sendPacket(entity, new SPacketSoundEffect(sound, entity.getSoundCategory(), entity.posX, entity.posY, entity.posZ, volume, pitch));
     }

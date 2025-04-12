@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.smeltery.tileentity;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +25,7 @@ import slimeknights.mantle.common.IInventoryGui;
 import slimeknights.tconstruct.common.TinkerNetwork;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
+import slimeknights.tconstruct.library.client.sound.SoundSmeltery;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.smeltery.AlloyRecipe;
 import slimeknights.tconstruct.library.smeltery.ISmelteryTankHandler;
@@ -63,6 +66,7 @@ public class TileSmeltery extends TileHeatingStructureFuelTank<MultiblockSmelter
 
   private BlockPos insideCheck; // last checked position for validity inside the smeltery
   private int fullCheckCounter = 0;
+  private boolean activeSound;
 
   public TileSmeltery() {
     super("gui.smeltery.name", 0, 1);
@@ -82,6 +86,7 @@ public class TileSmeltery extends TileHeatingStructureFuelTank<MultiblockSmelter
       if(tick == 0) {
         checkMultiblockStructure();
       }
+      activeSound = false;
     }
     else {
       // smeltery structure is there.. do stuff with the current fuel
@@ -122,6 +127,10 @@ public class TileSmeltery extends TileHeatingStructureFuelTank<MultiblockSmelter
             // advance to next block
             progressInsideCheck();
           }
+        }
+        if(FMLLaunchHandler.side().isClient() && !activeSound) {
+          playActiveSound();
+          activeSound = true;
         }
       }
     }
@@ -389,5 +398,10 @@ public class TileSmeltery extends TileHeatingStructureFuelTank<MultiblockSmelter
     super.readFromNBT(compound);
     liquids.readFromNBT(compound);
     insideCheck = TagUtil.readPos(compound.getCompoundTag(TAG_INSIDEPOS));
+  }
+
+  @SideOnly(Side.CLIENT)
+  public void playActiveSound() {
+    Minecraft.getMinecraft().getSoundHandler().playSound(new SoundSmeltery(this, 0.8F));
   }
 }

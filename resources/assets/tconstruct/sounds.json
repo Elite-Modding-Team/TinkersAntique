@@ -58,5 +58,24 @@
 	"sounds": [
 		"tconstruct:discharge"
 	]
+   },
+   "faucet_pour_loop": {
+     "category": "block",
+     "sounds": [
+       "tconstruct:faucet_pour_loop"
+     ]
+   },
+   "faucet_trigger": {
+     "category": "block",
+     "sounds": [
+       "tconstruct:faucet_trigger1",
+       "tconstruct:faucet_trigger2"
+     ]
+   },
+   "smeltery_loop": {
+     "category": "block",
+     "sounds": [
+       "tconstruct:smeltery_loop"
+     ]
    }
 }
