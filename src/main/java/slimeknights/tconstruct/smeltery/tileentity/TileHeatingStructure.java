@@ -1,7 +1,9 @@
 package slimeknights.tconstruct.smeltery.tileentity;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -9,6 +11,7 @@ import java.util.Arrays;
 
 import javax.annotation.Nonnull;
 
+import slimeknights.tconstruct.library.client.sound.SoundSmeltery;
 import slimeknights.tconstruct.smeltery.multiblock.MultiblockDetection;
 
 /** Represents a structure that has an inventory where it heats its items. Like a smeltery. */
@@ -28,6 +31,8 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
 
   protected int[] itemTemperatures; // current temperature of each item in the corresponding slot
   protected int[] itemTempRequired; // Temperature where the items want to goooooo
+
+  public boolean activeSound;
 
   public TileHeatingStructure(String name, int inventorySize, int maxStackSize) {
     super(name, inventorySize, maxStackSize);
@@ -112,6 +117,12 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
 
     if(heatedItem) {
       fuel--;
+      if(FMLLaunchHandler.side().isClient() && !activeSound) {
+        playActiveSound();
+        activeSound = true;
+      }
+    } else {
+      activeSound = false;
     }
   }
 
@@ -220,5 +231,10 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
     needsFuel = tags.getBoolean(TAG_NEEDS_FUEL);
     itemTemperatures = tags.getIntArray(TAG_ITEM_TEMPERATURES);
     itemTempRequired = tags.getIntArray(TAG_ITEM_TEMP_REQUIRED);
+  }
+
+  @SideOnly(Side.CLIENT)
+  public void playActiveSound() {
+    Minecraft.getMinecraft().getSoundHandler().playSound(new SoundSmeltery(this, 0.8F));
   }
 }

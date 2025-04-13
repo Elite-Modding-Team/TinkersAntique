@@ -7,19 +7,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.common.Sounds;
-import slimeknights.tconstruct.smeltery.tileentity.TileSmeltery;
+import slimeknights.tconstruct.smeltery.tileentity.TileHeatingStructure;
 
 @SideOnly(Side.CLIENT)
 public class SoundSmeltery extends PositionedSound implements ITickableSound {
-    protected TileSmeltery smeltery;
+    protected TileHeatingStructure heatingStructure;
     protected BlockPos position;
 
-    public SoundSmeltery(TileSmeltery smeltery, float volume) {
+    public SoundSmeltery(TileHeatingStructure heatingStructure, float volume) {
         super(Sounds.smeltery_loop, SoundCategory.BLOCKS);
         this.repeat = true;
-        this.smeltery = smeltery;
+        this.heatingStructure = heatingStructure;
         this.volume = volume;
-        this.position = this.smeltery.getPos();
+        this.position = this.heatingStructure.getPos();
         this.xPosF = position.getX();
         this.yPosF = position.getY();
         this.zPosF = position.getZ();
@@ -27,7 +27,7 @@ public class SoundSmeltery extends PositionedSound implements ITickableSound {
 
     @Override
     public void update() {
-        if(this.smeltery.isInvalid() || !this.smeltery.isActive()) {
+        if(this.heatingStructure.isInvalid() || !this.heatingStructure.isActive() || !this.heatingStructure.activeSound) {
             this.volume -= 0.02F;
         }
     }
