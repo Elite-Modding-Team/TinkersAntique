@@ -34,6 +34,9 @@
         "emerald": [{
             "custom": { "fluid": "emerald" }
         }],
+        "diamond": [{
+            "custom": { "fluid": "diamond" }
+        }],
         "glass": [{
             "custom": { "fluid": "glass" }
         }],

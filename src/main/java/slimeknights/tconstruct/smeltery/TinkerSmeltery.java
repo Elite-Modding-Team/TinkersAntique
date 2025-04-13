@@ -488,6 +488,16 @@ public class TinkerSmeltery extends TinkerPulse {
     TinkerRegistry.registerTableCasting(new ItemStack(Items.EMERALD), castGem, TinkerFluids.emerald, Material.VALUE_Gem);
     TinkerRegistry.registerBasinCasting(new ItemStack(Blocks.EMERALD_BLOCK), ItemStack.EMPTY, TinkerFluids.emerald, Material.VALUE_Gem * 9);
 
+    // diamond melting and casting
+    TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of("oreDiamond", (int) (Material.VALUE_Gem * Config.oreToIngotRatio)), TinkerFluids.diamond));
+    builder = ImmutableSet.builder();
+    builder.add(Pair.of("gemDiamond", Material.VALUE_Gem));
+    builder.add(Pair.of("blockDiamond", Material.VALUE_Gem * 9));
+    addKnownOreFluid(TinkerFluids.diamond, builder.build());
+
+    TinkerRegistry.registerTableCasting(new ItemStack(Items.DIAMOND), castGem, TinkerFluids.diamond, Material.VALUE_Gem);
+    TinkerRegistry.registerBasinCasting(new ItemStack(Blocks.DIAMOND_BLOCK), ItemStack.EMPTY, TinkerFluids.diamond, Material.VALUE_Gem * 9);
+
     // glass melting and casting
     TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of("sand", Material.VALUE_Glass), TinkerFluids.glass));
     builder = ImmutableSet.builder();
