@@ -74,7 +74,7 @@ public class TConstruct {
 
   public static final String modID = Util.MODID;
   public static final String modVersion = "${version}";
-  public static final String modName = "Tinkers' Construct";
+  public static final String modName = "Tinkers' Antique";
 
   public static final Logger log = LogManager.getLogger(modID);
   public static final Random random = new Random();

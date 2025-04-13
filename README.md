@@ -1,12 +1,14 @@
-# [Tinkers' Construct Legacy](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct-legacy)
+# [Tinkers' Antique](https://www.curseforge.com/minecraft/mc-mods/tinkers-antique)
 
-Modify all the things, then do it again!   
-Melt down any metals you find. 	 
+![Tinkers' Antique Banner](https://raw.githubusercontent.com/Elite-Modding-Team/TinkersAntique/refs/heads/1.12/banner.png)
+
+Modify all the things, then do it again!  
+Melt down any metals you find.  
 Power the world with spinning wind!
 
 ### IMC
 
-Tinkers' Construct supports several IMCs to allow mods to integrate themselves.
+Tinkers' Antique supports several IMCs to allow mods to integrate themselves.
 The [Wiki](https://github.com/SlimeKnights/TinkersConstruct/wiki/IMC) contains a page with further information.
 Anything that is not possible via IMC has to be integrated via Code through the API/library package.
 
@@ -25,7 +27,7 @@ Note: Git MUST be installed and in the system path to use our scripts.
 Please include the following:
 
 * Minecraft version
-* Tinkers' Construct Legacy version
+* Tinkers' Antique version
 * Forge version/build
 * Versions of any mods potentially related to the issue
 * Any relevant screenshots are greatly appreciated.
@@ -35,15 +37,15 @@ Please include the following:
 
 ## Licenses
 
-Code, textures and binaries of the original mod are licensed under
+Code, textures and binaries of the original mod (Tinkers' Construct) are licensed under
 the [MIT License](https://tldrlegal.com/license/mit-license).
-Code, textures and binaries of new changes in this fork are licensed
+Code, textures and binaries of new changes in this fork (Tinkers' Antique) are licensed
 under the [LGPLv3 License](https://www.tldrlegal.com/license/gnu-lesser-general-public-license-v3-lgpl-3).
 
 You are allowed to use the mod in your modpack.
-Any modpack which uses Tinkers' Construct takes **full** responsibility for user support queries. For anyone else, we
+Any modpack which uses Tinkers' Antique takes **full** responsibility for user support queries. For anyone else, we
 only support official builds from the main CI server, not custom-built jars. We also do not take bug reports for
-outdated builds of Minecraft.
+other builds of Minecraft than 1.12.2.
 
 Any alternate licenses are noted where appropriate.
 

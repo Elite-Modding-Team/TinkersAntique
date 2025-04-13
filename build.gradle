@@ -67,7 +67,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group= "slimeknights"
-archivesBaseName = "TConstruct"
+archivesBaseName = "TinkersAntique"
 
 // External properties
 ext.configFile = file "build.properties"
