@@ -1,3 +1,4 @@
+All sounds that were originally in stereo were converted to mono.
 All sounds that were not in ogg format were transcoded to Ogg Vorbis.
 All sounds are licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/3.0/) or CC0.
 
