@@ -102,6 +102,9 @@ public class TileFaucet extends TileEntity implements ITickable {
         else {
           reset();
         }
+        if (!getWorld().isRemote && !isPouring) {
+          getWorld().playSound(null, pos, SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F, 0.8F + 0.4F * world.rand.nextFloat());
+        }
       }
       else {
         // reduce amount (cooldown)
@@ -130,7 +133,7 @@ public class TileFaucet extends TileEntity implements ITickable {
           pour();
 
           // sync to clients
-          if(!getWorld().isRemote && getWorld() instanceof WorldServer) {
+          if(getWorld() instanceof WorldServer && !getWorld().isRemote) {
             TinkerNetwork.sendToClients((WorldServer) getWorld(), pos, new FaucetActivationPacket(pos, drained));
           }
 
@@ -169,10 +172,6 @@ public class TileFaucet extends TileEntity implements ITickable {
   }
 
   protected void reset() {
-    if (!getWorld().isRemote && isPouring) {
-      getWorld().playSound(null, pos, SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F, 0.8F + 0.4F * world.rand.nextFloat());
-    }
-
     isPouring = false;
     stopPouring = false;
     drained = null;
@@ -180,7 +179,7 @@ public class TileFaucet extends TileEntity implements ITickable {
     lastRedstoneState = false;
 
     // sync to clients
-    if(!getWorld().isRemote && getWorld() instanceof WorldServer) {
+    if(getWorld() instanceof WorldServer && !getWorld().isRemote) {
       TinkerNetwork.sendToClients((WorldServer) getWorld(), pos, new FaucetActivationPacket(pos, null));
     }
   }
