@@ -12,8 +12,8 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 
 import slimeknights.mantle.block.EnumBlock;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
-import slimeknights.tconstruct.library.utils.HarvestLevels;
 
 public class BlockOre extends EnumBlock<BlockOre.OreTypes> {
 
@@ -27,7 +27,7 @@ public class BlockOre extends EnumBlock<BlockOre.OreTypes> {
     super(material, TYPE, OreTypes.class);
 
     setHardness(10f);
-    setHarvestLevel("pickaxe", HarvestLevels.COBALT);
+    setHarvestLevel("pickaxe", Config.netherOresMiningLevel);
     setCreativeTab(TinkerRegistry.tabWorld);
   }
 

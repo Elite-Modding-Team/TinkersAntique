@@ -51,6 +51,7 @@ public final class Config {
   public static boolean beheadingAffectsWitherSkulls = true;
   public static boolean drainGaseousFluids = true;
   public static int maxSmelteryItemRenders = -1;
+  public static int netherOresMiningLevel = 4;
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
   };
@@ -282,6 +283,11 @@ public final class Config {
       prop.setComment("Determines the maximum number of possible items to display before not rendering any to prevent substantial lag. 0 to disable rendering items in the smeltery entirely. -1 for the default, which is always rendering items.");
       maxSmelteryItemRenders = prop.getInt();
       propOrder.add(prop.getName());
+      
+      prop = configFile.get(cat, "netherOresMiningLevel", netherOresMiningLevel);
+      prop.setComment("The mining level for ardite and cobalt ores.");
+      netherOresMiningLevel = prop.getInt();
+      propOrder.add(prop.getName());
     }
     // Worldgen
     {
@@ -327,7 +333,7 @@ public final class Config {
       slimeIslandsOnlyGenerateInSurfaceWorlds = prop.getBoolean();
       propOrder.add(prop.getName());
 
-      // Nether ore generation
+      // Ores
       prop = configFile.get(cat, "genCobalt", genCobalt);
       prop.setComment("If true, cobalt ore will generate in the nether.");
       genCobalt = prop.getBoolean();
