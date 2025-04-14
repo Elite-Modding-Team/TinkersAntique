@@ -579,7 +579,7 @@ public final class TinkerRegistry {
     return null;
   }
 
-  public static List<MeltingRecipe> getAllMeltingRecipes() {
+  public static List<MeltingRecipe> getAllMeltingRecipies() {
     return ImmutableList.copyOf(meltingRegistry);
   }
 
