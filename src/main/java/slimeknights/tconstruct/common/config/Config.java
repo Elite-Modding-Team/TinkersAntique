@@ -81,7 +81,7 @@ public final class Config {
   public static boolean genIslandsInSuperflat = false;
   public static int slimeIslandsRate = 730; // Every x-th chunk will have a slime island. so 1 = every chunk, 100 = every 100th
   public static int magmaIslandsRate = 100; // Every x-th chunk will have a slime island. so 1 = every chunk, 100 = every 100th
-  public static int[] slimeIslandDimensions = new int[]{-1, 1};
+  public static int[] slimeIslandBlacklist = new int[]{-1, 1};
   public static boolean slimeIslandDimensionsIsBlacklist = true;
   public static boolean slimeIslandsOnlyGenerateInSurfaceWorlds = true;
   public static boolean genCobalt = true;
@@ -318,9 +318,9 @@ public final class Config {
 
       configFile.renameProperty(cat, "slimeIslandBlacklist", "slimeIslandDimensions");
 
-      prop = configFile.get(cat, "slimeIslandDimensions", slimeIslandDimensions);
+      prop = configFile.get(cat, "slimeIslandDimensions", slimeIslandBlacklist);
       prop.setComment("List of dimensions in which to enable or disable generation of slime islands.");
-      slimeIslandDimensions = prop.getIntList();
+      slimeIslandBlacklist = prop.getIntList();
       propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "slimeIslandDimensionsIsBlacklist", slimeIslandDimensionsIsBlacklist);
