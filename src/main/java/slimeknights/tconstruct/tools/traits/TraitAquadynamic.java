@@ -27,6 +27,8 @@ public class TraitAquadynamic extends AbstractTrait {
       coeff += event.getEntityPlayer().getEntityWorld().getBiomeForCoordsBody(event.getEntityPlayer().getPosition()).getRainfall() / 1.6f;
     }
 
-    event.setNewSpeed(event.getNewSpeed() + event.getOriginalSpeed() * coeff);
+    if(coeff != 1f) {
+      event.setNewSpeed(event.getNewSpeed() + event.getOriginalSpeed() * coeff);
+    }
   }
 }
