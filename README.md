@@ -26,9 +26,8 @@ Note: Git MUST be installed and in the system path to use our scripts.
 
 Please include the following:
 
-* Minecraft version
 * Tinkers' Antique version
-* Forge version/build
+* Forge/Cleanroom version/build
 * Versions of any mods potentially related to the issue
 * Any relevant screenshots are greatly appreciated.
 * For crashes:
