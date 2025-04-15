@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -89,6 +90,46 @@ public class Kama extends AoeToolCore {
   @Override
   protected void breakExtraBlock(ItemStack stack, World world, EntityPlayer player, BlockPos pos, BlockPos refPos) {
     ToolHelper.shearExtraBlock(stack, world, player, pos, refPos);
+  }
+
+  @Nonnull
+  @Override
+  public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    ItemStack stack = player.getHeldItem(hand);
+    if(ToolHelper.isBroken(stack)) {
+      return EnumActionResult.FAIL;
+    }
+
+    EnumActionResult ret = useHoe(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
+    for(BlockPos blockPos : getAOEBlocks(stack, world, player, pos)) {
+      if(ToolHelper.isBroken(stack)) {
+        break;
+      }
+
+      EnumActionResult ret2 = useHoe(stack, player, world, blockPos, hand, facing, hitX, hitY, hitZ);
+      if(ret != EnumActionResult.SUCCESS) {
+        ret = ret2;
+      }
+    }
+
+    if(ret == EnumActionResult.SUCCESS) {
+      TinkerToolEvent.OnMattockHoe.fireEvent(stack, player, world, pos);
+    }
+
+    return ret;
+  }
+
+  private EnumActionResult useHoe(ItemStack stack, EntityPlayer player, World world, BlockPos blockPos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    // make sure no damage is taken
+    int damage = stack.getItemDamage();
+    EnumActionResult ret = Items.DIAMOND_HOE.onItemUse(player, world, blockPos, hand, facing, hitX, hitY, hitZ);
+    stack.setItemDamage(damage);
+
+    // do tinkers damaging
+    if(!world.isRemote && ret == EnumActionResult.SUCCESS) {
+      ToolHelper.damageTool(stack, 1, player);
+    }
+    return ret;
   }
 
   @Nonnull

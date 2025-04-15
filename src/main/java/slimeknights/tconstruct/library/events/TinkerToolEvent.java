@@ -65,6 +65,9 @@ public abstract class TinkerToolEvent extends TinkerEvent {
     }
   }
 
+  /*
+   * Applies to Kamas now, name kept for retro-compatibility
+   */
   public static class OnMattockHoe extends TinkerToolEvent {
 
     public final BlockPos pos;

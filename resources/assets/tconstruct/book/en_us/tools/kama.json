@@ -8,10 +8,11 @@
       "text": "\n"
     },
     {
-      "text": "Rightclicking on crops or sugarcane harvests and replants all fully grown plants in the area."
+      "text": "Right-clicking on crops or sugarcane harvests and replants all fully grown plants in the area."
     }
   ],
   "properties": [
+    "Tills the ground",
     "Harvests crops on right click",
     "Shears blocks and animals",
     "Effective on plants"

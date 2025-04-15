@@ -2,8 +2,10 @@ package slimeknights.tconstruct.tools.tools;
 
 import com.google.common.collect.ImmutableSet;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -112,46 +114,43 @@ public class Mattock extends AoeToolCore {
     return new int[]{1, 2};
   }
 
+  // grass paths
   @Nonnull
   @Override
-  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+  public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     if(ToolHelper.isBroken(stack)) {
       return EnumActionResult.FAIL;
     }
 
-    EnumActionResult ret = useHoe(stack, player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-    for(BlockPos blockPos : getAOEBlocks(stack, worldIn, player, pos)) {
-      if(ToolHelper.isBroken(stack)) {
-        break;
+    EnumActionResult result = Items.DIAMOND_SHOVEL.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+    if(result == EnumActionResult.SUCCESS) {
+      TinkerToolEvent.OnShovelMakePath.fireEvent(stack, player, world, pos);
+    }
+
+    // only do the AOE path if the selected block is grass or grass path
+    Block block = world.getBlockState(pos).getBlock();
+    if(block == Blocks.GRASS || block == Blocks.GRASS_PATH) {
+      for(BlockPos aoePos : getAOEBlocks(stack, world, player, pos)) {
+        // stop if the tool breaks during the process
+        if(ToolHelper.isBroken(stack)) {
+          break;
+        }
+
+        EnumActionResult aoeResult = Items.DIAMOND_SHOVEL.onItemUse(player, world, aoePos, hand, facing, hitX, hitY, hitZ);
+        // if we pass on an earlier block, check if another block succeeds here instead
+        if(result != EnumActionResult.SUCCESS) {
+          result = aoeResult;
+        }
+
+        if(aoeResult == EnumActionResult.SUCCESS) {
+          TinkerToolEvent.OnShovelMakePath.fireEvent(stack, player, world, aoePos);
+        }
       }
-
-      EnumActionResult ret2 = useHoe(stack, player, worldIn, blockPos, hand, facing, hitX, hitY, hitZ);
-      if(ret != EnumActionResult.SUCCESS) {
-        ret = ret2;
-      }
     }
 
-    if(ret == EnumActionResult.SUCCESS) {
-      TinkerToolEvent.OnMattockHoe.fireEvent(stack, player, worldIn, pos);
-    }
-
-    return ret;
+    return result;
   }
-
-  private EnumActionResult useHoe(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos blockPos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    // make sure no damage is taken
-    int damage = stack.getItemDamage();
-    EnumActionResult ret = Items.DIAMOND_HOE.onItemUse(playerIn, worldIn, blockPos, hand, facing, hitX, hitY, hitZ);
-    stack.setItemDamage(damage);
-
-    // do tinkers damaging
-    if(!worldIn.isRemote && ret == EnumActionResult.SUCCESS) {
-      ToolHelper.damageTool(stack, 1, playerIn);
-    }
-    return ret;
-  }
-
 
   @Override
   public boolean isAoeHarvestTool() {
