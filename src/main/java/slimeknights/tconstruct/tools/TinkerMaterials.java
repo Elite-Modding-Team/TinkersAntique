@@ -64,6 +64,7 @@ import static slimeknights.tconstruct.tools.TinkerTraits.crude;
 import static slimeknights.tconstruct.tools.TinkerTraits.crude2;
 import static slimeknights.tconstruct.tools.TinkerTraits.crumbling;
 import static slimeknights.tconstruct.tools.TinkerTraits.dense;
+import static slimeknights.tconstruct.tools.TinkerTraits.depthdigger;
 import static slimeknights.tconstruct.tools.TinkerTraits.duritos;
 import static slimeknights.tconstruct.tools.TinkerTraits.ecological;
 import static slimeknights.tconstruct.tools.TinkerTraits.enderference;
@@ -353,7 +354,7 @@ public final class TinkerMaterials {
     steel.addTrait(stiff);
     
     alubrass.addCommonItems("Alubrass");
-    alubrass.addTrait(dense);
+    alubrass.addTrait(depthdigger);
 
     // bowstring
     string.addItemIngot("string");
