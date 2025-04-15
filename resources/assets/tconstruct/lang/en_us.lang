@@ -557,6 +557,7 @@ material.lead.name=Lead
 material.silver.name=Silver
 material.electrum.name=Electrum
 material.steel.name=Steel
+material.alubrass.name=Aluminum Brass
 
 material.string.name=String
 material.vine.name=Vines

@@ -149,6 +149,7 @@ public final class TinkerMaterials {
   public static final Material silver     = mat("silver", 0xd1ecf6);
   public static final Material electrum   = mat("electrum", 0xe8db49);
   public static final Material steel      = mat("steel", 0xa7a7a7);
+  public static final Material alubrass   = mat("alubrass", 0xf0d467);
 
   // specul
   public static final Material xu;
@@ -350,6 +351,9 @@ public final class TinkerMaterials {
     steel.addCommonItems("Steel");
     steel.addTrait(sharp, HEAD);
     steel.addTrait(stiff);
+    
+    alubrass.addCommonItems("Alubrass");
+    alubrass.addTrait(dense);
 
     // bowstring
     string.addItemIngot("string");
@@ -533,6 +537,11 @@ public final class TinkerMaterials {
                                     new HandleMaterialStats(0.9f, 150),
                                     new ExtraMaterialStats(25));
 
+    TinkerRegistry.addMaterialStats(alubrass,
+                                  new HeadMaterialStats(450, 7.00f, 3.50f, DIAMOND),
+                                  new HandleMaterialStats(1.10f, 80),
+                                  new ExtraMaterialStats(90));
+
     //TinkerRegistry.addMaterialStats(xu,         new ToolMaterialStats(97, 1.00f, 1.00f, 0.10f, 0.20f, DIAMOND));
   }
 
@@ -575,6 +584,7 @@ public final class TinkerMaterials {
     TinkerRegistry.addMaterialStats(silver, new BowMaterialStats(1.2f, 0.8f, 2f));
     TinkerRegistry.addMaterialStats(electrum, new BowMaterialStats(1.5f, 1f, 4f));
     TinkerRegistry.addMaterialStats(steel, new BowMaterialStats(0.4f, 2f, 9f));
+    TinkerRegistry.addMaterialStats(alubrass, new BowMaterialStats(0.45f, 1.5f, 6f));
 
     // Bowstring materials
     BowStringMaterialStats bowstring = new BowStringMaterialStats(1f);

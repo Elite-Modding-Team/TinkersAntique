@@ -57,7 +57,7 @@ public class TinkerIntegration extends TinkerPulse {
     integrate(TinkerMaterials.magmaslime, "slimecrystalMagma");
 
     // alubrass needs  both copper and aluminum
-    TinkerRegistry.integrate(new MaterialIntegration(null, TinkerFluids.alubrass, "Alubrass", "ingotCopper", "ingotAluminum")).toolforge();
+    TinkerRegistry.integrate(new MaterialIntegration(TinkerMaterials.alubrass, TinkerFluids.alubrass, "Alubrass", "ingotCopper", "ingotAluminum")).toolforge();
 
 
     integrate(TinkerMaterials.netherrack);

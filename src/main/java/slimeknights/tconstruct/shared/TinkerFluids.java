@@ -112,7 +112,7 @@ public class TinkerFluids extends TinkerPulse {
     knightslime.setTemperature(520);
     knightslime.setRarity(EnumRarity.EPIC);
 
-    alubrass = fluidMetal("alubrass", 0xece347);
+    alubrass = fluidMetal(TinkerMaterials.alubrass);
     alubrass.setTemperature(500);
 
     // Mod Integration fluids
