@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 
 import java.io.IOException;
 
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistryClient;
 import slimeknights.tconstruct.library.client.Icons;
 import slimeknights.tconstruct.library.client.ToolBuildGuiInfo;
@@ -19,7 +20,7 @@ public class GuiButtonsToolStation extends GuiSideButtons {
   protected final GuiToolStation parent;
 
   public GuiButtonsToolStation(GuiToolStation parent, Container container) {
-    super(parent, container, GuiToolStation.Column_Count);
+    super(parent, container, Config.columnsToolStation);
 
     this.parent = parent;
   }

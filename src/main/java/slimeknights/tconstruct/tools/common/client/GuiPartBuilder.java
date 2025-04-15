@@ -43,8 +43,6 @@ public class GuiPartBuilder extends GuiTinkerStation {
 
   private static final ResourceLocation BACKGROUND = Util.getResource("textures/gui/partbuilder.png");
 
-  public static final int Column_Count = 4;
-
   protected GuiButtonsPartCrafter buttons;
   protected GuiInfoPanel info;
   protected GuiSideInventory sideInventory;

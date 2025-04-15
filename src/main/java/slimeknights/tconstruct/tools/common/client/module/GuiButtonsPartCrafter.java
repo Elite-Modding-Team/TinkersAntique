@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import slimeknights.tconstruct.common.TinkerNetwork;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.client.CustomTextureCreator;
 import slimeknights.tconstruct.library.client.Icons;
@@ -27,7 +28,7 @@ public class GuiButtonsPartCrafter extends GuiSideButtons {
   private final IInventory patternChest;
 
   public GuiButtonsPartCrafter(GuiPartBuilder parent, Container container, IInventory patternChest) {
-    super(parent, container, GuiPartBuilder.Column_Count, false);
+    super(parent, container, Config.columnsPartBuilder, false);
 
     this.patternChest = patternChest;
   }

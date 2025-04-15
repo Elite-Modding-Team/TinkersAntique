@@ -31,6 +31,7 @@ import slimeknights.mantle.client.gui.GuiElement;
 import slimeknights.mantle.client.gui.GuiElementScalable;
 import slimeknights.mantle.client.gui.GuiModule;
 import slimeknights.tconstruct.common.TinkerNetwork;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.TinkerRegistryClient;
 import slimeknights.tconstruct.library.Util;
@@ -73,7 +74,6 @@ public class GuiToolStation extends GuiTinkerStation {
   private static final GuiElement BeamRight = new GuiElement(131, 180, 2, 7);
   private static final GuiElementScalable BeamCenter = new GuiElementScalable(2, 180, 129, 7);
 
-  public static final int Column_Count = 5;
   private static final int Table_slot_count = 6;
 
   protected GuiElement buttonDecorationTop = SlotSpaceTop;
@@ -470,7 +470,7 @@ public class GuiToolStation extends GuiTinkerStation {
 
       buttonDecorationTop.draw(button.x, button.y - buttonDecorationTop.h);
       // don't draw the bottom for the buttons in the last row
-      if(button.id < buttons.buttonList.size() - Column_Count) {
+      if(button.id < buttons.buttonList.size() - Config.columnsToolStation) {
         buttonDecorationBot.draw(button.x, button.y + button.height);
       }
     }

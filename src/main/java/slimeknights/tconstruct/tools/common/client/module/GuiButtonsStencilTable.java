@@ -8,14 +8,12 @@ import net.minecraft.item.ItemStack;
 import java.io.IOException;
 
 import slimeknights.tconstruct.common.TinkerNetwork;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.client.CustomTextureCreator;
 import slimeknights.tconstruct.library.client.Icons;
 import slimeknights.tconstruct.library.tinkering.MaterialItem;
-import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.library.tools.Pattern;
-import slimeknights.tconstruct.library.tools.ToolCore;
-import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.tools.common.client.GuiButtonItem;
 import slimeknights.tconstruct.tools.common.client.GuiStencilTable;
 import slimeknights.tconstruct.tools.common.inventory.ContainerStencilTable;
@@ -26,7 +24,7 @@ public class GuiButtonsStencilTable extends GuiSideButtons {
   public int selected = -1;
 
   public GuiButtonsStencilTable(GuiStencilTable parent, Container container, boolean right) {
-    super(parent, container, GuiStencilTable.Column_Count, right);
+    super(parent, container, Config.columnsStencilTable, right);
   }
 
   @Override

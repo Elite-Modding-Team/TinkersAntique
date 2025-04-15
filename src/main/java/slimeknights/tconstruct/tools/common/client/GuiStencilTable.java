@@ -22,8 +22,6 @@ public class GuiStencilTable extends GuiTinkerStation {
 
   private static final ResourceLocation BACKGROUND = Util.getResource("textures/gui/stenciltable.png");
 
-  public static final int Column_Count = 4;
-
   protected GuiButtonsStencilTable buttons;
   protected GuiSideInventory sideInventory;
   protected ContainerPatternChest.DynamicChestInventory chestContainer;

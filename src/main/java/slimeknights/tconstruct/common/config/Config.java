@@ -52,6 +52,10 @@ public final class Config {
   public static boolean drainGaseousFluids = true;
   public static int maxSmelteryItemRenders = -1;
   public static int netherOresMiningLevel = 4;
+  public static int columnsPartBuilder = 4;
+  public static int columnsStencilTable = 4;
+  public static int columnsToolStation = 5;
+  
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
   };
@@ -287,6 +291,21 @@ public final class Config {
       prop = configFile.get(cat, "netherOresMiningLevel", netherOresMiningLevel);
       prop.setComment("The mining level for ardite and cobalt ores.");
       netherOresMiningLevel = prop.getInt();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "columnsPartBuilder", columnsPartBuilder);
+      prop.setComment("The column count of buttons in part builder GUIs.");
+      columnsPartBuilder = prop.getInt();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "columnsStencilTable", columnsStencilTable);
+      prop.setComment("The column count of buttons in stencil table GUIs.");
+      columnsStencilTable = prop.getInt();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "columnsToolStation", columnsToolStation);
+      prop.setComment("The column count of buttons in tool station GUIs.");
+      columnsToolStation = prop.getInt();
       propOrder.add(prop.getName());
     }
     // Worldgen
