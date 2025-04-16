@@ -15,6 +15,8 @@ public class FluidColored extends Fluid {
   public static ResourceLocation ICON_MilkFlowing = Util.getResource("blocks/fluids/milk_flow");
   public static ResourceLocation ICON_StoneStill = Util.getResource("blocks/fluids/liquid_stone");
   public static ResourceLocation ICON_StoneFlowing = Util.getResource("blocks/fluids/liquid_stone_flow");
+  public static ResourceLocation ICON_SlimeStill = Util.getResource("blocks/fluids/liquid_slime");
+  public static ResourceLocation ICON_SlimeFlowing = Util.getResource("blocks/fluids/liquid_slime_flow");
 
   public final int color;
 

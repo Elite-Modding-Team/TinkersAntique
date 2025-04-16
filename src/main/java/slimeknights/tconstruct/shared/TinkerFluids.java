@@ -196,7 +196,7 @@ public class TinkerFluids extends TinkerPulse {
     registerClassicBlock(registry, milk);
 
     if(isWorldLoaded()) {
-      blueslime = fluidClassic("blueslime", 0xef67f0f5);
+      blueslime = fluidSlime("blueslime", 0xef67f0f5);
       blueslime.setTemperature(310);
       blueslime.setViscosity(1500);
       blueslime.setDensity(1500);
@@ -204,7 +204,7 @@ public class TinkerFluids extends TinkerPulse {
     }
 
     if(isWorldLoaded() || isSmelteryLoaded()) {
-      purpleSlime = fluidClassic("purpleslime", 0xefd236ff);
+      purpleSlime = fluidSlime("purpleslime", 0xefd236ff);
       purpleSlime.setTemperature(370);
       purpleSlime.setViscosity(1600);
       purpleSlime.setDensity(1600);
@@ -283,6 +283,12 @@ public class TinkerFluids extends TinkerPulse {
 
     return registerFluid(fluid);
   }
+  
+  private static FluidColored fluidSlime(String name, int color) {
+	    FluidColored fluid = new FluidColored(name, color, FluidColored.ICON_SlimeStill, FluidColored.ICON_SlimeFlowing);
+
+	    return registerFluid(fluid);
+	  }
 
   private static FluidColored fluidClassic(String name, int color) {
     FluidColored fluid = new FluidColored(name, color, FluidColored.ICON_LiquidStill, FluidColored.ICON_LiquidFlowing);
