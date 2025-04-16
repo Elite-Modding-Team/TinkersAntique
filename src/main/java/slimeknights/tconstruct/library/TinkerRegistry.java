@@ -105,18 +105,18 @@ public final class TinkerRegistry {
   public static void addMaterial(Material material) {
     // ensure material identifiers are safe
     if(CharMatcher.whitespace().matchesAnyOf(material.getIdentifier())) {
-      error("Could not register material \"%s\": Material identifier must not contain any spaces.", material.identifier);
+      log.fatal("Could not register material \"{}\": Material identifier must not contain any spaces.", material.identifier);
       return;
     }
     if(CharMatcher.javaUpperCase().matchesAnyOf(material.getIdentifier())) {
-      error("Could not register material \"%s\": Material identifier must be completely lowercase.", material.identifier);
+      log.fatal("Could not register material \"{}\": Material identifier must be completely lowercase.", material.identifier);
       return;
     }
 
     // duplicate material
     if(materials.containsKey(material.identifier)) {
       ModContainer registeredBy = materialRegisteredByMod.get(material.identifier);
-      error(String.format(
+      log.fatal(String.format(
           "Could not register material \"%s\": It was already registered by %s",
           material.identifier,
           registeredBy.getName()));
@@ -192,8 +192,7 @@ public final class TinkerRegistry {
       return;
     }
     if(!materials.containsKey(materialIdentifier)) {
-      error(String.format("Could not add Stats \"%s\" to \"%s\": Unknown Material", stats.getIdentifier(),
-                          materialIdentifier));
+      log.fatal("Could not add Stats \"{}\" to \"{}\": Unknown Material", stats.getIdentifier(), materialIdentifier);
       return;
     }
 
@@ -210,7 +209,7 @@ public final class TinkerRegistry {
 
   public static void addMaterialStats(Material material, IMaterialStats stats) {
     if(material == null) {
-      error(String.format("Could not add Stats \"%s\": Material is null", stats.getIdentifier()));
+      log.fatal("Could not add Stats \"{}\": Material is null", stats.getIdentifier());
       return;
     }
     if(cancelledMaterials.contains(material.identifier)) {
@@ -226,15 +225,13 @@ public final class TinkerRegistry {
         registeredBy = matReg.get(stats.getIdentifier()).getName();
       }
 
-      error(String.format(
-          "Could not add Stats to \"%s\": Stats of type \"%s\" were already registered by %s. Use the events to modify stats.",
-          identifier, stats.getIdentifier(), registeredBy));
+      log.fatal("Could not add Stats to \"{}\": Stats of type \"{}\" were already registered by {}. Use the events to modify stats.", identifier, stats.getIdentifier(), registeredBy);
       return;
     }
 
     // ensure there are default stats present
     if(Material.UNKNOWN.getStats(stats.getIdentifier()) == null) {
-      error("Could not add Stat of type \"%s\": Default Material does not have default stats for said type. Please add default-values to the default material \"unknown\" first.", stats
+      log.fatal("Could not add Stat of type \"{}\": Default Material does not have default stats for said type. Please add default-values to the default material \"unknown\" first.", stats
           .getIdentifier());
       return;
     }
@@ -262,8 +259,7 @@ public final class TinkerRegistry {
       return;
     }
     if(!materials.containsKey(materialIdentifier)) {
-      error(String.format("Could not add Trait \"%s\" to \"%s\": Unknown Material",
-                          trait.getIdentifier(), materialIdentifier));
+      log.fatal("Could not add Trait \"{}\" to \"{}\": Unknown Material", trait.getIdentifier(), materialIdentifier);
       return;
     }
 
@@ -283,7 +279,7 @@ public final class TinkerRegistry {
    */
   public static boolean checkMaterialTrait(Material material, ITrait trait, String stats) {
     if(material == null) {
-      error(String.format("Could not add Trait \"%s\": Material is null", trait.getIdentifier()));
+      log.fatal("Could not add Trait \"{}\": Material is null", trait.getIdentifier());
       return false;
     }
     if(cancelledMaterials.contains(material.identifier)) {
@@ -299,9 +295,7 @@ public final class TinkerRegistry {
         registeredBy = matReg.get(trait.getIdentifier()).getName();
       }
 
-      error(String.format(
-          "Could not add Trait to \"%s\": Trait \"%s\" was already registered by %s",
-          identifier, trait.getIdentifier(), registeredBy));
+      log.fatal("Could not add Trait to \"{}\": Trait \"{}\" was already registered by {}", identifier, trait.getIdentifier(), registeredBy);
       return false;
     }
 
@@ -407,14 +401,13 @@ public final class TinkerRegistry {
   /** Adds a new pattern to craft to the stenciltable. NBT sensitive. Has to be a Pattern. */
   public static void registerStencilTableCrafting(ItemStack stencil) {
     if(!(stencil.getItem() instanceof IPattern)) {
-      error(String.format(
-          "Stencil Table Crafting has to be a pattern (%s)", stencil.toString()));
+      log.fatal("Stencil Table Crafting has to be a pattern ({})", stencil);
       return;
     }
     if(new TinkerRegisterEvent.StencilTableCraftingRegisterEvent(stencil).fire()) {
       stencilTableCrafting.add(stencil);
     } else {
-      log.debug("Registration of stencil table stencil " + stencil.toString() + " has been cancelled by event");
+      log.debug("Registration of stencil table stencil " + stencil + " has been cancelled by event");
     }
   }
 
@@ -585,10 +578,10 @@ public final class TinkerRegistry {
 
   public static void registerAlloy(FluidStack result, FluidStack... inputs) {
     if(result.amount < 1) {
-      error("Alloy Recipe: Resulting alloy %s has to have an amount (%d)", result.getLocalizedName(), result.amount);
+      log.fatal("Alloy Recipe: Resulting alloy {} has to have an amount ({})", result.getLocalizedName(), result.amount);
     }
     if(inputs.length < 2) {
-      error("Alloy Recipe: Alloy for %s must consist of at least 2 liquids", result.getLocalizedName());
+      log.fatal("Alloy Recipe: Alloy for {} must consist of at least 2 liquids", result.getLocalizedName());
     }
 
     registerAlloy(new AlloyRecipe(result, inputs));
@@ -749,7 +742,7 @@ public final class TinkerRegistry {
     ResourceLocation name = EntityList.getKey(clazz);
 
     if(name == null) {
-      error("Entity Melting: Entity %s is not registered in the EntityList", clazz.getSimpleName());
+      log.fatal("Entity Melting: Entity {} is not registered in the EntityList", clazz.getSimpleName());
     }
 
     TinkerRegisterEvent.EntityMeltingRegisterEvent event = new TinkerRegisterEvent.EntityMeltingRegisterEvent(clazz, liquid);
