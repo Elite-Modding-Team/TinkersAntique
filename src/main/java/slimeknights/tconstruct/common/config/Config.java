@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.common.config;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,7 +16,6 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.utils.RecipeUtil;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 public final class Config {
@@ -52,9 +50,6 @@ public final class Config {
   public static boolean drainGaseousFluids = true;
   public static int maxSmelteryItemRenders = -1;
   public static int netherOresMiningLevel = 4;
-  public static int columnsPartBuilder = 4;
-  public static int columnsStencilTable = 4;
-  public static int columnsToolStation = 5;
   
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -105,6 +100,9 @@ public final class Config {
   public static boolean testIMC = false; // requires debug module
   public static boolean temperatureCelsius = true;
   public static int minFluidHeight = 3;
+  public static int columnsPartBuilder = 4;
+  public static int columnsStencilTable = 4;
+  public static int columnsToolStation = 5;
 
   /* Config File */
 
@@ -116,7 +114,7 @@ public final class Config {
   static ConfigCategory ClientSide;
 
   public static void load(FMLPreInitializationEvent event) {
-    configFile = new Configuration(event.getSuggestedConfigurationFile(), "0.1", false);
+    configFile = new Configuration(event.getSuggestedConfigurationFile(), "0.2", false);
 
     MinecraftForge.EVENT_BUS.register(instance);
 
@@ -138,7 +136,6 @@ public final class Config {
     {
       Modules = pulseConfig.getCategory();
       /*
-      List<String> propOrder = Lists.newArrayList();
       // convert pulse config to MC compatible config for GUI config
       Modules = new ConfigCategory("modules");
       for(PulseMeta pm : TConstruct.pulseManager.getAllPulseMetadata()) {
@@ -147,237 +144,180 @@ public final class Config {
         prop.setValue(pm.isEnabled());
         prop.setRequiresMcRestart(true);
         Modules.put(pm.getId(), prop);
-        propOrder.add(prop.getName());
-      }
-      Modules.setPropertyOrder(propOrder);*/
+      }*/
     }
     // Gameplay
     {
       String cat = "gameplay";
-      List<String> propOrder = Lists.newArrayList();
       Gameplay = configFile.getCategory(cat);
 
       prop = configFile.get(cat, "spawnWithBook", spawnWithBook);
       prop.setComment("Players who enter the world for the first time get a Tinkers' Book.");
       spawnWithBook = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "reuseStencils", reuseStencil);
       prop.setComment("Allows to reuse stencils in the stencil table to turn them into other stencils.");
       reuseStencil = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "chestsKeepInventory", chestsKeepInventory);
       prop.setComment("Pattern and Part chests keep their inventory when harvested.");
       chestsKeepInventory = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "enableClayCasts", claycasts);
       prop.setComment("Adds single-use clay casts.");
       claycasts = prop.getBoolean();
       prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "allowBrickCasting", castableBricks);
       prop.setComment("Allows the creation of bricks from molten clay.");
       castableBricks = prop.getBoolean();
       prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
 
-      prop = configFile.get(cat, "AutosmeltFortuneInteraction", autosmeltlapis);
+      prop = configFile.get(cat, "autosmeltFortuneInteraction", autosmeltlapis);
       prop.setComment("Fortune increases drops after harvesting a block with autosmelt.");
       autosmeltlapis = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "craftCastableMaterials", craftCastableMaterials);
       prop.setComment("Allows to craft all tool parts of all materials in the part builder, including materials that normally have to be cast with a smeltery.");
       craftCastableMaterials = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "registerAllItems", forceRegisterAll);
       prop.setComment("Enables all items, even if the Module needed to obtain them is not active.");
       forceRegisterAll = prop.getBoolean();
       prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "obsidianAlloy", obsidianAlloy);
       prop.setComment("Allows the creation of obsidian in the smeltery, using a bucket of lava and water.");
       obsidianAlloy = prop.getBoolean();
       prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "addLeatherDryingRecipe", leatherDryingRecipe);
       prop.setComment("Adds a recipe that allows you to get leather from drying cooked meat.");
       leatherDryingRecipe = prop.getBoolean();
       prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "addFlintRecipe", gravelFlintRecipe);
       prop.setComment("Adds a recipe that allows you to craft 3 gravel into a flint.");
       gravelFlintRecipe = prop.getBoolean();
       prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "oreToIngotRatio", oreToIngotRatio);
       prop.setComment("Determines the ratio of ore to ingot, or in other words how many ingots you get out of an ore. This ratio applies to all ores (including poor and dense). The ratio can be any decimal, including 1.5 and the like, but can't go below 1. THIS ALSO AFFECTS MELTING TEMPERATURE!");
       prop.setMinValue(1);
       oreToIngotRatio = prop.getDouble();
       prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "matchVanillaSlimeblock", matchVanillaSlimeblock);
       prop.setComment("If true, requires slimeballs in the vanilla slimeblock recipe to match in color, otherwise gives a pink slimeblock.");
       matchVanillaSlimeblock = prop.getBoolean();
       prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "limitPiggybackpack", limitPiggybackpack);
       prop.setComment("If true, piggybackpacks can only pick up players and mobs that can be leashed in vanilla. If false any mob can be picked up.");
       limitPiggybackpack = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "clearGlassSilkTouch", clearGlassSilkTouch);
       prop.setComment("If true, clear glass can only be harvested with silk touch like regular glass.");
       clearGlassSilkTouch = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "beheadingAffectsWitherSkulls", beheadingAffectsWitherSkulls);
       prop.setComment("If true, the Beheading modifier increases Wither Skeleton Skull drop rates. If false, Wither Skeleton Skulls drop rates will not be affected.");
       beheadingAffectsWitherSkulls = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "despawnProjectile", despawnProjectile);
       prop.setComment("How many ticks projectiles are allowed on the ground until they despawn.");
       despawnProjectile = prop.getInt();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "craftingStationBlacklist", craftingStationBlacklistArray);
       prop.setComment("Blacklist of registry names or TE classnames for the crafting station to connect to. Mainly for compatibility.");
       craftingStationBlacklistArray = prop.getStringList();
       craftingStationBlacklist = Sets.newHashSet(craftingStationBlacklistArray);
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "orePreference", orePreference);
       prop.setComment("Preferred mod ID for oredictionary outputs. Top most mod ID will be the preferred output ID, and if none is found the first output stack is used.");
       orePreference = prop.getStringList();
       RecipeUtil.setOrePreferences(orePreference);
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "oredictMeltingIgnore", oredictMeltingIgnore);
       prop.setComment("List of items to ignore when generating melting recipes from the crafting registry. For example, ignoring sticks allows metal pickaxes to melt down.\nFormat: oreName or modid:item[:meta]. If meta is unset, uses wildcard.");
       oredictMeltingIgnore = prop.getStringList();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "testIMC", testIMC);
       prop.setComment("REQUIRES DEBUG MODULE. Tests all IMC integrations with dummy recipes. May significantly impact gameplay, so its advised you disable this outside of dev environments.");
       testIMC = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "materialIgnore", materialIgnore);
       prop.setComment("List of materials to ignore, effectively preventing registration.");
       materialIgnore = prop.getStringList();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "drainGaseousFluids", drainGaseousFluids);
       prop.setComment("If gaseous fluids are being transferable via faucets.");
       drainGaseousFluids = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "maxSmelteryItemRenders", maxSmelteryItemRenders);
       prop.setComment("Determines the maximum number of possible items to display before not rendering any to prevent substantial lag. 0 to disable rendering items in the smeltery entirely. -1 for the default, which is always rendering items.");
       maxSmelteryItemRenders = prop.getInt();
-      propOrder.add(prop.getName());
-      
+
       prop = configFile.get(cat, "netherOresMiningLevel", netherOresMiningLevel);
       prop.setComment("The mining level for ardite and cobalt ores.");
       netherOresMiningLevel = prop.getInt();
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "columnsPartBuilder", columnsPartBuilder);
-      prop.setComment("The column count of buttons in part builder GUIs.");
-      columnsPartBuilder = prop.getInt();
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "columnsStencilTable", columnsStencilTable);
-      prop.setComment("The column count of buttons in stencil table GUIs.");
-      columnsStencilTable = prop.getInt();
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "columnsToolStation", columnsToolStation);
-      prop.setComment("The column count of buttons in tool station GUIs.");
-      columnsToolStation = prop.getInt();
-      propOrder.add(prop.getName());
     }
     // Worldgen
     {
       String cat = "worldgen";
-      List<String> propOrder = Lists.newArrayList();
       Worldgen = configFile.getCategory(cat);
 
       // Slime Islands
       prop = configFile.get(cat, "generateSlimeIslands", genSlimeIslands);
       prop.setComment("If true, slime islands will generate.");
       genSlimeIslands = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "generateIslandsInSuperflat", genIslandsInSuperflat);
       prop.setComment("If true, slime islands generate in superflat worlds.");
       genIslandsInSuperflat = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "slimeIslandRate", slimeIslandsRate);
       prop.setComment("One in every X chunks will contain a slime island.");
       slimeIslandsRate = prop.getInt();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "magmaIslandRate", magmaIslandsRate);
       prop.setComment("One in every X chunks will contain a magma island in the nether.");
       magmaIslandsRate = prop.getInt();
-      propOrder.add(prop.getName());
 
       configFile.renameProperty(cat, "slimeIslandBlacklist", "slimeIslandDimensions");
 
       prop = configFile.get(cat, "slimeIslandDimensions", slimeIslandBlacklist);
       prop.setComment("List of dimensions in which to enable or disable generation of slime islands.");
       slimeIslandBlacklist = prop.getIntList();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "slimeIslandDimensionsIsBlacklist", slimeIslandDimensionsIsBlacklist);
       prop.setComment("Whether the list of slime island dimensions behaves as a blacklist or a whitelist.");
       slimeIslandDimensionsIsBlacklist = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "slimeIslandsOnlyGenerateInSurfaceWorlds", slimeIslandsOnlyGenerateInSurfaceWorlds);
       prop.setComment("If false, slime islands only generate in dimensions which are of type surface. This means they won't generate in modded cave dimensions like the Deep Dark. Note that the name of this property is inverted: It must be set to false to prevent slime islands from generating in non-surface dimensions.");
       slimeIslandsOnlyGenerateInSurfaceWorlds = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       // Ores
       prop = configFile.get(cat, "genCobalt", genCobalt);
       prop.setComment("If true, cobalt ore will generate in the nether.");
       genCobalt = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "genArdite", genArdite);
       prop.setComment("If true, ardite ore will generate in the nether.");
       genArdite = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "cobaltRate", cobaltRate);
-      prop.setComment("Approximate Ores per chunk.");
+      prop.setComment("Approximate cobalt ore generation per chunk.");
       cobaltRate = prop.getInt();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "arditeRate", arditeRate);
+      prop.setComment("Approximate ardite ore generation per chunk.");
       arditeRate = prop.getInt();
-      propOrder.add(prop.getName());
-
-      Worldgen.setPropertyOrder(propOrder);
     }
     // Clientside
     {
       String cat = "clientside";
-      List<String> propOrder = Lists.newArrayList();
       ClientSide = configFile.getCategory(cat);
 
       // rename renderTableItems to renderInventoryInWorld
@@ -386,38 +326,31 @@ public final class Config {
       prop = configFile.get(cat, "renderInventoryInWorld", renderTableItems);
       prop.setComment("If true, all of Tinkers' blocks with contents (tables, basin, drying racks,...) will render their contents in the world.");
       renderTableItems = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "renderInventoryNullLayer", renderInventoryNullLayer);
       prop.setComment("If true, use a null render layer when building the models to render tables. Fixes an issue with chisel, but the config is provide in case it breaks something.");
       renderInventoryNullLayer = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "extraTooltips", extraTooltips);
       prop.setComment("If true, tools will show additional info in their tooltips.");
       extraTooltips = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "listAllTables", listAllTables);
       prop.setComment("If true, all variants of the different tables will be listed in creative. Set to false to only have the oak variant for all tables.");
       listAllTables = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       configFile.renameProperty(cat, "listAllMaterials", "listAllToolMaterials");
       prop = configFile.get(cat, "listAllToolMaterials", listAllToolMaterials);
       prop.setComment("If true, all material variants of the different tools will be listed in creative. Set to false to only have the first found material for all tools (usually wood).");
       listAllToolMaterials = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "listAllPartMaterials", listAllToolMaterials); // property was split, so defailt to the value of tool materials
       prop.setComment("If true, all material variants of the different parts will be listed in creative. Set to false to only have the first found material for all parts (usually wood).");
       listAllPartMaterials = prop.getBoolean();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "temperatureCelsius", temperatureCelsius);
       prop.setComment("If true, temperatures in the smeltery and in JEI will display in celsius. If false, they will use the internal units of Kelvin, which may be better for devs.");
       temperatureCelsius = prop.getBoolean();
-      propOrder.add(prop.getName());
       Util.setTemperaturePref(temperatureCelsius);
 
       prop = configFile.get(cat, "minFluidHeight", minFluidHeight);
@@ -425,7 +358,6 @@ public final class Config {
       prop.setMinValue(3);
       prop.setMaxValue(8);
       minFluidHeight = prop.getInt();
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "enableForgeBucketModel", enableForgeBucketModel);
       prop.setComment("If true, tools will enable the forge bucket model on startup and then turn itself off. This is only there so that a fresh install gets the buckets turned on by default.");
@@ -439,14 +371,22 @@ public final class Config {
           ForgeModContainer.getConfig().save();
         }
       }
-      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "dumpTextureMap", dumpTextureMap);
       prop.setComment("REQUIRES DEBUG MODULE. Will do nothing if debug module is disabled. If true the texture map will be dumped into the run directory, just like old forge did.");
       dumpTextureMap = prop.getBoolean();
-      propOrder.add(prop.getName());
 
-      ClientSide.setPropertyOrder(propOrder);
+      prop = configFile.get(cat, "columnsPartBuilder", columnsPartBuilder);
+      prop.setComment("The column count of buttons in part builder GUIs.");
+      columnsPartBuilder = prop.getInt();
+
+      prop = configFile.get(cat, "columnsStencilTable", columnsStencilTable);
+      prop.setComment("The column count of buttons in stencil table GUIs.");
+      columnsStencilTable = prop.getInt();
+
+      prop = configFile.get(cat, "columnsToolStation", columnsToolStation);
+      prop.setComment("The column count of buttons in tool station GUIs.");
+      columnsToolStation = prop.getInt();
     }
 
     // save changes if any
