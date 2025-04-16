@@ -112,7 +112,7 @@ public class TraitShocking extends AbstractTrait {
       TagUtil.setEnchantEffect(tool, true);
       // send only to the player that is charged
       if(entity instanceof EntityPlayerMP) {
-        Sounds.playSoundForPlayer(entity, Sounds.shocking_charged, 0.8f, 0.8f + 0.2f * random.nextFloat());
+        Sounds.PlaySoundForPlayer(entity, Sounds.shocking_charged, 0.8f, 0.8f + 0.2f * random.nextFloat());
       }
     }
   }

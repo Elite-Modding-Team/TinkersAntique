@@ -149,7 +149,7 @@ public class CrossBow extends BowCore implements ICustomCrosshairUser {
     if(!ToolHelper.isBroken(stack) && (entityLiving instanceof EntityPlayer)) {
       int useTime = this.getMaxItemUseDuration(stack) - timeLeft;
       if(getDrawbackProgress(stack, useTime) >= 1f) {
-        Sounds.playSoundForPlayer(entityLiving, Sounds.crossbow_reload, 1.5f, 0.9f + itemRand.nextFloat() * 0.1f);
+        Sounds.PlaySoundForPlayer(entityLiving, Sounds.crossbow_reload, 1.5f, 0.9f + itemRand.nextFloat() * 0.1f);
         setLoaded(stack, true);
       }
     }
