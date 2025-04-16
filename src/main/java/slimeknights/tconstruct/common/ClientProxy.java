@@ -25,6 +25,7 @@ import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 
 import slimeknights.mantle.network.AbstractPacket;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.book.TinkerBook;
@@ -161,6 +162,8 @@ public abstract class ClientProxy extends CommonProxy {
 
   @Override
   public void spawnParticle(Particles particleType, World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... data) {
+    if(Config.disableAllParticles) return;
+
     Particle effect = createParticle(particleType, mc.world, x, y, z, xSpeed, ySpeed, zSpeed, data);
     mc.effectRenderer.addEffect(effect);
 
@@ -174,6 +177,7 @@ public abstract class ClientProxy extends CommonProxy {
 
   @Override
   public void spawnSlimeParticle(World world, double x, double y, double z) {
+    if(Config.disableAllParticles) return;
     mc.effectRenderer.addEffect(new EntitySlimeFx(world, x, y, z, TinkerCommons.matSlimeBallBlue.getItem(), TinkerCommons.matSlimeBallBlue.getItemDamage()));
   }
 

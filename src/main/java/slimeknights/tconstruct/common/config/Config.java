@@ -99,6 +99,7 @@ public final class Config {
   public static boolean dumpTextureMap = false; // requires debug module
   public static boolean testIMC = false; // requires debug module
   public static boolean temperatureCelsius = true;
+  public static boolean disableAllParticles = false;
   public static int minFluidHeight = 3;
   public static int columnsPartBuilder = 4;
   public static int columnsStencilTable = 4;
@@ -387,6 +388,10 @@ public final class Config {
       prop = configFile.get(cat, "columnsToolStation", columnsToolStation);
       prop.setComment("The column count of buttons in tool station GUIs.");
       columnsToolStation = prop.getInt();
+
+      prop = configFile.get(cat, "disableAllParticles", disableAllParticles);
+      prop.setComment("If true, disables all mod-specific particles to display.");
+      disableAllParticles = prop.getBoolean();
     }
 
     // save changes if any
