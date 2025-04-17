@@ -15,6 +15,11 @@
     "data": "smeltery/multiblock.json"
   },
   {
+    "name": "alloys",
+    "type": "text",
+    "data": "smeltery/alloys.json"
+  },
+  {
     "name": "entity_melting",
     "type": "text",
     "data": "smeltery/entity_melting.json"
