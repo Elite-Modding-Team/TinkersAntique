@@ -13,5 +13,10 @@
     "name": "structure",
     "type": "structure",
     "data": "smeltery/multiblock.json"
+  },
+  {
+    "name": "entity_melting",
+    "type": "text",
+    "data": "smeltery/entity_melting.json"
   }
 ]
