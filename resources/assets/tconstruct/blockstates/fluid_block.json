@@ -43,6 +43,9 @@
         "blood": [{
             "custom": { "fluid": "blood" }
         }],
+        "blazing_blood": [{
+            "custom": { "fluid": "blazing_blood" }
+        }],
         "milk": [{
             "custom": { "fluid": "milk" }
         }],

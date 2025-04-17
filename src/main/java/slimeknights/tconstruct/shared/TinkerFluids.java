@@ -25,6 +25,7 @@ import slimeknights.tconstruct.common.TinkerPulse;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.fluid.FluidColored;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
+import slimeknights.tconstruct.library.fluid.FluidNonColored;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.shared.block.BlockLiquidSlime;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
@@ -57,6 +58,7 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidMolten diamond;
   public static FluidMolten glass;
   public static FluidColored blood;
+  public static FluidNonColored blazingBlood;
   public static FluidColored milk;
   public static FluidColored blueslime;
   public static FluidColored purpleSlime;
@@ -189,6 +191,14 @@ public class TinkerFluids extends TinkerPulse {
       blood = fluidClassic("blood", 0x540000);
       blood.setTemperature(336);
       registerClassicBlock(registry, blood);
+      
+      // even more blood for the blood god
+      blazingBlood = fluidBlaze("blazing_blood");
+      blazingBlood.setTemperature(1800);
+      blazingBlood.setViscosity(6000);
+      blazingBlood.setDensity(3500);
+      blazingBlood.setLuminosity(14);
+      registerMoltenBlockPrefixless(registry, blazingBlood);
     }
 
     milk = fluidMilk("milk", 0xffffff);
@@ -233,6 +243,9 @@ public class TinkerFluids extends TinkerPulse {
 
       // blood for the blood god
       FluidRegistry.addBucketForFluid(blood);
+      
+      // even more blood for the blood god
+      FluidRegistry.addBucketForFluid(blazingBlood);
     }
 
     if(isWorldLoaded()) {
@@ -284,6 +297,12 @@ public class TinkerFluids extends TinkerPulse {
     return registerFluid(fluid);
   }
   
+  private static FluidNonColored fluidBlaze(String name) {
+	    FluidNonColored fluid = new FluidNonColored(name, FluidNonColored.ICON_BlazeStill, FluidNonColored.ICON_BlazeFlowing);
+
+	    return registerFluid(fluid);
+	  }
+  
   private static FluidColored fluidSlime(String name, int color) {
 	    FluidColored fluid = new FluidColored(name, color, FluidColored.ICON_SlimeStill, FluidColored.ICON_SlimeFlowing);
 
@@ -316,5 +335,10 @@ public class TinkerFluids extends TinkerPulse {
   /** Registers a hot lava-based block for the fluid, prefix with molten_ */
   public static BlockMolten registerMoltenBlock(IForgeRegistry<Block> registry, Fluid fluid) {
     return registerBlock(registry, new BlockMolten(fluid), "molten_" + fluid.getName()); // molten_foobar prefix
+  }
+
+  /** Registers a hot lava-based block for the fluid, no prefix */
+  public static BlockFluidBase registerMoltenBlockPrefixless(IForgeRegistry<Block> registry, Fluid fluid) {
+    return registerBlock(registry, new BlockMolten(fluid), fluid.getName());
   }
 }

@@ -20,6 +20,7 @@ import slimeknights.tconstruct.common.ClientProxy;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.fluid.FluidColored;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
+import slimeknights.tconstruct.library.fluid.FluidNonColored;
 
 public class FluidsClientProxy extends ClientProxy {
 
@@ -40,6 +41,7 @@ public class FluidsClientProxy extends ClientProxy {
     registerFluidModels(TinkerFluids.blueslime);
     registerFluidModels(TinkerFluids.purpleSlime);
     registerFluidModels(TinkerFluids.blood);
+    registerFluidModels(TinkerFluids.blazingBlood);
   }
 
   @SubscribeEvent
@@ -52,8 +54,12 @@ public class FluidsClientProxy extends ClientProxy {
     map.registerSprite(FluidColored.ICON_MilkFlowing);
     map.registerSprite(FluidColored.ICON_StoneStill);
     map.registerSprite(FluidColored.ICON_StoneFlowing);
+    map.registerSprite(FluidColored.ICON_SlimeStill);
+    map.registerSprite(FluidColored.ICON_SlimeFlowing);
     map.registerSprite(FluidMolten.ICON_MetalStill);
     map.registerSprite(FluidMolten.ICON_MetalFlowing);
+    map.registerSprite(FluidNonColored.ICON_BlazeStill);
+    map.registerSprite(FluidNonColored.ICON_BlazeFlowing);
   }
 
   @Override

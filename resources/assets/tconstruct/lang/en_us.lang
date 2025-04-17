@@ -498,6 +498,7 @@ fluid.tconstruct.emerald.name=Molten Emerald
 fluid.tconstruct.diamond.name=Molten Diamond
 fluid.tconstruct.glass.name=Molten Glass
 fluid.tconstruct.blood.name=Blood
+fluid.tconstruct.blazing_blood.name=Blazin' Blood
 fluid.tconstruct.milk.name=Milk
 fluid.tconstruct.blueslime.name=Liquid Blue Slime
 fluid.tconstruct.purpleslime.name=Liquid Purple Slime

@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEvoker;
 import net.minecraft.entity.monster.EntityIllusionIllager;
 import net.minecraft.entity.monster.EntityIronGolem;
@@ -96,6 +97,7 @@ import slimeknights.tconstruct.smeltery.tileentity.TileSmelteryComponent;
 import slimeknights.tconstruct.smeltery.tileentity.TileTank;
 import slimeknights.tconstruct.smeltery.tileentity.TileTinkerTank;
 import slimeknights.tconstruct.tools.TinkerMaterials;
+import slimeknights.tconstruct.world.entity.EntityBlueSlime;
 
 import java.io.File;
 import java.io.IOException;
@@ -353,6 +355,7 @@ public class TinkerSmeltery extends TinkerPulse {
 
   private void registerSmelteryFuel() {
     TinkerRegistry.registerSmelteryFuel(new FluidStack(FluidRegistry.LAVA, 50), 100);
+    TinkerRegistry.registerSmelteryFuel(new FluidStack(TinkerFluids.blazingBlood, 50), 150);
   }
 
   private void registerMeltingCasting() {
@@ -526,6 +529,8 @@ public class TinkerSmeltery extends TinkerPulse {
     TinkerRegistry.registerEntityMelting(EntityVindicator.class, new FluidStack(TinkerFluids.emerald, 6));
     TinkerRegistry.registerEntityMelting(EntityEvoker.class, new FluidStack(TinkerFluids.emerald, 6));
     TinkerRegistry.registerEntityMelting(EntityIllusionIllager.class, new FluidStack(TinkerFluids.emerald, 6));
+    TinkerRegistry.registerEntityMelting(EntityBlaze.class, new FluidStack(TinkerFluids.blazingBlood, 20));
+    TinkerRegistry.registerEntityMelting(EntityBlueSlime.class, new FluidStack(TinkerFluids.blueslime, 20));
   }
 
   /**
