@@ -4,13 +4,17 @@ materials=Материалы
 bowmaterials=Части луков
 tools=Инструменты
 modifiers=Модификаторы
-smeltery=Плавильня
-seared_furnace=Печь
-tinker_tank=Резервуар
+seared_devices=Seared Devices
 
 repairing=Починка
 offhand=Сбор левой рукой
-bolt_core=Создание болтов
+smeltery_intro=Smeltery
+cast_crafting=Cast Crafting
+bolt_crafting=Создание болтов
+alloying=Alloying
+entity_melting=Entity Melting
+seared_furnace_intro=Seared Furnace
+tinker_tank_intro=Tinker Tank
 
 modifier.effect=Эффекты:
 tool.properties=Свойства:

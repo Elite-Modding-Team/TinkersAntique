@@ -4,13 +4,17 @@ materials=工具材質
 bowmaterials=弓箭材質
 tools=工具
 modifiers=強化
-smeltery=冶煉
-seared_furnace=焦黑熔爐
-tinker_tank=工匠液體槽
+seared_devices=Seared Devices
 
 repairing=修復
 offhand=副手採集
-bolt_core=弩矢合成
+smeltery_intro=Smeltery
+cast_crafting=Cast Crafting
+bolt_crafting=弩矢合成
+alloying=Alloying
+entity_melting=Entity Melting
+seared_furnace_intro=Seared Furnace
+tinker_tank_intro=Tinker Tank
 
 modifier.effect=效果:
 tool.properties=屬性:

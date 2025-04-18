@@ -4,13 +4,17 @@ materials=道具の素材
 bowmaterials=弓の素材
 tools=道具
 modifiers=改造
-smeltery=乾式製錬炉
-seared_furnace=焼成かまど
-tinker_tank=ティンカータンク
+seared_devices=Seared Devices
 
 repairing=修理
 offhand=オフハンド採掘
-bolt_core=ボルトの作り方
+smeltery_intro=Smeltery
+cast_crafting=Cast Crafting
+bolt_crafting=ボルトの作り方
+alloying=Alloying
+entity_melting=Entity Melting
+seared_furnace_intro=Seared Furnace
+tinker_tank_intro=Tinker Tank
 
 modifier.effect=効果：
 tool.properties=特徴：

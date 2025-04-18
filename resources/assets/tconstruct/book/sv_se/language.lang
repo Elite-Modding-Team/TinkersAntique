@@ -4,13 +4,17 @@ materials=Verktygsmaterial
 bowmaterials=Pilbågsmaterial
 tools=Verktyg
 modifiers=Modifierare
-smeltery=Smältverk
-seared_furnace=Bränd ugn
-tinker_tank=Tinkertank
+seared_devices=Seared Devices
 
 repairing=Reparera
 offhand=Skörda m. sekundär h.
-bolt_core=Tillv. armborstspilar
+smeltery_intro=Smeltery
+cast_crafting=Cast Crafting
+bolt_crafting=Tillv. armborstspilar
+alloying=Alloying
+entity_melting=Entity Melting
+seared_furnace_intro=Seared Furnace
+tinker_tank_intro=Tinker Tank
 
 modifier.effect=Effekter:
 tool.properties=Egenskaper:

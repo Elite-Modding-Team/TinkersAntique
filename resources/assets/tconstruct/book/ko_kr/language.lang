@@ -4,13 +4,17 @@ materials=도구 재료
 bowmaterials=활 재료
 tools=도구
 modifiers=수식어
-smeltery=제련소
-seared_furnace=그을린 화로
-tinker_tank=Tinker 탱크
+seared_devices=Seared Devices
 
 repairing=수리
 offhand=반대 손으로 채집
-bolt_core=볼트 제작
+smeltery_intro=Smeltery
+cast_crafting=Cast Crafting
+bolt_crafting=볼트 제작
+alloying=Alloying
+entity_melting=Entity Melting
+seared_furnace_intro=Seared Furnace
+tinker_tank_intro=Tinker Tank
 
 modifier.effect=효과:
 tool.properties=특성:

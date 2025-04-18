@@ -49,32 +49,12 @@
     }
   },
   {
-    "name": "smeltery",
-    "data": "sections/smeltery.json",
+    "name": "seared_devices",
+    "data": "sections/seared_devices.json",
     "module": "TinkerSmeltery",
     "icon": {
       "item": {
         "id": "tconstruct:smeltery_controller"
-      }
-    }
-  },
-  {
-    "name": "seared_furnace",
-    "data": "sections/seared_furnace.json",
-    "module": "TinkerSmeltery",
-    "icon": {
-      "item": {
-        "id": "tconstruct:seared_furnace_controller"
-      }
-    }
-  },
-  {
-    "name": "tinker_tank",
-    "data": "sections/tinker_tank.json",
-    "module": "TinkerSmeltery",
-    "icon": {
-      "item": {
-        "id": "tconstruct:tinker_tank_controller"
       }
     }
   }

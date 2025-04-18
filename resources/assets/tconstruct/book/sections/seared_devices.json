@@ -1,0 +1,67 @@
+[
+  {
+    "name": "smeltery_intro",
+    "type": "image with text below",
+    "data": "seared_devices/smeltery_intro.json"
+  },
+  {
+    "name": "smeltery_info",
+    "type": "text",
+    "data": "seared_devices/smeltery_structure.json"
+  },
+  {
+    "name": "smeltery_structure",
+    "type": "structure",
+    "data": "seared_devices/smeltery_multiblock.json"
+  },
+  {
+    "name": "cast_crafting",
+    "type": "text",
+    "data": "seared_devices/cast_crafting.json"
+  },
+  {
+    "name": "bolt_crafting",
+    "type": "imageText2",
+    "data": "seared_devices/bolt_crafting.json"
+  },
+  {
+    "name": "alloying",
+    "type": "text",
+    "data": "seared_devices/alloying.json"
+  },
+  {
+    "name": "entity_melting",
+    "type": "text",
+    "data": "seared_devices/entity_melting.json"
+  },
+  {
+    "name": "seared_furnace_intro",
+    "type": "image with text below",
+    "data": "seared_devices/seared_furnace_intro.json"
+  },
+  {
+    "name": "seared_furnace_info",
+    "type": "text",
+    "data": "seared_devices/seared_furnace_structure.json"
+  },
+  {
+    "name": "seared_furnace_structure",
+    "type": "structure",
+    "data": "seared_devices/seared_furnace_multiblock.json"
+  },
+  {
+    "name": "tinker_tank_intro",
+    "type": "image with text below",
+    "data": "seared_devices/tinker_tank_intro.json"
+  },
+  {
+    "name": "tinker_tank_structure",
+    "type": "text",
+    "data": "seared_devices/tinker_tank_structure.json"
+  },
+  {
+    "name": "tinker_tank_structure",
+    "type": "structure",
+    "data": "seared_devices/tinker_tank_multiblock.json"
+  }
+]
