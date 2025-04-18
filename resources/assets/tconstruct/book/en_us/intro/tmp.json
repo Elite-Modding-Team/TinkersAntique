@@ -1,8 +1,8 @@
 {
-  "title":"Introduction",
+  "title": "Introduction",
   "text": [
     {
-      "text": "Welcome to the second edition of Materials and You. Within these pages you will find useful information on making and using specialized tools with the materials you find."
+      "text": "Welcome to Materials and You, within these pages you will find useful information regarding Tinkers' Antique and its many features. You can also utilize JEI/HEI to see more recipes used for smelting, alloying, casting, and more!"
     },
     {
       "text": "\n"
@@ -12,6 +12,15 @@
     },
     {
       "text": "This book is a magic copy. If lost, another one can be called upon this world by combining both a blank pattern and a blank book together."
+    },
+    {
+      "text": "\n"
+    },
+    {
+      "text": "\n"
+    },
+    {
+      "text": "Some pages regarding recipes are still missing for the time being, you'll have to rely on JEI/HEI or wikis online for further information."
     }
   ]
 }

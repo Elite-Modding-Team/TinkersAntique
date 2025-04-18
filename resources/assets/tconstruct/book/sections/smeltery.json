@@ -15,9 +15,19 @@
     "data": "smeltery/multiblock.json"
   },
   {
-    "name": "alloys",
+    "name": "cast_crafting",
     "type": "text",
-    "data": "smeltery/alloys.json"
+    "data": "smeltery/cast_crafting.json"
+  },
+  {
+    "name": "bolt_crafting",
+    "type": "imageText2",
+    "data": "smeltery/bolt_crafting.json"
+  },
+  {
+    "name": "alloying",
+    "type": "text",
+    "data": "smeltery/alloying.json"
   },
   {
     "name": "entity_melting",
