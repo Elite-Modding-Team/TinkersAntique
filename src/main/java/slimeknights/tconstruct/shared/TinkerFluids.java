@@ -64,6 +64,7 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidColored purpleSlime;
 
   public static FluidMolten alubrass;
+  public static FluidMolten alumite;
 
   // Mod Integration fluids
   public static FluidMolten brass;
@@ -116,6 +117,10 @@ public class TinkerFluids extends TinkerPulse {
 
     alubrass = fluidMetal(TinkerMaterials.alubrass);
     alubrass.setTemperature(500);
+    
+    alumite = fluidMetal(TinkerMaterials.alumite);
+    alumite.setTemperature(500);
+    alumite.setRarity(EnumRarity.RARE);
 
     // Mod Integration fluids
     brass = fluidMetal("brass", 0xede38b);
@@ -198,6 +203,7 @@ public class TinkerFluids extends TinkerPulse {
       blazingBlood.setViscosity(6000);
       blazingBlood.setDensity(3500);
       blazingBlood.setLuminosity(14);
+      blazingBlood.setRarity(EnumRarity.UNCOMMON);
       registerMoltenBlockPrefixless(registry, blazingBlood);
     }
 

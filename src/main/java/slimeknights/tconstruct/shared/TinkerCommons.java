@@ -105,6 +105,7 @@ public class TinkerCommons extends TinkerPulse {
   public static ItemStack blockKnightSlime;
   public static ItemStack blockSilkyJewel;
   public static ItemStack blockAlubrass;
+  public static ItemStack blockAlumite;
 
   public static ItemStack lavawood;
   public static ItemStack firewood;
@@ -123,6 +124,7 @@ public class TinkerCommons extends TinkerPulse {
   public static ItemStack nuggetPigIron;
   public static ItemStack nuggetKnightSlime;
   public static ItemStack nuggetAlubrass;
+  public static ItemStack nuggetAlumite;
 
   // Ingot Itemstacks
   public static ItemStack ingotCobalt;
@@ -131,6 +133,7 @@ public class TinkerCommons extends TinkerPulse {
   public static ItemStack ingotPigIron;
   public static ItemStack ingotKnightSlime;
   public static ItemStack ingotAlubrass;
+  public static ItemStack ingotAlumite;
 
   // Material Itemstacks
   public static ItemStack searedBrick;
@@ -319,6 +322,9 @@ public class TinkerCommons extends TinkerPulse {
 
       nuggetAlubrass = nuggets.addMeta(5, "alubrass");
       ingotAlubrass = ingots.addMeta(5, "alubrass");
+      
+      nuggetAlumite = nuggets.addMeta(6, "alumite");
+      ingotAlumite = ingots.addMeta(6, "alumite");
 
       blockMetal = registerEnumItemBlock(registry, blockMetal);
 
@@ -329,6 +335,7 @@ public class TinkerCommons extends TinkerPulse {
       blockPigIron = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.PIGIRON.getMeta());
       blockAlubrass = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.ALUBRASS.getMeta());
       blockSilkyJewel = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.SILKY_JEWEL.getMeta());
+      blockAlumite = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.ALUMITE.getMeta());
     }
 
     // Materials

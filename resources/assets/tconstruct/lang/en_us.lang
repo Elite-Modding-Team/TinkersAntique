@@ -40,6 +40,7 @@ tile.tconstruct.metal.knightslime.name=Block of Knightslime
 tile.tconstruct.metal.pigiron.name=Block of Pigiron
 tile.tconstruct.metal.alubrass.name=Block of Aluminum Brass
 tile.tconstruct.metal.silky_jewel.name=Silky Block of Jewel
+tile.tconstruct.metal.alumite.name=Block of Alumite
 
 tile.tconstruct.firewood.lavawood.name=Lavawood
 tile.tconstruct.firewood.firewood.name=Firewood
@@ -313,6 +314,7 @@ item.tconstruct.ingots.knightslime.tooltip=Slimy yet metallic but also stone? Fa
 item.tconstruct.ingots.pigiron.name=Pigiron Ingot
 item.tconstruct.ingots.pigiron.tooltip=Oink!
 item.tconstruct.ingots.alubrass.name=Aluminum Brass Ingot
+item.tconstruct.ingots.alumite.name=Alumite Ingot
 
 item.tconstruct.nuggets.cobalt.name=Cobalt Nugget
 item.tconstruct.nuggets.ardite.name=Ardite Nugget
@@ -320,6 +322,7 @@ item.tconstruct.nuggets.manyullyn.name=Manyullyn Nugget
 item.tconstruct.nuggets.knightslime.name=Knightslime Nugget
 item.tconstruct.nuggets.pigiron.name=Pigiron Nugget
 item.tconstruct.nuggets.alubrass.name=Aluminum Brass Nugget
+item.tconstruct.nuggets.alumite.name=Alumite Nugget
 
 item.tconstruct.pattern.blank=Blank Pattern
 item.tconstruct.pattern.name=%s Pattern
@@ -514,6 +517,7 @@ fluid.tconstruct.electrum.name=Molten Electrum
 fluid.tconstruct.steel.name=Molten Steel
 fluid.tconstruct.aluminum.name=Molten Aluminum
 fluid.tconstruct.alubrass.name=Molten Aluminum Brass
+fluid.tconstruct.alumite.name=Molten Alumite
 
 #################
 #    Potions    #
@@ -559,6 +563,7 @@ material.silver.name=Silver
 material.electrum.name=Electrum
 material.steel.name=Steel
 material.alubrass.name=Aluminum Brass
+material.alumite.name=Alumite
 
 material.string.name=String
 material.vine.name=Vines

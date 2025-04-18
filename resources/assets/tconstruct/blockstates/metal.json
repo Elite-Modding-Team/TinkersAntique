@@ -26,6 +26,9 @@
             },
             "silky_jewel": {
                 "textures": { "all": "tconstruct:blocks/block_silky_jewel" }
+            },
+            "alumite": {
+                "textures": { "all": "tconstruct:blocks/block_alumite" }
             }
         }
     }

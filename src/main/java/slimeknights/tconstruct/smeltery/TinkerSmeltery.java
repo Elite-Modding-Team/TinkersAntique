@@ -572,7 +572,7 @@ public class TinkerSmeltery extends TinkerPulse {
                                  new FluidStack(TinkerFluids.blood, 40),
                                  new FluidStack(TinkerFluids.clay, 72));
 
-    // 1 ingot cobalt + 1 ingot ardite = 1 ingot manyullyn!
+    // 2 ingot cobalt + 2 ingot ardite = 2 ingot manyullyn!
     // 144 + 144 = 144
     TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.manyullyn, 2),
                                  new FluidStack(TinkerFluids.cobalt, 2),
@@ -612,6 +612,17 @@ public class TinkerSmeltery extends TinkerPulse {
       TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.brass, 3),
                                    new FluidStack(TinkerFluids.copper, 2),
                                    new FluidStack(TinkerFluids.zinc, 1));
+    }
+
+    // 1 ingot aluminum + 1 ingot iron + 1 obsidian = 1 alumite
+    // 144 + 144 + 288 = 144
+    if(TinkerIntegration.isIntegrated(TinkerFluids.alumite) &&
+       TinkerIntegration.isIntegrated(TinkerFluids.aluminum) &&
+       TinkerIntegration.isIntegrated(TinkerFluids.iron)) {
+      TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.alumite, 144),
+                                   new FluidStack(TinkerFluids.aluminum, 144),
+                                   new FluidStack(TinkerFluids.iron, 144),
+                                   new FluidStack(TinkerFluids.obsidian, 288));
     }
   }
 
