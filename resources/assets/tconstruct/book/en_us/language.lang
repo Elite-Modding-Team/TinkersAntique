@@ -8,7 +8,13 @@ seared_devices=Seared Devices
 
 repairing=Repairing
 offhand=Offhand Harvesting
-bolt_core=Bolt Crafting
+smeltery_intro=Smeltery
+cast_crafting=Cast Crafting
+bolt_crafting=Bolt Crafting
+alloying=Alloying
+entity_melting=Entity Melting
+seared_furnace_intro=Seared Furnace
+tinker_tank_intro=Tinker Tank
 
 modifier.effect=Effects:
 tool.properties=Properties:
@@ -17,4 +23,12 @@ material.craft_partbuilder=Can be crafted in the Part Builder
 material.craft_casting=Can be cast from %s
 
 wood.flavour=How much wood could a woodchuck chuck if a woodchuck could chuck wood?
-stone.flavour=Rock solid
+stone.flavour=Rock solid.
+flint.flavour=The material of choice for cavemen.
+cactus.flavour=You'll poke your eye out kid!
+bone.flavour=Do you have a bone to pick with me?
+obsidian.flavour=Tough as nails, but fragile when shaped.
+paper.flavour=It's very weak, but can take a lot of modification.
+netherrack.flavour=This is made of what?!
+manyullyn.flavour=Often pronounced as 'man-yul-in'. It's also known as the star cutting metal.
+copper.flavour=Don't let this tarnish your day.
