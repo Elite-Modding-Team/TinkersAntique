@@ -23,6 +23,7 @@ import slimeknights.mantle.util.ItemStackList;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.Sounds;
 import slimeknights.tconstruct.common.TinkerNetwork;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent;
@@ -193,7 +194,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
         out.inventory.setInventorySlotContents(0, result);
       }
       // if no crafting result and a tool is in the output slot, try deconstruction
-      else if(!outputStack.isEmpty() && outputStack.getItem() instanceof TinkersItem) {
+      else if(Config.deconstructTools && !outputStack.isEmpty() && outputStack.getItem() instanceof TinkersItem) {
         if(deconstructTool(false)) {
           // populate input slots with parts
           NonNullList<ItemStack> parts = getDeconstructedParts(outputStack);
@@ -234,7 +235,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
     boolean resultTaken = false;
 
     try {
-      if(stack.getItem() instanceof TinkersItem && deconstructTool(true)) {
+      if(Config.deconstructTools && stack.getItem() instanceof TinkersItem && deconstructTool(true)) {
         resultTaken = true;
       } else {
         resultTaken = !repairTool(true).isEmpty() ||
