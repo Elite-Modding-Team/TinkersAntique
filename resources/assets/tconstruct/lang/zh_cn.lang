@@ -922,12 +922,12 @@ gui.general.temperature.celsius=%s°C
 gui.general.temperature.kelvin=%sK
 
 # Creative Tabs
-itemGroup.TinkerGeneral=匠魂丨常规物品
-itemGroup.TinkerTools=匠魂丨工具
-itemGroup.TinkerToolParts=匠魂丨部件
-itemGroup.TinkerSmeltery=匠魂丨冶炼
-itemGroup.TinkerWorld=匠魂丨世界
-itemGroup.TinkerGadgets=匠魂丨器物
+itemGroup.TinkerGeneral=匠魂怀古丨常规物品
+itemGroup.TinkerTools=匠魂怀古丨工具
+itemGroup.TinkerToolParts=匠魂怀古丨部件
+itemGroup.TinkerSmeltery=匠魂怀古丨冶炼
+itemGroup.TinkerWorld=匠魂怀古丨世界
+itemGroup.TinkerGadgets=匠魂怀古丨器物
 
 # Crafting Station
 gui.craftingstation.name=合成站
