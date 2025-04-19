@@ -358,7 +358,7 @@ public final class TinkerMaterials {
     alubrass.addTrait(depthdigger);
     
     alumite.addCommonItems("Alumite");
-    alumite.addTrait(depthdigger);
+    alumite.addTrait(duritos);
 
     // bowstring
     string.addItemIngot("string");
@@ -548,9 +548,9 @@ public final class TinkerMaterials {
                                   new ExtraMaterialStats(90));
 
     TinkerRegistry.addMaterialStats(alumite,
-                                  new HeadMaterialStats(450, 7.00f, 3.50f, DIAMOND),
-                                  new HandleMaterialStats(1.10f, 80),
-                                  new ExtraMaterialStats(90));
+                                  new HeadMaterialStats(700, 8.00f, 5.50f, COBALT),
+                                  new HandleMaterialStats(1.25f, 150),
+                                  new ExtraMaterialStats(100));
 
     //TinkerRegistry.addMaterialStats(xu,         new ToolMaterialStats(97, 1.00f, 1.00f, 0.10f, 0.20f, DIAMOND));
   }
@@ -595,7 +595,7 @@ public final class TinkerMaterials {
     TinkerRegistry.addMaterialStats(electrum, new BowMaterialStats(1.5f, 1f, 4f));
     TinkerRegistry.addMaterialStats(steel, new BowMaterialStats(0.4f, 2f, 9f));
     TinkerRegistry.addMaterialStats(alubrass, new BowMaterialStats(0.45f, 1.5f, 6f));
-    TinkerRegistry.addMaterialStats(alumite, new BowMaterialStats(0.45f, 1.5f, 6f));
+    TinkerRegistry.addMaterialStats(alumite, new BowMaterialStats(0.4f, 1.5f, 8f));
 
     // Bowstring materials
     BowStringMaterialStats bowstring = new BowStringMaterialStats(1f);

@@ -119,7 +119,7 @@ public class TinkerFluids extends TinkerPulse {
     alubrass.setTemperature(500);
     
     alumite = fluidMetal(TinkerMaterials.alumite);
-    alumite.setTemperature(500);
+    alumite.setTemperature(900);
     alumite.setRarity(EnumRarity.RARE);
 
     // Mod Integration fluids
