@@ -7,7 +7,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.WorldServer;
@@ -28,6 +31,7 @@ import slimeknights.tconstruct.library.tinkering.IModifyable;
 import slimeknights.tconstruct.library.tinkering.IRepairable;
 import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.library.tinkering.TinkersItem;
+import slimeknights.tconstruct.library.tools.IToolPart;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.ToolBuilder;
@@ -60,6 +64,16 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
     addSlotToContainer(out);
     this.addPlayerInventory(playerInventory, 8, 84 + 8);
     onCraftMatrixChanged(playerInventory);
+  }
+
+  public List<ItemStack> getInputSlotContents() {
+    NonNullList<ItemStack> contents = NonNullList.create();
+    for (Slot slotIn : inventorySlots) {
+      if (slotIn instanceof SlotToolStationIn && !slotIn.getStack().isEmpty()) {
+        contents.add(slotIn.getStack());
+      }
+    }
+    return contents;
   }
 
   public ItemStack getResult() {
@@ -173,7 +187,31 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
         result = buildTool();
       }
 
-      out.inventory.setInventorySlotContents(0, result);
+      ItemStack outputStack = out.getStack();
+      // if a crafting operation produced a result, set it in the output slot
+      if(!result.isEmpty()) {
+        out.inventory.setInventorySlotContents(0, result);
+      }
+      // if no crafting result and a tool is in the output slot, try deconstruction
+      else if(!outputStack.isEmpty() && outputStack.getItem() instanceof TinkersItem) {
+        if(deconstructTool(false)) {
+          // populate input slots with parts
+          NonNullList<ItemStack> parts = getDeconstructedParts(outputStack);
+          for(int i = 0; i < activeSlots && i < parts.size(); i++) {
+            tile.setInventorySlotContents(i, parts.get(i));
+          }
+        } else {
+          // clear input slots if deconstruction fails
+          for(int i = 0; i < activeSlots; i++) {
+            tile.setInventorySlotContents(i, ItemStack.EMPTY);
+          }
+          // keep tool in output slot
+          out.inventory.setInventorySlotContents(0, outputStack);
+        }
+      } else {
+        // no crafting result and no valid tool for deconstruction
+        out.inventory.setInventorySlotContents(0, ItemStack.EMPTY);
+      }
       updateGUI();
     } catch(TinkerGuiException e) {
       // error ;(
@@ -196,10 +234,14 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
     boolean resultTaken = false;
 
     try {
-      resultTaken = !repairTool(true).isEmpty() ||
-                    !replaceToolParts(true).isEmpty() ||
-                    !modifyTool(true).isEmpty() ||
-                    !renameTool().isEmpty();
+      if(stack.getItem() instanceof TinkersItem && deconstructTool(true)) {
+        resultTaken = true;
+      } else {
+        resultTaken = !repairTool(true).isEmpty() ||
+                      !replaceToolParts(true).isEmpty() ||
+                      !modifyTool(true).isEmpty() ||
+                      !renameTool().isEmpty();
+      }
     } catch(TinkerGuiException e) {
       // no error updating needed
       e.printStackTrace();
@@ -235,6 +277,102 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
 
   protected void playCraftSound(EntityPlayer player) {
     Sounds.playSoundForAll(player, Sounds.saw, 0.8f, 0.8f + 0.4f * TConstruct.random.nextFloat());
+  }
+
+  private boolean deconstructTool(boolean remove) throws TinkerGuiException {
+    ItemStack toolStack = out.getStack();
+    if(toolStack.isEmpty() || !(toolStack.getItem() instanceof TinkersItem)) {
+      return false;
+    }
+
+    TinkersItem tool = (TinkersItem) toolStack.getItem();
+    if(!(tool instanceof ToolCore)) {
+      return false;
+    }
+
+    NBTTagList materials = TagUtil.getBaseMaterialsTagList(toolStack);
+    if(materials.tagCount() == 0) {
+      return false;
+    }
+
+    for(int i = 0; i < activeSlots; i++) {
+      if(!tile.getStackInSlot(i).isEmpty()) {
+        throw new TinkerGuiException(Util.translate("gui.error.input_slots_not_empty"));
+      }
+    }
+
+    ToolCore toolCore = (ToolCore) tool;
+    List<PartMaterialType> requiredComponents = toolCore.getRequiredComponents();
+    if(requiredComponents.size() > activeSlots) {
+      return false;
+    }
+
+    NonNullList<ItemStack> parts = NonNullList.create();
+    for(int i = 0; i < materials.tagCount() && i < requiredComponents.size(); i++) {
+      String materialId = materials.getStringTagAt(i);
+      PartMaterialType pmt = requiredComponents.get(i);
+      ItemStack partStack = ItemStack.EMPTY;
+      for(IToolPart part : pmt.getPossibleParts()) {
+        ItemStack testStack = new ItemStack((Item) part);
+        if(testStack.getItem() instanceof IToolPart) {
+          NBTTagCompound nbt = TagUtil.getTagSafe(testStack);
+          nbt.setString("Material", materialId);
+          testStack.setTagCompound(nbt);
+          if(pmt.isValid(testStack)) {
+            partStack = testStack;
+            break;
+          }
+        }
+      }
+      if(partStack.isEmpty()) {
+        return false;
+      }
+      parts.add(partStack);
+    }
+
+    if(!remove) {
+      return true;
+    }
+
+    out.inventory.setInventorySlotContents(0, ItemStack.EMPTY);
+    for(int i = 0; i < parts.size(); i++) {
+      tile.setInventorySlotContents(i, parts.get(i));
+    }
+
+    // todo: fire deconstruction event
+
+    return true;
+  }
+
+  private NonNullList<ItemStack> getDeconstructedParts(ItemStack toolStack) {
+    NonNullList<ItemStack> parts = NonNullList.create();
+    if(!(toolStack.getItem() instanceof ToolCore)) {
+      return parts;
+    }
+    ToolCore toolCore = (ToolCore) toolStack.getItem();
+    NBTTagList materials = TagUtil.getBaseMaterialsTagList(toolStack);
+    List<PartMaterialType> requiredComponents = toolCore.getRequiredComponents();
+    for(int i = 0; i < materials.tagCount() && i < requiredComponents.size(); i++) {
+      String materialId = materials.getStringTagAt(i);
+      PartMaterialType pmt = requiredComponents.get(i);
+      ItemStack partStack = ItemStack.EMPTY;
+      for(IToolPart part : pmt.getPossibleParts()) {
+        ItemStack testStack = new ItemStack((Item) part);
+        if(testStack.getItem() instanceof IToolPart) {
+          NBTTagCompound nbt = TagUtil.getTagSafe(testStack);
+          nbt.setString("Material", materialId);
+          testStack.setTagCompound(nbt);
+          if(pmt.isValid(testStack)) {
+            partStack = testStack;
+            break;
+          }
+        }
+      }
+      if(!partStack.isEmpty()) {
+        parts.add(partStack);
+      }
+    }
+    return parts;
   }
 
   private ItemStack repairTool(boolean remove) {

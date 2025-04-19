@@ -9,8 +9,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Iterator;
 
-import slimeknights.tconstruct.library.client.CustomTextureCreator;
-import slimeknights.tconstruct.library.tinkering.MaterialItem;
 import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.library.tools.IToolPart;
 

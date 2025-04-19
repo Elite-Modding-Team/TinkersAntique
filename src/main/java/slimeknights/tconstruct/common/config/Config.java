@@ -50,6 +50,7 @@ public final class Config {
   public static boolean drainGaseousFluids = true;
   public static int maxSmelteryItemRenders = -1;
   public static int netherOresMiningLevel = 4;
+  public static boolean deconstructTools = false;
   
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -262,6 +263,10 @@ public final class Config {
       prop = configFile.get(cat, "netherOresMiningLevel", netherOresMiningLevel);
       prop.setComment("The mining level for ardite and cobalt ores.");
       netherOresMiningLevel = prop.getInt();
+
+      prop = configFile.get(cat, "deconstructTools", deconstructTools);
+      prop.setComment("If tools can be deconstructed in tool stations and tool forges by putting them into output slots.");
+      deconstructTools = prop.getBoolean();
     }
     // Worldgen
     {

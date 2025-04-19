@@ -5,6 +5,9 @@ import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import slimeknights.tconstruct.common.config.Config;
+import slimeknights.tconstruct.library.tinkering.TinkersItem;
+import slimeknights.tconstruct.library.utils.ToolHelper;
 
 import javax.annotation.Nonnull;
 
@@ -20,7 +23,21 @@ public class SlotToolStationOut extends Slot {
 
   @Override
   public boolean isItemValid(ItemStack stack) {
-    return false;
+    return Config.deconstructTools // config enabled
+            && !stack.isEmpty() && stack.getItem() instanceof TinkersItem // is tool
+            && !stack.isItemDamaged() && !ToolHelper.isBroken(stack) // undamaged
+            && parent.getBuildableTools().contains(stack.getItem()) // can be built in the current table
+            && parent.getInputSlotContents().isEmpty(); // input slots are empty
+  }
+
+  @Override
+  public void putStack(@Nonnull ItemStack stack) {
+    super.putStack(stack);
+    // trigger craft matrix update and sync when a tool is placed in the output slot
+    if(isItemValid(stack)) {
+      parent.onCraftMatrixChanged(parent.getTile());
+      parent.detectAndSendChanges();
+    }
   }
 
   @Nonnull
