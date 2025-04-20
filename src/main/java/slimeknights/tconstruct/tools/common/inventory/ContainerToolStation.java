@@ -49,6 +49,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
   protected ToolCore selectedTool; // needed for newly opened containers to sync
   protected int activeSlots;
   public String toolName;
+  public boolean deconstruct;
 
   public ContainerToolStation(InventoryPlayer playerInventory, TileToolStation tile) {
     super(tile);
@@ -196,6 +197,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
       // if no crafting result and a tool is in the output slot, try deconstruction
       else if(Config.deconstructTools && !outputStack.isEmpty() && outputStack.getItem() instanceof TinkersItem) {
         if(deconstructTool(false)) {
+          deconstruct = true;
           // populate input slots with parts
           NonNullList<ItemStack> parts = getDeconstructedParts(outputStack);
           for(int i = 0; i < activeSlots && i < parts.size(); i++) {
@@ -211,6 +213,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
         }
       } else {
         // no crafting result and no valid tool for deconstruction
+        deconstruct = false;
         out.inventory.setInventorySlotContents(0, ItemStack.EMPTY);
       }
       updateGUI();

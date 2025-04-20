@@ -918,6 +918,8 @@ gui.error.incompatible_trait=Modifier %s can not be used together with trait %s
 gui.error.incompatible_enchantments=Modifier %s cannot be combined with enchantment %s
 gui.error.no_rename=This tool cannot be renamed
 gui.error.input_slots_not_empty=Input slots are not empty
+# GUI Warning from deconstructing tools
+gui.warning.deconstruct_tool=§cTaking this tool apart will destroy all modifiers and traits!
 
 ################
 #     GUIs     #

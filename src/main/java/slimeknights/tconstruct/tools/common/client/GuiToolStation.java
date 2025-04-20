@@ -220,8 +220,12 @@ public class GuiToolStation extends GuiTinkerStation {
       toolStack = inventorySlots.getSlot(0).getStack();
     }
 
+    // current tool to deconstruct
+    if (Config.deconstructTools && container.deconstruct) {
+      warning(Util.translate("gui.warning.deconstruct_tool"));
+    }
     // current tool to build or repair/modify
-    if(toolStack.getItem() instanceof IModifyable) {
+    else if(toolStack.getItem() instanceof IModifyable) {
       if(toolStack.getItem() instanceof IToolStationDisplay) {
         IToolStationDisplay tool = (IToolStationDisplay) toolStack.getItem();
         toolInfo.setCaption(tool.getLocalizedToolName());
