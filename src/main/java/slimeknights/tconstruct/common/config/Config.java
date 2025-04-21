@@ -51,6 +51,8 @@ public final class Config {
   public static int maxSmelteryItemRenders = -1;
   public static int netherOresMiningLevel = 4;
   public static boolean deconstructTools = false;
+  public static int heatItemsTickrateSmeltery = 4;
+  public static int heatItemsTickrateSearedFurnace = 4;
   
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -267,6 +269,14 @@ public final class Config {
       prop = configFile.get(cat, "deconstructTools", deconstructTools);
       prop.setComment("If tools can be deconstructed in tool stations and tool forges by putting them into output slots.");
       deconstructTools = prop.getBoolean();
+
+      prop = configFile.get(cat, "heatItemsTickrateSmeltery", heatItemsTickrateSmeltery);
+      prop.setComment("The tickrate at which items are heated and alloys are created in the smeltery. Defaults to every 4th tick.");
+      heatItemsTickrateSmeltery = prop.getInt();
+
+      prop = configFile.get(cat, "heatItemsTickrateSearedFurnace", heatItemsTickrateSearedFurnace);
+      prop.setComment("The tickrate at which items are heated in the seared furnace. Defaults to every 4th tick.");
+      heatItemsTickrateSearedFurnace = prop.getInt();
     }
     // Worldgen
     {

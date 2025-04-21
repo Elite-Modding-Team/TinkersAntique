@@ -22,6 +22,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import slimeknights.mantle.common.IInventoryGui;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.smeltery.client.GuiSearedFurnace;
 import slimeknights.tconstruct.smeltery.inventory.ContainerSearedFurnace;
@@ -57,7 +58,7 @@ public class TileSearedFurnace extends TileHeatingStructureFuelTank<MultiblockSe
       // basically just heating and fuel consumption
 
       // we heat items every tick, as otherwise we are quite slow compared to a vanilla furnace
-      if(tick % 4 == 0) {
+      if(tick % Config.heatItemsTickrateSearedFurnace == 0) {
         heatItems();
       }
 

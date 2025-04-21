@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Logger;
 import slimeknights.mantle.common.IInventoryGui;
 import slimeknights.tconstruct.common.TinkerNetwork;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.materials.Material;
@@ -92,7 +93,7 @@ public class TileSmeltery extends TileHeatingStructureFuelTank<MultiblockSmelter
       if(tick == 0) {
         interactWithEntitiesInside();
       }
-      if(tick % 4 == 0) {
+      if(tick % Config.heatItemsTickrateSmeltery == 0) {
         heatItems();
         alloyAlloys();
       }
