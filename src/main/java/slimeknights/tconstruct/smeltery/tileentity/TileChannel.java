@@ -26,6 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.mantle.tileentity.MantleTileEntity;
 import slimeknights.tconstruct.common.TinkerNetwork;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.fluid.ChannelSideTank;
 import slimeknights.tconstruct.library.fluid.ChannelTank;
@@ -82,12 +83,12 @@ public class TileChannel extends MantleTileEntity implements ITickable, IFluidPa
       // if we have down, use only that
       boolean hasFlown = false;
       if(isConnectedDown()) {
-        hasFlown = trySide(EnumFacing.DOWN, TileFaucet.LIQUID_TRANSFER);
+        hasFlown = trySide(EnumFacing.DOWN, Config.liquidTransferRate);
         // otherwise, ensure we have a connection before pouring
       }
       if(!hasFlown && numOutputs > 0) {
         // we want to split the fluid if needed rather than favoring a side
-        int flowRate = Math.max(1, Math.min(tank.usableFluid() / numOutputs, TileFaucet.LIQUID_TRANSFER));
+        int flowRate = Math.max(1, Math.min(tank.usableFluid() / numOutputs, Config.liquidTransferRate));
         // then just try each side
         for(EnumFacing side : EnumFacing.HORIZONTALS) {
           trySide(side, flowRate);
@@ -191,7 +192,7 @@ public class TileChannel extends MantleTileEntity implements ITickable, IFluidPa
 
   /**
    * Called on block placement to fill data from blocks on all sides
-   * @param side   Side clicked
+   * @param hit   Side clicked
    * @param sneak  If true, player was sneaking
    */
   public void onPlaceBlock(EnumFacing hit, boolean sneak) {

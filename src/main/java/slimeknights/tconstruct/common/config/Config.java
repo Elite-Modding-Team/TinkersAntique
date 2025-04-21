@@ -53,6 +53,7 @@ public final class Config {
   public static boolean deconstructTools = false;
   public static int heatItemsTickrateSmeltery = 4;
   public static int heatItemsTickrateSearedFurnace = 4;
+  public static int liquidTransferRate = 6;
   
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -277,6 +278,10 @@ public final class Config {
       prop = configFile.get(cat, "heatItemsTickrateSearedFurnace", heatItemsTickrateSearedFurnace);
       prop.setComment("The tickrate at which items are heated in the seared furnace. Defaults to every 4th tick.");
       heatItemsTickrateSearedFurnace = prop.getInt();
+
+      prop = configFile.get(cat, "liquidTransferRate", liquidTransferRate);
+      prop.setComment("How much liquid is transferred by faucets and channels per pouring operation.");
+      liquidTransferRate = prop.getInt();
     }
     // Worldgen
     {

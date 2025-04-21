@@ -31,7 +31,6 @@ import javax.annotation.Nonnull;
 
 public class TileFaucet extends TileEntity implements ITickable {
 
-  public static final int LIQUID_TRANSFER = 6; // how much liquid is transferred per operation
   public static final int TRANSACTION_AMOUNT = Material.VALUE_Ingot;
 
   // direction we're pulling liquid from. cached so we don't have to query the world every time. set on pour-begin
@@ -154,7 +153,7 @@ public class TileFaucet extends TileEntity implements ITickable {
     IFluidHandler toFill = getFluidHandler(pos.down(), EnumFacing.UP);
     if(toFill != null) {
       FluidStack fillStack = drained.copy();
-      fillStack.amount = Math.min(drained.amount, LIQUID_TRANSFER);
+      fillStack.amount = Math.min(drained.amount, Config.liquidTransferRate);
 
       // can we fill?
       int filled = toFill.fill(fillStack, false);
