@@ -76,6 +76,7 @@ import slimeknights.tconstruct.smeltery.block.BlockFaucet;
 import slimeknights.tconstruct.smeltery.block.BlockSeared;
 import slimeknights.tconstruct.smeltery.block.BlockSearedFurnaceController;
 import slimeknights.tconstruct.smeltery.block.BlockSearedGlass;
+import slimeknights.tconstruct.smeltery.block.BlockSearedLadder;
 import slimeknights.tconstruct.smeltery.block.BlockSearedSlab;
 import slimeknights.tconstruct.smeltery.block.BlockSearedSlab2;
 import slimeknights.tconstruct.smeltery.block.BlockSearedStairs;
@@ -123,6 +124,7 @@ public class TinkerSmeltery extends TinkerPulse {
   public static BlockCasting castingBlock;
   public static BlockSmelteryIO smelteryIO;
   public static BlockSearedGlass searedGlass;
+  public static BlockSearedLadder searedLadder;
 
   public static Block searedFurnaceController;
   public static Block tinkerTankController;
@@ -179,6 +181,7 @@ public class TinkerSmeltery extends TinkerPulse {
     castingBlock = registerBlock(registry, new BlockCasting(), "casting");
     smelteryIO = registerBlock(registry, new BlockSmelteryIO(), "smeltery_io");
     searedGlass = registerBlock(registry, new BlockSearedGlass(), "seared_glass");
+    searedLadder = registerBlock(registry, new BlockSearedLadder(), "seared_ladder");
 
     searedFurnaceController = registerBlock(registry, new BlockSearedFurnaceController(), "seared_furnace_controller");
     tinkerTankController = registerBlock(registry, new BlockTinkerTankController(), "tinker_tank_controller");
@@ -225,6 +228,7 @@ public class TinkerSmeltery extends TinkerPulse {
     castingBlock = registerItemBlockProp(registry, new ItemBlockMeta(castingBlock), BlockCasting.TYPE);
     smelteryIO = registerEnumItemBlock(registry, smelteryIO);
     searedGlass = registerEnumItemBlock(registry, searedGlass);
+    searedLadder = registerEnumItemBlock(registry, searedLadder);
 
     searedFurnaceController = registerItemBlock(registry, searedFurnaceController);
     tinkerTankController = registerItemBlock(registry, tinkerTankController);
@@ -269,6 +273,7 @@ public class TinkerSmeltery extends TinkerPulse {
     builder.add(searedTank);
     builder.add(smelteryIO);
     builder.add(searedGlass);
+    builder.add(searedLadder);
 
     validSmelteryBlocks = builder.build();
     validTinkerTankBlocks = builder.build(); // same blocks right now
@@ -391,6 +396,9 @@ public class TinkerSmeltery extends TinkerPulse {
                                                            TinkerFluids.searedStone, Material.VALUE_Ore()));
     TinkerRegistry.registerMelting(MeltingRecipe.forAmount(RecipeMatch.of("cobblestone", Material.VALUE_SearedMaterial),
                                                            TinkerFluids.searedStone, Material.VALUE_Ore()));
+  
+    // seared stone, misc blocks
+    TinkerRegistry.registerMelting(searedLadder, TinkerFluids.searedStone, 288);
 
     // obsidian
     TinkerRegistry.registerMelting(MeltingRecipe.forAmount(RecipeMatch.of("obsidian", Material.VALUE_Ore()),
@@ -524,7 +532,7 @@ public class TinkerSmeltery extends TinkerPulse {
     
     // bone casting
     TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matBloodyBone, RecipeMatch.of("bone"),
-                                                          new FluidStack(TinkerFluids.blood, 160),
+                                                          new FluidStack(TinkerFluids.blood, 320),
                                                           true, false));
 
     // melt entities into a pulp
