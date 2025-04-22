@@ -2,7 +2,7 @@
 name: Bug report
 about: Report something that is not working in the mod
 title: ''
-labels: bug
+labels: new bug
 assignees: ''
 
 ---
