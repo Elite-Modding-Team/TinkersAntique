@@ -521,6 +521,11 @@ public class TinkerSmeltery extends TinkerPulse {
                                                           RecipeMatch.of(new ItemStack(Blocks.SAND, 1, 0)),
                                                           new FluidStack(TinkerFluids.blood, 10),
                                                           true, false));
+    
+    // bone casting
+    TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matBloodyBone, RecipeMatch.of("bone"),
+                                                          new FluidStack(TinkerFluids.blood, 160),
+                                                          true, false));
 
     // melt entities into a pulp
     TinkerRegistry.registerEntityMelting(EntityIronGolem.class, new FluidStack(TinkerFluids.iron, 18));

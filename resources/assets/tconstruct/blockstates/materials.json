@@ -19,6 +19,7 @@
         "necrotic_bone": [{ "textures": { "layer0": "tconstruct:items/materials/necrotic_bone" }}],
         "moss": [{ "textures": { "layer0": "tconstruct:items/materials/moss" }}],
         "mending_moss": [{ "textures": { "layer0": "tconstruct:items/materials/mending_moss" }}],
+        "bloody_bone": [{ "textures": { "layer0": "tconstruct:items/materials/bloody_bone" }}],
         "creative_modifier": [{ "textures": { "layer0": "tconstruct:items/skull_char_gold" }}]
     }
 }
