@@ -1,0 +1,15 @@
+{
+  "title": "Cast Crafting",
+  "text": [
+    {
+      "text": "Blank casts are made by pouring aluminum brass or gold (or other compatible metals) into an empty casting table. These are used in crafting recipes and can be re-melted."
+    },
+    {
+      "text": "\n"
+    },
+    {
+      "text": "The various part casts are made by pouring aluminum brass or gold (or other compatible metals) onto the corresponding tool part instead. It is highly recommended to use a cheap material like stone because you WILL lose your tool part after the process is complete.",
+      "paragraph": true
+    }
+  ]
+}
