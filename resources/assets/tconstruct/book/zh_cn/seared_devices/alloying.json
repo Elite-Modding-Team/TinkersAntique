@@ -1,80 +1,80 @@
 {
-  "title": "Alloying",
+  "title": "合金",
   "text": [
     {
-      "text": "Alloys are made when two or more fluids are mixed in with precise proportions. Here are a few alloys you can try out:"
+      "text": "合金是由两种或多种流体以精确的比例混合而成的。以下是您可以尝试的几种合金："
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lBronze"
+      "text": "§l青铜"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Copper(3) and Tin(1)"
+      "text": "铜：锌=3:1"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lAluminum Brass"
+      "text": "§l铝黄铜"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Aluminum(3) and Copper(1)"
+      "text": "铝：铜=3:1"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lManyullyn"
+      "text": "§l玛玉灵"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Cobalt(2) and Ardite(2)"
+      "text": "钴：阿迪特=2:2"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lAlumite"
+      "text": "§l耐酸铝"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Aluminum(1), Iron(1), and Obsidian(1)"
+      "text": "铝：铁：黑曜石=1:1:1"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lPig Iron"
+      "text": "§l生铁"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Iron(1), Blood(1), and Clay(0.5)"
+      "text": "铁：血：黏土=1:1:0.5"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lKnightslime"
+      "text": "§l骑士史莱姆"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Iron(0.5), Purple Slime(0.5), and Seared Stone(0.5)"
+      "text": "铁：熔融焦黑石头：液态紫色史莱姆=0.5:0.5:0.5"
     }
   ]
 }

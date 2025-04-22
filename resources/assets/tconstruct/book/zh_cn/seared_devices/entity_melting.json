@@ -1,56 +1,56 @@
 {
-  "title": "Entity Melting",
+  "title": "实体冶炼",
   "text": [
     {
-      "text": "You can obtain certain liquids by melting trapped entities in an active smeltery. Here are a few liquids you can try out:"
+      "text": "你可以将生物投入正在工作的冶炼炉来获得流体，下面是你通常能做到的："
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lBlood"
+      "text": "§l血液"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Melt down most entities or rotten flesh."
+      "text": "熔融大部分生物或者熔融腐肉"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lMolten §lEmerald"
+      "text": "§l熔融绿宝石"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Melt down emeralds or villagers (illagers included)."
+      "text": "熔融绿宝石或者村民以及刌民"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lLiquid §lSlime"
+      "text": "§l熔融史莱姆"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Melt down slimes or find some in slime islands. This liquid functions as a slime spawner and comes in various colors."
+      "text": "熔融史莱姆或者在史莱姆空岛上寻找，这种流体会生成新的史莱姆并且颜色各异"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lBlazin' §lBlood"
+      "text": "§l烈焰血"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Melt down blazes. This liquid is also used as a stronger fuel source in comparison to lava."
+      "text": "熔融烈焰人，与熔岩相比，它是一种更加强力的燃料"
     }
   ]
 }

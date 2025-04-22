@@ -1,14 +1,14 @@
 {
-  "title": "Cast Crafting",
+  "title": "铸模制作",
   "text": [
     {
-      "text": "Blank casts are made by pouring aluminum brass or gold (or other compatible metals) into an empty casting table. These are used in crafting recipes and can be re-melted."
+      "text": "空白铸模需要将金或铝黄铜等浇筑到空的铸造台上。它被用于合成配方并且可以被重新熔融。"
     },
     {
       "text": "\n"
     },
     {
-      "text": "The various part casts are made by pouring aluminum brass or gold (or other compatible metals) onto the corresponding tool part instead. It is highly recommended to use a cheap material like stone because you WILL lose your tool part after the process is complete.",
+      "text": "各种部件铸模是通过将金或铝黄铜等浇注到相应的部件上而制成的。强烈推荐使用石头等廉价材料，因为加工完成后你会失去工具部件。",
       "paragraph": true
     }
   ]
