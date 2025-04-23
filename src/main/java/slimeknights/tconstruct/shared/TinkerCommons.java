@@ -51,6 +51,7 @@ import slimeknights.tconstruct.shared.block.BlockSlimeCongealed;
 import slimeknights.tconstruct.shared.block.BlockSoil;
 import slimeknights.tconstruct.shared.item.ItemMetaDynamicTinkers;
 import slimeknights.tconstruct.shared.worldgen.NetherOreGenerator;
+import slimeknights.tconstruct.shared.worldgen.OverworldOreGenerator;
 
 /**
  * Contains items and blocks and stuff that is shared by multiple pulses, but might be required individually
@@ -503,6 +504,9 @@ public class TinkerCommons extends TinkerPulse {
     proxy.init();
 
     GameRegistry.registerWorldGenerator(NetherOreGenerator.INSTANCE, 0);
+    if(Config.registerAllCommonMetals) {
+      GameRegistry.registerWorldGenerator(OverworldOreGenerator.INSTANCE, 0);
+    }
 
     MinecraftForge.EVENT_BUS.register(new AchievementEvents());
     MinecraftForge.EVENT_BUS.register(new BlockEvents());

@@ -47,8 +47,8 @@ public class BlockCommonOre extends EnumBlock<BlockCommonOre.OreTypes> {
 
     public enum OreTypes implements IStringSerializable, EnumBlock.IEnumMeta {
         COPPER(3.0F, 1),
-        TIN(3.5F, 1),
-        ALUMINUM(2.5F, 1);
+        TIN(3.0F, 1),
+        ALUMINUM(3.0F, 1);
 
         private final int meta;
         private final float hardness;

@@ -91,6 +91,18 @@ public final class Config {
   public static int cobaltRate = 20; // max. cobalt per chunk
   public static boolean genArdite = true;
   public static int arditeRate = 20; // max. ardite per chunk
+  public static boolean genCopper = true;
+  public static int copperRate = 4;
+  public static int copperHeightMin = 20;
+  public static int copperHeightMax = 60;
+  public static boolean genTin = true;
+  public static int tinRate = 4;
+  public static int tinHeightMin = 0;
+  public static int tinHeightMax = 40;
+  public static boolean genAluminum = true;
+  public static int aluminumRate = 6;
+  public static int aluminumHeightMin = 0;
+  public static int aluminumHeightMax = 64;
 
   // Clientside configs
   public static boolean renderTableItems = true;
@@ -333,6 +345,18 @@ public final class Config {
       prop.setComment("If true, ardite ore will generate in the nether.");
       genArdite = prop.getBoolean();
 
+      prop = configFile.get(cat, "genCopper", genCopper);
+      prop.setComment("If true, copper ore will generate in the overworld.");
+      genCopper = prop.getBoolean();
+
+      prop = configFile.get(cat, "genTin", genTin);
+      prop.setComment("If true, tin ore will generate in the overworld.");
+      genTin = prop.getBoolean();
+
+      prop = configFile.get(cat, "genAluminum", genAluminum);
+      prop.setComment("If true, aluminum ore will generate in the overworld.");
+      genAluminum = prop.getBoolean();
+
       prop = configFile.get(cat, "cobaltRate", cobaltRate);
       prop.setComment("Approximate cobalt ore generation per chunk.");
       cobaltRate = prop.getInt();
@@ -340,6 +364,42 @@ public final class Config {
       prop = configFile.get(cat, "arditeRate", arditeRate);
       prop.setComment("Approximate ardite ore generation per chunk.");
       arditeRate = prop.getInt();
+
+      prop = configFile.get(cat, "copperRate", copperRate);
+      prop.setComment("Approximate copper ore generation per chunk.");
+      copperRate = prop.getInt();
+
+      prop = configFile.get(cat, "copperHeightMin", copperHeightMin);
+      prop.setComment("Minimum Y level for copper ore generation.");
+      copperHeightMin = prop.getInt();
+
+      prop = configFile.get(cat, "copperHeightMax", copperHeightMax);
+      prop.setComment("Maximum Y level for copper ore generation.");
+      copperHeightMax = prop.getInt();
+
+      prop = configFile.get(cat, "tinRate", tinRate);
+      prop.setComment("Approximate tin ore generation per chunk.");
+      tinRate = prop.getInt();
+
+      prop = configFile.get(cat, "tinHeightMin", tinHeightMin);
+      prop.setComment("Minimum Y level for tin ore generation.");
+      tinHeightMin = prop.getInt();
+
+      prop = configFile.get(cat, "tinHeightMax", tinHeightMax);
+      prop.setComment("Maximum Y level for tin ore generation.");
+      tinHeightMax = prop.getInt();
+
+      prop = configFile.get(cat, "aluminumRate", aluminumRate);
+      prop.setComment("Approximate aluminum ore generation per chunk.");
+      aluminumRate = prop.getInt();
+
+      prop = configFile.get(cat, "aluminumHeightMin", aluminumHeightMin);
+      prop.setComment("Minimum Y level for aluminum ore generation.");
+      aluminumHeightMin = prop.getInt();
+
+      prop = configFile.get(cat, "aluminumHeightMax", aluminumHeightMax);
+      prop.setComment("Maximum Y level for aluminum ore generation.");
+      aluminumHeightMax = prop.getInt();
     }
     // Clientside
     {
