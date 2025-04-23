@@ -17,6 +17,7 @@ import slimeknights.tconstruct.common.ClientProxy;
 import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.client.CustomTextureCreator;
 import slimeknights.tconstruct.smeltery.block.BlockSearedGlass;
+import slimeknights.tconstruct.smeltery.block.BlockSearedLadder;
 import slimeknights.tconstruct.smeltery.block.BlockSmelteryIO;
 import slimeknights.tconstruct.smeltery.block.BlockTank;
 import slimeknights.tconstruct.smeltery.client.CastingRenderer;
@@ -100,7 +101,7 @@ public class SmelteryClientProxy extends ClientProxy {
 
     // seared ladder
     Item searedLadder = Item.getItemFromBlock(TinkerSmeltery.searedLadder);
-    ModelLoader.setCustomStateMapper(TinkerSmeltery.searedLadder, new StateMap.Builder().ignore(BlockSearedGlass.TYPE).build());
+    ModelLoader.setCustomStateMapper(TinkerSmeltery.searedLadder, new StateMap.Builder().ignore(BlockSearedLadder.TYPE).build());
     ModelLoader.setCustomModelResourceLocation(searedLadder, 0, new ModelResourceLocation(TinkerSmeltery.searedLadder.getRegistryName(), "inventory"));
 
     // TEs

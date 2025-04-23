@@ -4,12 +4,14 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -18,18 +20,22 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import slimeknights.mantle.block.EnumBlock;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 
 // Courtesy of jbredwards
-public class BlockSearedLadder extends BlockEnumSmeltery<BlockSearedGlass.GlassType> {
+public class BlockSearedLadder extends BlockEnumSmeltery<BlockSearedLadder.LadderType> {
+
+    public static final PropertyEnum<BlockSearedLadder.LadderType> TYPE = PropertyEnum.create("type", BlockSearedLadder.LadderType.class);
     public static final PropertyBool BOTTOM = PropertyBool.create("bottom");
     public static final AxisAlignedBB BOTTOM_BOX = box(0, 0, 0, 16, 2, 16);
     public static final List<AxisAlignedBB>
@@ -55,13 +61,13 @@ public class BlockSearedLadder extends BlockEnumSmeltery<BlockSearedGlass.GlassT
             );
 
     public BlockSearedLadder() {
-        super(Material.ROCK, BlockSearedGlass.TYPE, BlockSearedGlass.GlassType.class);
+        super(Material.ROCK, BlockSearedLadder.TYPE, BlockSearedLadder.LadderType.class);
     }
 
     @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, BlockSearedGlass.TYPE, BOTTOM, FACING);
+        return new BlockStateContainer(this, BlockSearedLadder.TYPE, BOTTOM, FACING);
     }
 
     @Override
@@ -187,5 +193,26 @@ public class BlockSearedLadder extends BlockEnumSmeltery<BlockSearedGlass.GlassT
     @Nonnull
     static AxisAlignedBB box(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return new AxisAlignedBB(minX / 16, minY / 16, minZ / 16, maxX / 16, maxY / 16, maxZ / 16);
+    }
+
+    // only one type, but we are forced to use an enum to extend BlockEnumSmeltery (which has all the smeltery multiblock logic)
+    public enum LadderType implements IStringSerializable, EnumBlock.IEnumMeta {
+        LADDER;
+
+        public final int meta;
+
+        LadderType() {
+            meta = ordinal();
+        }
+
+        @Override
+        public String getName() {
+            return this.toString().toLowerCase(Locale.US);
+        }
+
+        @Override
+        public int getMeta() {
+            return meta;
+        }
     }
 }
