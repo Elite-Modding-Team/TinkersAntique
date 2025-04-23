@@ -13,6 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import slimeknights.mantle.block.EnumBlock;
 import slimeknights.tconstruct.library.TinkerRegistry;
@@ -30,6 +31,12 @@ public class BlockCommonOre extends EnumBlock<BlockCommonOre.OreTypes> {
     public float getBlockHardness(IBlockState state, World world, BlockPos pos) {
         OreTypes type = state.getValue(TYPE);
         return type.getHardness();
+    }
+    
+    @Nullable
+    @Override
+    public String getHarvestTool(IBlockState state) {
+        return "pickaxe";
     }
 
     @Override
