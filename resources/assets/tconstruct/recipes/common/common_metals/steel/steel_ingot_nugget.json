@@ -1,0 +1,42 @@
+{
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:is_pulse_loaded",
+          "pulse_name": "TinkerTools"
+        },
+        {
+          "type": "tconstruct:is_pulse_loaded",
+          "pulse_name": "TinkerSmeltery"
+        },
+        {
+          "type": "tconstruct:is_option_enabled",
+          "config_setting": "registerAllItems"
+        }
+      ]
+    },
+    {
+      "type": "tconstruct:is_option_enabled",
+      "config_setting": "registerAllCommonMetals"
+    }
+  ],
+  "type": "forge:ore_shaped",
+  "group": "tconstruct:steel_ingot",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetSteel"
+    }
+  },
+  "result": {
+    "item": "tconstruct:common_ingots",
+    "data": 4
+  }
+}

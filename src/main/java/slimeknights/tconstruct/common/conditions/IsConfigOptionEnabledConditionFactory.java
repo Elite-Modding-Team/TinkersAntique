@@ -14,6 +14,8 @@ public class IsConfigOptionEnabledConditionFactory implements IConditionFactory 
     String configSetting = JsonUtils.getString(json, "config_setting", "");
 
     switch(configSetting) {
+      case "registerAllCommonMetals":
+        return () -> Config.registerAllCommonMetals;
       case "registerAllItems":
         return () -> Config.forceRegisterAll;
       case "addFlintRecipe":

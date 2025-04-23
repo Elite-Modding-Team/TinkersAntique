@@ -1,0 +1,26 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block",
+        "model": "cube_all"
+    },
+	"variants": {
+        "type": {
+            "copper": {
+                "textures": { "all": "tconstruct:blocks/block_copper" }
+            },
+            "tin": {
+                "textures": { "all": "tconstruct:blocks/block_tin" }
+            },
+            "aluminum": {
+                "textures": { "all": "tconstruct:blocks/block_aluminum" }
+            },
+            "bronze": {
+                "textures": { "all": "tconstruct:blocks/block_bronze" }
+            },
+            "steel": {
+                "textures": { "all": "tconstruct:blocks/block_steel" }
+            }
+        }
+    }
+}

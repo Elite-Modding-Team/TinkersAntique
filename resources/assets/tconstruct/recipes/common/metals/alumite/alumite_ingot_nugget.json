@@ -19,7 +19,7 @@
         }
     ],
     "type": "forge:ore_shaped",
-    "group": "tconstruct:alubrass_ingot",
+    "group": "tconstruct:alumite_ingot",
     "pattern": [
         "AAA",
         "AAA",

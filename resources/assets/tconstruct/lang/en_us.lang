@@ -32,7 +32,14 @@ tile.tconstruct.mudbrick_stairs.name=Mud Bricks Stairs
 tile.tconstruct.ore.cobalt.name=Cobalt Ore
 tile.tconstruct.ore.ardite.name=Ardite Ore
 
-tile.tconstruct.metal.tooltip=Can be used as beacon base
+tile.tconstruct.common_metal.tooltip=Can be used as a beacon base.
+tile.tconstruct.common_metal.copper.name=Block of Copper
+tile.tconstruct.common_metal.tin.name=Block of Tin
+tile.tconstruct.common_metal.aluminum.name=Block of Aluminum
+tile.tconstruct.common_metal.bronze.name=Block of Bronze
+tile.tconstruct.common_metal.steel.name=Block of Steel
+
+tile.tconstruct.metal.tooltip=Can be used as a beacon base.
 tile.tconstruct.metal.cobalt.name=Block of Cobalt
 tile.tconstruct.metal.ardite.name=Block of Ardite
 tile.tconstruct.metal.manyullyn.name=Block of Manyullyn
@@ -309,6 +316,18 @@ item.tconstruct.materials.bloody_bone.name=Bloody Bone
 item.tconstruct.materials.bloody_bone.tooltip=Blood to the bone!
 item.tconstruct.materials.creative_modifier.name=Creative Modifier
 item.tconstruct.materials.creative_modifier.tooltip=Adds an additional modifier
+
+item.tconstruct.common_ingots.copper.name=Copper Ingot
+item.tconstruct.common_ingots.tin.name=Tin Ingot
+item.tconstruct.common_ingots.aluminum.name=Aluminum Ingot
+item.tconstruct.common_ingots.bronze.name=Bronze Ingot
+item.tconstruct.common_ingots.steel.name=Steel Ingot
+
+item.tconstruct.common_nuggets.copper.name=Copper Nugget
+item.tconstruct.common_nuggets.tin.name=Tin Nugget
+item.tconstruct.common_nuggets.aluminum.name=Aluminum Nugget
+item.tconstruct.common_nuggets.bronze.name=Bronze Nugget
+item.tconstruct.common_nuggets.steel.name=Steel Nugget
 
 item.tconstruct.ingots.cobalt.name=Cobalt Ingot
 item.tconstruct.ingots.ardite.name=Ardite Ingot

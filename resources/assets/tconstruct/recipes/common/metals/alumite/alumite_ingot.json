@@ -19,7 +19,7 @@
         }
     ],
     "type": "forge:ore_shapeless",
-    "group": "tconstruct:alubrass_ingot",
+    "group": "tconstruct:alumite_ingot",
     "ingredients": [
         {
             "type": "forge:ore_dict",

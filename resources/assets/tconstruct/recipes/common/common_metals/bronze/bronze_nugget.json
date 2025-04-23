@@ -1,0 +1,37 @@
+{
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:is_pulse_loaded",
+          "pulse_name": "TinkerTools"
+        },
+        {
+          "type": "tconstruct:is_pulse_loaded",
+          "pulse_name": "TinkerSmeltery"
+        },
+        {
+          "type": "tconstruct:is_option_enabled",
+          "config_setting": "registerAllItems"
+        }
+      ]
+    },
+    {
+      "type": "tconstruct:is_option_enabled",
+      "config_setting": "registerAllCommonMetals"
+    }
+  ],
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotBronze"
+    }
+  ],
+  "result": {
+    "item": "tconstruct:common_nuggets",
+    "count": 9,
+    "data": 3
+  }
+}

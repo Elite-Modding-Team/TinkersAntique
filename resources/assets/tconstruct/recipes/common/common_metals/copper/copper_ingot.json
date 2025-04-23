@@ -1,0 +1,38 @@
+{
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:is_pulse_loaded",
+          "pulse_name": "TinkerTools"
+        },
+        {
+          "type": "tconstruct:is_pulse_loaded",
+          "pulse_name": "TinkerSmeltery"
+        },
+        {
+          "type": "tconstruct:is_option_enabled",
+          "config_setting": "registerAllItems"
+        }
+      ]
+    },
+    {
+      "type": "tconstruct:is_option_enabled",
+      "config_setting": "registerAllCommonMetals"
+    }
+  ],
+  "type": "forge:ore_shapeless",
+  "group": "tconstruct:copper_ingot",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "blockCopper"
+    }
+  ],
+  "result": {
+    "item": "tconstruct:common_ingots",
+    "count": 9,
+    "data": 0
+  }
+}

@@ -1,0 +1,14 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-item",
+        "model": "forge:item-layer"
+    },
+    "variants": {
+        "copper": [{ "textures": { "layer0": "tconstruct:items/materials/nugget_copper" }}],
+        "tin": [{ "textures": { "layer0": "tconstruct:items/materials/nugget_tin" }}],
+        "aluminum": [{ "textures": { "layer0": "tconstruct:items/materials/nugget_aluminum" }}],
+        "bronze": [{ "textures": { "layer0": "tconstruct:items/materials/nugget_bronze" }}],
+        "steel": [{ "textures": { "layer0": "tconstruct:items/materials/nugget_steel" }}]
+    }
+}

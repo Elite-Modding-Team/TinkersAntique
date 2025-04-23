@@ -37,6 +37,7 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.plugin.quark.QuarkPlugin;
 import slimeknights.tconstruct.shared.block.BlockClearGlass;
 import slimeknights.tconstruct.shared.block.BlockClearStainedGlass;
+import slimeknights.tconstruct.shared.block.BlockCommonMetal;
 import slimeknights.tconstruct.shared.block.BlockDecoGround;
 import slimeknights.tconstruct.shared.block.BlockDecoGroundSlab;
 import slimeknights.tconstruct.shared.block.BlockFirewood;
@@ -64,6 +65,7 @@ public class TinkerCommons extends TinkerPulse {
 
   public static BlockSoil blockSoil;
   public static BlockOre blockOre;
+  public static BlockCommonMetal blockCommonMetal;
   public static BlockMetal blockMetal;
   public static BlockFirewood blockFirewood;
   public static BlockGlow blockGlow;
@@ -97,6 +99,12 @@ public class TinkerCommons extends TinkerPulse {
 
   public static ItemStack oreCobalt;
   public static ItemStack oreArdite;
+  
+  public static ItemStack blockCopper;
+  public static ItemStack blockTin;
+  public static ItemStack blockAluminum;
+  public static ItemStack blockBronze;
+  public static ItemStack blockSteel;
 
   public static ItemStack blockCobalt;
   public static ItemStack blockArdite;
@@ -112,11 +120,27 @@ public class TinkerCommons extends TinkerPulse {
 
   // Items
   public static ItemTinkerBook book;
+  public static ItemMetaDynamic commonNuggets;
+  public static ItemMetaDynamic commonIngots;
   public static ItemMetaDynamic nuggets;
   public static ItemMetaDynamic ingots;
   public static ItemMetaDynamic materials;
   public static ItemEdible edibles;
 
+  // Common Nugget Itemstacks
+  public static ItemStack nuggetCopper;
+  public static ItemStack nuggetTin;
+  public static ItemStack nuggetAluminum;
+  public static ItemStack nuggetBronze;
+  public static ItemStack nuggetSteel;
+
+  // Common Ingot Itemstacks
+  public static ItemStack ingotCopper;
+  public static ItemStack ingotTin;
+  public static ItemStack ingotAluminum;
+  public static ItemStack ingotBronze;
+  public static ItemStack ingotSteel;
+  
   // Nugget Itemstacks
   public static ItemStack nuggetCobalt;
   public static ItemStack nuggetArdite;
@@ -222,6 +246,11 @@ public class TinkerCommons extends TinkerPulse {
     stairsFirewood = registerBlockStairsFrom(registry, blockFirewood, BlockFirewood.FirewoodType.FIREWOOD, "firewood_stairs");
     stairsLavawood = registerBlockStairsFrom(registry, blockFirewood, BlockFirewood.FirewoodType.LAVAWOOD, "lavawood_stairs");
 
+    // Common ingots and nuggets, these can be disabled completely with a config option
+    if((isToolsLoaded() || isSmelteryLoaded() || forced) && Config.registerAllCommonMetals) {
+      blockCommonMetal = registerBlock(registry, new BlockCommonMetal(), "common_metal");
+    }
+    
     // Ingots and nuggets
     if(isToolsLoaded() || isSmelteryLoaded() || forced) {
       blockMetal = registerBlock(registry, new BlockMetal(), "metal");
@@ -281,6 +310,10 @@ public class TinkerCommons extends TinkerPulse {
     stairsMudBrick = registerItemBlock(registry, stairsMudBrick);
     stairsFirewood = registerItemBlock(registry, stairsFirewood);
     stairsLavawood = registerItemBlock(registry, stairsLavawood);
+    
+    // Common metals, these can be disabled completely with a config option
+    commonNuggets = registerItem(registry, new ItemMetaDynamicTinkers(), "common_nuggets");
+    commonIngots = registerItem(registry, new ItemMetaDynamicTinkers(), "common_ingots");
 
     // create the items. We can probably always create them since they handle themselves dynamically
     nuggets = registerItem(registry, new ItemMetaDynamicTinkers(), "nuggets");
@@ -288,6 +321,9 @@ public class TinkerCommons extends TinkerPulse {
     materials = registerItem(registry, new ItemMetaDynamic(), "materials");
     edibles = registerItem(registry, new ItemEdible(), "edible");
 
+    commonNuggets.setCreativeTab(TinkerRegistry.tabGeneral);
+    commonIngots.setCreativeTab(TinkerRegistry.tabGeneral);
+    
     nuggets.setCreativeTab(TinkerRegistry.tabGeneral);
     ingots.setCreativeTab(TinkerRegistry.tabGeneral);
     materials.setCreativeTab(TinkerRegistry.tabGeneral);
@@ -305,6 +341,32 @@ public class TinkerCommons extends TinkerPulse {
     if(isSmelteryLoaded() || forced) {
       searedBrick = materials.addMeta(0, "seared_brick");
       mudBrick = materials.addMeta(1, "mud_brick");
+    }
+    
+    // Common Ingots and nuggets, these can be disabled completely with a config option
+    if((isToolsLoaded() || isSmelteryLoaded() || forced) && Config.registerAllCommonMetals) {
+        nuggetCopper = commonNuggets.addMeta(0, "copper");
+        ingotCopper = commonIngots.addMeta(0, "copper");
+
+        nuggetTin = commonNuggets.addMeta(1, "tin");
+        ingotTin = commonIngots.addMeta(1, "tin");
+
+        nuggetAluminum = commonNuggets.addMeta(2, "aluminum");
+        ingotAluminum = commonIngots.addMeta(2, "aluminum");
+
+        nuggetBronze = commonNuggets.addMeta(3, "bronze");
+        ingotBronze = commonIngots.addMeta(3, "bronze");
+
+        nuggetSteel = commonNuggets.addMeta(4, "steel");
+        ingotSteel = commonIngots.addMeta(4, "steel");
+        
+        blockCommonMetal = registerEnumItemBlock(registry, blockCommonMetal);
+
+        blockCopper = new ItemStack(blockCommonMetal, 1, BlockCommonMetal.MetalTypes.COPPER.getMeta());
+        blockTin = new ItemStack(blockCommonMetal, 1, BlockCommonMetal.MetalTypes.TIN.getMeta());
+        blockAluminum = new ItemStack(blockCommonMetal, 1, BlockCommonMetal.MetalTypes.ALUMINUM.getMeta());
+        blockBronze = new ItemStack(blockCommonMetal, 1, BlockCommonMetal.MetalTypes.BRONZE.getMeta());
+        blockSteel = new ItemStack(blockCommonMetal, 1, BlockCommonMetal.MetalTypes.STEEL.getMeta());
     }
 
     // Ingots and nuggets

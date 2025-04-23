@@ -27,9 +27,9 @@ public final class Config {
   private Config() {
   }
 
-
   public static boolean forceRegisterAll = false; // enables all common items, even if their module is not present
-
+  public static boolean registerAllCommonMetals = true; // enables all common metals (copper, tin, aluminum, bronze, and steel)
+  
   // Tools and general
   public static boolean spawnWithBook = true;
   public static boolean reuseStencil = true;
@@ -189,6 +189,11 @@ public final class Config {
       prop = configFile.get(cat, "registerAllItems", forceRegisterAll);
       prop.setComment("Enables all items, even if the Module needed to obtain them is not active.");
       forceRegisterAll = prop.getBoolean();
+      prop.setRequiresMcRestart(true);
+      
+      prop = configFile.get(cat, "registerAllCommonMetals", registerAllCommonMetals);
+      prop.setComment("Enables all common metals (copper, tin, aluminum, bronze, and steel) for ingots, nuggets, ores, and metal blocks. Disable if you want to rely on metals added by third party mods instead.");
+      registerAllCommonMetals = prop.getBoolean();
       prop.setRequiresMcRestart(true);
 
       prop = configFile.get(cat, "obsidianAlloy", obsidianAlloy);

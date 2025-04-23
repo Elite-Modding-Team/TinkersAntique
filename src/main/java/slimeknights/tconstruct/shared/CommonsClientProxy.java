@@ -22,6 +22,7 @@ import static slimeknights.tconstruct.common.ModelRegisterUtil.registerItemBlock
 import static slimeknights.tconstruct.common.ModelRegisterUtil.registerItemModel;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockClearGlass;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockClearStainedGlass;
+import static slimeknights.tconstruct.shared.TinkerCommons.blockCommonMetal;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockDecoGround;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockFirewood;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockMetal;
@@ -30,6 +31,8 @@ import static slimeknights.tconstruct.shared.TinkerCommons.blockSlime;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockSlimeCongealed;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockSoil;
 import static slimeknights.tconstruct.shared.TinkerCommons.book;
+import static slimeknights.tconstruct.shared.TinkerCommons.commonIngots;
+import static slimeknights.tconstruct.shared.TinkerCommons.commonNuggets;
 import static slimeknights.tconstruct.shared.TinkerCommons.edibles;
 import static slimeknights.tconstruct.shared.TinkerCommons.ingots;
 import static slimeknights.tconstruct.shared.TinkerCommons.materials;
@@ -78,6 +81,8 @@ public class CommonsClientProxy extends ClientProxy {
     // ignore color state for the clear stained glass, it is handled by tinting
     ModelLoader.setCustomStateMapper(blockClearStainedGlass, (new StateMap.Builder()).ignore(BlockClearStainedGlass.COLOR).build());
 
+    commonNuggets.registerItemModels();
+    commonIngots.registerItemModels();
     nuggets.registerItemModels();
     ingots.registerItemModels();
     materials.registerItemModels();
@@ -85,6 +90,7 @@ public class CommonsClientProxy extends ClientProxy {
 
     registerItemModel(book, 0, "inventory");
 
+    registerItemBlockMeta(blockCommonMetal);
     registerItemBlockMeta(blockMetal);
     registerItemBlockMeta(blockSoil);
     registerItemBlockMeta(blockOre);
