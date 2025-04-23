@@ -1,0 +1,21 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block",
+        "model": "tconstruct:cube_overlay_all",
+        "textures": {"all": "minecraft:blocks/stone" }
+    },
+	"variants": {
+        "type": {
+            "copper": {
+                "textures": { "overlay": "tconstruct:blocks/ore_copper" }
+            },
+            "tin": {
+                "textures": { "overlay": "tconstruct:blocks/ore_tin" }
+            },
+			"aluminum": {
+                "textures": { "overlay": "tconstruct:blocks/ore_aluminum" }
+            }
+        }
+    }
+}

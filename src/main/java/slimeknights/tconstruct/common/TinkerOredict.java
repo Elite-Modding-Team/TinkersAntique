@@ -69,8 +69,11 @@ import static slimeknights.tconstruct.shared.TinkerCommons.nuggetManyullyn;
 import static slimeknights.tconstruct.shared.TinkerCommons.nuggetPigIron;
 import static slimeknights.tconstruct.shared.TinkerCommons.nuggetSteel;
 import static slimeknights.tconstruct.shared.TinkerCommons.nuggetTin;
+import static slimeknights.tconstruct.shared.TinkerCommons.oreAluminum;
 import static slimeknights.tconstruct.shared.TinkerCommons.oreArdite;
 import static slimeknights.tconstruct.shared.TinkerCommons.oreCobalt;
+import static slimeknights.tconstruct.shared.TinkerCommons.oreCopper;
+import static slimeknights.tconstruct.shared.TinkerCommons.oreTin;
 import static slimeknights.tconstruct.shared.TinkerCommons.searedBrick;
 import static slimeknights.tconstruct.tools.TinkerTools.binding;
 import static slimeknights.tconstruct.tools.TinkerTools.pattern;
@@ -196,6 +199,10 @@ public class TinkerOredict {
     	oredictNIB(nuggetAluminum, ingotAluminum, blockAluminum, "Aluminum");
     	oredictNIB(nuggetBronze, ingotBronze, blockBronze, "Bronze");
     	oredictNIB(nuggetSteel, ingotSteel, blockSteel, "Steel");
+    	
+        oredict(oreCopper, "oreCopper");
+        oredict(oreTin, "oreTin");
+        oredict(oreAluminum, "oreAluminum");
     }
 
     String metal = "blockMetal";

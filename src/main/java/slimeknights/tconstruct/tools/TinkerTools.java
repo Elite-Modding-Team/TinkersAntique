@@ -30,6 +30,7 @@ import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.CommonProxy;
 import slimeknights.tconstruct.common.EntityIDs;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.materials.Material;
@@ -228,7 +229,13 @@ public class TinkerTools extends AbstractToolPulse {
   }
 
   protected void registerSmeltingRecipes() {
-    // cobalt ardite manyullyn
+    // Ores
+	if(Config.registerAllCommonMetals) {
+		GameRegistry.addSmelting(TinkerCommons.oreCopper, TinkerCommons.ingotCopper, 0.5f);
+    	GameRegistry.addSmelting(TinkerCommons.oreTin, TinkerCommons.ingotTin, 0.5f);
+    	GameRegistry.addSmelting(TinkerCommons.oreAluminum, TinkerCommons.ingotAluminum, 0.7f);
+	}
+    
     GameRegistry.addSmelting(TinkerCommons.oreArdite, TinkerCommons.ingotArdite, 1.0f);
     GameRegistry.addSmelting(TinkerCommons.oreCobalt, TinkerCommons.ingotCobalt, 1.0f);
 

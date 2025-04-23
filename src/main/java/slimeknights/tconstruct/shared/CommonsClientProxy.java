@@ -24,6 +24,7 @@ import static slimeknights.tconstruct.common.ModelRegisterUtil.registerItemModel
 import static slimeknights.tconstruct.shared.TinkerCommons.blockClearGlass;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockClearStainedGlass;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockCommonMetal;
+import static slimeknights.tconstruct.shared.TinkerCommons.blockCommonOre;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockDecoGround;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockFirewood;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockMetal;
@@ -87,6 +88,7 @@ public class CommonsClientProxy extends ClientProxy {
       commonIngots.registerItemModels();
 
       registerItemBlockMeta(blockCommonMetal);
+      registerItemBlockMeta(blockCommonOre);
     }
 
     nuggets.registerItemModels();

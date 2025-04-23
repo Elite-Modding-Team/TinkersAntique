@@ -38,6 +38,7 @@ import slimeknights.tconstruct.plugin.quark.QuarkPlugin;
 import slimeknights.tconstruct.shared.block.BlockClearGlass;
 import slimeknights.tconstruct.shared.block.BlockClearStainedGlass;
 import slimeknights.tconstruct.shared.block.BlockCommonMetal;
+import slimeknights.tconstruct.shared.block.BlockCommonOre;
 import slimeknights.tconstruct.shared.block.BlockDecoGround;
 import slimeknights.tconstruct.shared.block.BlockDecoGroundSlab;
 import slimeknights.tconstruct.shared.block.BlockFirewood;
@@ -64,6 +65,7 @@ public class TinkerCommons extends TinkerPulse {
   public static CommonProxy proxy;
 
   public static BlockSoil blockSoil;
+  public static BlockCommonOre blockCommonOre;
   public static BlockOre blockOre;
   public static BlockCommonMetal blockCommonMetal;
   public static BlockMetal blockMetal;
@@ -96,7 +98,11 @@ public class TinkerCommons extends TinkerPulse {
   public static ItemStack consecratedSoil;
 
   public static ItemStack mudBrickBlock;
-
+  
+  public static ItemStack oreCopper;
+  public static ItemStack oreTin;
+  public static ItemStack oreAluminum;
+  
   public static ItemStack oreCobalt;
   public static ItemStack oreArdite;
   
@@ -221,9 +227,14 @@ public class TinkerCommons extends TinkerPulse {
     if(!TConstruct.pulseManager.isPulseLoaded(QuarkPlugin.PulseId)) {
       blockSlime = registerBlock(registry, new BlockSlime(), "slime");
     }
+    
     blockSlimeCongealed = registerBlock(registry, new BlockSlimeCongealed(), "slime_congealed");
 
     // Ores
+    if((isToolsLoaded() || isSmelteryLoaded() || forced) && Config.registerAllCommonMetals) {
+        blockCommonOre = registerBlock(registry, new BlockCommonOre(), "common_ore");
+      }
+    
     blockOre = registerBlock(registry, new BlockOre(), "ore");
 
     // Firewood
@@ -334,6 +345,15 @@ public class TinkerCommons extends TinkerPulse {
     if(isSmelteryLoaded() || forced) {
       searedBrick = materials.addMeta(0, "seared_brick");
       mudBrick = materials.addMeta(1, "mud_brick");
+    }
+    
+    // Common ores, these can be disabled completely with a config option
+    if(Config.registerAllCommonMetals) {
+        blockCommonOre = registerEnumItemBlock(registry, blockCommonOre);
+
+        oreCopper = new ItemStack(blockCommonOre, 1, BlockCommonOre.OreTypes.COPPER.getMeta());
+        oreTin = new ItemStack(blockCommonOre, 1, BlockCommonOre.OreTypes.TIN.getMeta());
+        oreAluminum = new ItemStack(blockCommonOre, 1, BlockCommonOre.OreTypes.ALUMINUM.getMeta());
     }
     
     // Common Ingots and nuggets, these can be disabled completely with a config option
