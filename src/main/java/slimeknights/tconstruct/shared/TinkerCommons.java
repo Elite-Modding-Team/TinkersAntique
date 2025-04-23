@@ -310,19 +310,12 @@ public class TinkerCommons extends TinkerPulse {
     stairsMudBrick = registerItemBlock(registry, stairsMudBrick);
     stairsFirewood = registerItemBlock(registry, stairsFirewood);
     stairsLavawood = registerItemBlock(registry, stairsLavawood);
-    
-    // Common metals, these can be disabled completely with a config option
-    commonNuggets = registerItem(registry, new ItemMetaDynamicTinkers(), "common_nuggets");
-    commonIngots = registerItem(registry, new ItemMetaDynamicTinkers(), "common_ingots");
 
     // create the items. We can probably always create them since they handle themselves dynamically
     nuggets = registerItem(registry, new ItemMetaDynamicTinkers(), "nuggets");
     ingots = registerItem(registry, new ItemMetaDynamicTinkers(), "ingots");
     materials = registerItem(registry, new ItemMetaDynamic(), "materials");
     edibles = registerItem(registry, new ItemEdible(), "edible");
-
-    commonNuggets.setCreativeTab(TinkerRegistry.tabGeneral);
-    commonIngots.setCreativeTab(TinkerRegistry.tabGeneral);
     
     nuggets.setCreativeTab(TinkerRegistry.tabGeneral);
     ingots.setCreativeTab(TinkerRegistry.tabGeneral);
@@ -345,6 +338,12 @@ public class TinkerCommons extends TinkerPulse {
     
     // Common Ingots and nuggets, these can be disabled completely with a config option
     if((isToolsLoaded() || isSmelteryLoaded() || forced) && Config.registerAllCommonMetals) {
+        commonNuggets = registerItem(registry, new ItemMetaDynamicTinkers(), "common_nuggets");
+        commonIngots = registerItem(registry, new ItemMetaDynamicTinkers(), "common_ingots");
+
+        commonNuggets.setCreativeTab(TinkerRegistry.tabGeneral);
+        commonIngots.setCreativeTab(TinkerRegistry.tabGeneral);
+
         nuggetCopper = commonNuggets.addMeta(0, "copper");
         ingotCopper = commonIngots.addMeta(0, "copper");
 

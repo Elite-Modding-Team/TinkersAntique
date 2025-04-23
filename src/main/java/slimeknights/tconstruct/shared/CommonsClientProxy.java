@@ -15,6 +15,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import javax.annotation.Nonnull;
 
 import slimeknights.tconstruct.common.ClientProxy;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.shared.block.BlockClearStainedGlass;
 import slimeknights.tconstruct.shared.block.BlockClearStainedGlass.EnumGlassColor;
 
@@ -81,8 +82,13 @@ public class CommonsClientProxy extends ClientProxy {
     // ignore color state for the clear stained glass, it is handled by tinting
     ModelLoader.setCustomStateMapper(blockClearStainedGlass, (new StateMap.Builder()).ignore(BlockClearStainedGlass.COLOR).build());
 
-    commonNuggets.registerItemModels();
-    commonIngots.registerItemModels();
+    if(Config.registerAllCommonMetals) {
+      commonNuggets.registerItemModels();
+      commonIngots.registerItemModels();
+
+      registerItemBlockMeta(blockCommonMetal);
+    }
+
     nuggets.registerItemModels();
     ingots.registerItemModels();
     materials.registerItemModels();
@@ -90,7 +96,6 @@ public class CommonsClientProxy extends ClientProxy {
 
     registerItemModel(book, 0, "inventory");
 
-    registerItemBlockMeta(blockCommonMetal);
     registerItemBlockMeta(blockMetal);
     registerItemBlockMeta(blockSoil);
     registerItemBlockMeta(blockOre);
