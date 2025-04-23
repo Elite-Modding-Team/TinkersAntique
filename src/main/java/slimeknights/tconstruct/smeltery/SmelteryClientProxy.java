@@ -98,6 +98,11 @@ public class SmelteryClientProxy extends ClientProxy {
       ModelLoader.setCustomModelResourceLocation(tank, type.meta, new ModelResourceLocation(tank.getRegistryName(), type.getName()));
     }
 
+    // seared ladder
+    Item searedLadder = Item.getItemFromBlock(TinkerSmeltery.searedLadder);
+    ModelLoader.setCustomStateMapper(TinkerSmeltery.searedLadder, new StateMap.Builder().ignore(BlockSearedGlass.TYPE).build());
+    ModelLoader.setCustomModelResourceLocation(searedLadder, 0, new ModelResourceLocation(TinkerSmeltery.searedLadder.getRegistryName(), "inventory"));
+
     // TEs
     ClientRegistry.bindTileEntitySpecialRenderer(TileTank.class, new TankRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileSmeltery.class, new SmelteryRenderer());

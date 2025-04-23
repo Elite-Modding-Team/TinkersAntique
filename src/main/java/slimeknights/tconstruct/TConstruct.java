@@ -2,12 +2,14 @@ package slimeknights.tconstruct;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -144,6 +146,11 @@ public class TConstruct {
     }
     // but we can connect to servers without TiC when TiC is present on the client
     return !remoteVersions.containsKey(modID) || modVersion.equals(remoteVersions.get(modID));
+  }
+
+  @Mod.EventHandler
+  public void construct(FMLConstructionEvent event) {
+    ForgeModContainer.fullBoundingBoxLadders = true;
   }
 
   @Mod.EventHandler

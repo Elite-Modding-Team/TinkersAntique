@@ -1,0 +1,30 @@
+{
+  "conditions": [
+    {
+      "type": "tconstruct:is_pulse_loaded",
+      "pulse_name": "TinkerSmeltery"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "group": "tconstruct:seared_block",
+  "pattern": [
+    "I I",
+    "I I",
+    "BBB"
+  ],
+  "key": {
+    "I": {
+      "item": "tconstruct:materials",
+      "data": 0
+    },
+    "B": {
+      "item": "tconstruct:seared",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "tconstruct:seared_ladder",
+    "data": 0,
+    "count": 4
+  }
+}

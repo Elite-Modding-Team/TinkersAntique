@@ -7,27 +7,20 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import slimeknights.tconstruct.smeltery.block.BlockEnumSmeltery;
-import slimeknights.tconstruct.smeltery.block.BlockSearedGlass;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -41,10 +34,10 @@ public class BlockSearedLadder extends BlockEnumSmeltery<BlockSearedGlass.GlassT
     public static final AxisAlignedBB BOTTOM_BOX = box(0, 0, 0, 16, 2, 16);
     public static final List<AxisAlignedBB>
             NORTH_BOX = ImmutableList.of(
-            box(0, 0, 2, 16, 16, 16),
-            box(14, 0, 0, 16, 16, 2),
-            box(0, 0, 0, 2, 16, 2)
-    ),
+                    box(0, 0, 2, 16, 16, 16),
+                    box(14, 0, 0, 16, 16, 2),
+                    box(0, 0, 0, 2, 16, 2)
+            ),
             SOUTH_BOX = ImmutableList.of(
                     box(0, 0, 0, 16, 16, 14),
                     box(0, 0, 14, 2, 16, 16),
@@ -58,7 +51,8 @@ public class BlockSearedLadder extends BlockEnumSmeltery<BlockSearedGlass.GlassT
             WEST_BOX = ImmutableList.of(
                     box(2, 0, 0, 16, 16, 16),
                     box(0, 0, 0, 2, 16, 2),
-                    box(0, 0, 14, 2, 16, 16));
+                    box(0, 0, 14, 2, 16, 16)
+            );
 
     public BlockSearedLadder() {
         super(Material.ROCK, BlockSearedGlass.TYPE, BlockSearedGlass.GlassType.class);
@@ -109,12 +103,6 @@ public class BlockSearedLadder extends BlockEnumSmeltery<BlockSearedGlass.GlassT
         if (face == EnumFacing.DOWN && state.getValue(BOTTOM)) return BlockFaceShape.SOLID;
         return face.getAxis().isVertical() || state.getValue(FACING) == face
                 ? BlockFaceShape.UNDEFINED : BlockFaceShape.SOLID;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(TextFormatting.GRAY + I18n.format("tile.searedladder.seared_ladder.tooltip"));
     }
 
     @Override
@@ -184,6 +172,7 @@ public class BlockSearedLadder extends BlockEnumSmeltery<BlockSearedGlass.GlassT
                 break;
             case WEST:
                 collisions.addAll(WEST_BOX);
+                break;
             default:
         }
 
