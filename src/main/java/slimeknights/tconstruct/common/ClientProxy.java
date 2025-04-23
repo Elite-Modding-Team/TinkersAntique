@@ -180,12 +180,20 @@ public abstract class ClientProxy extends CommonProxy {
     if(Config.disableAllParticles) return;
     mc.effectRenderer.addEffect(new EntitySlimeFx(world, x, y, z, TinkerCommons.matSlimeBallBlue.getItem(), TinkerCommons.matSlimeBallBlue.getItemDamage()));
   }
+  
+  @Override
+  public void spawnPurpleSlimeParticle(World world, double x, double y, double z) {
+    if(Config.disableAllParticles) return;
+    mc.effectRenderer.addEffect(new EntitySlimeFx(world, x, y, z, TinkerCommons.matSlimeBallPurple.getItem(), TinkerCommons.matSlimeBallPurple.getItemDamage()));
+  }
 
   public static Particle createParticle(Particles type, World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... data) {
     switch(type) {
       // entities
       case BLUE_SLIME:
         return new EntitySlimeFx(world, x, y, z, TinkerCommons.matSlimeBallBlue.getItem(), TinkerCommons.matSlimeBallBlue.getItemDamage());
+      case PURPLE_SLIME:
+          return new EntitySlimeFx(world, x, y, z, TinkerCommons.matSlimeBallPurple.getItem(), TinkerCommons.matSlimeBallPurple.getItemDamage());
       // attack
       case CLEAVER_ATTACK:
         return new ParticleAttackCleaver(world, x, y, z, xSpeed, ySpeed, zSpeed, mc.getTextureManager());

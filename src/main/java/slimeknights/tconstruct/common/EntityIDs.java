@@ -9,7 +9,8 @@ public interface EntityIDs {
   int BLUESLIME = 1;
   int FANCY_FRAME = 2;
   int THROWBALL = 3;
-
+  int PURPLESLIME = 4;
+  
   int ARROW = 10;
   int BOLT = 11;
   int SHURIKEN = 12;

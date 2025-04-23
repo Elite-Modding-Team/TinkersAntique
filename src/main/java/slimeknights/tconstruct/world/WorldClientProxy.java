@@ -26,6 +26,7 @@ import slimeknights.tconstruct.world.block.BlockTallSlimeGrass;
 import slimeknights.tconstruct.world.client.CustomStateMap;
 import slimeknights.tconstruct.world.client.SlimeColorizer;
 import slimeknights.tconstruct.world.entity.EntityBlueSlime;
+import slimeknights.tconstruct.world.entity.EntityPurpleSlime;
 
 public class WorldClientProxy extends ClientProxy {
 
@@ -38,6 +39,7 @@ public class WorldClientProxy extends ClientProxy {
 
     // Entities
     RenderingRegistry.registerEntityRenderingHandler(EntityBlueSlime.class, RenderTinkerSlime.FACTORY_BlueSlime);
+    RenderingRegistry.registerEntityRenderingHandler(EntityPurpleSlime.class, RenderTinkerSlime.FACTORY_PurpleSlime);
 
     super.preInit();
   }

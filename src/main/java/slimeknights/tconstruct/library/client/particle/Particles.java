@@ -4,6 +4,7 @@ public enum Particles {
 
   // Entities
   BLUE_SLIME,
+  PURPLE_SLIME,
 
   // SLASHY SLASHY
   CLEAVER_ATTACK,

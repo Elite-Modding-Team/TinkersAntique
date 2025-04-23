@@ -99,6 +99,7 @@ import slimeknights.tconstruct.smeltery.tileentity.TileTank;
 import slimeknights.tconstruct.smeltery.tileentity.TileTinkerTank;
 import slimeknights.tconstruct.tools.TinkerMaterials;
 import slimeknights.tconstruct.world.entity.EntityBlueSlime;
+import slimeknights.tconstruct.world.entity.EntityPurpleSlime;
 
 import java.io.File;
 import java.io.IOException;
@@ -544,6 +545,7 @@ public class TinkerSmeltery extends TinkerPulse {
     TinkerRegistry.registerEntityMelting(EntityIllusionIllager.class, new FluidStack(TinkerFluids.emerald, 6));
     TinkerRegistry.registerEntityMelting(EntityBlaze.class, new FluidStack(TinkerFluids.blazingBlood, 20));
     TinkerRegistry.registerEntityMelting(EntityBlueSlime.class, new FluidStack(TinkerFluids.blueslime, 20));
+    TinkerRegistry.registerEntityMelting(EntityPurpleSlime.class, new FluidStack(TinkerFluids.purpleSlime, 20));
   }
 
   /**

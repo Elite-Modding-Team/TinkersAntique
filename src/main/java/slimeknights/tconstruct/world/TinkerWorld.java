@@ -37,6 +37,7 @@ import slimeknights.tconstruct.world.block.BlockSlimeSapling;
 import slimeknights.tconstruct.world.block.BlockSlimeVine;
 import slimeknights.tconstruct.world.block.BlockTallSlimeGrass;
 import slimeknights.tconstruct.world.entity.EntityBlueSlime;
+import slimeknights.tconstruct.world.entity.EntityPurpleSlime;
 import slimeknights.tconstruct.world.item.ItemBlockLeaves;
 import slimeknights.tconstruct.world.worldgen.MagmaSlimeIslandGenerator;
 import slimeknights.tconstruct.world.worldgen.SlimeIslandGenerator;
@@ -105,7 +106,9 @@ public class TinkerWorld extends TinkerPulse {
   @SubscribeEvent
   public void registerEntities(Register<EntityEntry> event) {
     EntityRegistry.registerModEntity(Util.getResource("blueslime"), EntityBlueSlime.class, Util.prefix("blueslime"), EntityIDs.BLUESLIME, TConstruct.instance, 64, 1, true, 0x47eff5, 0xacfff4);
+    EntityRegistry.registerModEntity(Util.getResource("purpleslime"), EntityPurpleSlime.class, Util.prefix("purpleslime"), EntityIDs.PURPLESLIME, TConstruct.instance, 64, 1, true, 0x6300b0, 0xd37cff);
     LootTableList.register(EntityBlueSlime.LOOT_TABLE);
+    LootTableList.register(EntityPurpleSlime.LOOT_TABLE);
     //EntitySpawnPlacementRegistry.setPlacementType(EntityBlueSlime.class, EntityLiving.SpawnPlacementType.IN_WATER);
   }
 

@@ -17,18 +17,18 @@ import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.world.TinkerWorld;
 
-public class EntityBlueSlime extends EntitySlime {
+public class EntityPurpleSlime extends EntitySlime {
 
-  public static final ResourceLocation LOOT_TABLE = Util.getResource("entities/blueslime");
+  public static final ResourceLocation LOOT_TABLE = Util.getResource("entities/purpleslime");
 
-  public EntityBlueSlime(World worldIn) {
+  public EntityPurpleSlime(World worldIn) {
     super(worldIn);
   }
 
   // we're using this instead of getDropItem because we need the metadata
   @Override
   public EntityItem dropItemWithOffset(@Nonnull Item itemIn, int size, float offsetY) {
-    ItemStack stack = TinkerCommons.matSlimeBallBlue.copy();
+    ItemStack stack = TinkerCommons.matSlimeBallPurple.copy();
     stack.setCount(size);
     return this.entityDropItem(stack, offsetY);
   }
@@ -41,12 +41,12 @@ public class EntityBlueSlime extends EntitySlime {
   @Nonnull
   @Override
   protected EntitySlime createInstance() {
-    return new EntityBlueSlime(this.getEntityWorld());
+    return new EntityPurpleSlime(this.getEntityWorld());
   }
 
   @Override
   public boolean getCanSpawnHere() {
-    if(this.getEntityWorld().getBlockState(this.getPosition()).getBlock() == TinkerFluids.blueslime.getBlock()) {
+    if(this.getEntityWorld().getBlockState(this.getPosition()).getBlock() == TinkerFluids.purpleSlime.getBlock()) {
       return true;
     }
     return this.getEntityWorld().getBlockState(this.getPosition().down()).getBlock() == TinkerWorld.slimeGrass;
@@ -89,7 +89,7 @@ public class EntityBlueSlime extends EntitySlime {
         double d0 = this.posX + (double) f2;
         double d1 = this.posZ + (double) f3;
         double d2 = this.getEntityBoundingBox().minY;
-        TinkerWorld.proxy.spawnSlimeParticle(this.getEntityWorld(), d0, d2, d1);
+        TinkerWorld.proxy.spawnPurpleSlimeParticle(this.getEntityWorld(), d0, d2, d1);
       }
     }
     return true;

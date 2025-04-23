@@ -103,6 +103,10 @@ public class CommonProxy {
   public void spawnSlimeParticle(World world, double x, double y, double z) {
 
   }
+  
+  public void spawnPurpleSlimeParticle(World world, double x, double y, double z) {
+
+  }
 
   public void registerFluidModels(Fluid fluid) {
 

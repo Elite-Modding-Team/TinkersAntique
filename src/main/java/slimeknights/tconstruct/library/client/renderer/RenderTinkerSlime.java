@@ -24,6 +24,7 @@ import slimeknights.tconstruct.library.client.RenderUtil;
 public class RenderTinkerSlime extends RenderSlime {
 
   public static final Factory FACTORY_BlueSlime = new Factory(0xff67f0f5);
+  public static final Factory FACTORY_PurpleSlime = new Factory(0xefd236ff);
 
   public static final ResourceLocation slimeTextures = Util.getResource("textures/entity/slime.png");
 

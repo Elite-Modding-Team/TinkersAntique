@@ -508,6 +508,7 @@ item.tconstruct.spaghetti.cold.tooltip=Well, that's better, but they still taste
 
 entity.ItemFrame.name=Item Frame
 entity.tconstruct.blueslime.name=Sky Slime
+entity.tconstruct.purpleslime.name=Squire Slime
 
 #################
 #    Liquids    #
