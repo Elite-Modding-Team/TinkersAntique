@@ -5,6 +5,7 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
@@ -49,6 +50,31 @@ public class EntityBlueSlime extends EntitySlime {
       return true;
     }
     return this.getEntityWorld().getBlockState(this.getPosition().down()).getBlock() == TinkerWorld.slimeGrass;
+  }
+  
+  @Override
+  protected void alterSquishAmount() {
+      this.squishAmount *= 0.8F;
+  }
+  
+  @Override
+  protected int getJumpDelay() {
+      return this.rand.nextInt(10) + 10;
+  }
+  
+  @Override
+  protected SoundEvent getFallSound(int heightIn) {
+      return null;
+  }
+
+  @Override
+  public void fall(float distance, float damageMultiplier) {
+  }
+  
+  @Override
+  protected void jump() {
+      this.motionY = 0.63D;
+      this.isAirBorne = true;
   }
 
   @Override
