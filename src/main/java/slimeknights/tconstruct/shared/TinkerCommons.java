@@ -503,8 +503,10 @@ public class TinkerCommons extends TinkerPulse {
     registerSmeltingRecipes();
     proxy.init();
 
-    GameRegistry.registerWorldGenerator(NetherOreGenerator.INSTANCE, 0);
-    if(Config.registerAllCommonMetals) {
+    if(Config.genCobalt || Config.genArdite) {
+      GameRegistry.registerWorldGenerator(NetherOreGenerator.INSTANCE, 0);
+    }
+    if(Config.registerAllCommonMetals && (Config.genCopper || Config.genTin || Config.genAluminum)) {
       GameRegistry.registerWorldGenerator(OverworldOreGenerator.INSTANCE, 0);
     }
 
