@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.shared.block;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,6 +26,7 @@ public class BlockMetal extends EnumBlock<BlockMetal.MetalTypes> {
     setHardness(5f);
     setHarvestLevel("pickaxe", -1); // we're generous. no harvest level required
     setCreativeTab(TinkerRegistry.tabGeneral);
+    setSoundType(SoundType.METAL);
   }
 
   @Override
