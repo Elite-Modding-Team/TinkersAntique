@@ -1,35 +1,67 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "transform": "forge:default-block",
-        "model": "cube_all"
-    },
-	"variants": {
-        "type": {
-            "cobalt": {
-                "textures": { "all": "tconstruct:blocks/block_cobalt" }
-            },
-            "ardite": {
-                "textures": { "all": "tconstruct:blocks/block_ardite" }
-            },
-            "manyullyn": {
-                "textures": { "all": "tconstruct:blocks/block_manyullyn" }
-            },
-            "knightslime": {
-                "textures": { "all": "tconstruct:blocks/block_knightslime" }
-            },
-            "pigiron": {
-                "textures": { "all": "tconstruct:blocks/block_pigiron" }
-            },
-            "alubrass": {
-                "textures": { "all": "tconstruct:blocks/block_alubrass" }
-            },
-            "silky_jewel": {
-                "textures": { "all": "tconstruct:blocks/block_silky_jewel" }
-            },
-            "alumite": {
-                "textures": { "all": "tconstruct:blocks/block_alumite" }
-            }
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "model": "cube_bottom_top"
+  },
+  "variants": {
+    "type": {
+      "cobalt": {
+        "textures": {
+          "top": "#side",
+          "bottom": "#side",
+          "side": "tconstruct:blocks/block_cobalt"
         }
+      },
+      "ardite": {
+        "textures": {
+          "top": "tconstruct:blocks/block_ardite_top",
+          "bottom": "#top",
+          "side": "tconstruct:blocks/block_ardite"
+        }
+      },
+      "manyullyn": {
+        "textures": {
+          "top": "#side",
+          "bottom": "#side",
+          "side": "tconstruct:blocks/block_manyullyn"
+        }
+      },
+      "knightslime": {
+        "textures": {
+          "top": "#side",
+          "bottom": "#side",
+          "side": "tconstruct:blocks/block_knightslime"
+        }
+      },
+      "pigiron": {
+        "textures": {
+          "top": "#side",
+          "bottom": "#side",
+          "side": "tconstruct:blocks/block_pigiron"
+        }
+      },
+      "alubrass": {
+        "textures": {
+          "top": "#side",
+          "bottom": "#side",
+          "side": "tconstruct:blocks/block_alubrass"
+        }
+      },
+      "silky_jewel": {
+        "textures": {
+          "top": "#side",
+          "bottom": "#side",
+          "side": "tconstruct:blocks/block_silky_jewel"
+        }
+      },
+      "alumite": {
+        "textures": {
+          "top": "#side",
+          "bottom": "#side",
+          "side": "tconstruct:blocks/block_alumite"
+        }
+      }
     }
+  }
 }
