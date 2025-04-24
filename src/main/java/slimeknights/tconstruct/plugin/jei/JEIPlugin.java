@@ -20,6 +20,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import slimeknights.tconstruct.TConstruct;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.gadgets.TinkerGadgets;
 import slimeknights.tconstruct.library.DryingRecipe;
 import slimeknights.tconstruct.library.MaterialIntegration;
@@ -110,7 +111,9 @@ public class JEIPlugin implements IModPlugin {
     // casts
     if(TConstruct.pulseManager.isPulseLoaded(TinkerSmeltery.PulseId)) {
       registry.registerSubtypeInterpreter(TinkerSmeltery.cast, patternInterpreter);
-      registry.registerSubtypeInterpreter(TinkerSmeltery.clayCast, patternInterpreter);
+      if(Config.claycasts) {
+        registry.registerSubtypeInterpreter(TinkerSmeltery.clayCast, patternInterpreter);
+      }
     }
   }
 

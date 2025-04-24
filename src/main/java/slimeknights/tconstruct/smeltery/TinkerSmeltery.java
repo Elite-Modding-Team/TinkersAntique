@@ -256,7 +256,9 @@ public class TinkerSmeltery extends TinkerPulse {
     castPlate = castCustom.addMeta(3, "plate", Material.VALUE_Ingot);
     castGear = castCustom.addMeta(4, "gear", Material.VALUE_Ingot * 4);
 
-    clayCast = registerItem(registry, new Cast(), "clay_cast");
+    if(Config.claycasts) {
+      clayCast = registerItem(registry, new Cast(), "clay_cast");
+    }
 
     if(TinkerRegistry.getShard() != null) {
       TinkerRegistry.addCastForItem(TinkerRegistry.getShard());
