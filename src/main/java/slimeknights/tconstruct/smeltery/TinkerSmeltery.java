@@ -9,6 +9,7 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.monster.*;
+import net.minecraft.entity.passive.EntitySkeletonHorse;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -536,6 +537,8 @@ public class TinkerSmeltery extends TinkerPulse {
     TinkerRegistry.registerEntityMeltingForAll(EntitySnowman.class, new FluidStack(FluidRegistry.WATER, 100));
     TinkerRegistry.registerEntityMeltingForAll(EntityVillager.class, new FluidStack(TinkerFluids.emerald, 6));
     TinkerRegistry.registerEntityMeltingForAll(AbstractIllager.class, new FluidStack(TinkerFluids.emerald, 6));
+    TinkerRegistry.registerEntityMeltingForAll(AbstractSkeleton.class, new FluidStack(TinkerFluids.milk, 20));
+    TinkerRegistry.registerEntityMeltingForAll(EntitySkeletonHorse.class, new FluidStack(TinkerFluids.milk, 20));
     TinkerRegistry.registerEntityMeltingForAll(EntityBlaze.class, new FluidStack(TinkerFluids.blazingBlood, 20));
     TinkerRegistry.registerEntityMeltingForAll(EntityBlueSlime.class, new FluidStack(TinkerFluids.blueslime, 20));
     TinkerRegistry.registerEntityMeltingForAll(EntityPurpleSlime.class, new FluidStack(TinkerFluids.purpleSlime, 20));
