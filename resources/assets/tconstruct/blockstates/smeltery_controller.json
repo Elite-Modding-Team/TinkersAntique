@@ -6,7 +6,8 @@
         "textures": {
             "particle": "#side",
             "top": "tconstruct:blocks/smeltery/seared_brick",
-            "side": "#top"
+            "side": "#top",
+            "south": "tconstruct:blocks/smeltery/drain_back"
         },
         "uvlock": true
     },
