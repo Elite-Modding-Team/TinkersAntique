@@ -7,6 +7,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import slimeknights.tconstruct.world.entity.EntityBlueSlime;
+import slimeknights.tconstruct.world.entity.EntityPurpleSlime;
 import slimeknights.tconstruct.world.worldgen.MagmaSlimeIslandGenerator;
 import slimeknights.tconstruct.world.worldgen.SlimeIslandGenerator;
 
@@ -15,6 +16,7 @@ public class WorldEvents {
   // Custom slime spawning on slime islands
   Biome.SpawnListEntry magmaSlimeSpawn = new Biome.SpawnListEntry(EntityMagmaCube.class, 150, 4, 6);
   Biome.SpawnListEntry blueSlimeSpawn = new Biome.SpawnListEntry(EntityBlueSlime.class, 15, 2, 4);
+  Biome.SpawnListEntry purpleSlimeSpawn = new Biome.SpawnListEntry(EntityPurpleSlime.class, 15, 2, 4);
 
   @SubscribeEvent
   public void extraSlimeSpawn(WorldEvent.PotentialSpawns event) {
@@ -27,9 +29,10 @@ public class WorldEvents {
       }
       // inside a slime island?
       if(SlimeIslandGenerator.INSTANCE.isSlimeIslandAt(event.getWorld(), event.getPos().down(3))) {
-        // spawn blue slime, most regular mobs have weight 10
+        // spawn slimes, most regular mobs have weight 10
         event.getList().clear();
         event.getList().add(blueSlimeSpawn);
+        event.getList().add(purpleSlimeSpawn);
       }
     }
   }

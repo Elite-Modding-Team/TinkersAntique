@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.world.entity;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.item.Item;
@@ -16,6 +17,7 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.world.TinkerWorld;
+import slimeknights.tconstruct.world.block.BlockSlimeGrass;
 
 public class EntityBlueSlime extends EntitySlime {
 
@@ -46,10 +48,12 @@ public class EntityBlueSlime extends EntitySlime {
 
   @Override
   public boolean getCanSpawnHere() {
-    if(this.getEntityWorld().getBlockState(this.getPosition()).getBlock() == TinkerFluids.blueslime.getBlock()) {
+    IBlockState state = this.getEntityWorld().getBlockState(this.getPosition());
+    IBlockState stateDown = this.getEntityWorld().getBlockState(this.getPosition().down());
+    if(state.getBlock() == TinkerFluids.blueslime.getBlock()) {
       return true;
     }
-    return this.getEntityWorld().getBlockState(this.getPosition().down()).getBlock() == TinkerWorld.slimeGrass;
+    return stateDown.getBlock() instanceof BlockSlimeGrass && stateDown.getValue(BlockSlimeGrass.TYPE) != BlockSlimeGrass.DirtType.PURPLE;
   }
   
   @Override

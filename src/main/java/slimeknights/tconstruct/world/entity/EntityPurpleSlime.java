@@ -1,11 +1,11 @@
 package slimeknights.tconstruct.world.entity;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
@@ -16,8 +16,9 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.world.TinkerWorld;
+import slimeknights.tconstruct.world.block.BlockSlimeGrass;
 
-public class EntityPurpleSlime extends EntitySlime {
+public class EntityPurpleSlime extends EntityBlueSlime {
 
   public static final ResourceLocation LOOT_TABLE = Util.getResource("entities/purpleslime");
 
@@ -46,35 +47,12 @@ public class EntityPurpleSlime extends EntitySlime {
 
   @Override
   public boolean getCanSpawnHere() {
-    if(this.getEntityWorld().getBlockState(this.getPosition()).getBlock() == TinkerFluids.purpleSlime.getBlock()) {
+    IBlockState state = this.getEntityWorld().getBlockState(this.getPosition());
+    IBlockState stateDown = this.getEntityWorld().getBlockState(this.getPosition().down());
+    if(state.getBlock() == TinkerFluids.purpleSlime.getBlock()) {
       return true;
     }
-    return this.getEntityWorld().getBlockState(this.getPosition().down()).getBlock() == TinkerWorld.slimeGrass;
-  }
-  
-  @Override
-  protected void alterSquishAmount() {
-      this.squishAmount *= 0.8F;
-  }
-  
-  @Override
-  protected int getJumpDelay() {
-      return this.rand.nextInt(10) + 10;
-  }
-  
-  @Override
-  protected SoundEvent getFallSound(int heightIn) {
-      return null;
-  }
-
-  @Override
-  public void fall(float distance, float damageMultiplier) {
-  }
-  
-  @Override
-  protected void jump() {
-      this.motionY = 0.63D;
-      this.isAirBorne = true;
+    return stateDown.getBlock() instanceof BlockSlimeGrass && stateDown.getValue(BlockSlimeGrass.TYPE) == BlockSlimeGrass.DirtType.PURPLE;
   }
 
   @Override
