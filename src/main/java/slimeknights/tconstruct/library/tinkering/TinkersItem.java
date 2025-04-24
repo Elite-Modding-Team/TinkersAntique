@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 
 import gnu.trove.set.hash.THashSet;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -16,7 +17,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -443,32 +443,34 @@ public abstract class TinkersItem extends Item implements ITinkerable, IModifyab
 
   @Override
   @SideOnly(Side.CLIENT)
-  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-    boolean shift = Util.isShiftKeyDown();
-    boolean ctrl = Util.isCtrlKeyDown();
-    // modifiers
-    if(!shift && !ctrl) {
-      getTooltip(stack, tooltip);
+  public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    getTooltip(stack, tooltip);
 
+    if(Config.extraTooltips) {
       tooltip.add("");
-      // info tooltip for detailed and componend info
-      tooltip.add(Util.translate("tooltip.tool.holdShift"));
-      tooltip.add(Util.translate("tooltip.tool.holdCtrl"));
+      boolean shift = Util.isShiftKeyDown();
+      boolean ctrl = Util.isCtrlKeyDown();
+      // modifiers
+      if(!shift && !ctrl) {
+        // info tooltip for detailed and componend info
+        tooltip.add(Util.translate("tooltip.tool.holdShift"));
+        tooltip.add(Util.translate("tooltip.tool.holdCtrl"));
 
-      if(worldIn != null) {
-        tooltip.add(TextFormatting.BLUE +
-                    I18n.translateToLocalFormatted("attribute.modifier.plus.0",
-                                                   Util.df.format(ToolHelper.getActualDamage(stack, Minecraft.getMinecraft().player)),
-                                                   I18n.translateToLocal("attribute.name.generic.attackDamage")));
+        if(world != null) {
+          tooltip.add(TextFormatting.BLUE +
+                  I18n.format("attribute.modifier.plus.0",
+                          Util.df.format(ToolHelper.getActualDamage(stack, Minecraft.getMinecraft().player)),
+                          I18n.format("attribute.name.generic.attackDamage")));
+        }
       }
-    }
-    // detailed data
-    else if(Config.extraTooltips && shift) {
-      getTooltipDetailed(stack, tooltip);
-    }
-    // component data
-    else if(Config.extraTooltips && ctrl) {
-      getTooltipComponents(stack, tooltip);
+      // detailed data
+      else if(shift) {
+        getTooltipDetailed(stack, tooltip);
+      }
+      // component data
+      else if(ctrl) {
+        getTooltipComponents(stack, tooltip);
+      }
     }
   }
 

@@ -77,7 +77,7 @@ public class ToolPart extends MaterialItem implements IToolPart {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+  public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
     Material material = getMaterial(stack);
 
     // Material traits/info
@@ -97,9 +97,8 @@ public class ToolPart extends MaterialItem implements IToolPart {
       else {
         tooltip.addAll(getTooltipStatsInfo(material));
       }
+      tooltip.addAll(getAddedByInfo(material));
     }
-
-    tooltip.addAll(getAddedByInfo(material));
   }
 
   public List<String> getTooltipTraitInfo(Material material) {
