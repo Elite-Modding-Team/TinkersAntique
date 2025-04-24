@@ -50,7 +50,7 @@ public final class Config {
   public static boolean drainGaseousFluids = true;
   public static int maxSmelteryItemRenders = -1;
   public static int netherOresMiningLevel = 4;
-  public static boolean deconstructTools = false;
+  public static boolean deconstructTools = true;
   public static int heatItemsTickrateSmeltery = 4;
   public static int heatItemsTickrateSearedFurnace = 4;
   public static int liquidTransferRate = 6;
