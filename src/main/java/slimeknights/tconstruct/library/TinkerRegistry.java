@@ -21,6 +21,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.logging.log4j.Logger;
@@ -735,6 +737,16 @@ public final class TinkerRegistry {
   /** Returns all registered smeltery fuels */
   public static Collection<FluidStack> getSmelteryFuels() {
     return ImmutableSet.copyOf(smelteryFuels.keySet());
+  }
+
+  /** Register all entities that extend the given class to melt into the specified fluidstack */
+  public static void registerEntityMeltingForAll(Class<? extends Entity> clazz, FluidStack liquid) {
+    for (EntityEntry entry : ForgeRegistries.ENTITIES) {
+      Class<? extends Entity> entityClass = entry.getEntityClass();
+      if (clazz.isAssignableFrom(entityClass)) {
+        registerEntityMelting(entityClass, liquid);
+      }
+    }
   }
 
   /** Register an entity to melt into the given fluidstack. The fluidstack is returned for 1 heart damage */
