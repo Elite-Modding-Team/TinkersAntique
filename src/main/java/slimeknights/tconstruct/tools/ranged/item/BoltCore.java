@@ -116,9 +116,8 @@ public class BoltCore extends ToolPart {
         tooltip.addAll(getTooltipStatsInfo(material));
         tooltip.addAll(getTooltipStatsInfo(material2));
       }
+      tooltip.addAll(getAddedByInfo(material2));
     }
-
-    tooltip.addAll(getAddedByInfo(material2));
   }
 
   @Nonnull
