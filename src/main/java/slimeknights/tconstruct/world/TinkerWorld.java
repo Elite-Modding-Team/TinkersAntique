@@ -41,6 +41,7 @@ import slimeknights.tconstruct.world.entity.EntityPurpleSlime;
 import slimeknights.tconstruct.world.item.ItemBlockLeaves;
 import slimeknights.tconstruct.world.worldgen.MagmaSlimeIslandGenerator;
 import slimeknights.tconstruct.world.worldgen.SlimeIslandGenerator;
+import slimeknights.tconstruct.world.worldgen.SlimePoolGenerator;
 
 @Pulse(id = TinkerWorld.PulseId, description = "Everything that's found in the world and worldgen")
 public class TinkerWorld extends TinkerPulse {
@@ -134,6 +135,7 @@ public class TinkerWorld extends TinkerPulse {
   public void postInit(FMLPostInitializationEvent event) {
     GameRegistry.registerWorldGenerator(SlimeIslandGenerator.INSTANCE, 25);
     GameRegistry.registerWorldGenerator(MagmaSlimeIslandGenerator.INSTANCE, 25);
+    GameRegistry.registerWorldGenerator(SlimePoolGenerator.INSTANCE, 25);
 
     MinecraftForge.EVENT_BUS.register(new WorldEvents());
 

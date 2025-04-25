@@ -87,6 +87,13 @@ public final class Config {
   public static int[] slimeIslandBlacklist = new int[]{-1, 1};
   public static boolean slimeIslandDimensionsIsBlacklist = true;
   public static boolean slimeIslandsOnlyGenerateInSurfaceWorlds = true;
+  public static boolean genSlimePools = false;
+  public static int slimePoolRate = 30;
+  public static int slimePoolHeightMax = 64;
+  public static int[] slimePoolDimensions = new int[]{-1, 1};
+  public static boolean slimePoolDimensionsIsBlacklist = true;
+  public static boolean slimePoolsOnlyGenerateInSurfaceWorlds = true;
+
   public static boolean genCobalt = true;
   public static int cobaltRate = 20; // max. cobalt per chunk
   public static boolean genArdite = true;
@@ -335,6 +342,31 @@ public final class Config {
       prop = configFile.get(cat, "slimeIslandsOnlyGenerateInSurfaceWorlds", slimeIslandsOnlyGenerateInSurfaceWorlds);
       prop.setComment("If false, slime islands only generate in dimensions which are of type surface. This means they won't generate in modded cave dimensions like the Deep Dark. Note that the name of this property is inverted: It must be set to false to prevent slime islands from generating in non-surface dimensions.");
       slimeIslandsOnlyGenerateInSurfaceWorlds = prop.getBoolean();
+
+      // Slime Pools
+      prop = configFile.get(cat, "generateSlimePools", genSlimePools);
+      prop.setComment("If true, slime pools will generate.");
+      genSlimePools = prop.getBoolean();
+
+      prop = configFile.get(cat, "slimePoolRate", slimePoolRate);
+      prop.setComment("One in every X chunks will contain a slime pool.");
+      slimePoolRate = prop.getInt();
+
+      prop = configFile.get(cat, "slimePoolHeightMax", slimePoolHeightMax);
+      prop.setComment("Maximum Y level for slime pool generation.");
+      slimePoolHeightMax = prop.getInt();
+
+      prop = configFile.get(cat, "slimePoolDimensions", slimePoolDimensions);
+      prop.setComment("List of dimensions in which to enable or disable generation of slime pools.");
+      slimePoolDimensions = prop.getIntList();
+
+      prop = configFile.get(cat, "slimePoolDimensionsIsBlacklist", slimePoolDimensionsIsBlacklist);
+      prop.setComment("Whether the list of slime pool dimensions behaves as a blacklist or a whitelist.");
+      slimePoolDimensionsIsBlacklist = prop.getBoolean();
+
+      prop = configFile.get(cat, "slimePoolsOnlyGenerateInSurfaceWorlds", slimePoolsOnlyGenerateInSurfaceWorlds);
+      prop.setComment("If false, slime pools only generate in dimensions which are of type surface. This means they won't generate in modded cave dimensions like the Deep Dark. Note that the name of this property is inverted: It must be set to false to prevent slime pools from generating in non-surface dimensions.");
+      slimePoolsOnlyGenerateInSurfaceWorlds = prop.getBoolean();
 
       // Ores
       prop = configFile.get(cat, "genCobalt", genCobalt);
