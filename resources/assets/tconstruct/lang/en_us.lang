@@ -531,6 +531,7 @@ fluid.tconstruct.glass.name=Molten Glass
 fluid.tconstruct.blood.name=Blood
 fluid.tconstruct.blazing_blood.name=Blazin' Blood
 fluid.tconstruct.milk.name=Milk
+fluid.tconstruct.greenslime.name=Liquid Green Slime
 fluid.tconstruct.blueslime.name=Liquid Blue Slime
 fluid.tconstruct.purpleslime.name=Liquid Purple Slime
 fluid.tconstruct.brass.name=Molten Brass
@@ -595,7 +596,7 @@ material.alumite.name=Alumite
 
 material.string.name=String
 material.vine.name=Vines
-material.slimevine_blue.name=Slimevine
+material.slimevine_blue.name=Blue Slimevine
 material.slimevine_orange.name=Magma Slimevine
 material.slimevine_purple.name=Purple Slimevine
 

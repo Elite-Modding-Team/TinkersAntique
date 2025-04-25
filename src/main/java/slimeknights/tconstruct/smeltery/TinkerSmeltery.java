@@ -383,6 +383,20 @@ public class TinkerSmeltery extends TinkerPulse {
       TinkerRegistry.registerTableCasting(TinkerCommons.matSlimeBallBlood.copy(), ItemStack.EMPTY, TinkerFluids.blood, 160);
     }
 
+    // green slime
+    TinkerRegistry.registerMelting(Items.SLIME_BALL, TinkerFluids.greenSlime, Material.VALUE_SlimeBall);
+    ItemStack slimeblock_green = new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.GREEN.meta);
+    TinkerRegistry.registerMelting(slimeblock_green, TinkerFluids.greenSlime, Material.VALUE_SlimeBall * 4);
+    slimeblock_green = new ItemStack(Blocks.SLIME_BLOCK);
+    TinkerRegistry.registerMelting(slimeblock_green, TinkerFluids.greenSlime, Material.VALUE_SlimeBall * 9);
+    
+    // blue slime
+    TinkerRegistry.registerMelting(TinkerCommons.matSlimeBallBlue, TinkerFluids.blueslime, Material.VALUE_SlimeBall);
+    ItemStack slimeblock_blue = new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.BLUE.meta);
+    TinkerRegistry.registerMelting(slimeblock_blue, TinkerFluids.blueslime, Material.VALUE_SlimeBall * 4);
+    slimeblock_blue = new ItemStack(TinkerCommons.blockSlime, 1, BlockSlime.SlimeType.BLUE.meta);
+    TinkerRegistry.registerMelting(slimeblock_blue, TinkerFluids.blueslime, Material.VALUE_SlimeBall * 9);
+    
     // purple slime
     TinkerRegistry.registerMelting(TinkerCommons.matSlimeBallPurple, TinkerFluids.purpleSlime, Material.VALUE_SlimeBall);
     ItemStack slimeblock = new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.PURPLE.meta);
@@ -542,6 +556,7 @@ public class TinkerSmeltery extends TinkerPulse {
     TinkerRegistry.registerEntityMeltingForAll(AbstractSkeleton.class, new FluidStack(TinkerFluids.milk, 20));
     TinkerRegistry.registerEntityMeltingForAll(EntitySkeletonHorse.class, new FluidStack(TinkerFluids.milk, 20));
     TinkerRegistry.registerEntityMeltingForAll(EntityBlaze.class, new FluidStack(TinkerFluids.blazingBlood, 20));
+    TinkerRegistry.registerEntityMeltingForAll(EntitySlime.class, new FluidStack(TinkerFluids.greenSlime, 20));
     TinkerRegistry.registerEntityMeltingForAll(EntityBlueSlime.class, new FluidStack(TinkerFluids.blueslime, 20));
     TinkerRegistry.registerEntityMeltingForAll(EntityPurpleSlime.class, new FluidStack(TinkerFluids.purpleSlime, 20));
   }

@@ -133,7 +133,7 @@ public class SlimePoolGenerator extends WorldGenerator implements IWorldGenerato
                             return false;
                         }
 
-                        if (yOffset < 4 && !material.isSolid() && world.getBlockState(pos).getBlock() != TinkerFluids.blueslime.getBlock()) {
+                        if (yOffset < 4 && !material.isSolid() && world.getBlockState(pos).getBlock() != TinkerFluids.greenSlime.getBlock()) {
                             return false;
                         }
                     }
@@ -149,7 +149,7 @@ public class SlimePoolGenerator extends WorldGenerator implements IWorldGenerato
                         if (yOffset < 4) {
                             fluidPositions.add(pos.toImmutable());
                         }
-                        world.setBlockState(pos, yOffset >= 4 ? Blocks.AIR.getDefaultState() : TinkerFluids.blueslime.getBlock().getDefaultState(), 2);
+                        world.setBlockState(pos, yOffset >= 4 ? Blocks.AIR.getDefaultState() : TinkerFluids.greenSlime.getBlock().getDefaultState(), 2);
                     }
                 }
             }
@@ -178,7 +178,7 @@ public class SlimePoolGenerator extends WorldGenerator implements IWorldGenerato
             }
         }
 
-        if (TinkerFluids.blueslime.getBlock().getDefaultState().getMaterial() == Material.WATER) {
+        if (TinkerFluids.greenSlime.getBlock().getDefaultState().getMaterial() == Material.WATER) {
             for (int xOffset = 0; xOffset < 16; ++xOffset) {
                 for (int zOffset = 0; zOffset < 16; ++zOffset) {
                     for (int yOffset = 0; yOffset < 8; ++yOffset) {

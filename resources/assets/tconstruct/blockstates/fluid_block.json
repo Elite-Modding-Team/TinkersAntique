@@ -49,6 +49,9 @@
         "milk": [{
             "custom": { "fluid": "milk" }
         }],
+        "greenslime": [{
+            "custom": { "fluid": "greenslime" }
+        }],
         "blueslime": [{
             "custom": { "fluid": "blueslime" }
         }],

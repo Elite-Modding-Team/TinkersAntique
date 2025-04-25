@@ -60,6 +60,7 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidColored blood;
   public static FluidNonColored blazingBlood;
   public static FluidColored milk;
+  public static FluidColored greenSlime;
   public static FluidColored blueslime;
   public static FluidColored purpleSlime;
 
@@ -211,15 +212,19 @@ public class TinkerFluids extends TinkerPulse {
     milk.setTemperature(320);
     registerClassicBlock(registry, milk);
 
-    if(isWorldLoaded()) {
-      blueslime = fluidSlime("blueslime", 0xef67f0f5);
-      blueslime.setTemperature(310);
-      blueslime.setViscosity(1500);
-      blueslime.setDensity(1500);
-      registerBlock(registry, new BlockLiquidSlime(blueslime, net.minecraft.block.material.Material.WATER), blueslime.getName());
-    }
-
     if(isWorldLoaded() || isSmelteryLoaded()) {
+      greenSlime = fluidSlime("greenslime", 0x82c873);
+      greenSlime.setTemperature(370);
+      greenSlime.setViscosity(1600);
+      greenSlime.setDensity(1600);
+      registerBlock(registry, new BlockLiquidSlime(greenSlime, net.minecraft.block.material.Material.WATER), greenSlime.getName());
+      
+      blueslime = fluidSlime("blueslime", 0xef67f0f5);
+      blueslime.setTemperature(370);
+      blueslime.setViscosity(1600);
+      blueslime.setDensity(1600);
+      registerBlock(registry, new BlockLiquidSlime(blueslime, net.minecraft.block.material.Material.WATER), blueslime.getName());
+      
       purpleSlime = fluidSlime("purpleslime", 0xefd236ff);
       purpleSlime.setTemperature(370);
       purpleSlime.setViscosity(1600);
@@ -254,11 +259,9 @@ public class TinkerFluids extends TinkerPulse {
       FluidRegistry.addBucketForFluid(blazingBlood);
     }
 
-    if(isWorldLoaded()) {
-      FluidRegistry.addBucketForFluid(blueslime);
-    }
-
     if(isWorldLoaded() || isSmelteryLoaded()) {
+      FluidRegistry.addBucketForFluid(greenSlime);
+      FluidRegistry.addBucketForFluid(blueslime);
       FluidRegistry.addBucketForFluid(purpleSlime);
     }
   }
