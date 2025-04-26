@@ -10,7 +10,7 @@ public class TraitRaging extends AbstractTraitLeveled {
     protected final float leveledDamage = 4f;
 
     public TraitRaging() {
-        super("raging", 0xc70000, 3, 3);
+        super("raging", 0xc70000, 3, 1);
     }
 
     @Override

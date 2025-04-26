@@ -291,7 +291,6 @@ public final class TinkerMaterials {
     bloodbone.setCraftable(true);
     bloodbone.addItemIngot("boneBloodied");
     bloodbone.setRepresentativeItem(TinkerCommons.matBloodyBone);
-    bloodbone.addTrait(duritos);
     bloodbone.addTrait(raging);
 
     // Common Metals
