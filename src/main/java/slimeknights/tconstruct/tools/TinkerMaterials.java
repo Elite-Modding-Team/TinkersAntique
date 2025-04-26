@@ -142,8 +142,11 @@ public final class TinkerMaterials {
   public static final Material ardite     = mat("ardite", 0xd14210);
   public static final Material cobalt     = mat("cobalt", 0x2882d4);
   public static final Material manyullyn  = mat("manyullyn", 0xa15cf8);
+  
+  // Special Bone Materials
+  public static final Material bloodbone  = mat("bloodbone", 0xa36bb4);
 
-  // mod integration
+  // Common Metals + Alloys
   public static final Material copper     = mat("copper", 0xed9f07);
   public static final Material bronze     = mat("bronze", 0xe3bd68);
   public static final Material lead       = mat("lead", 0x4d4968);
@@ -332,8 +335,14 @@ public final class TinkerMaterials {
     manyullyn.addCommonItems("Manyullyn");
     manyullyn.addTrait(insatiable, HEAD);
     manyullyn.addTrait(coldblooded);
+    
+    // Special Bone Materials
+    bloodbone.setCraftable(true);
+    bloodbone.addItemIngot("boneBloodied");
+    bloodbone.setRepresentativeItem(TinkerCommons.matBloodyBone);
+    bloodbone.addTrait(duritos);
 
-    // mod integration
+    // Common Metals
     copper.addCommonItems("Copper");
     copper.addTrait(established);
 
@@ -501,6 +510,13 @@ public final class TinkerMaterials {
                                     new HandleMaterialStats(1.0f, -200),
                                     new ExtraMaterialStats(150));
 
+
+    // Special Bone Materials
+    TinkerRegistry.addMaterialStats(bloodbone,
+            						new HeadMaterialStats(200, 5.09f, 2.50f, IRON),
+            						new HandleMaterialStats(1.10f, 50),
+            						new ExtraMaterialStats(65));
+
     // Metals
     TinkerRegistry.addMaterialStats(iron,
                                     new HeadMaterialStats(204, 6.00f, 4.00f, DIAMOND),
@@ -511,7 +527,7 @@ public final class TinkerMaterials {
                                     new HandleMaterialStats(1.20f, 0),
                                     new ExtraMaterialStats(170));
 
-    // Mod Integration
+    // Common Metals
     TinkerRegistry.addMaterialStats(copper,
                                     new HeadMaterialStats(210, 5.30f, 3.00f, IRON),
                                     new HandleMaterialStats(1.05f, 30),
@@ -586,8 +602,11 @@ public final class TinkerMaterials {
     // Metals
     TinkerRegistry.addMaterialStats(iron, new BowMaterialStats(0.5f, 1.5f, 7f));
     TinkerRegistry.addMaterialStats(pigiron, new BowMaterialStats(0.6f, 1.4f, 7f));
+    
+    // Special Bone Materials
+    TinkerRegistry.addMaterialStats(bloodbone, new BowMaterialStats(0.95f, 1.15f, 0));
 
-    // Mod Integration
+    // Common Metals
     TinkerRegistry.addMaterialStats(copper, new BowMaterialStats(0.6f, 1.45f, 5f));
     TinkerRegistry.addMaterialStats(bronze, new BowMaterialStats(0.55f, 1.5f, 6f));
     TinkerRegistry.addMaterialStats(lead, new BowMaterialStats(0.4f, 1.3f, 3f));

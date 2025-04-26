@@ -48,6 +48,7 @@ import static slimeknights.tconstruct.shared.TinkerCommons.ingotManyullyn;
 import static slimeknights.tconstruct.shared.TinkerCommons.ingotPigIron;
 import static slimeknights.tconstruct.shared.TinkerCommons.ingotSteel;
 import static slimeknights.tconstruct.shared.TinkerCommons.ingotTin;
+import static slimeknights.tconstruct.shared.TinkerCommons.matBloodyBone;
 import static slimeknights.tconstruct.shared.TinkerCommons.matNecroticBone;
 import static slimeknights.tconstruct.shared.TinkerCommons.matSlimeBallBlood;
 import static slimeknights.tconstruct.shared.TinkerCommons.matSlimeBallBlue;
@@ -240,6 +241,7 @@ public class TinkerOredict {
     // TinkerTools Pulse
     oredict(toolTables, BlockToolTable.TableTypes.CraftingStation.meta, "workbench");
     oredict(matNecroticBone, "boneWithered");
+    oredict(matBloodyBone, "boneBloodied");
 
     oredict(pickHead, "partPickHead");
     oredict(binding, "partBinding");
