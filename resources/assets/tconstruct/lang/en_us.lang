@@ -593,6 +593,7 @@ material.electrum.name=Electrum
 material.steel.name=Steel
 material.alubrass.name=Aluminum Brass
 material.alumite.name=Alumite
+material.bloodbone.name=Bloodbone
 
 material.string.name=String
 material.vine.name=Vines
@@ -732,6 +733,8 @@ modifier.poisonous.name=Poisonous
 modifier.poisonous.desc=§oNot exactly lead-free!§r\nPoisons enemies on hit.
 modifier.prickly.name=Prickly
 modifier.prickly.desc=§oOuch!§r\nNobody is safe from those thorns, they always hurt.
+modifier.raging.name=Raging
+modifier.raging.desc=§oA desperate solution!§r\nYour tool does more damage the lower your health is.
 modifier.sharp.name=Sharp
 modifier.sharp.desc=§oCan even cut words!§r\nHitting an enemy leaves them bleeding for a short time.
 modifier.shocking.name=Shocking

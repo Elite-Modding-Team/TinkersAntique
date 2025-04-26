@@ -51,56 +51,7 @@ import static slimeknights.tconstruct.library.utils.HarvestLevels.DIAMOND;
 import static slimeknights.tconstruct.library.utils.HarvestLevels.IRON;
 import static slimeknights.tconstruct.library.utils.HarvestLevels.OBSIDIAN;
 import static slimeknights.tconstruct.library.utils.HarvestLevels.STONE;
-import static slimeknights.tconstruct.tools.TinkerTraits.alien;
-import static slimeknights.tconstruct.tools.TinkerTraits.aquadynamic;
-import static slimeknights.tconstruct.tools.TinkerTraits.aridiculous;
-import static slimeknights.tconstruct.tools.TinkerTraits.autosmelt;
-import static slimeknights.tconstruct.tools.TinkerTraits.baconlicious;
-import static slimeknights.tconstruct.tools.TinkerTraits.breakable;
-import static slimeknights.tconstruct.tools.TinkerTraits.cheap;
-import static slimeknights.tconstruct.tools.TinkerTraits.cheapskate;
-import static slimeknights.tconstruct.tools.TinkerTraits.coldblooded;
-import static slimeknights.tconstruct.tools.TinkerTraits.crude;
-import static slimeknights.tconstruct.tools.TinkerTraits.crude2;
-import static slimeknights.tconstruct.tools.TinkerTraits.crumbling;
-import static slimeknights.tconstruct.tools.TinkerTraits.dense;
-import static slimeknights.tconstruct.tools.TinkerTraits.depthdigger;
-import static slimeknights.tconstruct.tools.TinkerTraits.duritos;
-import static slimeknights.tconstruct.tools.TinkerTraits.ecological;
-import static slimeknights.tconstruct.tools.TinkerTraits.enderference;
-import static slimeknights.tconstruct.tools.TinkerTraits.endspeed;
-import static slimeknights.tconstruct.tools.TinkerTraits.established;
-import static slimeknights.tconstruct.tools.TinkerTraits.flammable;
-import static slimeknights.tconstruct.tools.TinkerTraits.fractured;
-import static slimeknights.tconstruct.tools.TinkerTraits.freezing;
-import static slimeknights.tconstruct.tools.TinkerTraits.heavy;
-import static slimeknights.tconstruct.tools.TinkerTraits.hellish;
-import static slimeknights.tconstruct.tools.TinkerTraits.holy;
-import static slimeknights.tconstruct.tools.TinkerTraits.hovering;
-import static slimeknights.tconstruct.tools.TinkerTraits.insatiable;
-import static slimeknights.tconstruct.tools.TinkerTraits.jagged;
-import static slimeknights.tconstruct.tools.TinkerTraits.lightweight;
-import static slimeknights.tconstruct.tools.TinkerTraits.magnetic;
-import static slimeknights.tconstruct.tools.TinkerTraits.magnetic2;
-import static slimeknights.tconstruct.tools.TinkerTraits.momentum;
-import static slimeknights.tconstruct.tools.TinkerTraits.petramor;
-import static slimeknights.tconstruct.tools.TinkerTraits.poisonous;
-import static slimeknights.tconstruct.tools.TinkerTraits.prickly;
-import static slimeknights.tconstruct.tools.TinkerTraits.sharp;
-import static slimeknights.tconstruct.tools.TinkerTraits.shocking;
-import static slimeknights.tconstruct.tools.TinkerTraits.slimeyBlue;
-import static slimeknights.tconstruct.tools.TinkerTraits.slimeyGreen;
-import static slimeknights.tconstruct.tools.TinkerTraits.spiky;
-import static slimeknights.tconstruct.tools.TinkerTraits.splintering;
-import static slimeknights.tconstruct.tools.TinkerTraits.splitting;
-import static slimeknights.tconstruct.tools.TinkerTraits.squeaky;
-import static slimeknights.tconstruct.tools.TinkerTraits.stiff;
-import static slimeknights.tconstruct.tools.TinkerTraits.stonebound;
-import static slimeknights.tconstruct.tools.TinkerTraits.superheat;
-import static slimeknights.tconstruct.tools.TinkerTraits.tasty;
-import static slimeknights.tconstruct.tools.TinkerTraits.unnatural;
-import static slimeknights.tconstruct.tools.TinkerTraits.writable;
-import static slimeknights.tconstruct.tools.TinkerTraits.writable2;
+import static slimeknights.tconstruct.tools.TinkerTraits.*;
 
 /**
  * All the tool materials tcon supports.
@@ -144,7 +95,7 @@ public final class TinkerMaterials {
   public static final Material manyullyn  = mat("manyullyn", 0xa15cf8);
   
   // Special Bone Materials
-  public static final Material bloodbone  = mat("bloodbone", 0xa36bb4);
+  public static final Material bloodbone  = mat("bloodbone", 0xc70000);
 
   // Common Metals + Alloys
   public static final Material copper     = mat("copper", 0xed9f07);
@@ -341,6 +292,7 @@ public final class TinkerMaterials {
     bloodbone.addItemIngot("boneBloodied");
     bloodbone.setRepresentativeItem(TinkerCommons.matBloodyBone);
     bloodbone.addTrait(duritos);
+    bloodbone.addTrait(raging);
 
     // Common Metals
     copper.addCommonItems("Copper");
