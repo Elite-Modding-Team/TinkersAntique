@@ -6,7 +6,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import slimeknights.tconstruct.common.config.Config;
+import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.tinkering.TinkersItem;
+import slimeknights.tconstruct.library.utils.TinkerUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
 import javax.annotation.Nonnull;
@@ -27,7 +29,8 @@ public class SlotToolStationOut extends Slot {
             && !stack.isEmpty() && stack.getItem() instanceof TinkersItem // is tool
             && !stack.isItemDamaged() && !ToolHelper.isBroken(stack) // undamaged
             && parent.getBuildableTools().contains(stack.getItem()) // can be built in the current table
-            && parent.getInputSlotContents().isEmpty(); // input slots are empty
+            && parent.getInputSlotContents().isEmpty() // input slots are empty
+            && ModifierNBT.readTag(TinkerUtil.getModifierTag(stack, "tconevo.artifact")).level != 1; // is not a sealed artifact
   }
 
   @Override
