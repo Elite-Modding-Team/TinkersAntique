@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.debug;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.FMLLog;
@@ -48,14 +49,14 @@ public class TextureDump {
 
 
   public static void saveGlTexture(String name, int textureId, int mipmapLevels) {
-    GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
+    GlStateManager.bindTexture(textureId);
 
-    GL11.glPixelStorei(GL11.GL_PACK_ALIGNMENT, 1);
-    GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
+    GlStateManager.glPixelStorei(GL11.GL_PACK_ALIGNMENT, 1);
+    GlStateManager.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
 
     for(int level = 0; level <= mipmapLevels; level++) {
-      int width = GL11.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_WIDTH);
-      int height = GL11.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_HEIGHT);
+      int width = GlStateManager.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_WIDTH);
+      int height = GlStateManager.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_HEIGHT);
       int size = width * height;
 
       BufferedImage bufferedimage = new BufferedImage(width, height, 2);
@@ -64,7 +65,7 @@ public class TextureDump {
       IntBuffer buffer = BufferUtils.createIntBuffer(size);
       int[] data = new int[size];
 
-      GL11.glGetTexImage(GL11.GL_TEXTURE_2D, level, GL12.GL_BGRA, GL12.GL_UNSIGNED_INT_8_8_8_8_REV, buffer);
+      GlStateManager.glGetTexImage(GL11.GL_TEXTURE_2D, level, GL12.GL_BGRA, GL12.GL_UNSIGNED_INT_8_8_8_8_REV, buffer);
       buffer.get(data);
       bufferedimage.setRGB(0, 0, width, height, data, 0, width);
 

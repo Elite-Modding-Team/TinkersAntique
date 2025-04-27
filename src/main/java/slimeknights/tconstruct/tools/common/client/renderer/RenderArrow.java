@@ -1,8 +1,7 @@
 package slimeknights.tconstruct.tools.common.client.renderer;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
-
-import org.lwjgl.opengl.GL11;
 
 import slimeknights.tconstruct.library.client.renderer.RenderProjectileBase;
 import slimeknights.tconstruct.tools.common.entity.EntityArrow;
@@ -20,6 +19,6 @@ public class RenderArrow extends RenderProjectileBase<EntityArrow> {
     }
     float r = entity.roll;
 
-    GL11.glRotatef(r, 0f, 0f, 1f);
+    GlStateManager.rotate(r, 0f, 0f, 1f);
   }
 }

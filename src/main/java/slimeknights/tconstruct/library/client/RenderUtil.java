@@ -434,10 +434,10 @@ public final class RenderUtil {
     GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
     if(Minecraft.isAmbientOcclusionEnabled()) {
-      GL11.glShadeModel(GL11.GL_SMOOTH);
+      GlStateManager.shadeModel(GL11.GL_SMOOTH);
     }
     else {
-      GL11.glShadeModel(GL11.GL_FLAT);
+      GlStateManager.shadeModel(GL11.GL_FLAT);
     }
 
     GlStateManager.translate(x, y, z);

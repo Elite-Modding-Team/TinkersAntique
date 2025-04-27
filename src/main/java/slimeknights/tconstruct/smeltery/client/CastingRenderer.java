@@ -119,10 +119,10 @@ public class CastingRenderer<T extends TileCasting> extends TileEntitySpecialRen
       //GL14.glBlendColor(r, g, b, progress);
       //GL14.glBlendColor(1f, 1f, 1f, 1f); // debug
 
-      GL11.glDepthMask(false);
+      GlStateManager.depthMask(false);
       IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(stack, te.getWorld(), null);
       Minecraft.getMinecraft().getRenderItem().renderItem(stack, model);
-      GL11.glDepthMask(true);
+      GlStateManager.depthMask(true);
       GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
       RenderUtil.post();
     }

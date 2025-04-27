@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.library.client.renderer;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,9 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -46,13 +44,13 @@ public class RenderProjectileBase<T extends EntityProjectileBase> extends Render
     }
     ItemStack itemStack = handler.getItemStack();
 
-    GL11.glPushMatrix();
-    GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+    GlStateManager.pushMatrix();
+    GlStateManager.enableRescaleNormal();
 
     // last step: translate from 0/0/0 to correct position in world
-    GL11.glTranslated(x, y, z);
+    GlStateManager.translate(x, y, z);
     // mkae it smaller
-    GL11.glScalef(0.5F, 0.5F, 0.5F);
+    GlStateManager.scale(0.5F, 0.5F, 0.5F);
 
     customRendering(entity, x, y, z, entityYaw, partialTicks);
 
@@ -60,7 +58,7 @@ public class RenderProjectileBase<T extends EntityProjectileBase> extends Render
     float f11 = (float) entity.arrowShake - partialTicks;
     if(f11 > 0.0F) {
       float f12 = -MathHelper.sin(f11 * 3.0F) * f11;
-      GL11.glRotatef(f12, 0.0F, 0.0F, 1.0F);
+      GlStateManager.rotate(f12, 0.0F, 0.0F, 1.0F);
     }
 
     if(renderManager == null || renderManager.renderEngine == null) {
@@ -78,8 +76,8 @@ public class RenderProjectileBase<T extends EntityProjectileBase> extends Render
       Minecraft.getMinecraft().getRenderItem().renderItem(dummy, Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getMissingModel());
     }
 
-    GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-    GL11.glPopMatrix();
+    GlStateManager.disableRescaleNormal();
+    GlStateManager.popMatrix();
 
     super.doRender(entity, x, y, z, entityYaw, partialTicks);
   }
@@ -88,21 +86,21 @@ public class RenderProjectileBase<T extends EntityProjectileBase> extends Render
     // flip it, flop it, pop it, pull it, push it, rotate it, translate it, TECHNOLOGY
 
     // rotate it into the direction we threw it
-    GL11.glRotatef(entity.rotationYaw, 0f, 1f, 0f);
-    GL11.glRotatef(-entity.rotationPitch, 1f, 0f, 0f);
+    GlStateManager.rotate(entity.rotationYaw, 0f, 1f, 0f);
+    GlStateManager.rotate(-entity.rotationPitch, 1f, 0f, 0f);
 
     // adjust "stuck" depth
     if(entity.inGround) {
-      GL11.glTranslated(0, 0, -entity.getStuckDepth());
+      GlStateManager.translate(0, 0, -entity.getStuckDepth());
     }
 
     customCustomRendering(entity, x, y, z, entityYaw, partialTicks);
 
     // rotate it so it faces forward
-    GL11.glRotatef(-90f, 0f, 1f, 0f);
+    GlStateManager.rotate(-90f, 0f, 1f, 0f);
 
     // rotate the projectile it so it faces upwards
-    GL11.glRotatef(-45, 0f, 0f, 1f);
+    GlStateManager.rotate(-45, 0f, 0f, 1f);
   }
 
   /** If you just want to rotate it or something but the overall "have it heading towards the target" should stay the same */
