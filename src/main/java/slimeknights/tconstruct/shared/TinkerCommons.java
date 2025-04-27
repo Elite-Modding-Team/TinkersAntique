@@ -328,11 +328,15 @@ public class TinkerCommons extends TinkerPulse {
     ingots = registerItem(registry, new ItemMetaDynamicTinkers(), "ingots");
     materials = registerItem(registry, new ItemMetaDynamic(), "materials");
     edibles = registerItem(registry, new ItemEdible(), "edible");
+    commonNuggets = registerItem(registry, new ItemMetaDynamicTinkers(), "common_nuggets");
+    commonIngots = registerItem(registry, new ItemMetaDynamicTinkers(), "common_ingots");
     
     nuggets.setCreativeTab(TinkerRegistry.tabGeneral);
     ingots.setCreativeTab(TinkerRegistry.tabGeneral);
     materials.setCreativeTab(TinkerRegistry.tabGeneral);
     edibles.setCreativeTab(TinkerRegistry.tabGeneral);
+    commonNuggets.setCreativeTab(TinkerRegistry.tabGeneral);
+    commonIngots.setCreativeTab(TinkerRegistry.tabGeneral);
 
     // Items that can always be present.. slimeballs
     matSlimeBallBlue = edibles.addFood(1, 1, 1f, "slimeball_blue", new PotionEffect(MobEffects.SLOWNESS, 20 * 45, 2), new PotionEffect(MobEffects.JUMP_BOOST, 20 * 60, 2));
@@ -359,12 +363,6 @@ public class TinkerCommons extends TinkerPulse {
     
     // Common Ingots and nuggets, these can be disabled completely with a config option
     if((isToolsLoaded() || isSmelteryLoaded() || forced) && Config.registerAllCommonMetals) {
-        commonNuggets = registerItem(registry, new ItemMetaDynamicTinkers(), "common_nuggets");
-        commonIngots = registerItem(registry, new ItemMetaDynamicTinkers(), "common_ingots");
-
-        commonNuggets.setCreativeTab(TinkerRegistry.tabGeneral);
-        commonIngots.setCreativeTab(TinkerRegistry.tabGeneral);
-
         nuggetCopper = commonNuggets.addMeta(0, "copper");
         ingotCopper = commonIngots.addMeta(0, "copper");
 
