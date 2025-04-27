@@ -10,6 +10,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import io.netty.buffer.ByteBuf;
+import org.apache.commons.lang3.StringUtils;
 import slimeknights.mantle.network.AbstractPacketThreadsafe;
 import slimeknights.tconstruct.common.TinkerNetwork;
 import slimeknights.tconstruct.tools.common.inventory.ContainerToolStation;
@@ -37,7 +38,7 @@ public class ToolStationTextPacket extends AbstractPacketThreadsafe {
   public void handleServerSafe(NetHandlerPlayServer netHandler) {
     Container container = netHandler.player.openContainer;
     if(container instanceof ContainerToolStation) {
-      if(((ContainerToolStation) container).toolName.equals(text)) {
+      if(StringUtils.equals(((ContainerToolStation) container).toolName, text)) {
         return;
       }
       ((ContainerToolStation) container).setToolName(text);
