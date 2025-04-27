@@ -70,8 +70,8 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
 
   public List<ItemStack> getInputSlotContents() {
     NonNullList<ItemStack> contents = NonNullList.create();
-    for (Slot slotIn : inventorySlots) {
-      if (slotIn instanceof SlotToolStationIn && !slotIn.getStack().isEmpty()) {
+    for(Slot slotIn : inventorySlots) {
+      if(slotIn instanceof SlotToolStationIn && !slotIn.getStack().isEmpty()) {
         contents.add(slotIn.getStack());
       }
     }
@@ -196,7 +196,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
       }
       // if no crafting result and a tool is in the output slot, try deconstruction
       else if(Config.deconstructTools && !outputStack.isEmpty() && outputStack.getItem() instanceof TinkersItem) {
-        if(deconstructTool(false)) {
+        if(deconstructTool()) {
           deconstruct = true;
           // populate input slots with parts
           NonNullList<ItemStack> parts = getDeconstructedParts(outputStack);
@@ -238,8 +238,14 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
     boolean resultTaken = false;
 
     try {
-      if(Config.deconstructTools && stack.getItem() instanceof TinkersItem && deconstructTool(true)) {
-        resultTaken = true;
+      if(Config.deconstructTools && deconstruct) {
+        // clear input slots to remove previewed parts
+        for(int i = 0; i < activeSlots; i++) {
+          tile.setInventorySlotContents(i, ItemStack.EMPTY);
+        }
+        onCraftMatrixChanged(null);
+        deconstruct = false;
+        return;
       } else {
         resultTaken = !repairTool(true).isEmpty() ||
                       !replaceToolParts(true).isEmpty() ||
@@ -283,7 +289,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
     Sounds.playSoundForAll(player, Sounds.saw, 0.8f, 0.8f + 0.4f * TConstruct.random.nextFloat());
   }
 
-  private boolean deconstructTool(boolean remove) throws TinkerGuiException {
+  private boolean deconstructTool() throws TinkerGuiException {
     ItemStack toolStack = out.getStack();
     if(toolStack.isEmpty() || !(toolStack.getItem() instanceof TinkersItem)) {
       return false;
@@ -332,15 +338,6 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
         return false;
       }
       parts.add(partStack);
-    }
-
-    if(!remove) {
-      return true;
-    }
-
-    out.inventory.setInventorySlotContents(0, ItemStack.EMPTY);
-    for(int i = 0; i < parts.size(); i++) {
-      tile.setInventorySlotContents(i, parts.get(i));
     }
 
     // todo: fire deconstruction event
