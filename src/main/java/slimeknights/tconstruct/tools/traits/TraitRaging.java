@@ -7,7 +7,7 @@ import slimeknights.tconstruct.library.traits.AbstractTraitLeveled;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 public class TraitRaging extends AbstractTraitLeveled {
-    protected final float leveledDamage = 4f;
+    protected final float leveledDamage = 3f;
 
     public TraitRaging() {
         super("raging", 0xc70000, 3, 1);
