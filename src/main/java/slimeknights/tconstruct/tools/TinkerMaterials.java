@@ -291,7 +291,7 @@ public final class TinkerMaterials {
     bloodbone.setCraftable(true);
     bloodbone.addItemIngot("boneBloodied");
     bloodbone.setRepresentativeItem(TinkerCommons.matBloodyBone);
-    bloodbone.addTrait(raging, HEAD);
+    bloodbone.addTrait(raging2, HEAD);
     bloodbone.addTrait(splintering, HEAD);
     bloodbone.addTrait(raging);
     bloodbone.addTrait(fractured);

@@ -9,8 +9,8 @@ import slimeknights.tconstruct.library.utils.TinkerUtil;
 public class TraitRaging extends AbstractTraitLeveled {
     protected final float leveledDamage = 3f;
 
-    public TraitRaging() {
-        super("raging", 0xc70000, 3, 1);
+    public TraitRaging(int levels) {
+        super("raging", String.valueOf(levels), 0xc70000, 3, 1);
     }
 
     @Override

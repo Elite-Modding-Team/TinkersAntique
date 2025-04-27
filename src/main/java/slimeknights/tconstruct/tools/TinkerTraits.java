@@ -40,7 +40,8 @@ public class TinkerTraits {
   public static final AbstractTrait petramor = new TraitPetramor();
   public static final AbstractTrait poisonous = new TraitPoisonous();
   public static final AbstractTrait prickly = new TraitPrickly();
-  public static final AbstractTrait raging = new TraitRaging();
+  public static final AbstractTrait raging = new TraitRaging(1);
+  public static final AbstractTrait raging2 = new TraitRaging(2);
   public static final AbstractTrait sharp = new TraitSharp();
   public static final AbstractTrait shocking = new TraitShocking();
   public static final AbstractTrait slimeyGreen = new TraitSlimey("green", EntitySlime.class);
