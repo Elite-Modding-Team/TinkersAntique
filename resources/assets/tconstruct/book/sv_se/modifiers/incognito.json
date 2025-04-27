@@ -1,0 +1,18 @@
+{
+  "modifier": "incognito",
+  "text": [
+    {
+      "text": "It's more reality than illusion! For the seasoned tinkerer who aims for ingenious perks but a tidy appearance."
+    }
+  ],
+  "effects": [
+    "Hides all modifiers visually",
+    "Makes good use of wet sponges",
+    "Requires no modifier"
+  ],
+  "demoTool": [
+    "tconstruct:pickaxe",
+    "tconstruct:shovel",
+    "tconstruct:hatchet"
+  ]
+}

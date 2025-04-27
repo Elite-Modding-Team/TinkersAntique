@@ -43,29 +43,7 @@ import slimeknights.tconstruct.library.tools.IToolPart;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.shared.TinkerCommons;
-import slimeknights.tconstruct.tools.modifiers.ModAntiMonsterType;
-import slimeknights.tconstruct.tools.modifiers.ModBeheading;
-import slimeknights.tconstruct.tools.modifiers.ModBlasting;
-import slimeknights.tconstruct.tools.modifiers.ModCreative;
-import slimeknights.tconstruct.tools.modifiers.ModDiamond;
-import slimeknights.tconstruct.tools.modifiers.ModEmerald;
-import slimeknights.tconstruct.tools.modifiers.ModExtraTrait;
-import slimeknights.tconstruct.tools.modifiers.ModFiery;
-import slimeknights.tconstruct.tools.modifiers.ModFins;
-import slimeknights.tconstruct.tools.modifiers.ModFortify;
-import slimeknights.tconstruct.tools.modifiers.ModGlowing;
-import slimeknights.tconstruct.tools.modifiers.ModHarvestSize;
-import slimeknights.tconstruct.tools.modifiers.ModHaste;
-import slimeknights.tconstruct.tools.modifiers.ModKnockback;
-import slimeknights.tconstruct.tools.modifiers.ModLuck;
-import slimeknights.tconstruct.tools.modifiers.ModMendingMoss;
-import slimeknights.tconstruct.tools.modifiers.ModNecrotic;
-import slimeknights.tconstruct.tools.modifiers.ModReinforced;
-import slimeknights.tconstruct.tools.modifiers.ModSharpness;
-import slimeknights.tconstruct.tools.modifiers.ModShulking;
-import slimeknights.tconstruct.tools.modifiers.ModSilktouch;
-import slimeknights.tconstruct.tools.modifiers.ModSoulbound;
-import slimeknights.tconstruct.tools.modifiers.ModWebbed;
+import slimeknights.tconstruct.tools.modifiers.*;
 import slimeknights.tconstruct.tools.traits.InfiTool;
 
 @Pulse(
@@ -106,6 +84,7 @@ public class TinkerModifiers extends AbstractToolPulse {
   public static Modifier modSoulbound;
 
   public static Modifier modCreative;
+  public static Modifier modIncognito;
 
   public static List<Modifier> fortifyMods;
   public static List<Modifier> extraTraitMods;
@@ -211,6 +190,9 @@ public class TinkerModifiers extends AbstractToolPulse {
 
     modCreative = registerModifier(new ModCreative());
     modCreative.addItem(TinkerCommons.matCreativeModifier, 1, 1);
+
+    modIncognito = registerModifier(new ModIncognito());
+    modIncognito.addItem(new ItemStack(Blocks.SPONGE, 1, 1), 1, 1);
 
     // ensure infitool trait
     TinkerRegistry.addTrait(InfiTool.INSTANCE);

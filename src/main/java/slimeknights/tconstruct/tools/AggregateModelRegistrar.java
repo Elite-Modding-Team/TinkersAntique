@@ -27,9 +27,7 @@ import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.tools.modifiers.ModExtraTraitDisplay;
 import slimeknights.tconstruct.tools.modifiers.ModFortifyDisplay;
 
-import static slimeknights.tconstruct.tools.TinkerModifiers.modCreative;
-import static slimeknights.tconstruct.tools.TinkerModifiers.modHarvestHeight;
-import static slimeknights.tconstruct.tools.TinkerModifiers.modHarvestWidth;
+import static slimeknights.tconstruct.tools.TinkerModifiers.*;
 
 // this class is called after all other pulses that add stuff have been called and registers all the tools, modifiers
 // and more in one swoop
@@ -99,7 +97,7 @@ public class AggregateModelRegistrar extends AbstractToolPulse {
 
     private void registerModifierModels() {
       for(IModifier modifier : modifiers) {
-        if(modifier == modCreative || modifier == modHarvestWidth || modifier == modHarvestHeight) {
+        if(modifier == modCreative || modifier == modHarvestWidth || modifier == modHarvestHeight || modifier == modIncognito) {
           // modifiers without model are blacklisted
           continue;
         }

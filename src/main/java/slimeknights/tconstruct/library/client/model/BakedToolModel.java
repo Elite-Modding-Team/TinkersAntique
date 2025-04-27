@@ -146,6 +146,9 @@ public class BakedToolModel extends BakedWrapper.Perspective {
 
     private void addModifierQuads(ItemStack stack, BakedToolModel original, ImmutableList.Builder<BakedQuad> quads) {
       NBTTagList modifiers = TagUtil.getBaseModifiersTagList(stack);
+      if(modifiers.toString().contains("incognito")) {
+        return;
+      }
       Map<String, IBakedModel> modifierParts = original.modifierParts;
       for(int i = 0; i < modifiers.tagCount(); i++) {
         String modId = modifiers.getStringTagAt(i);

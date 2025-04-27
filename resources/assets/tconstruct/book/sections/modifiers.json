@@ -94,5 +94,9 @@
   {
     "type": "modifier",
     "data": "modifiers/extratrait.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifiers/incognito.json"
   }
 ]
