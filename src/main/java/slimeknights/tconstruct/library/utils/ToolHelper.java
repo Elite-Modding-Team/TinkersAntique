@@ -40,6 +40,7 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.ForgeEventFactory;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerNetwork;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.events.TinkerToolEvent;
 import slimeknights.tconstruct.library.tinkering.Category;
@@ -575,6 +576,9 @@ public final class ToolHelper {
         entity.resetActiveHand();
       }
       TinkerNetwork.sendTo(new ToolBreakAnimationPacket(stack), (EntityPlayerMP) entity);
+      if(Config.vanillaToolBreaking) {
+        stack.shrink(1);
+      }
     }
   }
 

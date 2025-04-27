@@ -54,6 +54,7 @@ public final class Config {
   public static int heatItemsTickrateSmeltery = 4;
   public static int heatItemsTickrateSearedFurnace = 4;
   public static int liquidTransferRate = 6;
+  public static boolean vanillaToolBreaking = false;
   
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -306,6 +307,10 @@ public final class Config {
       prop = configFile.get(cat, "liquidTransferRate", liquidTransferRate);
       prop.setComment("How much liquid is transferred by faucets and channels per pouring operation.");
       liquidTransferRate = prop.getInt();
+
+      prop = configFile.get(cat, "vanillaToolBreaking", vanillaToolBreaking);
+      prop.setComment("If true, tools will be fully destroyed like vanilla tools when durability is depleted. You monster!");
+      vanillaToolBreaking = prop.getBoolean();
     }
     // Worldgen
     {
