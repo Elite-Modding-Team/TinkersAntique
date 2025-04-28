@@ -104,7 +104,15 @@ public final class Config {
           "minecraft:blaze;true;blazing_blood;20",
           "minecraft:slime;false;greenslime;20",
           "tconstruct:blueslime;false;blueslime;20",
-          "tconstruct:purpleslime;false;purpleslime;20"
+          "tconstruct:purpleslime;false;purpleslime;20",
+          "mod_lavacow:forsaken;false;milk;20",
+          "mod_lavacow:grave_robber;false;emerald;6",
+          "mod_lavacow:imp;false;blazing_blood;20",
+          "mod_lavacow:lavacow;false;lava;20",
+          "mod_lavacow:lilsludge;false;blueslime;20",
+          "mod_lavacow:salamander;false;blazing_blood;20",
+          "mod_lavacow:skeletonking;false;milk;20",
+          "mod_lavacow:sludgelord;false;blueslime;20"
   };
 
   // Worldgen
