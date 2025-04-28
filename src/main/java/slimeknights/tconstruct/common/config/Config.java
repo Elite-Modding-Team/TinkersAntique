@@ -105,6 +105,7 @@ public final class Config {
           "minecraft:slime;false;greenslime;25",
           "tconstruct:blueslime;false;blueslime;25",
           "tconstruct:purpleslime;false;purpleslime;25",
+          "battletowers:golem;false;stone;100",
           "mocreatures:BigGolem;false;stone;50",
           "mocreatures:CaveOgre;false;stone;50",
           "mocreatures:CaveScorpion;false;stone;50",
