@@ -87,6 +87,20 @@ public final class Config {
           "minecraft:creeper;minecraft:skull:4",
           "minecraft:ender_dragon;minecraft:skull:5"
   };
+  public static String[] entityMelting = {
+          "minecraft:villager_golem;true;iron;18",
+          "minecraft:snowman;true;water;100",
+          "minecraft:villager;true;emerald;6",
+          "minecraft:evocation_illager;true;emerald;6",
+          "minecraft:illusion_illager;true;emerald;6",
+          "minecraft:vindication_illager;true;emerald;6",
+          "minecraft:skeleton;true;milk;20",
+          "minecraft:skeleton_horse;true;milk;20",
+          "minecraft:blaze;true;blazing_blood;20",
+          "minecraft:slime;false;greenslime;20",
+          "tconstruct:blueslime;false;blueslime;20",
+          "tconstruct:purpleslime;false;purpleslime;20"
+  };
 
   // Worldgen
   public static boolean genSlimeIslands = true;
@@ -323,6 +337,10 @@ public final class Config {
       prop = configFile.get(cat, "mobHeadDrops", mobHeadDrops);
       prop.setComment("List of mob head drops in the format 'modid:entity;modid:item:metadata'. Example: 'minecraft:skeleton;minecraft:skull:0'");
       mobHeadDrops = prop.getStringList();
+
+      prop = configFile.get(cat, "entityMelting", entityMelting);
+      prop.setComment("List of entity melting entries in the format 'modid:entity;subtypes;fluid;amount'.");
+      entityMelting = prop.getStringList();
     }
     // Worldgen
     {

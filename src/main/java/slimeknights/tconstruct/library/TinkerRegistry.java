@@ -739,6 +739,51 @@ public final class TinkerRegistry {
     return ImmutableSet.copyOf(smelteryFuels.keySet());
   }
 
+  /** Register all entities (and optionally subtypes) from config to melt into the specified fluidstack */
+  public static void registerEntityMelting() {
+    for (String entry : Config.entityMelting) {
+      String[] parts = entry.split(";");
+      if (parts.length != 4) {
+        log.error("Invalid entity melting entry: {}", entry);
+        continue;
+      }
+      String entityRL = parts[0];
+      String subtypes = parts[1];
+      String fluidName = parts[2];
+      int amount;
+      try {
+        amount = Integer.parseInt(parts[3]);
+      } catch (NumberFormatException e) {
+        log.error("Invalid fluid amount in entity melting entry: {}", entry);
+        continue;
+      }
+      ResourceLocation entityLocation;
+      try {
+        entityLocation = new ResourceLocation(entityRL);
+      } catch (Exception e) {
+        log.error("Invalid entity resource location: {}", entityRL);
+        continue;
+      }
+      EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(entityLocation);
+      if (entityEntry == null) {
+        log.error("Entity not found for melting: {}", entityRL);
+        continue;
+      }
+      Fluid fluid = FluidRegistry.getFluid(fluidName);
+      if (fluid == null) {
+        log.error("Fluid not found for entity melting: {}", fluidName);
+        continue;
+      }
+      Class<? extends Entity> entityClass = entityEntry.getEntityClass();
+      FluidStack fluidStack = new FluidStack(fluid, amount);
+      if(subtypes.equals("true")) {
+          TinkerRegistry.registerEntityMeltingForAll(entityClass, fluidStack);
+      } else {
+          TinkerRegistry.registerEntityMelting(entityClass, fluidStack);
+      }
+    }
+  }
+
   /** Register all entities that extend the given class to melt into the specified fluidstack */
   public static void registerEntityMeltingForAll(Class<? extends Entity> clazz, FluidStack liquid) {
     for (EntityEntry entry : ForgeRegistries.ENTITIES) {
@@ -769,6 +814,7 @@ public final class TinkerRegistry {
         log.error("Error when logging entity melting event", e);
       }
     }
+    log.info("Registered entity melting for {} into {} mB of {}", clazz.getSimpleName(), liquid.amount, liquid.getLocalizedName());
   }
 
   public static FluidStack getMeltingForEntity(Entity entity) {

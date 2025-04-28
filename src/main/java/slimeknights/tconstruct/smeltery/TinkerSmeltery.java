@@ -8,9 +8,6 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.EntitySkeletonHorse;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -94,8 +91,6 @@ import slimeknights.tconstruct.smeltery.tileentity.TileSmelteryComponent;
 import slimeknights.tconstruct.smeltery.tileentity.TileTank;
 import slimeknights.tconstruct.smeltery.tileentity.TileTinkerTank;
 import slimeknights.tconstruct.tools.TinkerMaterials;
-import slimeknights.tconstruct.world.entity.EntityBlueSlime;
-import slimeknights.tconstruct.world.entity.EntityPurpleSlime;
 
 import java.io.File;
 import java.io.IOException;
@@ -550,16 +545,7 @@ public class TinkerSmeltery extends TinkerPulse {
     }
 
     // melt entities into a pulp
-    TinkerRegistry.registerEntityMeltingForAll(EntityIronGolem.class, new FluidStack(TinkerFluids.iron, 18));
-    TinkerRegistry.registerEntityMeltingForAll(EntitySnowman.class, new FluidStack(FluidRegistry.WATER, 100));
-    TinkerRegistry.registerEntityMeltingForAll(EntityVillager.class, new FluidStack(TinkerFluids.emerald, 6));
-    TinkerRegistry.registerEntityMeltingForAll(AbstractIllager.class, new FluidStack(TinkerFluids.emerald, 6));
-    TinkerRegistry.registerEntityMeltingForAll(AbstractSkeleton.class, new FluidStack(TinkerFluids.milk, 20));
-    TinkerRegistry.registerEntityMeltingForAll(EntitySkeletonHorse.class, new FluidStack(TinkerFluids.milk, 20));
-    TinkerRegistry.registerEntityMeltingForAll(EntityBlaze.class, new FluidStack(TinkerFluids.blazingBlood, 20));
-    TinkerRegistry.registerEntityMeltingForAll(EntitySlime.class, new FluidStack(TinkerFluids.greenSlime, 20));
-    TinkerRegistry.registerEntityMeltingForAll(EntityBlueSlime.class, new FluidStack(TinkerFluids.blueslime, 20));
-    TinkerRegistry.registerEntityMeltingForAll(EntityPurpleSlime.class, new FluidStack(TinkerFluids.purpleSlime, 20));
+    TinkerRegistry.registerEntityMelting();
   }
 
   /**
