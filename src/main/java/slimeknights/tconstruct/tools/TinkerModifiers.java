@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTUtil;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -238,6 +239,9 @@ public class TinkerModifiers extends AbstractToolPulse {
       ResourceLocation itemLocation;
       try {
         itemLocation = new ResourceLocation(itemName);
+        if(!Loader.isModLoaded(itemLocation.getResourceDomain())) {
+          continue;
+        }
       } catch(Exception e) {
         log.error("Invalid item resource location: {}", itemName);
         continue;
@@ -260,6 +264,9 @@ public class TinkerModifiers extends AbstractToolPulse {
         ResourceLocation entityLocation;
         try {
           entityLocation = new ResourceLocation(entityRL);
+          if(!Loader.isModLoaded(entityLocation.getResourceDomain())) {
+            continue;
+          }
         } catch(Exception e) {
           log.error("Invalid entity resource location: {}", entityRL);
           continue;

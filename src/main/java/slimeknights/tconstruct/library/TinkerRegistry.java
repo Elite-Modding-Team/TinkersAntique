@@ -756,9 +756,9 @@ public final class TinkerRegistry {
 
   /** Register all entities (and optionally subtypes) from config to melt into the specified fluidstack */
   public static void registerEntityMelting() {
-    for (String entry : Config.entityMelting) {
+    for(String entry : Config.entityMelting) {
       String[] parts = entry.split(";");
-      if (parts.length != 4) {
+      if(parts.length != 4) {
         log.error("Invalid entity melting entry: {}", entry);
         continue;
       }
@@ -768,24 +768,27 @@ public final class TinkerRegistry {
       int amount;
       try {
         amount = Integer.parseInt(parts[3]);
-      } catch (NumberFormatException e) {
+      } catch(NumberFormatException e) {
         log.error("Invalid fluid amount in entity melting entry: {}", entry);
         continue;
       }
       ResourceLocation entityLocation;
       try {
         entityLocation = new ResourceLocation(entityRL);
-      } catch (Exception e) {
+        if(!Loader.isModLoaded(entityLocation.getResourceDomain())) {
+          continue;
+        }
+      } catch(Exception e) {
         log.error("Invalid entity resource location: {}", entityRL);
         continue;
       }
       EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(entityLocation);
-      if (entityEntry == null) {
+      if(entityEntry == null) {
         log.error("Entity not found for melting: {}", entityRL);
         continue;
       }
       Fluid fluid = FluidRegistry.getFluid(fluidName);
-      if (fluid == null) {
+      if(fluid == null) {
         log.error("Fluid not found for entity melting: {}", fluidName);
         continue;
       }
@@ -801,9 +804,9 @@ public final class TinkerRegistry {
 
   /** Register all entities that extend the given class to melt into the specified fluidstack */
   public static void registerEntityMeltingForAll(Class<? extends Entity> clazz, FluidStack liquid) {
-    for (EntityEntry entry : ForgeRegistries.ENTITIES) {
+    for(EntityEntry entry : ForgeRegistries.ENTITIES) {
       Class<? extends Entity> entityClass = entry.getEntityClass();
-      if (clazz.isAssignableFrom(entityClass)) {
+      if(clazz.isAssignableFrom(entityClass)) {
         registerEntityMelting(entityClass, liquid);
       }
     }
