@@ -131,7 +131,9 @@ public final class Config {
           "mod_lavacow:lilsludge;false;blueslime;25",
           "mod_lavacow:salamander;false;blazing_blood;40",
           "mod_lavacow:skeletonking;false;milk;20",
-          "mod_lavacow:sludgelord;false;blueslime;25"
+          "mod_lavacow:sludgelord;false;blueslime;25",
+          "thaumcraft:Firebat;false;blazing_blood;5",
+          "thaumcraft:Pech;false;gold;6"
   };
 
   // Worldgen
