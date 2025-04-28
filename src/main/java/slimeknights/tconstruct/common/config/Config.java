@@ -81,12 +81,14 @@ public final class Config {
   };
   public static String[] mobHeadDrops = {
           "minecraft:skeleton;true;minecraft:skull:0",
+          "minecraft:stray;true;minecraft:skull:0",
           "minecraft:wither_skeleton;true;minecraft:skull:1",
           "minecraft:zombie;true;minecraft:skull:2",
           "minecraft:player;false;minecraft:skull:3",
           "minecraft:creeper;true;minecraft:skull:4",
           "minecraft:ender_dragon;true;minecraft:skull:5",
           "mod_lavacow:boneworm;true;minecraft:skull:0",
+          "mod_lavacow:forsaken;true;minecraft:skull:0",
           "mod_lavacow:skeletonking;false;minecraft:skull:0",
           "mod_lavacow:scarecrow;false;mod_lavacow:scarecrowhead_common"
   };
