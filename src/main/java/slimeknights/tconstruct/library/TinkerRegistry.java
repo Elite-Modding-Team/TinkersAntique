@@ -488,12 +488,27 @@ public final class TinkerRegistry {
   }
 
   /**
+   * Registers a beheading head drop for all entities that extend the given class
+   * @param clazz  Entity class
+   * @param head   Head that drops from that entity
+   */
+  public static void registerHeadDropForAll(Class<? extends EntityLivingBase> clazz, ItemStack head) {
+    for(EntityEntry entry : ForgeRegistries.ENTITIES) {
+      Class<? extends Entity> entityClass = entry.getEntityClass();
+      if(clazz.isAssignableFrom(entityClass)) {
+        registerHeadDrop((Class<? extends EntityLivingBase>) entityClass, head);
+      }
+    }
+  }
+
+  /**
    * Registers a beheading head drop for an entity
    * @param clazz     Entity class
    * @param callback  Callback function, takes entity as a parameter and returns an item stack
    */
   public static void registerHeadDrop(Class<? extends EntityLivingBase> clazz, Function<EntityLivingBase,ItemStack> callback) {
     headDrops.put(clazz, callback);
+    log.info("Registered head drop for {}", clazz.getSimpleName());
   }
 
   /**
@@ -503,7 +518,7 @@ public final class TinkerRegistry {
    */
   public static void registerHeadDrop(Class<? extends EntityLivingBase> clazz, ItemStack head) {
     final ItemStack safeStack = head.copy();
-    registerHeadDrop(clazz, (e) -> safeStack);
+    registerHeadDrop(clazz, e -> safeStack);
   }
 
   /**

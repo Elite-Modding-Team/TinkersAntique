@@ -216,12 +216,13 @@ public class TinkerModifiers extends AbstractToolPulse {
   private void registerMobHeadDrops() {
     for(String entry : Config.mobHeadDrops) {
       String[] parts = entry.split(";");
-      if(parts.length != 2) {
+      if(parts.length != 3) {
         log.error("Invalid mob head drop entry: {}", entry);
         continue;
       }
       String entityRL = parts[0];
-      String[] itemParts = parts[1].split(":");
+      String subtypes = parts[1];
+      String[] itemParts = parts[2].split(":");
       if(itemParts.length < 2 || itemParts.length > 3) {
         log.error("Invalid item format in mob head drop entry: {}", entry);
         continue;
@@ -274,7 +275,11 @@ public class TinkerModifiers extends AbstractToolPulse {
           continue;
         }
         ItemStack headStack = new ItemStack(headItem, 1, metadata);
-        TinkerRegistry.registerHeadDrop((Class<? extends EntityLivingBase>) entityClass, headStack);
+        if(subtypes.equals("true")) {
+          TinkerRegistry.registerHeadDropForAll((Class<? extends EntityLivingBase>) entityClass, headStack);
+        } else {
+          TinkerRegistry.registerHeadDrop((Class<? extends EntityLivingBase>) entityClass, headStack);
+        }
       }
     }
   }

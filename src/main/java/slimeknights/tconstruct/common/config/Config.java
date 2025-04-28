@@ -80,12 +80,12 @@ public final class Config {
   public static String[] materialIgnore = {
   };
   public static String[] mobHeadDrops = {
-          "minecraft:skeleton;minecraft:skull:0",
-          "minecraft:wither_skeleton;minecraft:skull:1",
-          "minecraft:zombie;minecraft:skull:2",
-          "minecraft:player;minecraft:skull:3",
-          "minecraft:creeper;minecraft:skull:4",
-          "minecraft:ender_dragon;minecraft:skull:5"
+          "minecraft:skeleton;true;minecraft:skull:0",
+          "minecraft:wither_skeleton;true;minecraft:skull:1",
+          "minecraft:zombie;true;minecraft:skull:2",
+          "minecraft:player;false;minecraft:skull:3",
+          "minecraft:creeper;true;minecraft:skull:4",
+          "minecraft:ender_dragon;true;minecraft:skull:5"
   };
   public static String[] entityMelting = {
           "minecraft:villager_golem;true;iron;18",
@@ -335,7 +335,7 @@ public final class Config {
       vanillaToolBreaking = prop.getBoolean();
 
       prop = configFile.get(cat, "mobHeadDrops", mobHeadDrops);
-      prop.setComment("List of mob head drops in the format 'modid:entity;modid:item:metadata'. Example: 'minecraft:skeleton;minecraft:skull:0'");
+      prop.setComment("List of mob head drops in the format 'modid:entity;subtypes;modid:item:metadata'.");
       mobHeadDrops = prop.getStringList();
 
       prop = configFile.get(cat, "entityMelting", entityMelting);
