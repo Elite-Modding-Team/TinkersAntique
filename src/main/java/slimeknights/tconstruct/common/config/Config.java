@@ -133,6 +133,8 @@ public final class Config {
           "mod_lavacow:salamander;false;blazing_blood;40",
           "mod_lavacow:skeletonking;false;milk;20",
           "mod_lavacow:sludgelord;false;blueslime;25",
+          "natura:babyheatscarspider;false;blazing_blood;20",
+          "natura:heatscarspider;false;blazing_blood;40",
           "thaumcraft:Firebat;false;blazing_blood;5",
           "thaumcraft:Pech;false;gold;6"
   };
