@@ -79,6 +79,14 @@ public final class Config {
   };
   public static String[] materialIgnore = {
   };
+  public static String[] mobHeadDrops = {
+          "minecraft:skeleton;minecraft:skull:0",
+          "minecraft:wither_skeleton;minecraft:skull:1",
+          "minecraft:zombie;minecraft:skull:2",
+          "minecraft:player;minecraft:skull:3",
+          "minecraft:creeper;minecraft:skull:4",
+          "minecraft:ender_dragon;minecraft:skull:5"
+  };
 
   // Worldgen
   public static boolean genSlimeIslands = true;
@@ -311,6 +319,10 @@ public final class Config {
       prop = configFile.get(cat, "vanillaToolBreaking", vanillaToolBreaking);
       prop.setComment("If true, tools will be fully destroyed like vanilla tools when durability is depleted. You monster!");
       vanillaToolBreaking = prop.getBoolean();
+
+      prop = configFile.get(cat, "mobHeadDrops", mobHeadDrops);
+      prop.setComment("List of mob head drops in the format 'modid:entity;modid:item:metadata'. Example: 'minecraft:skeleton;minecraft:skull:0'");
+      mobHeadDrops = prop.getStringList();
     }
     // Worldgen
     {

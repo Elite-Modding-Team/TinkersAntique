@@ -4,24 +4,25 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import org.apache.logging.log4j.Logger;
@@ -33,6 +34,7 @@ import java.util.Map;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.common.CommonProxy;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.gadgets.item.ItemPiggybackPack.CarryPotionEffect;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
@@ -212,19 +214,69 @@ public class TinkerModifiers extends AbstractToolPulse {
   }
 
   private void registerMobHeadDrops() {
-    TinkerRegistry.registerHeadDrop(EntitySkeleton.class, new ItemStack(Items.SKULL, 1, 0));
-    TinkerRegistry.registerHeadDrop(EntityWitherSkeleton.class, new ItemStack(Items.SKULL, 1, 1));
-    TinkerRegistry.registerHeadDrop(EntityZombie.class, new ItemStack(Items.SKULL, 1, 2));
-    TinkerRegistry.registerHeadDrop(EntityCreeper.class, new ItemStack(Items.SKULL, 1, 4));
-    TinkerRegistry.registerHeadDrop(EntityDragon.class, new ItemStack(Items.SKULL, 1, 5));
-    // EntityPlayerMP is the one that shows in the living drop event rather than EntityPlayer
-    TinkerRegistry.registerHeadDrop(EntityPlayerMP.class, (entity) -> {
-      ItemStack head = new ItemStack(Items.SKULL, 1, 3);
-      if(entity instanceof EntityPlayer) {
-        NBTUtil.writeGameProfile(head.getOrCreateSubCompound("SkullOwner"), ((EntityPlayer) entity).getGameProfile());
+    for(String entry : Config.mobHeadDrops) {
+      String[] parts = entry.split(";");
+      if(parts.length != 2) {
+        log.error("Invalid mob head drop entry: {}", entry);
+        continue;
       }
-      return head;
-    });
+      String entityRL = parts[0];
+      String[] itemParts = parts[1].split(":");
+      if(itemParts.length < 2 || itemParts.length > 3) {
+        log.error("Invalid item format in mob head drop entry: {}", entry);
+        continue;
+      }
+      String itemName = itemParts[0] + ":" + itemParts[1];
+      int metadata;
+      try {
+        metadata = itemParts.length == 3 ? Integer.parseInt(itemParts[2]) : 0;
+      } catch(NumberFormatException e) {
+        log.error("Invalid metadata in mob head drop entry: {}", entry);
+        continue;
+      }
+      ResourceLocation itemLocation;
+      try {
+        itemLocation = new ResourceLocation(itemName);
+      } catch(Exception e) {
+        log.error("Invalid item resource location: {}", itemName);
+        continue;
+      }
+      Item headItem = ForgeRegistries.ITEMS.getValue(itemLocation);
+      if(headItem == null) {
+        log.error("Item not found for mob head drop: {}", itemName);
+        continue;
+      }
+      if(entityRL.equals("minecraft:player")) {
+        // EntityPlayerMP is the one that shows in the living drop event rather than EntityPlayer
+        TinkerRegistry.registerHeadDrop(EntityPlayerMP.class, entity -> {
+          ItemStack headStack = new ItemStack(headItem, 1, metadata);
+          if(entity instanceof EntityPlayer && headItem instanceof ItemSkull) {
+            NBTUtil.writeGameProfile(headStack.getOrCreateSubCompound("SkullOwner"), ((EntityPlayer) entity).getGameProfile());
+          }
+          return headStack;
+        });
+      } else {
+        ResourceLocation entityLocation;
+        try {
+          entityLocation = new ResourceLocation(entityRL);
+        } catch(Exception e) {
+          log.error("Invalid entity resource location: {}", entityRL);
+          continue;
+        }
+        EntityEntry entityEntry = ForgeRegistries.ENTITIES.getValue(entityLocation);
+        if(entityEntry == null) {
+          log.error("Entity not found for mob head drop: {}", entityRL);
+          continue;
+        }
+        Class<? extends Entity> entityClass = entityEntry.getEntityClass();
+        if(!EntityLivingBase.class.isAssignableFrom(entityClass)) {
+          log.error("Entity class {} is not a suitable entity for mob head drop: {}", entityClass.getName(), entityRL);
+          continue;
+        }
+        ItemStack headStack = new ItemStack(headItem, 1, metadata);
+        TinkerRegistry.registerHeadDrop((Class<? extends EntityLivingBase>) entityClass, headStack);
+      }
+    }
   }
 
   private Map<String, ModExtraTrait> extraTraitLookup = new HashMap<>();
