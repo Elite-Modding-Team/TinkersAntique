@@ -1,0 +1,16 @@
+{
+  "modifier": "extramodifier",
+  "text": [
+    {
+      "text": "You're a seasoned adventurer, you've beaten the End, and you got your elytra. How about an extra modifier to show off how far you got in your world?"
+    }
+  ],
+  "effects": [
+    "Adds an extra modifier",
+    "Makes good use of Ender Dragon heads",
+    "Requires no modifier (duh!)"
+  ],
+  "demoTool": [
+    "tconstruct:pickaxe"
+  ]
+}

@@ -97,7 +97,7 @@ public class AggregateModelRegistrar extends AbstractToolPulse {
 
     private void registerModifierModels() {
       for(IModifier modifier : modifiers) {
-        if(modifier == modCreative || modifier == modHarvestWidth || modifier == modHarvestHeight || modifier == modIncognito) {
+        if(modifier == modCreative || modifier == modHarvestWidth || modifier == modHarvestHeight || modifier == modEndearment || modifier == modIncognito) {
           // modifiers without model are blacklisted
           continue;
         }

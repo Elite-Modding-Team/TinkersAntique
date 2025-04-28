@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
@@ -82,9 +83,10 @@ public class TinkerModifiers extends AbstractToolPulse {
   public static Modifier modWebbed;
   public static Modifier modSmite;
   public static Modifier modSoulbound;
+  public static Modifier modEndearment;
+  public static Modifier modIncognito;
 
   public static Modifier modCreative;
-  public static Modifier modIncognito;
 
   public static List<Modifier> fortifyMods;
   public static List<Modifier> extraTraitMods;
@@ -187,12 +189,15 @@ public class TinkerModifiers extends AbstractToolPulse {
 
     modSoulbound = registerModifier(new ModSoulbound());
     modSoulbound.addItem(Items.NETHER_STAR);
+    
+    modEndearment = registerModifier(new ModExtraModifier());
+    modEndearment.addItem(new ItemStack(Items.SKULL, 1, 5), 1, 1);
+    
+    modIncognito = registerModifier(new ModIncognito());
+    modIncognito.addItem(new ItemStack(Blocks.SPONGE, 1, 1), 1, 1);
 
     modCreative = registerModifier(new ModCreative());
     modCreative.addItem(TinkerCommons.matCreativeModifier, 1, 1);
-
-    modIncognito = registerModifier(new ModIncognito());
-    modIncognito.addItem(new ItemStack(Blocks.SPONGE, 1, 1), 1, 1);
 
     // ensure infitool trait
     TinkerRegistry.addTrait(InfiTool.INSTANCE);
@@ -211,6 +216,7 @@ public class TinkerModifiers extends AbstractToolPulse {
     TinkerRegistry.registerHeadDrop(EntityWitherSkeleton.class, new ItemStack(Items.SKULL, 1, 1));
     TinkerRegistry.registerHeadDrop(EntityZombie.class, new ItemStack(Items.SKULL, 1, 2));
     TinkerRegistry.registerHeadDrop(EntityCreeper.class, new ItemStack(Items.SKULL, 1, 4));
+    TinkerRegistry.registerHeadDrop(EntityDragon.class, new ItemStack(Items.SKULL, 1, 5));
     // EntityPlayerMP is the one that shows in the living drop event rather than EntityPlayer
     TinkerRegistry.registerHeadDrop(EntityPlayerMP.class, (entity) -> {
       ItemStack head = new ItemStack(Items.SKULL, 1, 3);

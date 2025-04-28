@@ -97,6 +97,10 @@
   },
   {
     "type": "modifier",
+    "data": "modifiers/extramodifier.json"
+  },
+  {
+    "type": "modifier",
     "data": "modifiers/incognito.json"
   }
 ]
