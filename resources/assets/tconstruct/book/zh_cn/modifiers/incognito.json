@@ -2,13 +2,13 @@
   "modifier": "incognito",
   "text": [
     {
-      "text": "It's more reality than illusion! For the seasoned tinkerer who aims for ingenious perks but a tidy appearance."
+      "text": "梦想成真！适合哪些追求诸多强化但希望武器工具外表整洁的工匠."
     }
   ],
   "effects": [
-    "Hides all modifiers visually",
-    "Makes good use of wet sponges",
-    "Requires no modifier"
+    "隐藏全部强化的视觉效果",
+    "充分榨取湿海绵的剩余价值",
+    "不消耗强化槽"
   ],
   "demoTool": [
     "tconstruct:pickaxe",
