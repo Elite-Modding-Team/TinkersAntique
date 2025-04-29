@@ -46,7 +46,6 @@ public final class Config {
   public static boolean matchVanillaSlimeblock = false;
   public static boolean limitPiggybackpack = false;
   public static boolean clearGlassSilkTouch = true;
-  public static boolean beheadingAffectsWitherSkulls = true;
   public static boolean drainGaseousFluids = true;
   public static int maxSmelteryItemRenders = -1;
   public static int netherOresMiningLevel = 4;
@@ -198,7 +197,7 @@ public final class Config {
   static ConfigCategory ClientSide;
 
   public static void load(FMLPreInitializationEvent event) {
-    configFile = new Configuration(event.getSuggestedConfigurationFile(), "0.2", false);
+    configFile = new Configuration(event.getSuggestedConfigurationFile(), "0.3", false);
 
     MinecraftForge.EVENT_BUS.register(instance);
 
@@ -308,10 +307,6 @@ public final class Config {
       prop = configFile.get(cat, "clearGlassSilkTouch", clearGlassSilkTouch);
       prop.setComment("If true, clear glass can only be harvested with silk touch like regular glass.");
       clearGlassSilkTouch = prop.getBoolean();
-
-      prop = configFile.get(cat, "beheadingAffectsWitherSkulls", beheadingAffectsWitherSkulls);
-      prop.setComment("If true, the Beheading modifier increases Wither Skeleton Skull drop rates. If false, Wither Skeleton Skulls drop rates will not be affected.");
-      beheadingAffectsWitherSkulls = prop.getBoolean();
 
       prop = configFile.get(cat, "despawnProjectile", despawnProjectile);
       prop.setComment("How many ticks projectiles are allowed on the ground until they despawn.");

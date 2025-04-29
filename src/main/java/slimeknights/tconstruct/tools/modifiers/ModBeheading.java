@@ -99,12 +99,6 @@ public class ModBeheading extends ToolModifier {
     if(shouldDropHead(level)) {
       ItemStack head = TinkerRegistry.getHeadDrop(event.getEntityLiving());
       if(!head.isEmpty() && !alreadyContainsDrop(event, head)) {
-        if(!Config.beheadingAffectsWitherSkulls
-                && (event.getEntityLiving() instanceof EntityWitherSkeleton
-                || (head.getItem().equals(Items.SKULL) && head.getMetadata() == 1))) {
-          return;
-        }
-
         EntityItem entityitem = new EntityItem(event.getEntityLiving().getEntityWorld(), event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, head);
         entityitem.setDefaultPickupDelay();
         event.getDrops().add(entityitem);
