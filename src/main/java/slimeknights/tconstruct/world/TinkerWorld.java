@@ -40,6 +40,7 @@ import slimeknights.tconstruct.world.entity.EntityBlueSlime;
 import slimeknights.tconstruct.world.entity.EntityPurpleSlime;
 import slimeknights.tconstruct.world.item.ItemBlockLeaves;
 import slimeknights.tconstruct.world.worldgen.MagmaSlimeIslandGenerator;
+import slimeknights.tconstruct.world.worldgen.MagmaSlimePoolGenerator;
 import slimeknights.tconstruct.world.worldgen.SlimeIslandGenerator;
 import slimeknights.tconstruct.world.worldgen.SlimePoolGenerator;
 
@@ -136,6 +137,7 @@ public class TinkerWorld extends TinkerPulse {
     GameRegistry.registerWorldGenerator(SlimeIslandGenerator.INSTANCE, 25);
     GameRegistry.registerWorldGenerator(MagmaSlimeIslandGenerator.INSTANCE, 25);
     GameRegistry.registerWorldGenerator(SlimePoolGenerator.INSTANCE, 25);
+    GameRegistry.registerWorldGenerator(MagmaSlimePoolGenerator.INSTANCE, 25);
 
     MinecraftForge.EVENT_BUS.register(new WorldEvents());
 

@@ -151,6 +151,7 @@ public final class Config {
   public static boolean slimeIslandsOnlyGenerateInSurfaceWorlds = true;
   public static boolean genSlimePools = false;
   public static int slimePoolRate = 30;
+  public static int magmaPoolRate = 30;
   public static int slimePoolHeightMax = 64;
   public static int[] slimePoolDimensions = new int[]{-1, 1};
   public static boolean slimePoolDimensionsIsBlacklist = true;

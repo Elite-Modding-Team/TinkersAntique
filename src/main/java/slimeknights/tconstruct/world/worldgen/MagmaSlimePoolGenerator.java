@@ -1,20 +1,18 @@
 package slimeknights.tconstruct.world.worldgen;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldProviderHell;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.shared.TinkerCommons;
-import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.shared.block.BlockSlime;
 
 import java.util.ArrayList;
@@ -22,19 +20,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class SlimePoolGenerator extends WorldGenerator implements IWorldGenerator {
-    public static SlimePoolGenerator INSTANCE = new SlimePoolGenerator();
+public class MagmaSlimePoolGenerator extends WorldGenerator implements IWorldGenerator {
+    public static MagmaSlimePoolGenerator INSTANCE = new MagmaSlimePoolGenerator();
 
-    public SlimePoolGenerator() {
-    }
-
-    protected boolean shouldGenerateInDimension(int id) {
-        for(int dim : Config.slimePoolDimensions) {
-            if(dim == id) {
-                return !Config.slimePoolDimensionsIsBlacklist;
-            }
-        }
-        return Config.slimePoolDimensionsIsBlacklist;
+    public MagmaSlimePoolGenerator() {
     }
 
     @Override
@@ -45,27 +34,16 @@ public class SlimePoolGenerator extends WorldGenerator implements IWorldGenerato
         if(world.getWorldType() == WorldType.FLAT) {
             return;
         }
-        if(!Config.slimePoolsOnlyGenerateInSurfaceWorlds && !world.provider.isSurfaceWorld()) {
+        if(!(world.provider instanceof WorldProviderHell)) {
             return;
         }
-        if(!shouldGenerateInDimension(world.provider.getDimension())) {
-            return;
-        }
-        generateSlimePool(world, random, chunkX * 16, chunkZ * 16);
+        generateMagmaPool(world, random, chunkX * 16, chunkZ * 16);
     }
 
-    public void generateSlimePool(World world, Random random, int chunkX, int chunkZ) {
+    public void generateMagmaPool(World world, Random random, int chunkX, int chunkZ) {
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
-        if(random.nextInt(Config.slimePoolRate) == 0) {
-            int height = random.nextInt(Config.slimePoolHeightMax);
-            pos.setPos(chunkX + 8 + random.nextInt(8), height, chunkZ + 8 + random.nextInt(8));
-            this.generate(world, random, pos);
-        }
-        pos.setPos(chunkX + 16, 0, chunkZ + 16);
-        Biome biome = world.getBiome(pos);
-        if(biome.getTemperature() >= 0.8f && biome.getRainfall() >= 0.9f && random.nextInt(Config.slimePoolRate / 4 + 1) == 0) {
-            int height = random.nextInt(Config.slimePoolHeightMax * 3);
-            pos.setPos(chunkX + 8 + random.nextInt(8), height, chunkZ + 8 + random.nextInt(8));
+        if(random.nextInt(Config.magmaPoolRate) == 0) {
+            pos.setPos(chunkX + 8 + random.nextInt(8), random.nextInt(128), chunkZ + 8 + random.nextInt(8));
             this.generate(world, random, pos);
         }
     }
@@ -133,7 +111,7 @@ public class SlimePoolGenerator extends WorldGenerator implements IWorldGenerato
                             return false;
                         }
 
-                        if(yOffset < 4 && !material.isSolid() && world.getBlockState(pos).getBlock() != TinkerFluids.greenSlime.getBlock()) {
+                        if(yOffset < 4 && !material.isSolid() && world.getBlockState(pos).getBlock() != Blocks.LAVA) {
                             return false;
                         }
                     }
@@ -149,36 +127,13 @@ public class SlimePoolGenerator extends WorldGenerator implements IWorldGenerato
                         if(yOffset < 4) {
                             fluidPositions.add(pos.toImmutable());
                         }
-                        world.setBlockState(pos, yOffset >= 4 ? Blocks.AIR.getDefaultState() : TinkerFluids.greenSlime.getBlock().getDefaultState(), 2);
+                        world.setBlockState(pos, yOffset >= 4 ? Blocks.AIR.getDefaultState() : Blocks.LAVA.getDefaultState(), 2);
                     }
                 }
             }
         }
 
-        for(int xOffset = 0; xOffset < 16; ++xOffset) {
-            for(int zOffset = 0; zOffset < 16; ++zOffset) {
-                for(int yOffset = 4; yOffset < 8; ++yOffset) {
-                    if(shape[(xOffset * 16 + zOffset) * 8 + yOffset]) {
-                        pos.setPos(x + xOffset, y + yOffset - 1, z + zOffset);
-                        if(world.getBlockState(pos).getBlock() == Blocks.DIRT) {
-                            pos.setY(y + yOffset);
-                            if(world.getLightFor(EnumSkyBlock.SKY, pos) > 0) {
-                                pos.setY(0);
-                                Biome biome = world.getBiome(pos.setPos(x + xOffset, 0, z + zOffset));
-                                pos.setY(y + yOffset - 1);
-                                if(biome.topBlock.getBlock() == Blocks.MYCELIUM) {
-                                    world.setBlockState(pos, Blocks.MYCELIUM.getDefaultState(), 2);
-                                } else {
-                                    world.setBlockState(pos, Blocks.GRASS.getDefaultState(), 2);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if(TinkerFluids.greenSlime.getBlock().getDefaultState().getMaterial() == Material.WATER) {
+        if(Blocks.LAVA.getDefaultState().getMaterial() == Material.LAVA) {
             for(int xOffset = 0; xOffset < 16; ++xOffset) {
                 for(int zOffset = 0; zOffset < 16; ++zOffset) {
                     for(int yOffset = 0; yOffset < 8; ++yOffset) {
@@ -194,9 +149,9 @@ public class SlimePoolGenerator extends WorldGenerator implements IWorldGenerato
                             pos.setPos(x + xOffset, y + yOffset, z + zOffset);
                             if(world.getBlockState(pos).getMaterial().isSolid()) {
                                 pos.setY(y + yOffset + 1);
-                                if(world.getBlockState(pos).getMaterial() != Material.WATER) {
+                                if(world.getBlockState(pos).getMaterial() != Material.LAVA) {
                                     pos.setY(y + yOffset);
-                                    world.setBlockState(pos, TinkerCommons.blockSlimeCongealed.getDefaultState().withProperty(BlockSlime.TYPE, BlockSlime.SlimeType.GREEN), 2);
+                                    world.setBlockState(pos, TinkerCommons.blockSlimeCongealed.getDefaultState().withProperty(BlockSlime.TYPE, BlockSlime.SlimeType.MAGMA), 2);
                                 }
                             }
                         }
@@ -206,14 +161,14 @@ public class SlimePoolGenerator extends WorldGenerator implements IWorldGenerato
         }
 
         if(!fluidPositions.isEmpty()) {
-            int slimeCount = rand.nextInt(5) + 2;
+            int magmaCubeCount = rand.nextInt(5) + 2;
             Collections.shuffle(fluidPositions, rand);
-            for(int i = 0; i < Math.min(slimeCount, fluidPositions.size()); i++) {
+            for(int i = 0; i < Math.min(magmaCubeCount, fluidPositions.size()); i++) {
                 BlockPos spawnPos = fluidPositions.get(i);
                 if(world.isAirBlock(spawnPos.up())) {
-                    EntitySlime slime = new EntitySlime(world);
-                    slime.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D, rand.nextFloat() * 360.0F, 0.0F);
-                    world.spawnEntity(slime);
+                    EntityMagmaCube magmaCube = new EntityMagmaCube(world);
+                    magmaCube.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D, rand.nextFloat() * 360.0F, 0.0F);
+                    world.spawnEntity(magmaCube);
                 }
             }
         }
