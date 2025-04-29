@@ -2,13 +2,13 @@
   "modifier": "extramodifier",
   "text": [
     {
-      "text": "You're a seasoned adventurer, you've beaten the End, and you got your elytra. How about an extra modifier slot to show off how far you got in your world?"
+      "text": "你成为了以为传奇冒险家，你抵达了末地并得到了你的鞘翅，增加一个强化槽以彰显你的传奇历程怎么样？"
     }
   ],
   "effects": [
-    "Adds an extra modifier",
-    "Makes good use of Ender Dragon heads",
-    "Requires no modifier (duh!)"
+    "增加一个额外强化槽",
+    "充分利用龙首的价值",
+    "不消耗强化槽（纯属废话）"
   ],
   "demoTool": [
     "tconstruct:pickaxe"
