@@ -92,16 +92,19 @@ public final class Config {
           "mod_lavacow:scarecrow;false;mod_lavacow:scarecrowhead_common"
   };
   public static String[] entityMelting = {
-          "minecraft:villager_golem;true;iron;18",
-          "minecraft:snowman;true;water;100",
-          "minecraft:villager;true;emerald;6",
+          "minecraft:blaze;true;blazing_blood;20",
           "minecraft:evocation_illager;true;emerald;6",
+          "minecraft:guardian;true;stone;50",
           "minecraft:illusion_illager;true;emerald;6",
-          "minecraft:vindication_illager;true;emerald;6",
           "minecraft:skeleton;true;milk;20",
           "minecraft:skeleton_horse;true;milk;20",
-          "minecraft:blaze;true;blazing_blood;20",
+          "minecraft:silverfish;true;stone;25",
           "minecraft:slime;false;greenslime;25",
+          "minecraft:snowman;true;water;100",
+          "minecraft:villager;true;emerald;6",
+          "minecraft:villager_golem;true;iron;18",
+          "minecraft:vindication_illager;true;emerald;6",
+          "minecraft:zombie_pigman;true;gold;10",
           "tconstruct:blueslime;false;blueslime;25",
           "tconstruct:purpleslime;false;purpleslime;25",
           "battletowers:golem;false;stone;100",
@@ -135,7 +138,7 @@ public final class Config {
           "natura:babyheatscarspider;false;blazing_blood;20",
           "natura:heatscarspider;false;blazing_blood;40",
           "thaumcraft:Firebat;false;blazing_blood;5",
-          "thaumcraft:Pech;true;gold;6"
+          "thaumcraft:Pech;true;gold;10"
   };
 
   // Worldgen
