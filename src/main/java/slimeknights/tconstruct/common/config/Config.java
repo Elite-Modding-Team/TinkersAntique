@@ -136,7 +136,7 @@ public final class Config {
           "natura:babyheatscarspider;false;blazing_blood;20",
           "natura:heatscarspider;false;blazing_blood;40",
           "thaumcraft:Firebat;false;blazing_blood;5",
-          "thaumcraft:Pech;false;gold;6"
+          "thaumcraft:Pech;true;gold;6"
   };
 
   // Worldgen
