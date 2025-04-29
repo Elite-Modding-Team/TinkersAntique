@@ -91,6 +91,7 @@ import slimeknights.tconstruct.smeltery.tileentity.TileSmelteryComponent;
 import slimeknights.tconstruct.smeltery.tileentity.TileTank;
 import slimeknights.tconstruct.smeltery.tileentity.TileTinkerTank;
 import slimeknights.tconstruct.tools.TinkerMaterials;
+import slimeknights.tconstruct.world.TinkerWorld;
 
 import java.io.File;
 import java.io.IOException;
@@ -375,7 +376,13 @@ public class TinkerSmeltery extends TinkerPulse {
     // bloooooood
     TinkerRegistry.registerMelting(Items.ROTTEN_FLESH, TinkerFluids.blood, 40);
     if(TinkerCommons.matSlimeBallBlood != null) {
-      TinkerRegistry.registerTableCasting(TinkerCommons.matSlimeBallBlood.copy(), ItemStack.EMPTY, TinkerFluids.blood, 160);
+      // blood slime
+      TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matSlimeBallBlood.copy(), null, TinkerFluids.blood, Material.VALUE_SlimeBall, 50));
+      TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.BLOOD.meta), null, TinkerFluids.blood, Material.VALUE_SlimeBall * 4, 100));
+
+      TinkerRegistry.registerMelting(TinkerCommons.matSlimeBallBlood, TinkerFluids.blood, Material.VALUE_SlimeBall);
+      ItemStack slimeblock_blood = new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.BLOOD.meta);
+      TinkerRegistry.registerMelting(slimeblock_blood, TinkerFluids.blood, Material.VALUE_SlimeBall * 4);
     }
 
     // green slime
@@ -537,6 +544,21 @@ public class TinkerSmeltery extends TinkerPulse {
                                                           RecipeMatch.of(new ItemStack(Blocks.SAND, 1, 0)),
                                                           new FluidStack(TinkerFluids.blood, 10),
                                                           true, false));
+    
+    // slime casting
+    if(isWorldLoaded()) {
+      TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.SLIME_BALL), null, TinkerFluids.greenSlime, Material.VALUE_SlimeBall, 50));
+      TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerWorld.slimeDirt, 1, BlockSlime.SlimeType.GREEN.meta), RecipeMatch.of("dirt"), TinkerFluids.greenSlime, Material.VALUE_SlimeBall, 100));
+      TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.GREEN.meta), null, TinkerFluids.greenSlime, Material.VALUE_SlimeBall * 4, 100));
+      
+      TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matSlimeBallBlue.copy(), null, TinkerFluids.blueslime, Material.VALUE_SlimeBall, 50));
+      TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerWorld.slimeDirt, 1, BlockSlime.SlimeType.BLUE.meta), RecipeMatch.of("dirt"), TinkerFluids.blueslime, Material.VALUE_SlimeBall, 100));
+      TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.BLUE.meta), null, TinkerFluids.blueslime, Material.VALUE_SlimeBall * 4, 100));
+      
+      TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matSlimeBallPurple.copy(), null, TinkerFluids.purpleSlime, Material.VALUE_SlimeBall, 50));
+      TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerWorld.slimeDirt, 1, BlockSlime.SlimeType.PURPLE.meta), RecipeMatch.of("dirt"), TinkerFluids.purpleSlime, Material.VALUE_SlimeBall, 100));
+      TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.PURPLE.meta), null, TinkerFluids.purpleSlime, Material.VALUE_SlimeBall * 4, 100));
+    }
     
     // bone casting
     if(TinkerCommons.isToolsLoaded()) {
