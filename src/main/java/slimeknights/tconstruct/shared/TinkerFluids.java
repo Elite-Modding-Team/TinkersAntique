@@ -58,6 +58,7 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidMolten emerald;
   public static FluidMolten diamond;
   public static FluidMolten glass;
+  public static FluidColored venom;
   public static FluidColored blood;
   public static FluidNonColored blazingBlood;
   public static FluidColored milk;
@@ -198,6 +199,11 @@ public class TinkerFluids extends TinkerPulse {
       glass.setTemperature(625);
       registerMoltenBlock(registry, glass);
 
+      // venom for the insect god
+      venom = fluidPoison("venom", 0xa2935e);
+      venom.setTemperature(336);
+      registerClassicBlock(registry, venom);
+
       // blood for the blood god
       blood = fluidClassic("blood", 0x540000);
       blood.setTemperature(336);
@@ -258,6 +264,9 @@ public class TinkerFluids extends TinkerPulse {
       FluidRegistry.addBucketForFluid(diamond);
 
       FluidRegistry.addBucketForFluid(glass);
+ 
+      // venom for the insect god
+      FluidRegistry.addBucketForFluid(venom);
 
       // blood for the blood god
       FluidRegistry.addBucketForFluid(blood);
@@ -321,6 +330,12 @@ public class TinkerFluids extends TinkerPulse {
   
   private static FluidColored fluidSlime(String name, int color) {
 	    FluidColored fluid = new FluidColored(name, color, FluidColored.ICON_SlimeStill, FluidColored.ICON_SlimeFlowing);
+
+	    return registerFluid(fluid);
+	  }
+  
+  private static FluidColored fluidPoison(String name, int color) {
+	    FluidColored fluid = new FluidColored(name, color, FluidColored.ICON_PoisonStill, FluidColored.ICON_PoisonFlowing);
 
 	    return registerFluid(fluid);
 	  }

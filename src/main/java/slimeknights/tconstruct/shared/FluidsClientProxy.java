@@ -42,6 +42,7 @@ public class FluidsClientProxy extends ClientProxy {
     registerFluidModels(TinkerFluids.greenSlime);
     registerFluidModels(TinkerFluids.blueslime);
     registerFluidModels(TinkerFluids.purpleSlime);
+    registerFluidModels(TinkerFluids.venom);
     registerFluidModels(TinkerFluids.blood);
     registerFluidModels(TinkerFluids.blazingBlood);
   }
@@ -54,10 +55,12 @@ public class FluidsClientProxy extends ClientProxy {
     map.registerSprite(FluidColored.ICON_LiquidFlowing);
     map.registerSprite(FluidColored.ICON_MilkStill);
     map.registerSprite(FluidColored.ICON_MilkFlowing);
-    map.registerSprite(FluidColored.ICON_StoneStill);
-    map.registerSprite(FluidColored.ICON_StoneFlowing);
+    map.registerSprite(FluidColored.ICON_PoisonStill);
+    map.registerSprite(FluidColored.ICON_PoisonFlowing);
     map.registerSprite(FluidColored.ICON_SlimeStill);
     map.registerSprite(FluidColored.ICON_SlimeFlowing);
+    map.registerSprite(FluidColored.ICON_StoneStill);
+    map.registerSprite(FluidColored.ICON_StoneFlowing);
     map.registerSprite(FluidMolten.ICON_MetalStill);
     map.registerSprite(FluidMolten.ICON_MetalFlowing);
     map.registerSprite(FluidNonColored.ICON_BlazeStill);

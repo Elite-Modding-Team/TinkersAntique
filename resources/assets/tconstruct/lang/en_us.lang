@@ -367,6 +367,7 @@ item.tconstruct.sharpening_kit.name=Sharpening Kit
 item.tconstruct.sharpening_kit.tooltip=Combine with a flint\nUpgrades your tool to the material's mining level.
 
 item.forge.bucketFilled.blood=Bucket o' Blood
+item.forge.bucketFilled.venom=Bucket o' Venom
 
 # Tools
 item.tconstruct.pickaxe.name=Pickaxe
@@ -530,6 +531,7 @@ fluid.tconstruct.knightslime.name=Molten Knightslime
 fluid.tconstruct.emerald.name=Molten Emerald
 fluid.tconstruct.diamond.name=Molten Diamond
 fluid.tconstruct.glass.name=Molten Glass
+fluid.tconstruct.venom.name=Venom
 fluid.tconstruct.blood.name=Blood
 fluid.tconstruct.blazing_blood.name=Blazin' Blood
 fluid.tconstruct.milk.name=Milk

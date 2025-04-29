@@ -40,6 +40,9 @@
         "glass": [{
             "custom": { "fluid": "glass" }
         }],
+        "venom": [{
+            "custom": { "fluid": "venom" }
+        }],
         "blood": [{
             "custom": { "fluid": "blood" }
         }],
@@ -102,6 +105,9 @@
         }],
         "clay": [{
             "custom": { "fluid": "clay" }
+        }],
+        "calcium": [{
+            "custom": { "fluid":  "calcium" }
         }]
     }
 }

@@ -384,7 +384,11 @@ public class TinkerSmeltery extends TinkerPulse {
       ItemStack slimeblock_blood = new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.BLOOD.meta);
       TinkerRegistry.registerMelting(slimeblock_blood, TinkerFluids.blood, Material.VALUE_SlimeBall * 4);
     }
-
+    
+    // venom
+    TinkerRegistry.registerMelting(Items.SPIDER_EYE, TinkerFluids.venom, 40);
+    TinkerRegistry.registerMelting(new ItemStack(Items.FISH, 1, 3), TinkerFluids.venom, 40);
+    
     // green slime
     TinkerRegistry.registerMelting(Items.SLIME_BALL, TinkerFluids.greenSlime, Material.VALUE_SlimeBall);
     ItemStack slimeblock_green = new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.GREEN.meta);
@@ -534,12 +538,13 @@ public class TinkerSmeltery extends TinkerPulse {
     TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Blocks.GLASS_PANE), null, TinkerFluids.glass, Material.VALUE_Glass * 6 / 16, 50));
     TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerCommons.blockClearGlass), null, TinkerFluids.glass, Material.VALUE_Glass, 120));
     
-    TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.BONE), null, TinkerFluids.calcium, Material.VALUE_Ingot, 50));
-    TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(Blocks.BONE_BLOCK), null, TinkerFluids.calcium, Material.VALUE_Ingot * 3, 100));
-
+    // bone melting and casting
     TinkerRegistry.registerMelting(new ItemStack(Items.DYE, 1, 15), TinkerFluids.calcium, Material.VALUE_Ingot / 3);
     TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of("bone", Material.VALUE_Ingot), TinkerFluids.calcium));
     TinkerRegistry.registerMelting(new ItemStack(Blocks.BONE_BLOCK), TinkerFluids.calcium, Material.VALUE_Ingot * 3);
+    
+    TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.BONE), null, TinkerFluids.calcium, Material.VALUE_Ingot, 50));
+    TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(Blocks.BONE_BLOCK), null, TinkerFluids.calcium, Material.VALUE_Ingot * 3, 100));
 
     // lavawood
     TinkerRegistry.registerBasinCasting(new CastingRecipe(TinkerCommons.lavawood, RecipeMatch.of("plankWood"),
