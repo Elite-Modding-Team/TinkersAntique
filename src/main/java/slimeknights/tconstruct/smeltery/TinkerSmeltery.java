@@ -533,6 +533,13 @@ public class TinkerSmeltery extends TinkerPulse {
 
     TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Blocks.GLASS_PANE), null, TinkerFluids.glass, Material.VALUE_Glass * 6 / 16, 50));
     TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerCommons.blockClearGlass), null, TinkerFluids.glass, Material.VALUE_Glass, 120));
+    
+    TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.BONE), null, TinkerFluids.calcium, Material.VALUE_Ingot, 50));
+    TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(Blocks.BONE_BLOCK), null, TinkerFluids.calcium, Material.VALUE_Ingot * 3, 100));
+
+    TinkerRegistry.registerMelting(new ItemStack(Items.DYE, 1, 15), TinkerFluids.calcium, Material.VALUE_Ingot / 3);
+    TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of("bone", Material.VALUE_Ingot), TinkerFluids.calcium));
+    TinkerRegistry.registerMelting(new ItemStack(Blocks.BONE_BLOCK), TinkerFluids.calcium, Material.VALUE_Ingot * 3);
 
     // lavawood
     TinkerRegistry.registerBasinCasting(new CastingRecipe(TinkerCommons.lavawood, RecipeMatch.of("plankWood"),

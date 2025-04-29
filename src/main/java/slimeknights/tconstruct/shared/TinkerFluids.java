@@ -47,6 +47,7 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidMolten obsidian;
   public static FluidMolten clay;
   public static FluidMolten dirt;
+  public static FluidMolten calcium;
   public static FluidMolten iron;
   public static FluidMolten gold;
   public static FluidMolten pigIron;
@@ -180,6 +181,10 @@ public class TinkerFluids extends TinkerPulse {
       dirt = fluidStone("dirt", 0xa68564);
       dirt.setTemperature(500);
       registerMoltenBlock(registry, dirt);
+      
+      calcium = fluidStone("calcium", 0xcbc6a5);
+      calcium.setTemperature(800);
+      registerMoltenBlock(registry, calcium);
 
       emerald = fluidMetal("emerald", 0x58e78e);
       emerald.setTemperature(999);
@@ -245,6 +250,8 @@ public class TinkerFluids extends TinkerPulse {
       FluidRegistry.addBucketForFluid(clay);
 
       FluidRegistry.addBucketForFluid(dirt);
+      
+      FluidRegistry.addBucketForFluid(calcium);
 
       FluidRegistry.addBucketForFluid(emerald);
 
