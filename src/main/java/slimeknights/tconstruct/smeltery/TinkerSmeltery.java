@@ -575,7 +575,13 @@ public class TinkerSmeltery extends TinkerPulse {
     // bone casting
     if(TinkerCommons.isToolsLoaded()) {
       TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matBloodyBone, RecipeMatch.of("bone"),
-              new FluidStack(TinkerFluids.blood, 320), true, false));
+              new FluidStack(TinkerFluids.blood, Material.VALUE_SlimeBall * 2), true, false));
+      
+      TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matVenomousBone, RecipeMatch.of("bone"),
+              new FluidStack(TinkerFluids.venom, Material.VALUE_SlimeBall * 2), true, false));
+      
+      TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matBlazingBone, RecipeMatch.of("boneWithered"),
+              new FluidStack(TinkerFluids.blazingBlood, 250), true, false));
     }
 
     // melt entities into a pulp
