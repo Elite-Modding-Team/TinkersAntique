@@ -221,7 +221,7 @@ public class GuiToolStation extends GuiTinkerStation {
     }
 
     // current tool to deconstruct
-    if (Config.deconstructTools && container.deconstruct) {
+    if (Config.deconstructTools && container.getTile().isDeconstructing()) {
       warning(Util.translate("gui.warning.deconstruct_tool"));
     }
     // current tool to build or repair/modify

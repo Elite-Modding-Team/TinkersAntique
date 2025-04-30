@@ -49,8 +49,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
   protected ToolCore selectedTool; // needed for newly opened containers to sync
   protected int activeSlots;
   public String toolName;
-  public boolean deconstruct;
-
+  
   public ContainerToolStation(InventoryPlayer playerInventory, TileToolStation tile) {
     super(tile);
     this.player = playerInventory.player;
@@ -65,7 +64,11 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
     out = new SlotToolStationOut(i, 124, 38, this);
     addSlotToContainer(out);
     this.addPlayerInventory(playerInventory, 8, 84 + 8);
-    onCraftMatrixChanged(playerInventory);
+    if (tile.isDeconstructing()) {
+      out.inventory.setInventorySlotContents(0, tile.getDeconstructingStack());
+    } else {
+      onCraftMatrixChanged(playerInventory);
+    }
   }
 
   public List<ItemStack> getInputSlotContents() {
@@ -143,7 +146,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
   }
 
   public void setToolName(String name) {
-    this.toolName = name;
+	this.toolName = name;
 
     if(world.isRemote) {
       GuiScreen screen = Minecraft.getMinecraft().currentScreen;
@@ -166,10 +169,10 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
   // update crafting - called whenever the content of an input slot changes
   @Override
   public void onCraftMatrixChanged(IInventory inventoryIn) {
-    // reset gui state
+	// reset gui state
     updateGUI();
     try {
-      ItemStack result;
+      ItemStack result = ItemStack.EMPTY;
       // 1. try repairing
       result = repairTool(false);
       // 2. try swapping tool parts
@@ -197,7 +200,6 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
       // if no crafting result and a tool is in the output slot, try deconstruction
       else if(Config.deconstructTools && !outputStack.isEmpty() && outputStack.getItem() instanceof TinkersItem) {
         if(deconstructTool()) {
-          deconstruct = true;
           // populate input slots with parts
           NonNullList<ItemStack> parts = getDeconstructedParts(outputStack);
           for(int i = 0; i < activeSlots && i < parts.size(); i++) {
@@ -211,10 +213,11 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
           // keep tool in output slot
           out.inventory.setInventorySlotContents(0, outputStack);
         }
+    	tile.setDeconstructingStack(out.inventory.getStackInSlot(0));
       } else {
         // no crafting result and no valid tool for deconstruction
-        deconstruct = false;
         out.inventory.setInventorySlotContents(0, ItemStack.EMPTY);
+  	    tile.setDeconstructingStack(out.inventory.getStackInSlot(0));
       }
       updateGUI();
     } catch(TinkerGuiException e) {
@@ -222,6 +225,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
       out.inventory.setInventorySlotContents(0, ItemStack.EMPTY);
       this.error(e.getMessage());
     }
+    
     // sync output with other open containers on the server
     if(!this.world.isRemote) {
       WorldServer server = (WorldServer) this.world;
@@ -238,13 +242,13 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
     boolean resultTaken = false;
 
     try {
-      if(Config.deconstructTools && deconstruct) {
+      if(Config.deconstructTools && this.tile.isDeconstructing()) {
         // clear input slots to remove previewed parts
         for(int i = 0; i < activeSlots; i++) {
           tile.setInventorySlotContents(i, ItemStack.EMPTY);
         }
         onCraftMatrixChanged(null);
-        deconstruct = false;
+  	    tile.setDeconstructingStack(out.inventory.getStackInSlot(0));
         return;
       } else {
         resultTaken = !repairTool(true).isEmpty() ||
@@ -471,7 +475,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
       }
     }
   }
-
+  
   private NonNullList<ItemStack> getInputs() {
     NonNullList<ItemStack> input = NonNullList.withSize(tile.getSizeInventory() - 1, ItemStack.EMPTY);
     for(int i = 1; i < tile.getSizeInventory(); i++) {
