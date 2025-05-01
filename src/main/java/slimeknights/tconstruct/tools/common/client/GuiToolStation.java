@@ -1,5 +1,12 @@
 package slimeknights.tconstruct.tools.common.client;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Set;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.Point;
+
 import com.google.common.collect.Lists;
 
 import net.minecraft.client.gui.GuiButton;
@@ -19,14 +26,6 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.util.Point;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Set;
-
 import slimeknights.mantle.client.gui.GuiElement;
 import slimeknights.mantle.client.gui.GuiElementScalable;
 import slimeknights.mantle.client.gui.GuiModule;
@@ -112,10 +111,10 @@ public class GuiToolStation extends GuiTinkerStation {
     traitInfo.yOffset = toolInfo.ySize + 9;
 
     this.ySize = 174;
-
+    
     wood();
   }
-
+  
   @Override
   public void initGui() {
     super.initGui();
@@ -155,7 +154,7 @@ public class GuiToolStation extends GuiTinkerStation {
     return TinkerRegistry.getToolStationCrafting();
   }
 
-  public void onToolSelection(ToolBuildGuiInfo info) {
+  public void onToolSelection(ToolBuildGuiInfo info) {	  
     activeSlots = Math.min(info.positions.size(), Table_slot_count);
     currentInfo = info;
 
@@ -603,4 +602,10 @@ public class GuiToolStation extends GuiTinkerStation {
     traitInfo.setCaption(null);
     traitInfo.setText();
   }
+
+  @Override
+  public ContainerToolStation getContainer() {
+	return (ContainerToolStation) super.getContainer();
+  }
+
 }
