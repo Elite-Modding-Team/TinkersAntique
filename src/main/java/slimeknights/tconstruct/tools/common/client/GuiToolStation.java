@@ -65,6 +65,9 @@ public class GuiToolStation extends GuiTinkerStation {
   private static final GuiElement SlotBackground = new GuiElement(176, 0, 18, 18);
   private static final GuiElement SlotBorder = new GuiElement(194, 0, 18, 18);
 
+  private static final GuiElement ArrowLeft = new GuiElement(8, 241, 8, 15, 256, 256);
+  private static final GuiElement ArrowRight = new GuiElement(0, 241, 8, 15, 256, 256);
+  
   private static final GuiElement SlotSpaceTop = new GuiElement(0, 174 + 2, 18, 2);
   private static final GuiElement SlotSpaceBottom = new GuiElement(0, 174, 18, 2);
   private static final GuiElement PanelSpaceL = new GuiElement(0, 174, 5, 4);
@@ -365,8 +368,8 @@ public class GuiToolStation extends GuiTinkerStation {
 
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    drawBackground(BACKGROUND);
-
+	drawBackground(BACKGROUND);
+	
     // looks like there's a weird case where this is called before init? Not reproducible but meh.
     if(textField != null) {
       if(textField.isFocused()) {
@@ -376,7 +379,7 @@ public class GuiToolStation extends GuiTinkerStation {
       // draw textfield
       textField.drawTextBox();
     }
-
+    
     //int xOff = 3;
     //int yOff = 6;
 
@@ -419,10 +422,27 @@ public class GuiToolStation extends GuiTinkerStation {
     GlStateManager.color(1.0f, 1.0f, 1.0f, 0.82f);
     ItemCover.draw(this.cornerX + 7, this.cornerY + 18);
 
+    GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+    ContainerToolStation container = (ContainerToolStation) inventorySlots;
+    if (container.getSelectedTool() != null || !Config.deconstructTools) {
+      ArrowRight.draw(cornerX + 104, cornerY + 38);
+    } else if (container.getTile().isDeconstructing()) {
+      ArrowLeft.draw(cornerX + 82, cornerY + 38);
+    } else if (container.getTile().isInventoryEmpty()) {
+      ArrowRight.draw(cornerX + 104, cornerY + 38);
+      ArrowLeft.draw(cornerX + 82, cornerY + 38);
+    } else {
+      ArrowRight.draw(cornerX + 104, cornerY + 38);
+    }
+    
     // the slot backgrounds
-    GlStateManager.color(1.0f, 1.0f, 1.0f, 0.28f);
     for(int i = 0; i < activeSlots; i++) {
       Slot slot = inventorySlots.getSlot(i);
+      if (container.getTile().isDeconstructing() && !slot.getHasStack()) {
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 0.58f); 	
+      } else {
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 0.28f);
+      }
       SlotBackground.draw(x + this.cornerX + slot.xPos - 1, y + this.cornerY + slot.yPos - 1);
     }
 
@@ -445,7 +465,7 @@ public class GuiToolStation extends GuiTinkerStation {
     else if(currentInfo.tool.getItem() instanceof TinkersItem) {
       for(int i = 0; i < activeSlots; i++) {
         Slot slot = inventorySlots.getSlot(i);
-        if(!(slot instanceof SlotToolStationIn)) {
+        if(!(slot instanceof SlotToolStationIn) || ((ContainerToolStation) container).getTile().isDeconstructing()) {
           continue;
         }
 
@@ -498,6 +518,7 @@ public class GuiToolStation extends GuiTinkerStation {
 
   protected void drawRepairSlotIcons() {
     for(int i = 0; i < activeSlots; i++) {
+      if (!((ContainerToolStation) container).getTile().isDeconstructing())
       drawRepairSlotIcon(i);
     }
   }

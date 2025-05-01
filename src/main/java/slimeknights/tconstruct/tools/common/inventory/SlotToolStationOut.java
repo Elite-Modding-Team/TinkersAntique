@@ -32,7 +32,8 @@ public class SlotToolStationOut extends Slot {
             && !stack.isItemDamaged() && !ToolHelper.isBroken(stack) // undamaged
             && parent.getBuildableTools().contains(stack.getItem()) // can be built in the current table
             && !isSealedArtifact(stack) // is not a sealed artifact
-            && hasEnoughXP(stack); // has enough xp
+            && hasEnoughXP(stack) // has enough xp
+            && parent.getSelectedTool() == null; // on the default screen and not a tool building screen or the tool that is built
   }
 
   @Override
@@ -42,7 +43,7 @@ public class SlotToolStationOut extends Slot {
     if(isItemValid(stack)) {
       parent.onCraftMatrixChanged(parent.getTile());
       parent.detectAndSendChanges();
-    }
+    } 
   }
 
   @Nonnull
