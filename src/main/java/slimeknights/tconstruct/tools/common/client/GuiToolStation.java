@@ -264,20 +264,25 @@ public class GuiToolStation extends GuiTinkerStation {
     // repair info
     else if(currentInfo.tool.isEmpty()) {
       toolInfo.setCaption(I18n.translateToLocal("gui.toolstation.repair"));
-      toolInfo.setText();
+      toolInfo.setText(I18n.translateToLocal("gui.toolstation.info"));
 
-      traitInfo.setCaption(null);
-      String c = TextFormatting.DARK_GRAY.toString();
-      String[] art = new String[]{
-          c + "",
-          c + "",
-          c + "       .",
-          c + "     /( _________",
-          c + "     |  >:=========`",
-          c + "     )(  ",
-          c + "     \"\""
-      };
-      traitInfo.setText(art);
+      if(Config.deconstructTools) {
+        traitInfo.setCaption(I18n.translateToLocal("gui.toolstation.deconstruct"));
+        traitInfo.setText(I18n.translateToLocal("gui.toolstation.deconstruct.info"));
+      } else {
+        traitInfo.setCaption(null);
+        String c = TextFormatting.DARK_GRAY.toString();
+        String[] art = new String[]{
+                c + "",
+                c + "",
+                c + "       .",
+                c + "     /( _________",
+                c + "     |  >:=========`",
+                c + "     )(  ",
+                c + "     \"\""
+        };
+        traitInfo.setText(art);
+      }
     }
     // tool build info
     else {

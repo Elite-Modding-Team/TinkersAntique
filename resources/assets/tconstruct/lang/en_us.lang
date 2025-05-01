@@ -1002,6 +1002,8 @@ gui.toolstation.traits=Traits
 gui.toolstation.components=Components
 gui.toolstation.info=The main way to repair or change your tools. Place a tool and a material on the left to get started.
 gui.toolstation.noTraits=None :[
+gui.toolstation.deconstruct=Deconstruct
+gui.toolstation.deconstruct.info=Place a tool in the output slot on the right to deconstruct it if the tool:\n- Is undamaged\n- Can be built in the current table\n- Is not a sealed artifact (Tinkers' Evolution)\n- Has enough XP (Tinkers' Tool Leveling)
 
 # Pattern Chest
 gui.patternchest.name=Pattern Chest
