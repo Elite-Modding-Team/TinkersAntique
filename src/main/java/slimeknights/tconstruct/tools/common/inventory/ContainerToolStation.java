@@ -202,12 +202,12 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
         if(deconstructTool()) {
           // populate input slots with parts
           NonNullList<ItemStack> parts = getDeconstructedParts(outputStack);
-          for(int i = 0; i < activeSlots && i < parts.size(); i++) {
+          for(int i = 0; i < tile.getSizeInventory() && i < parts.size(); i++) {
             tile.setInventorySlotContents(i, parts.get(i));
           }
         } else {
           // clear input slots if deconstruction fails
-          for(int i = 0; i < activeSlots; i++) {
+          for(int i = 0; i < tile.getSizeInventory(); i++) {
             tile.setInventorySlotContents(i, ItemStack.EMPTY);
           }
           // keep tool in output slot
@@ -244,7 +244,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
     try {
       if(Config.deconstructTools && this.tile.isDeconstructing()) {
         // clear input slots to remove previewed parts
-        for(int i = 0; i < activeSlots; i++) {
+        for(int i = 0; i < tile.getSizeInventory(); i++) {
           tile.setInventorySlotContents(i, ItemStack.EMPTY);
         }
         onCraftMatrixChanged(null);
@@ -295,6 +295,11 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
 
   private boolean deconstructTool() throws TinkerGuiException {
     ItemStack toolStack = out.getStack();
+    
+    if (this.selectedTool != null) {
+      return false;
+    }
+    
     if(toolStack.isEmpty() || !(toolStack.getItem() instanceof TinkersItem)) {
       return false;
     }
@@ -467,7 +472,7 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
    * Removes the tool in the input slot and fixes all stacks that have stacksize 0 after being used up.
    */
   private void updateSlotsAfterToolAction() {
-// perfect, items already got removed but we still have to clean up 0-stacks and remove the tool
+    // perfect, items already got removed but we still have to clean up 0-stacks and remove the tool
     tile.setInventorySlotContents(0, ItemStack.EMPTY); // slot where the tool was
     for(int i = 1; i < tile.getSizeInventory(); i++) {
       if(!tile.getStackInSlot(i).isEmpty() && tile.getStackInSlot(i).getCount() == 0) {
@@ -488,5 +493,9 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
   @Override
   public boolean canMergeSlot(ItemStack stack, Slot slot) {
     return slot != out && super.canMergeSlot(stack, slot);
+  }
+
+  public ToolCore getSelectedTool() {
+	return selectedTool;
   }
 }

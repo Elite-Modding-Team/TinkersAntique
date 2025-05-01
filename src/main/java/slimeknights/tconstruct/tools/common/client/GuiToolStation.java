@@ -419,13 +419,15 @@ public class GuiToolStation extends GuiTinkerStation {
 
     GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
     ContainerToolStation container = (ContainerToolStation) inventorySlots;
-    if (container.getTile().isDeconstructing()) {
-    	ArrowLeft.draw(cornerX + 82, cornerY + 38);
+    if (container.getSelectedTool() != null) {
+      ArrowRight.draw(cornerX + 104, cornerY + 38);
+    } else if (container.getTile().isDeconstructing()) {
+      ArrowLeft.draw(cornerX + 82, cornerY + 38);
     } else if (container.getTile().isInventoryEmpty()) {
-    	ArrowRight.draw(cornerX + 104, cornerY + 38);
-    	ArrowLeft.draw(cornerX + 82, cornerY + 38);
+      ArrowRight.draw(cornerX + 104, cornerY + 38);
+      ArrowLeft.draw(cornerX + 82, cornerY + 38);
     } else {
-    	ArrowRight.draw(cornerX + 104, cornerY + 38);
+      ArrowRight.draw(cornerX + 104, cornerY + 38);
     }
     
     // the slot backgrounds
@@ -458,7 +460,7 @@ public class GuiToolStation extends GuiTinkerStation {
     else if(currentInfo.tool.getItem() instanceof TinkersItem) {
       for(int i = 0; i < activeSlots; i++) {
         Slot slot = inventorySlots.getSlot(i);
-        if(!(slot instanceof SlotToolStationIn)) {
+        if(!(slot instanceof SlotToolStationIn) || ((ContainerToolStation) container).getTile().isDeconstructing()) {
           continue;
         }
 

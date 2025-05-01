@@ -30,7 +30,8 @@ public class SlotToolStationOut extends Slot {
             && !stack.isItemDamaged() && !ToolHelper.isBroken(stack) // undamaged
             && parent.getBuildableTools().contains(stack.getItem()) // can be built in the current table
             && parent.getInputSlotContents().isEmpty() // input slots are empty
-            && ModifierNBT.readTag(TinkerUtil.getModifierTag(stack, "tconevo.artifact")).level != 1; // is not a sealed artifact
+            && ModifierNBT.readTag(TinkerUtil.getModifierTag(stack, "tconevo.artifact")).level != 1 // is not a sealed artifact
+            && parent.getSelectedTool() == null; // on the default screen and not a tool building screen or the tool that is built
   }
 
   @Override
