@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
 import it.unimi.dsi.fastutil.objects.*;
@@ -846,6 +847,10 @@ public final class TinkerRegistry {
     return Optional.ofNullable(fluidStack)
                    .map(slimeknights.tconstruct.library.utils.FluidUtil::getValidFluidStackOrNull)
                    .orElse(null);
+  }
+
+  public static Map<ResourceLocation, FluidStack> getAllEntityMeltingRecipes() {
+    return ImmutableMap.copyOf(entityMeltingRegistry);
   }
 
   /*---------------------------------------------------------------------------
