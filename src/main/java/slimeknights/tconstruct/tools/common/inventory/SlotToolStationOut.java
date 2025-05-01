@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
@@ -26,11 +27,12 @@ public class SlotToolStationOut extends Slot {
   @Override
   public boolean isItemValid(ItemStack stack) {
     return Config.deconstructTools // config enabled
+            && parent.getInputSlotContents().isEmpty() // input slots are empty
             && !stack.isEmpty() && stack.getItem() instanceof TinkersItem // is tool
             && !stack.isItemDamaged() && !ToolHelper.isBroken(stack) // undamaged
             && parent.getBuildableTools().contains(stack.getItem()) // can be built in the current table
-            && parent.getInputSlotContents().isEmpty() // input slots are empty
-            && ModifierNBT.readTag(TinkerUtil.getModifierTag(stack, "tconevo.artifact")).level != 1; // is not a sealed artifact
+            && !isSealedArtifact(stack) // is not a sealed artifact
+            && hasEnoughXP(stack); // has enough xp
   }
 
   @Override
@@ -51,5 +53,19 @@ public class SlotToolStationOut extends Slot {
     stack.onCrafting(playerIn.getEntityWorld(), playerIn, 1);
 
     return super.onTake(playerIn, stack);
+  }
+
+  private boolean isSealedArtifact(ItemStack stack) {
+    NBTTagCompound modifierTag = TinkerUtil.getModifierTag(stack, "tconevo.artifact");
+    return ModifierNBT.readTag(modifierTag).level == 1;
+  }
+
+  private boolean hasEnoughXP(ItemStack stack) {
+    NBTTagCompound modifierTag = TinkerUtil.getModifierTag(stack, "toolleveling");
+    if (modifierTag.hasKey("xp")) {
+      int xp = modifierTag.getInteger("xp");
+      return xp >= Config.deconstructXPRequirement;
+    }
+    return true;
   }
 }
