@@ -49,13 +49,13 @@ public class GuiButtonsToolStation extends GuiSideButtons {
         GuiButtonItem<ToolBuildGuiInfo> button = new GuiButtonItem<>(index++, -1, -1, info.tool, info);
         shiftButton(button, 0, -18 * style);
         addSideButton(button);
-
+        
         if(index - 1 == selected) {
           button.pressed = true;
         }
       }
     }
-
+    
     super.updatePosition(parentX, parentY, parentSizeX, parentSizeY);
 
     // activate currently selected/default
@@ -76,6 +76,10 @@ public class GuiButtonsToolStation extends GuiSideButtons {
   @Override
   @SuppressWarnings("unchecked")
   protected void actionPerformed(GuiButton button) throws IOException {
+    if(button instanceof GuiButtonItem && parent.getContainer().getTile().isDeconstructing() && ((GuiButtonItem<ToolBuildGuiInfo>) button).data.tool != null) {
+      return;
+    }
+      
     for(Object o : buttonList) {
       if(o instanceof GuiButtonItem) {
         ((GuiButtonItem<ToolBuildGuiInfo>) o).pressed = false;
