@@ -200,7 +200,7 @@ public class TinkerFluids extends TinkerPulse {
       registerMoltenBlock(registry, glass);
 
       // venom for the insect god
-      venom = fluidPoison("venom", 0xa2935e);
+      venom = fluidPoison("venom", 0xb9b566);
       venom.setTemperature(336);
       registerClassicBlock(registry, venom);
 

@@ -50,6 +50,7 @@ public final class Config {
   public static int maxSmelteryItemRenders = -1;
   public static int netherOresMiningLevel = 4;
   public static boolean deconstructTools = true;
+  public static int deconstructXPRequirement = 0;
   public static int heatItemsTickrateSmeltery = 4;
   public static int heatItemsTickrateSearedFurnace = 4;
   public static int liquidTransferRate = 6;
@@ -149,6 +150,9 @@ public final class Config {
           "natura:heatscarspider;false;blazing_blood;40",
           "thaumcraft:Firebat;false;blazing_blood;5",
           "thaumcraft:Pech;true;gold;10"
+  };
+  public static String[] materialPriorities = {
+          "tconstruct"
   };
 
   // Worldgen
@@ -364,6 +368,10 @@ public final class Config {
       prop.setComment("If tools can be deconstructed in tool stations and tool forges by putting them into output slots.");
       deconstructTools = prop.getBoolean();
 
+      prop = configFile.get(cat, "deconstructXPRequirement", deconstructXPRequirement);
+      prop.setComment("The XP requirement for deconstructing tools (if provided by Tinkers' Tool Leveling).");
+      deconstructXPRequirement = prop.getInt();
+
       prop = configFile.get(cat, "heatItemsTickrateSmeltery", heatItemsTickrateSmeltery);
       prop.setComment("The tickrate at which items are heated and alloys are created in the smeltery. Defaults to every 4th tick.");
       heatItemsTickrateSmeltery = prop.getInt();
@@ -387,6 +395,10 @@ public final class Config {
       prop = configFile.get(cat, "entityMelting", entityMelting);
       prop.setComment("List of entity melting entries in the format 'modid:entity;subtypes;fluid;amount'.");
       entityMelting = prop.getStringList();
+
+      prop = configFile.get(cat, "materialPriorities", materialPriorities);
+      prop.setComment("List of mod IDs for material registration with descending priority. Highest mod ID wins!");
+      materialPriorities = prop.getStringList();
     }
     // Worldgen
     {

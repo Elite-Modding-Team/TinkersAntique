@@ -1,5 +1,6 @@
 {
     "type": "metal",
+    "suffix": "metal_base",
     "parameters": {
         "color": "efa055",
         "shinyness": 0.25,
