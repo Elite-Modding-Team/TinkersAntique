@@ -469,7 +469,8 @@ public final class TinkerRegistry {
   /** Registers an alternate name for a modifier. This is used for multi-level modifiers/traits where multiple exist, but one specific is needed for access */
   public static void registerModifierAlias(IModifier modifier, String alias) {
     if(modifiers.containsKey(alias)) {
-      throw new TinkerAPIException("Trying to register a modifier with the name " + alias + " but it already is registered");
+      log.fatal("Trying to register a modifier with the name " + alias + " but it already is registered");
+      return;
     }
     if(new TinkerRegisterEvent.ModifierRegisterEvent(modifier).fire()) {
       modifiers.put(alias, modifier);
@@ -596,9 +597,11 @@ public final class TinkerRegistry {
   public static void registerAlloy(FluidStack result, FluidStack... inputs) {
     if(result.amount < 1) {
       log.fatal("Alloy Recipe: Resulting alloy {} has to have an amount ({})", result.getLocalizedName(), result.amount);
+      return;
     }
     if(inputs.length < 2) {
       log.fatal("Alloy Recipe: Alloy for {} must consist of at least 2 liquids", result.getLocalizedName());
+      return;
     }
 
     registerAlloy(new AlloyRecipe(result, inputs));
@@ -818,6 +821,7 @@ public final class TinkerRegistry {
 
     if(name == null) {
       log.fatal("Entity Melting: Entity {} is not registered in the EntityList", clazz.getSimpleName());
+      return;
     }
 
     TinkerRegisterEvent.EntityMeltingRegisterEvent event = new TinkerRegisterEvent.EntityMeltingRegisterEvent(clazz, liquid);
