@@ -2,13 +2,13 @@
   "tool": "kama",
   "text": [
     {
-      "text": "The Kama is a precision reaping tool, mowing down plants and shearing animals."
+      "text": "The Kama is a versatile farming tool, mowing down plants, tilling soil and shearing animals."
     },
     {
       "text": "\n"
     },
     {
-      "text": "Right-clicking on crops or sugarcane harvests and replants all fully grown plants in the area."
+      "text": "Right-clicking soil will till it. Right-clicking on crops or sugarcane will harvest and replant all fully grown plants in the area."
     }
   ],
   "properties": [
