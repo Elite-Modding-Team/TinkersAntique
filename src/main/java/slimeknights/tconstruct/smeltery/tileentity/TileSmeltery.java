@@ -240,23 +240,23 @@ public class TileSmeltery extends TileHeatingStructureFuelTank<MultiblockSmelter
           }
         }
       }
-      // we only melt living entities if we have something in the smeltery
-      else if(liquids.getFluidAmount() > 0) {
-        // custom melting?
-        FluidStack fluid = TinkerRegistry.getMeltingForEntity(entity);
-        // no custom melting but a living entity that's alive?
-        if(fluid == null && entity instanceof EntityLivingBase) {
-          if(entity.isEntityAlive() && !entity.isDead) {
+      // we only melt living entities
+      else if(entity instanceof EntityLivingBase && entity.isEntityAlive()) {
+        // we only melt if the smeltery is fueled
+        if(hasFuel()) {
+          // custom melting?
+          FluidStack fluid = TinkerRegistry.getMeltingForEntity(entity);
+          // no custom melting, there will be blood
+          if(fluid == null) {
             fluid = new FluidStack(TinkerFluids.blood, 20);
           }
-        }
-
-        if(fluid != null) {
           // hurt it
           if(entity.attackEntityFrom(smelteryDamage, 2f)) {
             // spill the blood
             liquids.fill(fluid.copy(), true);
           }
+        } else {
+          needsFuel = true;
         }
       }
     }

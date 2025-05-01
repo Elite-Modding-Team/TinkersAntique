@@ -40,6 +40,9 @@ import slimeknights.tconstruct.plugin.jei.casting.CastingRecipeWrapper;
 import slimeknights.tconstruct.plugin.jei.drying.DryingRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.drying.DryingRecipeChecker;
 import slimeknights.tconstruct.plugin.jei.drying.DryingRecipeHandler;
+import slimeknights.tconstruct.plugin.jei.entitymelting.EntityMeltingRecipeCategory;
+import slimeknights.tconstruct.plugin.jei.entitymelting.EntityMeltingRecipeChecker;
+import slimeknights.tconstruct.plugin.jei.entitymelting.EntityMeltingRecipeHandler;
 import slimeknights.tconstruct.plugin.jei.interpreter.PatternSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.TableSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.ToolPartSubtypeInterpreter;
@@ -126,7 +129,7 @@ public class JEIPlugin implements IModPlugin {
     if(TConstruct.pulseManager.isPulseLoaded(TinkerSmeltery.PulseId)) {
       castingCategory = new CastingRecipeCategory(guiHelper);
 
-      registry.addRecipeCategories(new SmeltingRecipeCategory(guiHelper), new AlloyRecipeCategory(guiHelper), castingCategory);
+      registry.addRecipeCategories(new SmeltingRecipeCategory(guiHelper), new AlloyRecipeCategory(guiHelper), castingCategory, new EntityMeltingRecipeCategory(guiHelper));
     }
 
     if(TConstruct.pulseManager.isPulseLoaded(TinkerGadgets.PulseId)) {
@@ -162,9 +165,11 @@ public class JEIPlugin implements IModPlugin {
 
       registry.handleRecipes(MeltingRecipe.class, new SmeltingRecipeHandler(), SmeltingRecipeCategory.CATEGORY);
 
+      registry.handleRecipes(MeltingRecipe.class, new EntityMeltingRecipeHandler(), EntityMeltingRecipeCategory.CATEGORY);
+
       registry.handleRecipes(CastingRecipeWrapper.class, new CastingRecipeHandler(), CastingRecipeCategory.CATEGORY);
 
-      registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.smelteryController), SmeltingRecipeCategory.CATEGORY, AlloyRecipeCategory.CATEGORY);
+      registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.smelteryController), SmeltingRecipeCategory.CATEGORY, AlloyRecipeCategory.CATEGORY, EntityMeltingRecipeCategory.CATEGORY);
       registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.castingBlock, 1, BlockCasting.CastingType.TABLE.meta), CastingRecipeCategory.CATEGORY);
       registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.castingBlock, 1, BlockCasting.CastingType.BASIN.meta), CastingRecipeCategory.CATEGORY);
       // add the seared furnace to the list with the vanilla furnace
@@ -173,6 +178,7 @@ public class JEIPlugin implements IModPlugin {
 
       // melting recipes
       registry.addRecipes(SmeltingRecipeChecker.getSmeltingRecipes(), SmeltingRecipeCategory.CATEGORY);
+      registry.addRecipes(EntityMeltingRecipeChecker.getEntityMeltingRecipes(), EntityMeltingRecipeCategory.CATEGORY);
       // alloys
       registry.addRecipes(AlloyRecipeChecker.getAlloyRecipes(), AlloyRecipeCategory.CATEGORY);
 

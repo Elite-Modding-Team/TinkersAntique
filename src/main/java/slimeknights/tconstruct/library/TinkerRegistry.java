@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
 import it.unimi.dsi.fastutil.objects.*;
@@ -117,12 +118,26 @@ public final class TinkerRegistry {
 
     // duplicate material
     if(materials.containsKey(material.identifier)) {
-      ModContainer registeredBy = materialRegisteredByMod.get(material.identifier);
-      log.fatal(String.format(
-          "Could not register material \"%s\": It was already registered by %s",
-          material.identifier,
-          registeredBy.getName()));
-      return;
+      ModContainer currentMod = Loader.instance().activeModContainer();
+      String currentModId = currentMod != null ? currentMod.getModId() : "unknown";
+      ModContainer registeredMod = getTrace(material);
+      String registeredModId = registeredMod != null ? registeredMod.getModId() : "unknown";
+      // compare priorities based on config
+      int currentPriority = getModPriority(currentModId);
+      int registeredPriority = getModPriority(registeredModId);
+      if(currentPriority < registeredPriority) {
+        // current mod has higher priority (lower index), replace existing material
+        log.warn("Replacing material \"{}\" with material from {} ({})",
+                material.identifier, currentMod.getName(), currentModId);
+        // remove existing material
+        materials.remove(material.identifier);
+        materialRegisteredByMod.remove(material.identifier);
+      } else {
+        // existing mod has higher priority, reject new material
+        log.fatal("Could not register material \"{}\" from {} ({}): It was already registered by {} ({})",
+                material.identifier, currentMod.getName(), currentModId, registeredMod.getName(), registeredModId);
+        return;
+      }
     }
 
     MaterialEvent.MaterialRegisterEvent event = new MaterialEvent.MaterialRegisterEvent(material);
@@ -469,7 +484,8 @@ public final class TinkerRegistry {
   /** Registers an alternate name for a modifier. This is used for multi-level modifiers/traits where multiple exist, but one specific is needed for access */
   public static void registerModifierAlias(IModifier modifier, String alias) {
     if(modifiers.containsKey(alias)) {
-      throw new TinkerAPIException("Trying to register a modifier with the name " + alias + " but it already is registered");
+      log.fatal("Trying to register a modifier with the name " + alias + " but it already is registered");
+      return;
     }
     if(new TinkerRegisterEvent.ModifierRegisterEvent(modifier).fire()) {
       modifiers.put(alias, modifier);
@@ -596,9 +612,11 @@ public final class TinkerRegistry {
   public static void registerAlloy(FluidStack result, FluidStack... inputs) {
     if(result.amount < 1) {
       log.fatal("Alloy Recipe: Resulting alloy {} has to have an amount ({})", result.getLocalizedName(), result.amount);
+      return;
     }
     if(inputs.length < 2) {
       log.fatal("Alloy Recipe: Alloy for {} must consist of at least 2 liquids", result.getLocalizedName());
+      return;
     }
 
     registerAlloy(new AlloyRecipe(result, inputs));
@@ -818,6 +836,7 @@ public final class TinkerRegistry {
 
     if(name == null) {
       log.fatal("Entity Melting: Entity {} is not registered in the EntityList", clazz.getSimpleName());
+      return;
     }
 
     TinkerRegisterEvent.EntityMeltingRegisterEvent event = new TinkerRegisterEvent.EntityMeltingRegisterEvent(clazz, liquid);
@@ -842,6 +861,10 @@ public final class TinkerRegistry {
     return Optional.ofNullable(fluidStack)
                    .map(slimeknights.tconstruct.library.utils.FluidUtil::getValidFluidStackOrNull)
                    .orElse(null);
+  }
+
+  public static Map<ResourceLocation, FluidStack> getAllEntityMeltingRecipes() {
+    return ImmutableMap.copyOf(entityMeltingRegistry);
   }
 
   /*---------------------------------------------------------------------------
@@ -1034,6 +1057,20 @@ public final class TinkerRegistry {
   /*---------------------------------------------------------------------------
   | Traceability & Internal stuff                                             |
   ---------------------------------------------------------------------------*/
+
+  /**
+   * Gets the priority of a mod based on config.
+   * Lower index means higher priority. Returns Integer.MAX_VALUE if mod is not in the priority list.
+   */
+  static int getModPriority(String modId) {
+    for(int i = 0; i < Config.materialPriorities.length; i++) {
+      if(Config.materialPriorities[i].equals(modId)) {
+        return i;
+      }
+    }
+    // mods not in priority list have the lowest priority
+    return Integer.MAX_VALUE;
+  }
 
   static void putMaterialTrace(String materialIdentifier) {
     ModContainer activeMod = Loader.instance().activeModContainer();
