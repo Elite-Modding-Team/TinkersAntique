@@ -424,7 +424,7 @@ public class GuiToolStation extends GuiTinkerStation {
 
     GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
     ContainerToolStation container = (ContainerToolStation) inventorySlots;
-    if (container.getSelectedTool() != null) {
+    if (container.getSelectedTool() != null || !Config.deconstructTools) {
       ArrowRight.draw(cornerX + 104, cornerY + 38);
     } else if (container.getTile().isDeconstructing()) {
       ArrowLeft.draw(cornerX + 82, cornerY + 38);
