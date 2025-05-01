@@ -33,7 +33,8 @@ public class SlotToolStationIn extends Slot {
   @Override
   public boolean isItemValid(ItemStack stack) {
     // dormant slots don't take any items, they can only be taken out of
-    if(dormant) {
+	// we also dont want stuff to be put in while a deconstruction is happening
+    if(dormant || ((ContainerToolStation) parent).getTile().isDeconstructing()) {
       return false;
     }
 
