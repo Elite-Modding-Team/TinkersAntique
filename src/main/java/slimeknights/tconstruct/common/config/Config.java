@@ -150,6 +150,9 @@ public final class Config {
           "thaumcraft:Firebat;false;blazing_blood;5",
           "thaumcraft:Pech;true;gold;10"
   };
+  public static String[] materialPriorities = {
+          "tconstruct"
+  };
 
   // Worldgen
   public static boolean genSlimeIslands = true;
@@ -387,6 +390,10 @@ public final class Config {
       prop = configFile.get(cat, "entityMelting", entityMelting);
       prop.setComment("List of entity melting entries in the format 'modid:entity;subtypes;fluid;amount'.");
       entityMelting = prop.getStringList();
+
+      prop = configFile.get(cat, "materialPriorities", materialPriorities);
+      prop.setComment("List of mod IDs for material registration with descending priority. Highest mod ID wins!");
+      materialPriorities = prop.getStringList();
     }
     // Worldgen
     {

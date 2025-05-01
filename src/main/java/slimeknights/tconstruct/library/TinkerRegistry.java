@@ -118,12 +118,26 @@ public final class TinkerRegistry {
 
     // duplicate material
     if(materials.containsKey(material.identifier)) {
-      ModContainer registeredBy = materialRegisteredByMod.get(material.identifier);
-      log.fatal(String.format(
-          "Could not register material \"%s\": It was already registered by %s",
-          material.identifier,
-          registeredBy.getName()));
-      return;
+      ModContainer currentMod = Loader.instance().activeModContainer();
+      String currentModId = currentMod != null ? currentMod.getModId() : "unknown";
+      ModContainer registeredMod = getTrace(material);
+      String registeredModId = registeredMod != null ? registeredMod.getModId() : "unknown";
+      // compare priorities based on config
+      int currentPriority = getModPriority(currentModId);
+      int registeredPriority = getModPriority(registeredModId);
+      if(currentPriority < registeredPriority) {
+        // current mod has higher priority (lower index), replace existing material
+        log.warn("Replacing material \"{}\" with material from {} ({})",
+                material.identifier, currentMod.getName(), currentModId);
+        // remove existing material
+        materials.remove(material.identifier);
+        materialRegisteredByMod.remove(material.identifier);
+      } else {
+        // existing mod has higher priority, reject new material
+        log.fatal("Could not register material \"{}\" from {} ({}): It was already registered by {} ({})",
+                material.identifier, currentMod.getName(), currentModId, registeredMod.getName(), registeredModId);
+        return;
+      }
     }
 
     MaterialEvent.MaterialRegisterEvent event = new MaterialEvent.MaterialRegisterEvent(material);
@@ -1043,6 +1057,20 @@ public final class TinkerRegistry {
   /*---------------------------------------------------------------------------
   | Traceability & Internal stuff                                             |
   ---------------------------------------------------------------------------*/
+
+  /**
+   * Gets the priority of a mod based on config.
+   * Lower index means higher priority. Returns Integer.MAX_VALUE if mod is not in the priority list.
+   */
+  static int getModPriority(String modId) {
+    for(int i = 0; i < Config.materialPriorities.length; i++) {
+      if(Config.materialPriorities[i].equals(modId)) {
+        return i;
+      }
+    }
+    // mods not in priority list have the lowest priority
+    return Integer.MAX_VALUE;
+  }
 
   static void putMaterialTrace(String materialIdentifier) {
     ModContainer activeMod = Loader.instance().activeModContainer();
