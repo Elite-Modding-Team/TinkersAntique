@@ -87,6 +87,8 @@ public final class Config {
           "minecraft:player;false;minecraft:skull:3",
           "minecraft:creeper;true;minecraft:skull:4",
           "minecraft:ender_dragon;true;minecraft:skull:5",
+          "minecraft:snowman;false;minecraft:pumpkin",
+          "minecraft:villager_golem;false;minecraft:pumpkin",
           "mod_lavacow:boneworm;true;minecraft:skull:0",
           "mod_lavacow:forsaken;true;minecraft:skull:0",
           "mod_lavacow:skeletonking;false;minecraft:skull:0",
