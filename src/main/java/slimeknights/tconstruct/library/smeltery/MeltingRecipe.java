@@ -90,4 +90,37 @@ public class MeltingRecipe {
   public static MeltingRecipe forAmount(RecipeMatch recipeMatch, Fluid fluid, int timeAmount) {
     return forAmount(recipeMatch, new FluidStack(fluid, recipeMatch.amountMatched), timeAmount);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if(this == o) {
+      return true;
+    }
+    if(o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    MeltingRecipe that = (MeltingRecipe) o;
+    if(temperature != that.temperature) {
+      return false;
+    }
+    if(input != null ? !input.equals(that.input) : that.input != null) {
+      return false;
+    }
+    return output != null ? output.isFluidStackIdentical(that.output) : that.output == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = input != null ? input.hashCode() : 0;
+    int outputHash = 0;
+    if(output != null) {
+      outputHash = output.getFluid().hashCode() + output.amount;
+      if(output.tag != null) {
+        outputHash = 31 * outputHash + output.tag.hashCode();
+      }
+    }
+    result = 31 * result + outputHash;
+    result = 31 * result + temperature;
+    return result;
+  }
 }

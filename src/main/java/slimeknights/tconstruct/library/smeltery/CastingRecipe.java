@@ -108,4 +108,49 @@ public class CastingRecipe implements ICastingRecipe {
 
     return time + (temperature * amount) / 1600;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if(this == o) {
+      return true;
+    }
+    if(o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    CastingRecipe that = (CastingRecipe) o;
+    if(time != that.time) {
+      return false;
+    }
+    if(consumesCast != that.consumesCast) {
+      return false;
+    }
+    if(switchOutputs != that.switchOutputs) {
+      return false;
+    }
+    if(cast != null ? !cast.equals(that.cast) : that.cast != null) {
+      return false;
+    }
+    if(fluid != null ? !fluid.isFluidStackIdentical(that.fluid) : that.fluid != null) {
+      return false;
+    }
+    return output != null ? output.isItemEqual(that.output) && ItemStack.areItemStackTagsEqual(output, that.output) : that.output == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = cast != null ? cast.hashCode() : 0;
+    int fluidHash = 0;
+    if(fluid != null) {
+      fluidHash = fluid.getFluid().hashCode() + fluid.amount;
+      if(fluid.tag != null) {
+        fluidHash = 31 * fluidHash + fluid.tag.hashCode();
+      }
+    }
+    result = 31 * result + fluidHash;
+    result = 31 * result + (output != null ? output.getItem().hashCode() + output.getMetadata() + (output.getTagCompound() != null ? output.getTagCompound().hashCode() : 0) : 0);
+    result = 31 * result + time;
+    result = 31 * result + (consumesCast ? 1 : 0);
+    result = 31 * result + (switchOutputs ? 1 : 0);
+    return result;
+  }
 }
