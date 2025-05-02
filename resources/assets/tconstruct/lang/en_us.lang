@@ -865,8 +865,8 @@ modifier.webbed.desc=§oYuck!§r\nEntangle your foes in cobwebs, slowing them.
 item.tconstruct.pickaxe.desc=The Pickaxe is a precise mining tool. It is effective on stone and ores.\nIt breaks blocks, OK?
 item.tconstruct.shovel.desc=The Shovel digs up dirt. It is effective on dirt, sand, gravel and snow.\nJust don't dig your own grave!
 item.tconstruct.hatchet.desc=The Hatchet chops up wood and makes short work of leaves. It also makes for a passable weapon.\nChop chop!
-item.tconstruct.mattock.desc=The Mattock is a versatile farming tool. It is effective on wood, soil and plants. It also packs quite a punch.\nRight Click: Create path
-item.tconstruct.kama.desc=The Kama is a precision reaping tool, mowing down plants and shearing animals.\nRight Click: Hoe ground, harvest and replant crops
+item.tconstruct.mattock.desc=The Mattock is a precise multi-use tool. It is effective on wood, soil and plants. It also creates paths like shovels and packs quite a punch.\nRight Click: Create path
+item.tconstruct.kama.desc=The Kama is a versatile farming tool, mowing down plants, tilling soil and shearing animals.\nRight Click: Hoe ground, harvest and replant crops
 item.tconstruct.broadsword.desc=The Broadsword is a universal weapon. Sweep attacks keep enemy hordes at bay.\nAlso good against cobwebs!
 item.tconstruct.longsword.desc=The Longsword is an offensive weapon. It is often used for charging into battle at full speed.\nRight Click: Lunge
 item.tconstruct.rapier.desc=The Rapier is a special weapon that relies on quick strikes to defeat foes.\nRight Click: Backpedal
@@ -882,7 +882,7 @@ item.tconstruct.shuriken.desc=The Shuriken is a fast, short ranged throwing weap
 item.tconstruct.shortbow.desc=The Shortbow is a quick and nimble weapon. It allows for fast movements while shooting arrows at a rapid rate.\nUses Tinkers' Arrows.
 item.tconstruct.longbow.desc=The Longbow is a powerful long range weapon. It provides high damage but is less mobile than its short brother.\nUses Tinkers' Arrows.
 item.tconstruct.arrow.desc=The Arrows are the ammo used for Tinkers' Bows. One stack provides many shots, and they can be modified as any tool.
-item.tconstruct.crossbow.desc=The Crossbow is a slow but very powerful weapon. It has to be loaded beforehand by holding rightclick, but can be fired at any moment afterwards.\nUses Tinkers' Bolts.
+item.tconstruct.crossbow.desc=The Crossbow is a slow but very powerful weapon. It has to be loaded beforehand by holding right-click, but can be fired at any moment afterwards.\nUses Tinkers' Bolts.
 item.tconstruct.bolt.desc=The Bolts are the ammo used for Tinkers' Crossbows. One stack provides many shots, and they can be modified as any tool.\nPartially penetrates enemy armor.
 
 
@@ -1032,7 +1032,6 @@ gui.smeltery.liquid.ingot=Ingots
 gui.smeltery.liquid.nugget=Nuggets
 gui.smeltery.liquid.block=Blocks
 gui.smeltery.liquid.gem=Gems
-gui.smeltery.entitymelting.prefix=Living
 
 # Seared Furnace
 gui.searedfurnace.name=Seared Furnace
@@ -1056,6 +1055,8 @@ gui.jei.casting.title=Casting
 gui.jei.casting.consume=Consumes cast!
 gui.jei.drying.title=Drying
 gui.jei.entitymelting.title=Entity Melting
+gui.jei.severing.title=Severing
+gui.jei.living.info=Living %s
 
 # WAILA Plugin
 gui.waila.tank.fluid=Liquid: %s

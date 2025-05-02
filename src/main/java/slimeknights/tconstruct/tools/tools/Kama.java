@@ -51,7 +51,9 @@ public class Kama extends AoeToolCore {
           net.minecraft.block.material.Material.PLANTS,
           net.minecraft.block.material.Material.VINE,
           net.minecraft.block.material.Material.GOURD,
-          net.minecraft.block.material.Material.CACTUS);
+          net.minecraft.block.material.Material.CACTUS,
+          net.minecraft.block.material.Material.CLOTH,
+          net.minecraft.block.material.Material.SPONGE);
 
 
   public Kama(PartMaterialType... requiredComponents) {

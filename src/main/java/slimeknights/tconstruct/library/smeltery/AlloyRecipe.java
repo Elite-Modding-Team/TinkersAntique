@@ -90,4 +90,29 @@ public class AlloyRecipe {
   private boolean validFluid(FluidStack fluid) {
     return fluid != null && fluid.getFluid() != null && fluid.amount > 0;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if(this == o) {
+      return true;
+    }
+    if(o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    AlloyRecipe that = (AlloyRecipe) o;
+    if(fluids != null ? !fluids.equals(that.fluids) : that.fluids != null) {
+      return false;
+    }
+    return result != null ? result.isFluidStackIdentical(that.result) : that.result == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int resultHash = result != null ? (result.getFluid().hashCode() + result.amount) : 0;
+    if(result != null && result.tag != null) {
+      resultHash = 31 * resultHash + result.tag.hashCode();
+    }
+    resultHash = 31 * resultHash + (fluids != null ? fluids.hashCode() : 0);
+    return resultHash;
+  }
 }
