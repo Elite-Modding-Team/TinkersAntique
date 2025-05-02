@@ -24,8 +24,8 @@ public class EntityMeltingRecipeChecker {
                 ItemStack spawnEgg = new ItemStack(Items.SPAWN_EGG);
                 ItemMonsterPlacer.applyEntityIdToItemStack(spawnEgg, rl);
                 if(!spawnEgg.isEmpty()) {
-                    String name = spawnEgg.getDisplayName().replace(I18n.format("item.monsterPlacer.name"), I18n.format("gui.smeltery.entitymelting.prefix"));
-                    spawnEgg.setStackDisplayName(name);
+                    String name = spawnEgg.getDisplayName().replace(I18n.format("item.monsterPlacer.name"), "").trim();
+                    spawnEgg.setStackDisplayName(I18n.format("gui.smeltery.entitymelting.entity", name));
                     FluidStack fluidOutput = TinkerRegistry.getAllEntityMeltingRecipes().get(rl);
                     if(fluidOutput != null) {
                         RecipeMatch recipeMatch = new RecipeMatch.Item(spawnEgg, 1, fluidOutput.amount);

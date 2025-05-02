@@ -1032,7 +1032,7 @@ gui.smeltery.liquid.ingot=Ingots
 gui.smeltery.liquid.nugget=Nuggets
 gui.smeltery.liquid.block=Blocks
 gui.smeltery.liquid.gem=Gems
-gui.smeltery.entitymelting.prefix=Living
+gui.smeltery.entitymelting.entity=Living %s
 
 # Seared Furnace
 gui.searedfurnace.name=Seared Furnace
