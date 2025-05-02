@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.plugin.jei.entitymelting;
 
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityList;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
@@ -19,19 +18,16 @@ public class EntityMeltingRecipeChecker {
         Set<MeltingRecipe> recipes = new HashSet<>();
 
         for(ResourceLocation rl : TinkerRegistry.getAllEntityMeltingRecipes().keySet()) {
-            EntityList.EntityEggInfo spawnEggInfo = EntityList.ENTITY_EGGS.get(rl);
-            if(spawnEggInfo != null) {
-                ItemStack spawnEgg = new ItemStack(Items.SPAWN_EGG);
-                ItemMonsterPlacer.applyEntityIdToItemStack(spawnEgg, rl);
-                if(!spawnEgg.isEmpty()) {
-                    String name = spawnEgg.getDisplayName().replace(I18n.format("item.monsterPlacer.name"), "").trim();
-                    spawnEgg.setStackDisplayName(I18n.format("gui.smeltery.entitymelting.entity", name));
-                    FluidStack fluidOutput = TinkerRegistry.getAllEntityMeltingRecipes().get(rl);
-                    if(fluidOutput != null) {
-                        RecipeMatch recipeMatch = new RecipeMatch.Item(spawnEgg, 1, fluidOutput.amount);
-                        MeltingRecipe entityRecipe = new MeltingRecipe(recipeMatch, fluidOutput);
-                        recipes.add(entityRecipe);
-                    }
+            ItemStack spawnEgg = new ItemStack(Items.SPAWN_EGG);
+            ItemMonsterPlacer.applyEntityIdToItemStack(spawnEgg, rl);
+            if(!spawnEgg.isEmpty()) {
+                String name = spawnEgg.getDisplayName().replace(I18n.format("item.monsterPlacer.name"), "").trim();
+                spawnEgg.setStackDisplayName(I18n.format("gui.jei.living.info", name));
+                FluidStack fluidOutput = TinkerRegistry.getAllEntityMeltingRecipes().get(rl);
+                if(fluidOutput != null) {
+                    RecipeMatch recipeMatch = new RecipeMatch.Item(spawnEgg, 1, fluidOutput.amount);
+                    MeltingRecipe entityRecipe = new MeltingRecipe(recipeMatch, fluidOutput);
+                    recipes.add(entityRecipe);
                 }
             }
         }

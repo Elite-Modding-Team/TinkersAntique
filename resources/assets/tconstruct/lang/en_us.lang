@@ -1032,7 +1032,6 @@ gui.smeltery.liquid.ingot=Ingots
 gui.smeltery.liquid.nugget=Nuggets
 gui.smeltery.liquid.block=Blocks
 gui.smeltery.liquid.gem=Gems
-gui.smeltery.entitymelting.entity=Living %s
 
 # Seared Furnace
 gui.searedfurnace.name=Seared Furnace
@@ -1056,6 +1055,8 @@ gui.jei.casting.title=Casting
 gui.jei.casting.consume=Consumes cast!
 gui.jei.drying.title=Drying
 gui.jei.entitymelting.title=Entity Melting
+gui.jei.severing.title=Severing
+gui.jei.living.info=Living %s
 
 # WAILA Plugin
 gui.waila.tank.fluid=Liquid: %s

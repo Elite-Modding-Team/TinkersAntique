@@ -24,6 +24,7 @@ import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.gadgets.TinkerGadgets;
 import slimeknights.tconstruct.library.DryingRecipe;
 import slimeknights.tconstruct.library.MaterialIntegration;
+import slimeknights.tconstruct.library.SeveringRecipe;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidColored;
 import slimeknights.tconstruct.library.smeltery.AlloyRecipe;
@@ -47,6 +48,9 @@ import slimeknights.tconstruct.plugin.jei.interpreter.PatternSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.TableSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.ToolPartSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.ToolSubtypeInterpreter;
+import slimeknights.tconstruct.plugin.jei.severing.SeveringRecipeCategory;
+import slimeknights.tconstruct.plugin.jei.severing.SeveringRecipeChecker;
+import slimeknights.tconstruct.plugin.jei.severing.SeveringRecipeHandler;
 import slimeknights.tconstruct.plugin.jei.smelting.SmeltingRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.smelting.SmeltingRecipeChecker;
 import slimeknights.tconstruct.plugin.jei.smelting.SmeltingRecipeHandler;
@@ -61,6 +65,7 @@ import slimeknights.tconstruct.smeltery.client.IGuiLiquidTank;
 import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.common.TableRecipeFactory.TableRecipe;
 import slimeknights.tconstruct.tools.common.block.BlockToolTable;
+import slimeknights.tconstruct.tools.melee.TinkerMeleeWeapons;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -135,6 +140,10 @@ public class JEIPlugin implements IModPlugin {
     if(TConstruct.pulseManager.isPulseLoaded(TinkerGadgets.PulseId)) {
       registry.addRecipeCategories(new DryingRecipeCategory(guiHelper));
     }
+
+    if(TConstruct.pulseManager.isPulseLoaded(TinkerTools.PulseId)) {
+      registry.addRecipeCategories(new SeveringRecipeCategory(guiHelper));
+    }
   }
 
   @Override
@@ -206,6 +215,16 @@ public class JEIPlugin implements IModPlugin {
       registry.addRecipes(DryingRecipeChecker.getDryingRecipes(), DryingRecipeCategory.CATEGORY);
 
       registry.addRecipeCatalyst(BlockTable.createItemstack(TinkerGadgets.rack, 1, Blocks.WOODEN_SLAB, 0), DryingRecipeCategory.CATEGORY);
+    }
+
+    // severing
+    if(TConstruct.pulseManager.isPulseLoaded(TinkerTools.PulseId)) {
+      registry.handleRecipes(SeveringRecipe.class, new SeveringRecipeHandler(), SeveringRecipeCategory.CATEGORY);
+
+      registry.addRecipes(SeveringRecipeChecker.getSeveringRecipes(), SeveringRecipeCategory.CATEGORY);
+
+      // todo: account for all cleavers
+      registry.addRecipeCatalyst(new ItemStack(TinkerMeleeWeapons.cleaver), SeveringRecipeCategory.CATEGORY);
     }
   }
 

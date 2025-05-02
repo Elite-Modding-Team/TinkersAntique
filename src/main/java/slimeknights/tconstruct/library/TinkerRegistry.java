@@ -476,6 +476,7 @@ public final class TinkerRegistry {
   ---------------------------------------------------------------------------*/
   private static final Map<String, IModifier> modifiers = new Object2ObjectOpenHashMap<>();
   private static final Map<Class<? extends EntityLivingBase>, Function<EntityLivingBase,ItemStack>> headDrops = new Object2ObjectOpenHashMap<>();
+  private static final Map<Class<? extends EntityLivingBase>, ItemStack> headDropsRaw = new Object2ObjectOpenHashMap<>();
 
   public static void registerModifier(IModifier modifier) {
     registerModifierAlias(modifier, modifier.getIdentifier());
@@ -535,6 +536,7 @@ public final class TinkerRegistry {
   public static void registerHeadDrop(Class<? extends EntityLivingBase> clazz, ItemStack head) {
     final ItemStack safeStack = head.copy();
     registerHeadDrop(clazz, e -> safeStack);
+    headDropsRaw.put(clazz, head);
   }
 
   /**
@@ -548,6 +550,10 @@ public final class TinkerRegistry {
       return callback.apply(entity).copy();
     }
     return ItemStack.EMPTY;
+  }
+
+  public static Map<Class<? extends EntityLivingBase>, ItemStack> getAllSeveringRecipes() {
+    return ImmutableMap.copyOf(headDropsRaw);
   }
 
   /*---------------------------------------------------------------------------
