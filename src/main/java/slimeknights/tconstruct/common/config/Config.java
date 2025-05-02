@@ -89,9 +89,10 @@ public final class Config {
           "minecraft:ender_dragon;true;minecraft:skull:5",
           "minecraft:snowman;false;minecraft:pumpkin",
           "minecraft:villager_golem;false;minecraft:pumpkin",
-          "mod_lavacow:boneworm;true;minecraft:skull:0",
+          "mod_lavacow:boneworm;false;minecraft:skull:0",
           "mod_lavacow:forsaken;true;minecraft:skull:0",
           "mod_lavacow:skeletonking;false;minecraft:skull:0",
+          "mod_lavacow:soulworm;false;minecraft:skull:1",
           "mod_lavacow:scarecrow;false;mod_lavacow:scarecrowhead_common"
   };
   public static String[] entityMelting = {
