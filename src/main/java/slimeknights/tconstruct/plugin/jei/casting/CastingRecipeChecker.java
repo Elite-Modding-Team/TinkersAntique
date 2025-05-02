@@ -1,13 +1,14 @@
 package slimeknights.tconstruct.plugin.jei.casting;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,9 +26,9 @@ public class CastingRecipeChecker {
 
   private static CastingRecipeWrapper recipeWrapper;
 
-  public static List<CastingRecipeWrapper> getCastingRecipes() {
-    List<CastingRecipeWrapper> recipes = new ArrayList<>();
-    Map<Triple<Item, Item, Fluid>, List<ItemStack>> castDict = Maps.newHashMap();
+  public static Set<CastingRecipeWrapper> getCastingRecipes() {
+    Set<CastingRecipeWrapper> recipes = new ObjectOpenHashSet<>();
+    Map<Triple<Item, Item, Fluid>, List<ItemStack>> castDict = new Object2ObjectOpenHashMap<>();
 
     // skip recipes with brass or alubrass if those are not integrated
     // done since we have to register those fluids as casts in init, but don't know until postInit if they are used
