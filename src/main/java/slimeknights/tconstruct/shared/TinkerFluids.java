@@ -183,7 +183,7 @@ public class TinkerFluids extends TinkerPulse {
       dirt.setTemperature(500);
       registerMoltenBlock(registry, dirt);
       
-      calcium = fluidStone("calcium", 0xcbc6a5);
+      calcium = fluidStone("notmilk", 0xcbc6a5);
       calcium.setTemperature(800);
       registerMoltenBlock(registry, calcium);
 
