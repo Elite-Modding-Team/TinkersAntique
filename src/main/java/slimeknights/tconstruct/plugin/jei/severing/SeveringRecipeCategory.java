@@ -5,6 +5,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.Util;
@@ -18,9 +19,11 @@ public class SeveringRecipeCategory implements IRecipeCategory<SeveringRecipeWra
   public static ResourceLocation background_loc = Util.getResource("textures/gui/jei/severing.png");
 
   private final IDrawable background;
+  private final IDrawable icon;
 
   public SeveringRecipeCategory(IGuiHelper guiHelper) {
-    background = guiHelper.createDrawable(background_loc, 0, 0, 160, 60, 0, 0, 0, 0);
+	    background = guiHelper.createDrawable(background_loc, 0, 0, 134, 66, 0, 0, 0, 0);
+	    icon = guiHelper.createDrawable(background_loc, 134, 0, 16, 16);
   }
 
   @Nonnull
@@ -35,6 +38,12 @@ public class SeveringRecipeCategory implements IRecipeCategory<SeveringRecipeWra
     return Util.translate("gui.jei.severing.title");
   }
 
+
+  @Override
+  public IDrawable getIcon() {
+  	return icon;
+  }
+  
   @Nonnull
   @Override
   public IDrawable getBackground() {
@@ -45,22 +54,16 @@ public class SeveringRecipeCategory implements IRecipeCategory<SeveringRecipeWra
   public void setRecipe(IRecipeLayout recipeLayout, SeveringRecipeWrapper recipeWrapper, IIngredients ingredients) {
     IGuiItemStackGroup items = recipeLayout.getItemStacks();
 
-    items.init(0, true, 43, 17);
-    items.set(ingredients);
-
-    items.init(1, false, 97, 17);
+    items.init(1, false, 107, 22);
     items.set(ingredients);
   }
 
   @Override
   public List<String> getTooltipStrings(int mouseX, int mouseY) {
+	if (mouseX > 43 && mouseY > 17 && mouseX < 73 && mouseY < 45) {
+	  return ImmutableList.of(I18n.format("gui.jei.severing.item_with_beheading"));
+	}
     return ImmutableList.of();
-  }
-
-  @Override
-  public IDrawable getIcon() {
-    // use the default icon
-    return null;
   }
 
   @Override

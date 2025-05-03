@@ -1,5 +1,11 @@
 package slimeknights.tconstruct.library.book.content;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.google.common.collect.Lists;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,13 +13,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import slimeknights.mantle.client.book.data.BookData;
 import slimeknights.mantle.client.book.data.element.ImageData;
 import slimeknights.mantle.client.book.data.element.TextData;
@@ -75,6 +74,7 @@ public class ContentTool extends TinkerPage {
     }
   }
 
+  @SuppressWarnings("unused")
   private Collection<Item> convertIToolPartToItem(Set<IToolPart> parts) {
     return parts.stream().map(part -> (Item) part).collect(Collectors.toList());
   }

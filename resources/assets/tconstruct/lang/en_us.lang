@@ -1058,6 +1058,8 @@ gui.jei.entitymelting.title=Entity Melting
 gui.jei.severing.title=Severing
 gui.jei.living.info=Living %s
 
+gui.jei.severing.item_with_beheading=Tool with Beheading
+
 # WAILA Plugin
 gui.waila.tank.fluid=Liquid: %s
 gui.waila.tank.amount=Amount: %d / %d mb

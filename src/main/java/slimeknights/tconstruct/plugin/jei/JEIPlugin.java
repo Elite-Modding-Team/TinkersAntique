@@ -1,5 +1,11 @@
 package slimeknights.tconstruct.plugin.jei;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IJeiRuntime;
@@ -23,12 +29,15 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.gadgets.TinkerGadgets;
 import slimeknights.tconstruct.library.DryingRecipe;
+import slimeknights.tconstruct.library.EntityMeltingRecipe;
 import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.SeveringRecipe;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidColored;
+import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.smeltery.AlloyRecipe;
 import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
+import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.library.tools.IToolPart;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.plugin.jei.alloy.AlloyRecipeCategory;
@@ -66,9 +75,6 @@ import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.common.TableRecipeFactory.TableRecipe;
 import slimeknights.tconstruct.tools.common.block.BlockToolTable;
 import slimeknights.tconstruct.tools.melee.TinkerMeleeWeapons;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 @mezz.jei.api.JEIPlugin
 public class JEIPlugin implements IModPlugin {
@@ -174,7 +180,7 @@ public class JEIPlugin implements IModPlugin {
 
       registry.handleRecipes(MeltingRecipe.class, new SmeltingRecipeHandler(), SmeltingRecipeCategory.CATEGORY);
 
-      registry.handleRecipes(MeltingRecipe.class, new EntityMeltingRecipeHandler(), EntityMeltingRecipeCategory.CATEGORY);
+      registry.handleRecipes(EntityMeltingRecipe.class, new EntityMeltingRecipeHandler(), EntityMeltingRecipeCategory.CATEGORY);
 
       registry.handleRecipes(CastingRecipeWrapper.class, new CastingRecipeHandler(), CastingRecipeCategory.CATEGORY);
 
@@ -223,11 +229,27 @@ public class JEIPlugin implements IModPlugin {
 
       registry.addRecipes(SeveringRecipeChecker.getSeveringRecipes(), SeveringRecipeCategory.CATEGORY);
 
-      // todo: account for all cleavers
-      registry.addRecipeCatalyst(new ItemStack(TinkerMeleeWeapons.cleaver), SeveringRecipeCategory.CATEGORY);
+      int added = 0;
+      for(Material head : TinkerRegistry.getAllMaterials()) {
+    	List<PartMaterialType> reqs = TinkerMeleeWeapons.cleaver.getRequiredComponents();
+        List<Material> mats = new ArrayList<>(reqs.size());
+
+        for(int i = 0; i < reqs.size(); i++) {
+          // todo: check for applicability with stats
+          mats.add(head);
+        }
+
+        ItemStack tool = TinkerMeleeWeapons.cleaver.buildItem(mats);
+        // only valid ones
+        if(TinkerMeleeWeapons.cleaver.hasValidMaterials(tool)) {
+          registry.addRecipeCatalyst(tool, SeveringRecipeCategory.CATEGORY);
+          if(++added > 10)
+          	break;
+        }
+      }      
     }
   }
-
+  
   @Override
   public void onRuntimeAvailable(@Nonnull IJeiRuntime jeiRuntime) {
     recipeRegistry = jeiRuntime.getRecipeRegistry();
