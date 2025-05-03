@@ -1,5 +1,8 @@
 package slimeknights.tconstruct.plugin.jei;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IJeiRuntime;
@@ -41,6 +44,7 @@ import slimeknights.tconstruct.plugin.jei.casting.CastingRecipeWrapper;
 import slimeknights.tconstruct.plugin.jei.drying.DryingRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.drying.DryingRecipeChecker;
 import slimeknights.tconstruct.plugin.jei.drying.DryingRecipeHandler;
+import slimeknights.tconstruct.plugin.jei.entitymelting.EntityMeltingRecipe;
 import slimeknights.tconstruct.plugin.jei.entitymelting.EntityMeltingRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.entitymelting.EntityMeltingRecipeChecker;
 import slimeknights.tconstruct.plugin.jei.entitymelting.EntityMeltingRecipeHandler;
@@ -66,9 +70,6 @@ import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.common.TableRecipeFactory.TableRecipe;
 import slimeknights.tconstruct.tools.common.block.BlockToolTable;
 import slimeknights.tconstruct.tools.melee.TinkerMeleeWeapons;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 @mezz.jei.api.JEIPlugin
 public class JEIPlugin implements IModPlugin {
@@ -174,7 +175,7 @@ public class JEIPlugin implements IModPlugin {
 
       registry.handleRecipes(MeltingRecipe.class, new SmeltingRecipeHandler(), SmeltingRecipeCategory.CATEGORY);
 
-      registry.handleRecipes(MeltingRecipe.class, new EntityMeltingRecipeHandler(), EntityMeltingRecipeCategory.CATEGORY);
+      registry.handleRecipes(EntityMeltingRecipe.class, new EntityMeltingRecipeHandler(), EntityMeltingRecipeCategory.CATEGORY);
 
       registry.handleRecipes(CastingRecipeWrapper.class, new CastingRecipeHandler(), CastingRecipeCategory.CATEGORY);
 

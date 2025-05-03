@@ -1,15 +1,14 @@
 package slimeknights.tconstruct.plugin.jei.entitymelting;
 
-import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.api.recipe.IRecipeWrapperFactory;
-import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
-
 import javax.annotation.Nonnull;
 
-public class EntityMeltingRecipeHandler implements IRecipeWrapperFactory<MeltingRecipe> {
+import mezz.jei.api.recipe.IRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapperFactory;
+
+public class EntityMeltingRecipeHandler implements IRecipeWrapperFactory<EntityMeltingRecipe> {
   @Nonnull
   @Override
-  public IRecipeWrapper getRecipeWrapper(@Nonnull MeltingRecipe recipe) {
+  public IRecipeWrapper getRecipeWrapper(@Nonnull EntityMeltingRecipe recipe) {
     return new EntityMeltingRecipeWrapper(recipe);
   }
 }

@@ -1,10 +1,14 @@
 package slimeknights.tconstruct.plugin.jei.entitymelting;
 
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.ImmutableList;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
-import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
@@ -15,20 +19,19 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.client.GuiUtil;
 import slimeknights.tconstruct.library.materials.Material;
 
-import javax.annotation.Nonnull;
-import java.util.List;
-
 public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltingRecipeWrapper> {
 
   public static String CATEGORY = Util.prefix("entitymelting");
-  public static ResourceLocation background_loc = Util.getResource("textures/gui/jei/smeltery.png");
+  public static ResourceLocation background_loc = Util.getResource("textures/gui/jei/smeltery2.png");
 
   private final IDrawable background;
   private final IDrawable tankOverlay;
 
   public EntityMeltingRecipeCategory(IGuiHelper guiHelper) {
-    background = guiHelper.createDrawable(background_loc, 0, 0, 160, 60, 0, 0, 0, 0);
-    tankOverlay = guiHelper.createDrawable(background_loc, 160, 0, 18, 18);
+    //background = guiHelper.createDrawable(background_loc, 0, 0, 160, 60, 0, 0, 0, 0);
+    background = guiHelper.createDrawable(background_loc, 0, 0, 150, 62);
+
+    tankOverlay = guiHelper.createDrawable(background_loc, 150, 33, 16, 16);
   }
 
   @Nonnull
@@ -56,17 +59,13 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
 
   @Override
   public void setRecipe(IRecipeLayout recipeLayout, EntityMeltingRecipeWrapper recipe, IIngredients ingredients) {
-    IGuiItemStackGroup items = recipeLayout.getItemStacks();
-    items.init(0, true, 27, 20);
-    items.set(ingredients);
-
     IGuiFluidStackGroup fluids = recipeLayout.getFluidStacks();
     fluids.addTooltipCallback(GuiUtil::onFluidTooltip);
 
-    fluids.init(0, false, 115, 6, 18, 32, Material.VALUE_Block, false, null);
+    fluids.init(0, false, 115, 11, 16, 32, Material.VALUE_Block, false, null);
     fluids.set(ingredients);
 
-    fluids.init(1, false, 72, 38, 16, 16, 1000, false, tankOverlay);
+    fluids.init(1, false, 75, 43, 16, 16, 1000, false, tankOverlay);
     fluids.set(1, recipe.fuels);
   }
 
