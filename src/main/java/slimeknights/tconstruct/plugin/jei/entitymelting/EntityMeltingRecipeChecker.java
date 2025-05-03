@@ -9,6 +9,7 @@ import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
+import slimeknights.tconstruct.library.EntityMeltingRecipe;
 import slimeknights.tconstruct.library.TinkerRegistry;
 
 public class EntityMeltingRecipeChecker {

@@ -1,4 +1,4 @@
-package slimeknights.tconstruct.plugin.jei.entitymelting;
+package slimeknights.tconstruct.library;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -6,9 +6,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class EntityMeltingRecipe {
 
-	final ResourceLocation entity;
-	final FluidStack stack;
-	final ItemStack spawnEgg;
+	public final ResourceLocation entity;
+	public final FluidStack stack;
+	public final ItemStack spawnEgg;
 	
 	public EntityMeltingRecipe(ResourceLocation entity, FluidStack stack, ItemStack spawnEgg) {
 		this.entity = entity;

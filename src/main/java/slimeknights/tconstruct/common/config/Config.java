@@ -55,6 +55,7 @@ public final class Config {
   public static int heatItemsTickrateSearedFurnace = 4;
   public static int liquidTransferRate = 6;
   public static boolean vanillaToolBreaking = false;
+  public static boolean fancyJEIBeheadingAnimation = true;
   
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -158,6 +159,10 @@ public final class Config {
           "tconstruct"
   };
 
+  public static String[] entityJEIRendererTransformation = {
+          "minecraft:ender_dragon;5.0",  
+  };
+
   // Worldgen
   public static boolean genSlimeIslands = true;
   public static boolean genIslandsInSuperflat = false;
@@ -216,7 +221,7 @@ public final class Config {
   static ConfigCategory Gameplay;
   static ConfigCategory Worldgen;
   static ConfigCategory ClientSide;
-
+  
   public static void load(FMLPreInitializationEvent event) {
     configFile = new Configuration(event.getSuggestedConfigurationFile(), "0.3", false);
 
@@ -605,6 +610,15 @@ public final class Config {
       prop = configFile.get(cat, "disableAllParticles", disableAllParticles);
       prop.setComment("If true, disables all mod-specific particles to display.");
       disableAllParticles = prop.getBoolean();
+      
+      prop = configFile.get(cat, "fancyJEIBeheadingAnimation", fancyJEIBeheadingAnimation);
+      prop.setComment("If true, JEI tab for severing will use a fancy animation.");
+      fancyJEIBeheadingAnimation = prop.getBoolean();
+
+      prop = configFile.get(cat, "entityJEIRendererScaleFactor", entityJEIRendererTransformation);
+      prop.setComment("List of entity IDs that needs to be scaled when rendered in a GUI in the format 'modid:entity;scale'");
+      entityJEIRendererTransformation = prop.getStringList();
+
     }
 
     // save changes if any

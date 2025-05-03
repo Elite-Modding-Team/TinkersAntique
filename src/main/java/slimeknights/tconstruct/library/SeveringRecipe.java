@@ -1,22 +1,18 @@
 package slimeknights.tconstruct.library;
 
 import net.minecraft.item.ItemStack;
-import slimeknights.mantle.util.RecipeMatch;
-import slimeknights.tconstruct.library.utils.ListUtil;
+import net.minecraft.util.ResourceLocation;
 
 public class SeveringRecipe {
 
-  public final RecipeMatch input;
+  public final ResourceLocation input;
   public final ItemStack output;
+  public final ItemStack spawnEgg;
 
-  public SeveringRecipe(RecipeMatch input, ItemStack output) {
+  public SeveringRecipe(ResourceLocation input, ItemStack output, ItemStack spawnEgg) {
     this.input = input;
     this.output = output;
-  }
-
-  public boolean matches(ItemStack input) {
-    return this.input != null && this.input.matches(ListUtil.getListFrom(input)).isPresent();
-
+    this.spawnEgg = spawnEgg;
   }
 
   public ItemStack getResult() {
