@@ -21,6 +21,7 @@ import slimeknights.tconstruct.library.tools.IPattern;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.shared.tileentity.TileTable;
 import slimeknights.tconstruct.tools.common.block.BlockToolTable;
+import slimeknights.tconstruct.tools.common.block.BlockToolTable.TableTypes;
 
 public class ItemBlockTable extends ItemBlockMeta {
 
@@ -70,7 +71,8 @@ public class ItemBlockTable extends ItemBlockMeta {
     }
 
     // check if it's a PatternChest (damage value corresponds to TableTypes enum)
-    if(BlockToolTable.TableTypes.fromMeta(stack.getItemDamage()) == BlockToolTable.TableTypes.PatternChest) {
+    TableTypes type = BlockToolTable.TableTypes.fromMeta(stack.getItemDamage());
+    if(type == BlockToolTable.TableTypes.PatternChest || type == BlockToolTable.TableTypes.CastChest) {
       // determine if it holds casts or patterns
       String desc = null;
 

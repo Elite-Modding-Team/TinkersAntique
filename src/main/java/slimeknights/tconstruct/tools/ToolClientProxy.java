@@ -46,6 +46,7 @@ public class ToolClientProxy extends ClientProxy {
     ModelLoader.setCustomModelResourceLocation(tableItem, BlockToolTable.TableTypes.ToolStation.meta, ToolClientEvents.locToolStation);
     // pattern/part chest
     ModelLoader.setCustomModelResourceLocation(tableItem, BlockToolTable.TableTypes.PatternChest.meta, ToolClientEvents.locPatternChest);
+    ModelLoader.setCustomModelResourceLocation(tableItem, BlockToolTable.TableTypes.CastChest.meta, ToolClientEvents.locCastChest);
     ModelLoader.setCustomModelResourceLocation(tableItem, BlockToolTable.TableTypes.PartChest.meta, ToolClientEvents.locPartChest);
 
     tableItem = Item.getItemFromBlock(TinkerTools.toolForge);

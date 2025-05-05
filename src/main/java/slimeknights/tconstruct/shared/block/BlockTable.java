@@ -115,7 +115,7 @@ public class BlockTable extends BlockInventory implements ITileEntityProvider {
   public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
                               ItemStack stack) {
     super.onBlockPlacedBy(world, pos, state, placer, stack);
-
+        
     NBTTagCompound tag = TagUtil.getTagSafe(stack);
     TileEntity te = world.getTileEntity(pos);
     if(te != null && te instanceof TileTable) {
@@ -126,6 +126,7 @@ public class BlockTable extends BlockInventory implements ITileEntityProvider {
       }
 
       table.updateTextureBlock(feetTag);
+      System.out.println(table.getFacing());
       table.setFacing(placer.getHorizontalFacing().getOpposite());
 
       // check if we also have an inventory
