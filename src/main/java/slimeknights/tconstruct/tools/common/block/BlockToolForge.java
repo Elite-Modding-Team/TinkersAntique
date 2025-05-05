@@ -40,7 +40,7 @@ public class BlockToolForge extends BlockTable implements ITinkerStationBlock {
     super(Material.IRON);
     this.setCreativeTab(TinkerRegistry.tabGeneral);
 
-    this.setSoundType(SoundType.METAL);
+    this.setSoundType(SoundType.ANVIL);
     this.setResistance(10f);
     this.setHardness(2f);
 

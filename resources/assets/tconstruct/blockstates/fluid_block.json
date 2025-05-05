@@ -106,8 +106,8 @@
         "clay": [{
             "custom": { "fluid": "clay" }
         }],
-        "calcium": [{
-            "custom": { "fluid":  "calcium" }
+        "notmilk": [{
+            "custom": { "fluid":  "notmilk" }
         }]
     }
 }
