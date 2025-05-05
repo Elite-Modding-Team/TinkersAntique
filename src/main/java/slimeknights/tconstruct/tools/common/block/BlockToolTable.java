@@ -1,6 +1,11 @@
 package slimeknights.tconstruct.tools.common.block;
 
+import java.util.Locale;
+
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.ImmutableList;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -40,9 +45,6 @@ import slimeknights.tconstruct.tools.common.tileentity.TileStencilTable;
 import slimeknights.tconstruct.tools.common.tileentity.TileTinkerChest;
 import slimeknights.tconstruct.tools.common.tileentity.TileToolStation;
 
-import javax.annotation.Nonnull;
-import java.util.Locale;
-
 public class BlockToolTable extends BlockTable implements ITinkerStationBlock {
 
   public static final PropertyEnum<TableTypes> TABLES = PropertyEnum.create("type", TableTypes.class);
@@ -71,6 +73,7 @@ public class BlockToolTable extends BlockTable implements ITinkerStationBlock {
         return new TilePartBuilder();
       case ToolStation:
         return new TileToolStation();
+      case CastChest:
       case PatternChest:
         return new TilePatternChest();
       case PartChest:
@@ -157,7 +160,7 @@ public class BlockToolTable extends BlockTable implements ITinkerStationBlock {
   @Override
   protected boolean keepInventory(IBlockState state) {
     return Config.chestsKeepInventory &&
-           (state.getValue(TABLES) == TableTypes.PatternChest || state.getValue(TABLES) == TableTypes.PartChest);
+           (state.getValue(TABLES) == TableTypes.PatternChest || state.getValue(TABLES) == TableTypes.PartChest || state.getValue(TABLES) == TableTypes.CastChest);
   }
 
   @Nonnull
@@ -201,6 +204,7 @@ public class BlockToolTable extends BlockTable implements ITinkerStationBlock {
     switch(state.getValue(TABLES)) {
       case StencilTable:
         return 10;
+      case CastChest:
       case PatternChest:
         return 15;
       case PartChest:
@@ -222,7 +226,8 @@ public class BlockToolTable extends BlockTable implements ITinkerStationBlock {
     PartBuilder,
     ToolStation,
     PatternChest(true),
-    PartChest(true);
+    PartChest(true),
+	CastChest(true);
 
     TableTypes() {
       meta = this.ordinal();

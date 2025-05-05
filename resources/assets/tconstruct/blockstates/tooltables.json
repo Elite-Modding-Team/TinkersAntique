@@ -16,6 +16,16 @@
                 "drawer_side": "tconstruct:blocks/chest/pattern_drawer_side"
             }
         },
+        "type=castchest": {
+            "model": "tconstruct:patternchest",
+            "textures": {
+                "side": "tconstruct:blocks/chest/cast_side",
+                "front": "tconstruct:blocks/chest/cast_front",
+                "top": "tconstruct:blocks/chest/cast_top",
+                "drawer_front": "tconstruct:blocks/chest/cast_drawer_front",
+                "drawer_side": "tconstruct:blocks/chest/cast_drawer_side"
+            }
+        },
         "type=partchest": {
             "model": "tconstruct:patternchest",
             "textures": {

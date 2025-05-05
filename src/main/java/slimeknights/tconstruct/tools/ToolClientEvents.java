@@ -49,6 +49,7 @@ public class ToolClientEvents {
   public static final ModelResourceLocation locToolForge = new ModelResourceLocation(LOCATION_ToolForge, "normal");
 
   public static final ModelResourceLocation locPatternChest = getTableLoc(BlockToolTable.TableTypes.PatternChest);
+  public static final ModelResourceLocation locCastChest = getTableLoc(BlockToolTable.TableTypes.CastChest);
   public static final ModelResourceLocation locPartChest = getTableLoc(BlockToolTable.TableTypes.PartChest);
 
   // Blank Pattern
@@ -75,6 +76,7 @@ public class ToolClientEvents {
     replaceTableModel(locToolStation, event); // tool station has no variants but we want the item support
     replaceTableModel(locToolForge, event);
     replaceChestModel(locPatternChest, event); // pattern and part chest have no variants or items but we want rotation
+    replaceChestModel(locCastChest, event);
     replaceChestModel(locPartChest, event);
 
     // silence the missing-model message for the default itemblock
