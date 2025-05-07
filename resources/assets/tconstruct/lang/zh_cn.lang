@@ -7,6 +7,7 @@ tile.tconstruct.tooltables.stenciltable.name=模具加工台
 tile.tconstruct.tooltables.partbuilder.name=部件加工台
 tile.tconstruct.tooltables.toolstation.name=工具装配台
 tile.tconstruct.tooltables.patternchest.name=模具箱
+tile.tconstruct.tooltables.castchest.name=铸模箱
 tile.tconstruct.tooltables.patternchest.tooltip=破坏可以保留其中的模具
 tile.tconstruct.tooltables.partchest.name=部件箱
 tile.tconstruct.tooltables.partchest.tooltip=可以容纳大量的部件
@@ -278,6 +279,7 @@ item.tconstruct.edible.slimeball_magma.name=熔岩史莱姆球
 item.tconstruct.edible.slimeball_pink.name=粉色史莱姆球
 item.tconstruct.edible.jerky_beef.name=牛肉干
 item.tconstruct.edible.jerky_chicken.name=鸡肉干
+item.tconstruct.edible.jerky_chicken.tooltip=或者可以叫它干鸡?
 item.tconstruct.edible.jerky_pork.name=培根干
 item.tconstruct.edible.jerky_mutton.name=羊肉干
 item.tconstruct.edible.jerky_rabbit.name=兔肉干
@@ -312,13 +314,17 @@ item.tconstruct.materials.silky_cloth.name=绢布
 item.tconstruct.materials.silky_jewel.name=精致珠宝
 item.tconstruct.materials.silky_jewel.tooltip=精准采集
 item.tconstruct.materials.necrotic_bone.name=凋零之骨
-item.tconstruct.materials.necrotic_bone.tooltip=生命窃取
+item.tconstruct.materials.necrotic_bone.tooltip=因生命窃取而声名鹊起
 item.tconstruct.materials.moss.name=苔藓球
 item.tconstruct.materials.moss.tooltip=用这个右击一下书架\n就可以转化为修复苔藓\n§o会消耗10级经验
 item.tconstruct.materials.mending_moss.name=修复苔藓
 item.tconstruct.materials.mending_moss.tooltip=自动修复
-item.tconstruct.materials.bloody_bone.name=鲜血之骨
+item.tconstruct.materials.bloody_bone.name=血之骨
 item.tconstruct.materials.bloody_bone.tooltip=注血于骨!
+item.tconstruct.materials.venomous_bone.name=毒之骨
+item.tconstruct.materials.venomous_bone.tooltip=或者说它恶毒到了骨子里?
+item.tconstruct.materials.blazing_bone.name=烈焰之骨
+item.tconstruct.materials.blazing_bone.tooltip=这天就好像烈焰人一样热!
 item.tconstruct.materials.creative_modifier.name=创造模式强化头颅
 item.tconstruct.materials.creative_modifier.tooltip=增加一个强化槽
 
@@ -365,6 +371,7 @@ item.tconstruct.sharpening_kit.name=磨制工具
 item.tconstruct.sharpening_kit.tooltip=结合燧石使用\n可以把你的工具升级到该种材料对应的挖掘等级
 
 item.forge.bucketFilled.blood=血桶
+item.forge.bucketFilled.venom=毒液桶
 
 # Tools
 item.tconstruct.pickaxe.name=镐
@@ -518,6 +525,7 @@ fluid.tconstruct.stone.name=熔融焦黑石头
 fluid.tconstruct.obsidian.name=熔融黑曜石
 fluid.tconstruct.clay.name=熔融粘土
 fluid.tconstruct.dirt.name=液态泥土
+fluid.tconstruct.notmilk.name=液态钙质
 fluid.tconstruct.iron.name=熔融铁
 fluid.tconstruct.gold.name=熔融金
 fluid.tconstruct.pigiron.name=熔融生铁
@@ -528,6 +536,7 @@ fluid.tconstruct.knightslime.name=熔融骑士史莱姆
 fluid.tconstruct.emerald.name=熔融绿宝石
 fluid.tconstruct.diamond.name=熔融钻石
 fluid.tconstruct.glass.name=熔融玻璃
+fluid.tconstruct.venom.name=毒液
 fluid.tconstruct.blood.name=血
 fluid.tconstruct.blazing_blood.name=烈焰血
 fluid.tconstruct.milk.name=牛奶
@@ -993,6 +1002,8 @@ gui.toolstation.traits=特性
 gui.toolstation.components=组件
 gui.toolstation.info=修复和更改你工具的主要途径. 在左边放上工具和材料以开始.
 gui.toolstation.noTraits=无 :[
+gui.toolstation.deconstruct=拆解
+gui.toolstation.deconstruct.info=如果工具满足以下条件，请将工具放入右侧的输出槽中进行拆解:\n- 满耐久值\n- 可以在当前界面被制作\n- 不是匠心之作 (Tinkers' Evolution)\n- 拥有足够的经验值 (Tinkers' Tool Leveling)
 
 # Pattern Chest
 gui.patternchest.name=模具箱
@@ -1044,6 +1055,11 @@ gui.jei.alloy.title=合金
 gui.jei.casting.title=浇铸
 gui.jei.casting.consume=消耗铸模！
 gui.jei.drying.title=晾干架
+gui.jei.entitymelting.title=实体熔炼
+gui.jei.severing.title=躯体分割
+gui.jei.living.info=Living %s
+
+gui.jei.severing.item_with_beheading=拥有斩首的工具或武器
 
 # WAILA Plugin
 gui.waila.tank.fluid=液体：%s
@@ -1060,3 +1076,4 @@ option.tconstruct.progress=合成进度
 # Config
 config.synced.restart=你的配置已与服务器同步，请重启Minecraft。
 config.synced.ok=配置已与服务器同步。
+
