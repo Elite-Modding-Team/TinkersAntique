@@ -19,11 +19,14 @@ public class SeveringRecipeCategory implements IRecipeCategory<SeveringRecipeWra
   public static ResourceLocation background_loc = Util.getResource("textures/gui/jei/severing.png");
 
   private final IDrawable background;
-  private final IDrawable icon;
+  protected final IDrawable icon;
 
+  protected static SeveringRecipeCategory instance;
+  
   public SeveringRecipeCategory(IGuiHelper guiHelper) {
 	    background = guiHelper.createDrawable(background_loc, 0, 0, 134, 66, 0, 0, 0, 0);
 	    icon = guiHelper.createDrawable(background_loc, 134, 0, 16, 16);
+	    instance = this;
   }
 
   @Nonnull
