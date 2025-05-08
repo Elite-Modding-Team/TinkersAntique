@@ -1058,6 +1058,7 @@ gui.jei.drying.title=Drying
 gui.jei.entitymelting.title=Entity Melting
 gui.jei.severing.title=Severing
 gui.jei.living.info=Living %s
+gui.jei.smeltery_damage.info=Damage Tick
 
 gui.jei.severing.item_with_beheading=Tool with Beheading
 

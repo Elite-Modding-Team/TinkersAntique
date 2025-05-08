@@ -331,7 +331,7 @@ public class GuiUtil {
     return ImmutableList.copyOf(list);
   }
 
-  private static int calcLiquidText(int amount, int divider, String unit, List<String> text) {
+  public static int calcLiquidText(int amount, int divider, String unit, List<String> text) {
     int full = amount / divider;
     if(full > 0) {
       text.add(String.format("%s%d %s", TextFormatting.GRAY, full, unit));
