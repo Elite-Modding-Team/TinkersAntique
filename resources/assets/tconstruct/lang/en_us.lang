@@ -1057,6 +1057,7 @@ gui.jei.casting.consume=Consumes cast!
 gui.jei.drying.title=Drying
 gui.jei.entitymelting.title=Entity Melting
 gui.jei.severing.title=Severing
+gui.jei.smeltery_damage.info=Damage Tick
 gui.jei.material.title=Material Stats
 
 gui.jei.severing.item_with_beheading=Tool with Beheading

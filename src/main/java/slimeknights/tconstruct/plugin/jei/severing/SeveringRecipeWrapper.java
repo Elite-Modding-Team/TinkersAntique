@@ -30,8 +30,6 @@ public class SeveringRecipeWrapper implements IRecipeWrapper {
 	protected final List<ItemStack> output;
 	protected final ResourceLocation entity;
 
-	private static ItemStack demo;
-
 	private String configStr;
 	private double configScale;
 
@@ -115,12 +113,8 @@ public class SeveringRecipeWrapper implements IRecipeWrapper {
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA); // I HATE YOU SPIDER EYES!!!!!
 		}
 
-		if (demo == null) {
-			demo = TinkerMeleeWeapons.cleaver.buildItemForRenderingInGui();
-		}
-
 		if (Config.fancyJEIBeheadingAnimation) {
-			float theta = (float) (Math.PI / 2 * (Minecraft.getSystemTime() / 500d - 1750));
+			float theta = (float) (Math.PI / 2 * ((minecraft.world.getTotalWorldTime() + minecraft.getRenderPartialTicks()) / 10f + 5));
 			double movementX = Math.sin(theta); // Yes i know sine is supposed to be y usually but its out of phase. shut up math majors grrr ik what im doing
 			double movementY = Math.cos(theta);
 
@@ -129,10 +123,14 @@ public class SeveringRecipeWrapper implements IRecipeWrapper {
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(x, y, 0);
 			GlStateManager.rotate((float) (120 * movementX), 0, 0, 1);
-			minecraft.getRenderItem().renderItemIntoGUI(demo, 0, -16);
+			GlStateManager.disableDepth();
+			SeveringRecipeCategory.instance.icon.draw(minecraft, 0, -16);
+			GlStateManager.enableDepth();
 			GlStateManager.popMatrix();
 		} else {
-			minecraft.getRenderItem().renderItemIntoGUI(demo, 50, 23);
+			GlStateManager.disableDepth();
+			SeveringRecipeCategory.instance.icon.draw(minecraft, 50, 23);
+			GlStateManager.enableDepth();
 		}
 	}
 

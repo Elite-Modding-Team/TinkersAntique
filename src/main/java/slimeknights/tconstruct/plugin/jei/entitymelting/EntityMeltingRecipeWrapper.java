@@ -41,11 +41,12 @@ public class EntityMeltingRecipeWrapper implements IRecipeWrapper {
 	private EntityLivingBase entityInst;
 
 	private boolean entityErrored = false;
+	public int outputAmount;
 
 	public EntityMeltingRecipeWrapper(EntityMeltingRecipe recipe) {
 		this.entity = recipe.getEntity();
 		FluidStack result = recipe.getResultStack();
-		result.amount = 1000;
+		outputAmount = result.amount;
 		this.outputs = ImmutableList.of(result);
 		this.inputs = ImmutableList.of(ImmutableList.of(recipe.spawnEgg));
 

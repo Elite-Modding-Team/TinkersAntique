@@ -17,71 +17,88 @@ import net.minecraft.util.ResourceLocation;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.client.GuiUtil;
-import slimeknights.tconstruct.library.materials.Material;
 
 public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltingRecipeWrapper> {
 
-  public static String CATEGORY = Util.prefix("entitymelting");
-  public static ResourceLocation background_loc = Util.getResource("textures/gui/jei/smeltery2.png");
+	public static String CATEGORY = Util.prefix("entitymelting");
+	public static ResourceLocation background_loc = Util.getResource("textures/gui/jei/smeltery2.png");
 
-  private final IDrawable background;
-  private final IDrawable tankOverlay;
+	private final IDrawable background;
+	private final IDrawable tankOverlay;
 
-  public EntityMeltingRecipeCategory(IGuiHelper guiHelper) {
-    //background = guiHelper.createDrawable(background_loc, 0, 0, 160, 60, 0, 0, 0, 0);
-    background = guiHelper.createDrawable(background_loc, 0, 0, 150, 62);
+	public EntityMeltingRecipeCategory(IGuiHelper guiHelper) {
+		// background = guiHelper.createDrawable(background_loc, 0, 0, 160, 60, 0, 0, 0, 0);
+		background = guiHelper.createDrawable(background_loc, 0, 0, 150, 62);
 
-    tankOverlay = guiHelper.createDrawable(background_loc, 150, 33, 16, 16);
-  }
+		tankOverlay = guiHelper.createDrawable(background_loc, 150, 33, 16, 16);
+	}
 
-  @Nonnull
-  @Override
-  public String getUid() {
-    return CATEGORY;
-  }
+	@Nonnull
+	@Override
+	public String getUid() {
+		return CATEGORY;
+	}
 
-  @Nonnull
-  @Override
-  public String getTitle() {
-    return Util.translate("gui.jei.entitymelting.title");
-  }
+	@Nonnull
+	@Override
+	public String getTitle() {
+		return Util.translate("gui.jei.entitymelting.title");
+	}
 
-  @Nonnull
-  @Override
-  public IDrawable getBackground() {
-    return background;
-  }
+	@Nonnull
+	@Override
+	public IDrawable getBackground() {
+		return background;
+	}
 
-  @Override
-  public void drawExtras(@Nonnull Minecraft minecraft) {
+	@Override
+	public void drawExtras(@Nonnull Minecraft minecraft) {
 
-  }
+	}
 
-  @Override
-  public void setRecipe(IRecipeLayout recipeLayout, EntityMeltingRecipeWrapper recipe, IIngredients ingredients) {
-    IGuiFluidStackGroup fluids = recipeLayout.getFluidStacks();
-    fluids.addTooltipCallback(GuiUtil::onFluidTooltip);
+	@Override
+	public void setRecipe(IRecipeLayout recipeLayout, EntityMeltingRecipeWrapper recipe, IIngredients ingredients) {
+		IGuiFluidStackGroup fluids = recipeLayout.getFluidStacks();
+		fluids.addTooltipCallback((slotIndex, input, fluid, text) -> {
+			if (slotIndex == 0) {
+				// first, store the original name and mod name from JEI
+				String ingredientName = text.get(0);
+				String modName = text.get(text.size() - 1);
+				text.clear();
+				text.add(ingredientName);
 
-    fluids.init(0, false, 115, 11, 16, 32, Material.VALUE_Block, false, null);
-    fluids.set(ingredients);
+				// next, determine smeltery amounts to show
+				int amount = fluid.amount;
+				
+				// we always show mbs
+				GuiUtil.calcLiquidText(amount, 1, Util.translate("gui.smeltery.liquid.millibucket") + " / " + Util.translate("gui.jei.smeltery_damage.info"), text);
 
-    fluids.init(1, false, 75, 43, 16, 16, 1000, false, tankOverlay);
-    fluids.set(1, recipe.fuels);
-  }
+				// add mod name back
+				text.add(modName);
+			} else
+				GuiUtil.onFluidTooltip(slotIndex, input, fluid, text);
+		});
 
-  @Override
-  public List<String> getTooltipStrings(int mouseX, int mouseY) {
-    return ImmutableList.of();
-  }
+		fluids.init(0, false, 115, 11, 16, 32, recipe.outputAmount, false, null);
+		fluids.set(ingredients);
 
-  @Override
-  public IDrawable getIcon() {
-    // use the default icon
-    return null;
-  }
+		fluids.init(1, false, 75, 43, 16, 16, 1000, false, tankOverlay);
+		fluids.set(1, recipe.fuels);
+	}
 
-  @Override
-  public String getModName() {
-    return TConstruct.modName;
-  }
+	@Override
+	public List<String> getTooltipStrings(int mouseX, int mouseY) {
+		return ImmutableList.of();
+	}
+
+	@Override
+	public IDrawable getIcon() {
+		// use the default icon
+		return null;
+	}
+
+	@Override
+	public String getModName() {
+		return TConstruct.modName;
+	}
 }
