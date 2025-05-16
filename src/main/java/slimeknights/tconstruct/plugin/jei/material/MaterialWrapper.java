@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
+import org.apache.commons.lang3.text.WordUtils;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.IMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
@@ -75,11 +76,11 @@ public class MaterialWrapper implements IRecipeWrapper {
     public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         ItemStack item = material.getRepresentativeItem();
         if (item != null && !item.isEmpty()) {
-            slot.draw(minecraft, recipeWidth - 18 - MaterialCategory.OFFSET_X, 0);
+            slot.draw(minecraft, recipeWidth - 16, 0);
         }
-        slot.draw(minecraft, MaterialCategory.OFFSET_X, 0);
+        slot.draw(minecraft, 0, 0);
         if (material.hasFluid()) {
-            slot.draw(minecraft, MaterialCategory.OFFSET_X + 22 - 1, 0);
+            slot.draw(minecraft, slot.getWidth(), 0);
         }
 
         minecraft.fontRenderer.drawString(material.getLocalizedName(), (recipeWidth - minecraft.fontRenderer.getStringWidth(material.getLocalizedName())) / 2.0F, 4, material.materialTextColor, true);
@@ -90,14 +91,14 @@ public class MaterialWrapper implements IRecipeWrapper {
         if (!material.getAllTraits().isEmpty()) {
             ArrayList<ITrait> traits = new ArrayList<>();
             for (ITrait trait : material.getAllTraits())
-                if (trait != null && trait.getLocalizedName() != null)
+                if (trait != null && trait.getLocalizedName() != null && !traits.contains(trait))
                     traits.add(trait);
 
             traitList.clear();
             int y = 0;
 
             for (ITrait trait : traits) {
-                if (trait != null) {
+                if (trait != null && !traitList.containsValue(trait)) {
                     traitList.put(y, trait);
                     y++;
                 }
@@ -133,38 +134,14 @@ public class MaterialWrapper implements IRecipeWrapper {
     public List<String> getTooltipStrings(int mouseX, int mouseY) {
         List<String> tooltip = new ArrayList<>();
         traitList.forEach((index, trait) -> {
-            if (mouseY >= 22 + index * 9 && mouseY < 31 + index * 9 && mouseX >= 0 && mouseX <= MaterialCategory.WIDTH) {
-                // Yes this looks weird, but it doesn't split the string properly when just doing `.split("\\n")`
-                String[] desc = trait.getLocalizedDesc().replace("\\n", "__").split("__");
+            if (mouseY >= 22 + index * 9 && mouseY < 31 + index * 9 && mouseX >= 0 && mouseX <= AbstractCategory.WIDTH) {
+                String[] desc = trait.getLocalizedDesc().split("\\\\n");
                 String title = TextFormatting.GOLD + desc[0] + TextFormatting.RESET;
-                List<String> groups = getStringList(desc[1], 40);
                 tooltip.add(title);
-                tooltip.addAll(groups);
+                tooltip.addAll(Arrays.asList(WordUtils.wrap(desc[1], 40).split("\\r\\n")));
             }
         });
         return tooltip;
-    }
-
-    private static List<String> getStringList(String input, int maxChars) {
-        String[] words = input.split(" ");
-        List<String> groups = new ArrayList<>();
-        StringBuilder currentLine = new StringBuilder();
-
-        for (String word : words) {
-            if (currentLine.length() + word.length() + (currentLine.length() > 0 ? 1 : 0) > maxChars) {
-                groups.add(currentLine.toString());
-                currentLine = new StringBuilder(word);
-            } else {
-                if (currentLine.length() > 0) {
-                    currentLine.append(" ");
-                }
-                currentLine.append(word);
-            }
-        }
-        if (currentLine.length() > 0) {
-            groups.add(currentLine.toString());
-        }
-        return groups;
     }
 
     public boolean hasFluid() {
