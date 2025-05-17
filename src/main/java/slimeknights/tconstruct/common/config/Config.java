@@ -55,8 +55,9 @@ public final class Config {
   public static int heatItemsTickrateSearedFurnace = 4;
   public static int liquidTransferRate = 6;
   public static boolean vanillaToolBreaking = false;
+  public static boolean oldMattockAndKama = false;
   public static boolean fancyJEIBeheadingAnimation = true;
-  
+
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
   };
@@ -395,6 +396,10 @@ public final class Config {
       prop = configFile.get(cat, "vanillaToolBreaking", vanillaToolBreaking);
       prop.setComment("If true, tools will be fully destroyed like vanilla tools when durability is depleted. You monster!");
       vanillaToolBreaking = prop.getBoolean();
+
+      prop = configFile.get(cat, "oldMattockAndKama", oldMattockAndKama);
+      prop.setComment("Restores old Mattock and Kama behavior (Mattock usable as a hoe, Kama is not)");
+      oldMattockAndKama = prop.getBoolean();
 
       prop = configFile.get(cat, "mobHeadDrops", mobHeadDrops);
       prop.setComment("List of mob head drops in the format 'modid:entity;subtypes;modid:item:metadata'.");
