@@ -62,38 +62,7 @@ public class Shovel extends AoeToolCore {
   @Nonnull
   @Override
   public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    ItemStack stack = player.getHeldItem(hand);
-    if(ToolHelper.isBroken(stack)) {
-      return EnumActionResult.FAIL;
-    }
-
-    EnumActionResult result = Items.DIAMOND_SHOVEL.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
-    if(result == EnumActionResult.SUCCESS) {
-      TinkerToolEvent.OnShovelMakePath.fireEvent(stack, player, world, pos);
-    }
-
-    // only do the AOE path if the selected block is grass or grass path
-    Block block = world.getBlockState(pos).getBlock();
-    if(block == Blocks.GRASS || block == Blocks.GRASS_PATH) {
-      for(BlockPos aoePos : getAOEBlocks(stack, world, player, pos)) {
-        // stop if the tool breaks during the process
-        if(ToolHelper.isBroken(stack)) {
-          break;
-        }
-
-        EnumActionResult aoeResult = Items.DIAMOND_SHOVEL.onItemUse(player, world, aoePos, hand, facing, hitX, hitY, hitZ);
-        // if we pass on an earlier block, check if another block succeeds here instead
-        if(result != EnumActionResult.SUCCESS) {
-          result = aoeResult;
-        }
-
-        if(aoeResult == EnumActionResult.SUCCESS) {
-          TinkerToolEvent.OnShovelMakePath.fireEvent(stack, player, world, aoePos);
-        }
-      }
-    }
-
-    return result;
+    return doMakePath(player, world, pos, hand, facing, hitX, hitY, hitZ);
   }
 
   @Override
