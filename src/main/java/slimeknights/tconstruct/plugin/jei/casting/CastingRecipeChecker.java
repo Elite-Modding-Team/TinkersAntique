@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.google.common.collect.Lists;
@@ -27,7 +27,7 @@ public class CastingRecipeChecker {
   private static CastingRecipeWrapper recipeWrapper;
 
   public static Set<CastingRecipeWrapper> getCastingRecipes() {
-    Set<CastingRecipeWrapper> recipes = new ObjectOpenHashSet<>();
+    Set<CastingRecipeWrapper> recipes = new ObjectLinkedOpenHashSet<>();
     Map<Triple<Item, Item, Fluid>, List<ItemStack>> castDict = new Object2ObjectOpenHashMap<>();
 
     // skip recipes with brass or alubrass if those are not integrated
