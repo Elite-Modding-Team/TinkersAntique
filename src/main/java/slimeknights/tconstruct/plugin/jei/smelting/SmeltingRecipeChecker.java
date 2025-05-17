@@ -4,13 +4,13 @@ import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
 
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
 
 public class SmeltingRecipeChecker {
   public static Set<MeltingRecipe> getSmeltingRecipesSet() {
-    Set<MeltingRecipe> recipes = new ObjectOpenHashSet<>();
+    Set<MeltingRecipe> recipes = new ObjectLinkedOpenHashSet<>();
 
     for(MeltingRecipe recipe : TinkerRegistry.getAllMeltingRecipies()) {
       if(recipe.output != null && recipe.input != null && recipe.input.getInputs() != null && !recipe.input.getInputs().isEmpty()) {
