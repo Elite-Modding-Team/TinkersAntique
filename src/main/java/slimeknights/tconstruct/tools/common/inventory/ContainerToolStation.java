@@ -455,6 +455,10 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
 
     ItemStack result = ToolBuilder.tryBuildTool(input, toolName, getBuildableTools());
     if(!result.isEmpty()) {
+      if (tile.isDeconstructing()) {
+        result = tile.getDeconstructingStack();
+      }
+
       TinkerCraftingEvent.ToolCraftingEvent.fireEvent(result, player, input);
     }
     return result;
