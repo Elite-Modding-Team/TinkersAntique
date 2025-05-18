@@ -134,10 +134,19 @@ public class MaterialWrapper implements IRecipeWrapper {
         List<String> tooltip = new ArrayList<>();
         traitList.forEach((index, trait) -> {
             if (mouseY >= 22 + index * 9 && mouseY < 31 + index * 9 && mouseX >= 0 && mouseX <= MaterialCategory.WIDTH) {
-                // Yes this looks weird, but it doesn't split the string properly when just doing `.split("\\n")`
-                String[] desc = trait.getLocalizedDesc().replace("\\n", "__").split("__");
+                String[] desc = trait.getLocalizedDesc().split("\\R");
+                if (desc.length < 2) {
+                    // Yes this looks weird, but it doesn't split the string properly when just doing `.split("\\n")`
+                    desc = desc[0].replace("\\n", "__").split("__");
+                }
                 String title = TextFormatting.GOLD + desc[0] + TextFormatting.RESET;
-                List<String> groups = getStringList(desc[1], 40);
+
+                String rest = "";
+                if (desc.length > 1) {
+                    rest = desc[1];
+                }
+
+                List<String> groups = getStringList(rest, 40);
                 tooltip.add(title);
                 tooltip.addAll(groups);
             }
