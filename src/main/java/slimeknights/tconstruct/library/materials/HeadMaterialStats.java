@@ -47,10 +47,10 @@ public class HeadMaterialStats extends AbstractMaterialStats {
   public List<String> getLocalizedInfo() {
     List<String> info = Lists.newArrayList();
 
-    info.add(formatDurability(durability));
+    if(durability != 0) info.add(formatDurability(durability));
     info.add(formatHarvestLevel(harvestLevel));
-    info.add(formatMiningSpeed(miningspeed));
-    info.add(formatAttack(attack));
+    if(miningspeed != 0) info.add(formatMiningSpeed(miningspeed));
+    if(attack != 0) info.add(formatAttack(attack));
 
     return info;
   }
@@ -82,10 +82,10 @@ public class HeadMaterialStats extends AbstractMaterialStats {
   public List<String> getLocalizedDesc() {
     List<String> info = Lists.newArrayList();
 
-    info.add(Util.translate(LOC_DurabilityDesc));
+    if(durability != 0) info.add(Util.translate(LOC_DurabilityDesc));
     info.add(Util.translate(LOC_HarvestLevelDesc));
-    info.add(Util.translate(LOC_MiningSpeedDesc));
-    info.add(Util.translate(LOC_AttackDesc));
+    if(miningspeed != 0) info.add(Util.translate(LOC_MiningSpeedDesc));
+    if(attack != 0) info.add(Util.translate(LOC_AttackDesc));
 
     return info;
   }
