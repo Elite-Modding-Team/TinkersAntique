@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.tools.common.inventory;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -32,7 +33,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import slimeknights.mantle.inventory.BaseContainer;
-import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerNetwork;
 import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.shared.inventory.InventoryCraftingPersistent;
@@ -93,7 +93,7 @@ public class ContainerCraftingStation extends ContainerTinkerStation<TileCraftin
         TileEntity te = world.getTileEntity(neighbor);
         if(te != null && !(te instanceof TileCraftingStation)) {
           // if blacklisted, skip checks entirely
-          if(blacklisted(te.getClass())) {
+          if(blacklisted(te.getClass(), te.getBlockType())) {
             continue;
           }
           if(te instanceof IInventory && !((IInventory) te).isUsableByPlayer(player)) {
@@ -127,13 +127,17 @@ public class ContainerCraftingStation extends ContainerTinkerStation<TileCraftin
     this.addPlayerInventory(playerInventory, 8, 84);
   }
 
-  private boolean blacklisted(Class<? extends TileEntity> clazz) {
+  private boolean blacklisted(Class<? extends TileEntity> clazz, Block block) {
     if(Config.craftingStationBlacklist.isEmpty()) {
       return false;
     }
 
     // first, try registry name
     ResourceLocation registryName = TileEntity.getKey(clazz);
+    if(registryName != null && Config.craftingStationBlacklist.contains(registryName.toString())) {
+      return true;
+    }
+    registryName = block.getRegistryName();
     if(registryName != null && Config.craftingStationBlacklist.contains(registryName.toString())) {
       return true;
     }
