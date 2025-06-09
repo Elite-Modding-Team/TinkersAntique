@@ -126,7 +126,6 @@ public class BlockTable extends BlockInventory implements ITileEntityProvider {
       }
 
       table.updateTextureBlock(feetTag);
-      System.out.println(table.getFacing());
       table.setFacing(placer.getHorizontalFacing().getOpposite());
 
       // check if we also have an inventory
