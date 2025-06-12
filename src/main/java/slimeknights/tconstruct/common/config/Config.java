@@ -105,7 +105,10 @@ public final class Config {
           "techguns:zombiefarmer;true;minecraft:skull:2",
           "techguns:zombieminer;true;minecraft:skull:2",
           "techguns:zombiepoliceman;true;minecraft:skull:2",
-          "techguns:zombiesoldier;true;minecraft:skull:2"
+          "techguns:zombiesoldier;true;minecraft:skull:2",
+          "thaumcraft:CultistCleric;false;minecraft:skull:2",
+          "thaumcraft:CultistKnight;false;minecraft:skull:2",
+          "thaumcraft:CultistLeader;false;minecraft:skull:2"
   };
   public static String[] entityMelting = {
           "minecraft:blaze;true;blazing_blood;20",
