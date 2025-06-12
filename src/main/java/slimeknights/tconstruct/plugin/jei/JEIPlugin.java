@@ -57,6 +57,8 @@ import slimeknights.tconstruct.plugin.jei.interpreter.PatternSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.TableSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.ToolPartSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.ToolSubtypeInterpreter;
+import slimeknights.tconstruct.plugin.jei.material.MaterialCategory;
+import slimeknights.tconstruct.plugin.jei.material.MaterialWrapper;
 import slimeknights.tconstruct.plugin.jei.severing.SeveringRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.severing.SeveringRecipeChecker;
 import slimeknights.tconstruct.plugin.jei.severing.SeveringRecipeHandler;
@@ -149,6 +151,7 @@ public class JEIPlugin implements IModPlugin {
 
     if(TConstruct.pulseManager.isPulseLoaded(TinkerTools.PulseId)) {
       registry.addRecipeCategories(new SeveringRecipeCategory(guiHelper));
+      registry.addRecipeCategories(new MaterialCategory(guiHelper));
     }
   }
 
@@ -247,6 +250,19 @@ public class JEIPlugin implements IModPlugin {
           	break;
         }
       }      
+    }
+
+    // Integrate Tinker's JEI
+    if (TConstruct.pulseManager.isPulseLoaded(TinkerTools.PulseId)) {
+      ArrayList<MaterialWrapper> list = new ArrayList<>();
+
+      for (Material material : TinkerRegistry.getAllMaterials())
+        if (!material.isHidden() && material.hasItems() && !material.getAllStats().isEmpty())
+          list.add(new MaterialWrapper(material, guiHelper));
+
+      registry.addRecipes(list, MaterialCategory.UUID);
+      registry.addRecipeCatalyst(new ItemStack(TinkerTools.toolForge, 1), MaterialCategory.UUID);
+      registry.addRecipeCatalyst(new ItemStack(TinkerTools.toolTables, 1, 3), MaterialCategory.UUID);
     }
   }
   
