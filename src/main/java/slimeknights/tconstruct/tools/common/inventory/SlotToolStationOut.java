@@ -17,6 +17,7 @@ import javax.annotation.Nonnull;
 public class SlotToolStationOut extends Slot {
 
   public ContainerToolStation parent;
+  public boolean isToolForDeconstruction = false;
 
   public SlotToolStationOut(int index, int xPosition, int yPosition, ContainerToolStation container) {
     super(new InventoryCraftResult(), index, xPosition, yPosition);
@@ -41,6 +42,7 @@ public class SlotToolStationOut extends Slot {
     super.putStack(stack);
     // trigger craft matrix update and sync when a tool is placed in the output slot
     if(isItemValid(stack)) {
+      this.isToolForDeconstruction = true;
       parent.onCraftMatrixChanged(parent.getTile());
       parent.detectAndSendChanges();
     } 

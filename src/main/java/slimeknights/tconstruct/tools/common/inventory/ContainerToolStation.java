@@ -198,7 +198,8 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
         out.inventory.setInventorySlotContents(0, result);
       }
       // if no crafting result and a tool is in the output slot, try deconstruction
-      else if(Config.deconstructTools && !outputStack.isEmpty() && outputStack.getItem() instanceof TinkersItem) {
+      else if(Config.deconstructTools && !outputStack.isEmpty() && outputStack.getItem() instanceof TinkersItem && out.isToolForDeconstruction) {
+        out.isToolForDeconstruction = false;
         if(deconstructTool()) {
           // populate input slots with parts
           NonNullList<ItemStack> parts = getDeconstructedParts(outputStack);
@@ -496,7 +497,11 @@ public class ContainerToolStation extends ContainerTinkerStation<TileToolStation
 
   @Override
   public boolean canMergeSlot(ItemStack stack, Slot slot) {
-    return slot != out && super.canMergeSlot(stack, slot);
+    if (slot == out || tile.isDeconstructing() && slot instanceof SlotToolStationIn) {
+      return false;
+    }
+
+    return super.canMergeSlot(stack, slot);
   }
 
   public ToolCore getSelectedTool() {
