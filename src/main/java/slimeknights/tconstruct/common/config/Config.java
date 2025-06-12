@@ -95,7 +95,17 @@ public final class Config {
           "mod_lavacow:forsaken;true;minecraft:skull:0",
           "mod_lavacow:skeletonking;false;minecraft:skull:0",
           "mod_lavacow:soulworm;false;minecraft:skull:1",
-          "mod_lavacow:scarecrow;false;mod_lavacow:scarecrowhead_common"
+          "mod_lavacow:scarecrow;false;mod_lavacow:scarecrowhead_common",
+          "techguns:armysoldier;false;minecraft:skull:3",
+          "techguns:bandit;false;minecraft:skull:3",
+          "techguns:commando;false;minecraft:skull:3",
+          "techguns:dictatordave;false;minecraft:skull:3",
+          "techguns:psychosteve;false;minecraft:skull:3",
+          "techguns:stormtrooper;false;minecraft:skull:3",
+          "techguns:zombiefarmer;true;minecraft:skull:2",
+          "techguns:zombieminer;true;minecraft:skull:2",
+          "techguns:zombiepoliceman;true;minecraft:skull:2",
+          "techguns:zombiesoldier;true;minecraft:skull:2"
   };
   public static String[] entityMelting = {
           "minecraft:blaze;true;blazing_blood;20",
