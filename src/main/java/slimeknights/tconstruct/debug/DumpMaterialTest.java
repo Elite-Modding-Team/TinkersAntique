@@ -132,7 +132,7 @@ public class DumpMaterialTest extends CommandBase {
     }
 
     DecimalFormat df = new DecimalFormat("#.00");
-    HeadMaterialStats ref = baseMaterial.getStats(MaterialTypes.HEAD);// head.getStatInfos(ToolMaterialStats.TYPE);
+    HeadMaterialStats ref = baseMaterial.getStats(MaterialTypes.HEAD);
 
     List<String> header = Lists.newArrayList();
     header.add("");
