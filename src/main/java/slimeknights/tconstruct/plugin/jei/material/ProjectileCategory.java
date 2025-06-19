@@ -35,38 +35,17 @@ public class ProjectileCategory extends AbstractCategory {
 
     @Override
     protected void drawStats(LinkedList<String> statInfo, float lineNumber) {
-        if (statInfo.size() == 6) {
-            // Head && Arrow Shaft
-            String projectile = getHeading("stat.projectile.name");
-            drawComponent(projectile, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
-            lineNumber += HEADING_SPACING;
-            drawStatComponent(statInfo.get(0), lineNumber++);
-            drawStatComponent(statInfo.get(1), lineNumber++);
-            drawStatComponent(statInfo.get(2), lineNumber++);
-            drawStatComponent(statInfo.get(3), lineNumber++);
-            lineNumber += LINE_SPACING;
-
-            String shaft = getHeading("stat.shaft.name");
-            drawComponent(shaft, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
-            lineNumber += HEADING_SPACING;
-            drawStatComponent(statInfo.get(4), lineNumber++);
-            drawStatComponent(statInfo.get(5), lineNumber);
-        } else if (statInfo.size() == 4) {
-            // Head
-            String projectile = getHeading("stat.projectile.name");
-            drawComponent(projectile, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
-            lineNumber += HEADING_SPACING;
-            drawStatComponent(statInfo.get(0), lineNumber++);
-            drawStatComponent(statInfo.get(1), lineNumber++);
-            drawStatComponent(statInfo.get(2), lineNumber++);
-            drawStatComponent(statInfo.get(3), lineNumber);
-        } else if (statInfo.size() == 2) {
-            // Arrow Shaft || Fletching
-            String shaft = getHeading(statInfo.get(1).contains("%") ? "stat.fletching.name" : "stat.shaft.name");
-            drawComponent(shaft, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
-            lineNumber += HEADING_SPACING;
-            drawStatComponent(statInfo.get(0), lineNumber++);
-            drawStatComponent(statInfo.get(1), lineNumber);
+        String mainHeading = getHeading("stat." + (statInfo.size() != 2 ? "projectile" : statInfo.get(1).contains("%") ? "fletching" : "shaft") + ".name");
+        drawComponent(mainHeading, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
+        lineNumber += HEADING_SPACING;
+        for (int i = 0; i < statInfo.size(); ++i) {
+            if (i == 4) {
+                lineNumber += LINE_SPACING;
+                String shaft = getHeading("stat.shaft.name");
+                drawComponent(shaft, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
+                lineNumber += HEADING_SPACING;
+            }
+            drawStatComponent(statInfo.get(i), lineNumber++);
         }
     }
 }
