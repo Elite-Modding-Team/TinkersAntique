@@ -31,20 +31,11 @@ public class RangedCategory extends AbstractCategory {
 
     @Override
     protected void drawStats(LinkedList<String> statInfo, float lineNumber) {
-        if (statInfo.size() == 3) {
-            // Bow
-            String bow = getHeading("stat.bow.name");
-            drawComponent(bow, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
-            lineNumber += HEADING_SPACING;
-            drawStatComponent(statInfo.get(0), lineNumber++);
-            drawStatComponent(statInfo.get(1), lineNumber++);
-            drawStatComponent(statInfo.get(2), lineNumber);
-        } else if (statInfo.size() == 1) {
-            // Bow String
-            String bowstring = getHeading("stat.bowstring.name");
-            drawComponent(bowstring, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
-            lineNumber += HEADING_SPACING;
-            drawStatComponent(statInfo.get(0), lineNumber);
+        String heading = getHeading(statInfo.size() == 3 ? "stat.bow.name" : "stat.bowstring.name");
+        drawComponent(heading, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
+        lineNumber += HEADING_SPACING;
+        for (String s : statInfo) {
+            drawStatComponent(s, lineNumber++);
         }
     }
 }
