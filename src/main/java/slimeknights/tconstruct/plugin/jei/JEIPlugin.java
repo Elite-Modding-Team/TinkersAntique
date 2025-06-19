@@ -2,6 +2,7 @@ package slimeknights.tconstruct.plugin.jei;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -57,8 +58,7 @@ import slimeknights.tconstruct.plugin.jei.interpreter.PatternSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.TableSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.ToolPartSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.ToolSubtypeInterpreter;
-import slimeknights.tconstruct.plugin.jei.material.HarvestCategory;
-import slimeknights.tconstruct.plugin.jei.material.MaterialWrapper;
+import slimeknights.tconstruct.plugin.jei.material.*;
 import slimeknights.tconstruct.plugin.jei.severing.SeveringRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.severing.SeveringRecipeChecker;
 import slimeknights.tconstruct.plugin.jei.severing.SeveringRecipeHandler;
@@ -152,6 +152,8 @@ public class JEIPlugin implements IModPlugin {
     if(TConstruct.pulseManager.isPulseLoaded(TinkerTools.PulseId)) {
       registry.addRecipeCategories(new SeveringRecipeCategory(guiHelper));
       registry.addRecipeCategories(new HarvestCategory(guiHelper));
+      registry.addRecipeCategories(new RangedCategory(guiHelper));
+      registry.addRecipeCategories(new ProjectileCategory(guiHelper));
     }
   }
 
@@ -254,15 +256,33 @@ public class JEIPlugin implements IModPlugin {
 
     // Integrate Tinker's JEI
     if (TConstruct.pulseManager.isPulseLoaded(TinkerTools.PulseId)) {
-      ArrayList<MaterialWrapper> list = new ArrayList<>();
+      List<MaterialWrapper> materialWrappers = TinkerRegistry.getAllMaterials().stream()
+              .filter(material -> !material.isHidden() && material.hasItems() && !material.getAllStats().isEmpty())
+              .map(MaterialWrapper::new).collect(Collectors.toList());
 
-      for (Material material : TinkerRegistry.getAllMaterials())
-        if (!material.isHidden() && material.hasItems() && !material.getAllStats().isEmpty())
-          list.add(new MaterialWrapper(material, guiHelper));
       HarvestCategory harvestCategory = new HarvestCategory(guiHelper);
-      registry.addRecipes(list, harvestCategory.getUid());
+      List<MaterialWrapper> harvestWrapper = materialWrappers.stream()
+              .filter(materialWrapper -> Reference.HARVEST_TYPES.stream().anyMatch(type -> materialWrapper.getMaterial().hasStats(type)))
+              .collect(Collectors.toList());
+      registry.addRecipes(harvestWrapper, harvestCategory.getUid());
       registry.addRecipeCatalyst(new ItemStack(TinkerTools.toolForge, 1), harvestCategory.getUid());
       registry.addRecipeCatalyst(new ItemStack(TinkerTools.toolTables, 1, 3), harvestCategory.getUid());
+
+      RangedCategory rangedCategory = new RangedCategory(guiHelper);
+      List<MaterialWrapper> rangedWrapper = materialWrappers.stream()
+              .filter(materialWrapper -> Reference.RANGED_TYPES.stream().anyMatch(type -> materialWrapper.getMaterial().hasStats(type)))
+              .collect(Collectors.toList());
+      registry.addRecipes(rangedWrapper, rangedCategory.getUid());
+      registry.addRecipeCatalyst(new ItemStack(TinkerTools.toolForge, 1), rangedCategory.getUid());
+      registry.addRecipeCatalyst(new ItemStack(TinkerTools.toolTables, 1, 3), rangedCategory.getUid());
+
+      ProjectileCategory projectileCategory = new ProjectileCategory(guiHelper);
+      List<MaterialWrapper> projectileWrapper = materialWrappers.stream()
+              .filter(materialWrapper -> Reference.PROJECTILE_TYPES.stream().anyMatch(type -> materialWrapper.getMaterial().hasStats(type)))
+              .collect(Collectors.toList());
+      registry.addRecipes(projectileWrapper, projectileCategory.getUid());
+      registry.addRecipeCatalyst(new ItemStack(TinkerTools.toolForge, 1), projectileCategory.getUid());
+      registry.addRecipeCatalyst(new ItemStack(TinkerTools.toolTables, 1, 3), projectileCategory.getUid());
     }
   }
   

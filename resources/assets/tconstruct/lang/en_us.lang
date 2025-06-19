@@ -1059,7 +1059,8 @@ gui.jei.entitymelting.title=Entity Melting
 gui.jei.severing.title=Severing
 gui.jei.smeltery_damage.info=Damage Tick
 gui.jei.material.harvest=Material Harvest Stats
-gui.jei.material.range=Material Ranged Stats
+gui.jei.material.ranged=Material Ranged Stats
+gui.jei.material.projectile=Material Projectile Stats
 gui.jei.material.armor=Material Armor Stats
 
 gui.jei.severing.item_with_beheading=Tool with Beheading
