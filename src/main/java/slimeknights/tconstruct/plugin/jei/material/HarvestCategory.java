@@ -35,25 +35,23 @@ public class HarvestCategory extends AbstractCategory {
 
     @Override
     protected void drawStats(LinkedList<String> statInfo, float lineNumber) {
-        String head = getHeading("stat.head.name");
-        drawComponent(head, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
-        lineNumber += HEADING_SPACING;
-        drawStatComponent(statInfo.get(0), lineNumber++);
-        drawStatComponent(statInfo.get(1), lineNumber++);
-        drawStatComponent(statInfo.get(2), lineNumber++);
-        drawStatComponent(statInfo.get(3), lineNumber++);
-        lineNumber += LINE_SPACING;
+        String[] header = new String[]{
+                getHeading("stat.head.name"),
+                getHeading("stat.extra.name"),
+                getHeading("stat.handle.name")
+        };
+        int index = 0;
 
-        String extra = getHeading("stat.extra.name");
-        drawComponent(extra, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
-        lineNumber += HEADING_SPACING;
-        drawStatComponent(statInfo.get(4), lineNumber++);
-        lineNumber += LINE_SPACING;
-
-        String handle = getHeading("stat.handle.name");
-        drawComponent(handle, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
-        lineNumber += HEADING_SPACING;
-        drawStatComponent(statInfo.get(5), lineNumber++);
-        drawStatComponent(statInfo.get(6), lineNumber);
+        for (int i = 0; i < statInfo.size(); ++i) {
+            if (i == 4 || i == 5) {
+                lineNumber += LINE_SPACING;
+            }
+            if (i == 0 || i == 4 || i == 5) {
+                drawComponent(header[index], 0, lineNumber++, materialWrapper.material.materialTextColor, true);
+                lineNumber += HEADING_SPACING;
+                index++;
+            }
+            drawStatComponent(statInfo.get(i), lineNumber++);
+        }
     }
 }
