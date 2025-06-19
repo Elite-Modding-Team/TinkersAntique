@@ -127,11 +127,11 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
                 tooltip.addAll(formatTooltip(desc[1]));
             }
         });
-        tooltip.addAll(additionalTooltips(mouseX, mouseY));
+        tooltip.addAll(additionalTooltips(materialWrapper.getStatInfos(relatedParts), materialWrapper.getStatDescriptions(relatedParts), mouseX, mouseY));
         return tooltip;
     }
 
-    protected abstract List<String> additionalTooltips(int mouseX, int mouseY);
+    protected abstract List<String> additionalTooltips(List<String> statInfo, List<String> statDesc, int mouseX, int mouseY);
 
     protected abstract void drawStats(LinkedList<String> statInfo, float lineNumber);
 

@@ -9,31 +9,27 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class HarvestCategory extends AbstractCategory{
+public class HarvestCategory extends AbstractCategory {
     public HarvestCategory(IGuiHelper guiHelper) {
         super(guiHelper, Reference.HARVEST_TYPES);
-        icon = guiHelper.drawableBuilder(icon_location, 0, 0, 16, 16).setTextureSize(32,32).build();
+        icon = guiHelper.drawableBuilder(icon_location, 0, 0, 16, 16).setTextureSize(32, 32).build();
         title = new TextComponentTranslation("gui.jei.material.harvest").getFormattedText();
         uuid = Util.MODID + ":harvest_stats";
     }
 
     @Override
-    protected List<String> additionalTooltips(int mouseX, int mouseY) {
+    protected List<String> additionalTooltips(List<String> statInfo, List<String> statDesc, int mouseX, int mouseY) {
         List<String> tooltip = new ArrayList<>();
-        LinkedList<String> statInfo = materialWrapper.getStatInfos(relatedParts);
-        LinkedList<String> statDescriptions = materialWrapper.getStatDescriptions(relatedParts);
         float height = 4 + HEADING_SPACING;
-        if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(0)), height++, mouseX, mouseY)) tooltip.addAll(formatTooltip(statDescriptions.get(0)));
-        if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(1)), height++, mouseX, mouseY)) tooltip.addAll(formatTooltip(statDescriptions.get(1)));
-        if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(2)), height++, mouseX, mouseY)) tooltip.addAll(formatTooltip(statDescriptions.get(2)));
-        if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(3)), height++, mouseX, mouseY)) tooltip.addAll(formatTooltip(statDescriptions.get(3)));
-        height += LINE_SPACING + HEADING_SPACING;
-        height++;
-        if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(4)), height++, mouseX, mouseY)) tooltip.addAll(formatTooltip(statDescriptions.get(4)));
-        height += LINE_SPACING + HEADING_SPACING;
-        height++;
-        if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(5)), height++, mouseX, mouseY)) tooltip.addAll(formatTooltip(statDescriptions.get(5)));
-        if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(6)), height, mouseX, mouseY)) tooltip.addAll(formatTooltip(statDescriptions.get(6)));
+        for (int i = 0; i < Math.min(statInfo.size(), statDesc.size()); ++i) {
+            if (i == 4 || i == 5) {
+                height += LINE_SPACING + HEADING_SPACING;
+                height++;
+            }
+            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(i)), height++, mouseX, mouseY)) {
+                tooltip.addAll(formatTooltip(statDesc.get(i)));
+            }
+        }
         return tooltip;
     }
 

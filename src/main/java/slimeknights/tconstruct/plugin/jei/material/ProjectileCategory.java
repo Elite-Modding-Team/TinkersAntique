@@ -6,7 +6,6 @@ import slimeknights.tconstruct.common.ClientProxy;
 import slimeknights.tconstruct.library.Util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,42 +18,17 @@ public class ProjectileCategory extends AbstractCategory {
     }
 
     @Override
-    protected List<String> additionalTooltips(int mouseX, int mouseY) {
+    protected List<String> additionalTooltips(List<String> statInfo, List<String> statDesc, int mouseX, int mouseY) {
         List<String> tooltip = new ArrayList<>();
-        LinkedList<String> statInfo = materialWrapper.getStatInfos(relatedParts);
-        LinkedList<String> statDescriptions = materialWrapper.getStatDescriptions(relatedParts);
-        if (statInfo.size() == 6 && statDescriptions.size() == 6) {
-            float height = 4 + HEADING_SPACING;
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(0)), height++, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(0)));
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(1)), height++, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(1)));
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(2)), height++, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(2)));
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(3)), height++, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(3)));
-            height += LINE_SPACING + HEADING_SPACING;
-            height++;
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(4)), height++, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(4)));
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(5)), height, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(5)));
-        } else if (statInfo.size() == 4 && statDescriptions.size() == 4) {
-            float height = 4 + HEADING_SPACING;
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(0)), height++, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(0)));
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(1)), height++, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(1)));
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(2)), height++, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(2)));
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(3)), height, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(3)));
-        } else if (statInfo.size() == 2 && statDescriptions.size() == 2) {
-            float height = 4 + HEADING_SPACING;
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(0)), height++, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(0)));
-            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(1)), height, mouseX, mouseY))
-                tooltip.addAll(formatTooltip(statDescriptions.get(1)));
+        float height = 4 + HEADING_SPACING;
+        for (int i = 0; i < Math.min(statInfo.size(), statDesc.size()); ++i) {
+            if (i == 4) {
+                height += LINE_SPACING + HEADING_SPACING;
+                height++;
+            }
+            if (isHovered(0, ClientProxy.fontRenderer.getStringWidth(statInfo.get(i)), height++, mouseX, mouseY)) {
+                tooltip.addAll(formatTooltip(statDesc.get(i)));
+            }
         }
         return tooltip;
     }
