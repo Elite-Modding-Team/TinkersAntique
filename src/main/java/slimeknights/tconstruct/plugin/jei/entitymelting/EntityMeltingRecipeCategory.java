@@ -24,12 +24,12 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
 	public static ResourceLocation background_loc = Util.getResource("textures/gui/jei/smeltery2.png");
 
 	private final IDrawable background;
+	private final IDrawable icon;
 	private final IDrawable tankOverlay;
 
 	public EntityMeltingRecipeCategory(IGuiHelper guiHelper) {
-		// background = guiHelper.createDrawable(background_loc, 0, 0, 160, 60, 0, 0, 0, 0);
 		background = guiHelper.createDrawable(background_loc, 0, 0, 150, 62);
-
+		icon = guiHelper.createDrawable(background_loc, 174, 0, 16, 16);
 		tankOverlay = guiHelper.createDrawable(background_loc, 150, 33, 16, 16);
 	}
 
@@ -93,8 +93,7 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
 
 	@Override
 	public IDrawable getIcon() {
-		// use the default icon
-		return null;
+		return icon;
 	}
 
 	@Override
