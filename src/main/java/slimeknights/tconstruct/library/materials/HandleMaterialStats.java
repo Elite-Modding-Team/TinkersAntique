@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.client.CustomFontColor;
 
@@ -32,16 +33,23 @@ public class HandleMaterialStats extends AbstractMaterialStats {
 
   @Override
   public List<String> getLocalizedInfo() {
-    return ImmutableList.of(formatModifier(modifier),
-                            formatDurability(durability));
+    List<String> info = Lists.newArrayList();
+
+    if(modifier != 0) info.add(formatModifier(modifier));
+    if(durability != 0) info.add(formatDurability(durability));
+
+    return info;
   }
 
   @Override
   public List<String> getLocalizedDesc() {
-    return ImmutableList.of(Util.translate(LOC_MultiplierDesc),
-                            Util.translate(LOC_DurabilityDesc));
-  }
+    List<String> info = Lists.newArrayList();
 
+    if(modifier != 0) info.add(Util.translate(LOC_MultiplierDesc));
+    if(durability != 0) info.add(Util.translate(LOC_DurabilityDesc));
+
+    return info;
+  }
 
   public static String formatModifier(float quality) {
     return formatNumber(LOC_Multiplier, COLOR_Modifier, quality);

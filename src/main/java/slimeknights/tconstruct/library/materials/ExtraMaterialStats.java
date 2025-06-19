@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
 import slimeknights.tconstruct.library.Util;
 
 public class ExtraMaterialStats extends AbstractMaterialStats {
@@ -24,12 +25,20 @@ public class ExtraMaterialStats extends AbstractMaterialStats {
 
   @Override
   public List<String> getLocalizedInfo() {
-    return ImmutableList.of(formatDurability(extraDurability));
+    List<String> info = Lists.newArrayList();
+
+    if(extraDurability != 0) info.add(formatDurability(extraDurability));
+
+    return info;
   }
 
   @Override
   public List<String> getLocalizedDesc() {
-    return ImmutableList.of(Util.translate(LOC_DurabilityDesc));
+    List<String> info = Lists.newArrayList();
+
+    if(extraDurability != 0) info.add(Util.translate(LOC_DurabilityDesc));
+
+    return info;
   }
 
   public static String formatDurability(int durability) {

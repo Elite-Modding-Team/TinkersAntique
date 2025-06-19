@@ -90,6 +90,7 @@ public class MaterialWrapper implements IRecipeWrapper {
         LinkedList<String> statList = new LinkedList<>();
         getStats(parts).forEach(s -> statList.addAll(s.getLocalizedInfo()));
         return statList;
+
     }
 
     public LinkedList<String> getStatDescriptions(List<String> parts) {

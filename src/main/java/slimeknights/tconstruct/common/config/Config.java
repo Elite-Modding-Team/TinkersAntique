@@ -55,8 +55,9 @@ public final class Config {
   public static int heatItemsTickrateSearedFurnace = 4;
   public static int liquidTransferRate = 6;
   public static boolean vanillaToolBreaking = false;
+  public static boolean oldMattockAndKama = false;
   public static boolean fancyJEIBeheadingAnimation = true;
-  
+
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
   };
@@ -94,7 +95,20 @@ public final class Config {
           "mod_lavacow:forsaken;true;minecraft:skull:0",
           "mod_lavacow:skeletonking;false;minecraft:skull:0",
           "mod_lavacow:soulworm;false;minecraft:skull:1",
-          "mod_lavacow:scarecrow;false;mod_lavacow:scarecrowhead_common"
+          "mod_lavacow:scarecrow;false;mod_lavacow:scarecrowhead_common",
+          "techguns:armysoldier;false;minecraft:skull:3",
+          "techguns:bandit;false;minecraft:skull:3",
+          "techguns:commando;false;minecraft:skull:3",
+          "techguns:dictatordave;false;minecraft:skull:3",
+          "techguns:psychosteve;false;minecraft:skull:3",
+          "techguns:stormtrooper;false;minecraft:skull:3",
+          "techguns:zombiefarmer;true;minecraft:skull:2",
+          "techguns:zombieminer;true;minecraft:skull:2",
+          "techguns:zombiepoliceman;true;minecraft:skull:2",
+          "techguns:zombiesoldier;true;minecraft:skull:2",
+          "thaumcraft:CultistCleric;false;minecraft:skull:2",
+          "thaumcraft:CultistKnight;false;minecraft:skull:2",
+          "thaumcraft:CultistLeader;false;minecraft:skull:2"
   };
   public static String[] entityMelting = {
           "minecraft:blaze;true;blazing_blood;20",
@@ -395,6 +409,10 @@ public final class Config {
       prop = configFile.get(cat, "vanillaToolBreaking", vanillaToolBreaking);
       prop.setComment("If true, tools will be fully destroyed like vanilla tools when durability is depleted. You monster!");
       vanillaToolBreaking = prop.getBoolean();
+
+      prop = configFile.get(cat, "oldMattockAndKama", oldMattockAndKama);
+      prop.setComment("Restores old Mattock and Kama behavior (Mattock usable as a hoe, Kama is not)");
+      oldMattockAndKama = prop.getBoolean();
 
       prop = configFile.get(cat, "mobHeadDrops", mobHeadDrops);
       prop.setComment("List of mob head drops in the format 'modid:entity;subtypes;modid:item:metadata'.");

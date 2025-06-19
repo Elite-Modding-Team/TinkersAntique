@@ -197,7 +197,7 @@ public class JEIPlugin implements IModPlugin {
       registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.searedFurnaceController), VanillaRecipeCategoryUid.SMELTING);
 
       // melting recipes
-      registry.addRecipes(SmeltingRecipeChecker.getSmeltingRecipes(), SmeltingRecipeCategory.CATEGORY);
+      registry.addRecipes(SmeltingRecipeChecker.getSmeltingRecipesSet(), SmeltingRecipeCategory.CATEGORY);
       registry.addRecipes(EntityMeltingRecipeChecker.getEntityMeltingRecipes(), EntityMeltingRecipeCategory.CATEGORY);
       // alloys
       registry.addRecipes(AlloyRecipeChecker.getAlloyRecipes(), AlloyRecipeCategory.CATEGORY);

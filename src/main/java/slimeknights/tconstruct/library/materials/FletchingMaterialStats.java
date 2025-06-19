@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.client.CustomFontColor;
 
@@ -29,14 +30,22 @@ public class FletchingMaterialStats extends AbstractMaterialStats {
 
   @Override
   public List<String> getLocalizedInfo() {
-    return ImmutableList.of(formatModifier(modifier),
-                            formatAccuracy(accuracy));
+    List<String> info = Lists.newArrayList();
+
+    if(modifier != 0) info.add(formatModifier(modifier));
+    if(accuracy != 0) info.add(formatAccuracy(accuracy));
+
+    return info;
   }
 
   @Override
   public List<String> getLocalizedDesc() {
-    return ImmutableList.of(Util.translate(LOC_MultiplierDesc),
-                            Util.translate(LOC_AccuracyDesc));
+    List<String> info = Lists.newArrayList();
+
+    if(modifier != 0) info.add(Util.translate(LOC_MultiplierDesc));
+    if(accuracy != 0) info.add(Util.translate(LOC_AccuracyDesc));
+
+    return info;
   }
 
 

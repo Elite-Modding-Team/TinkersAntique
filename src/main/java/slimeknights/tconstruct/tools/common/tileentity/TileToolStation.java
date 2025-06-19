@@ -57,7 +57,7 @@ public class TileToolStation extends TileTable implements IInventoryGui {
       info = ((GuiToolStation) Minecraft.getMinecraft().currentScreen).currentInfo;
     }*/
     
-    if (!this.deconstructingStack.isEmpty()) {
+    if (isDeconstructing()) {
 	  PropertyTableItem.TableItem item = getTableItem(this.deconstructingStack, this.getWorld(), null);
 	  toDisplay.items.add(item);
     } else {

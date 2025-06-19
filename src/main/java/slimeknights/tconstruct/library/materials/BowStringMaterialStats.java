@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.client.CustomFontColor;
 
@@ -24,12 +25,20 @@ public class BowStringMaterialStats extends AbstractMaterialStats {
 
   @Override
   public List<String> getLocalizedInfo() {
-    return ImmutableList.of(formatModifier(modifier));
+    List<String> info = Lists.newArrayList();
+
+    if(modifier != 0) info.add(formatModifier(modifier));
+
+    return info;
   }
 
   @Override
   public List<String> getLocalizedDesc() {
-    return ImmutableList.of(Util.translate(LOC_MultiplierDesc));
+    List<String> info = Lists.newArrayList();
+
+    if(modifier != 0) info.add(Util.translate(LOC_MultiplierDesc));
+
+    return info;
   }
 
 

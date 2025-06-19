@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
 import slimeknights.tconstruct.library.Util;
 
 public class ArrowShaftMaterialStats extends AbstractMaterialStats {
@@ -28,14 +29,22 @@ public class ArrowShaftMaterialStats extends AbstractMaterialStats {
 
   @Override
   public List<String> getLocalizedInfo() {
-    return ImmutableList.of(formatModifier(modifier),
-                            formatAmmo(bonusAmmo));
+    List<String> info = Lists.newArrayList();
+
+    if(modifier != 0) info.add(formatModifier(modifier));
+    if(bonusAmmo != 0) info.add(formatAmmo(bonusAmmo));
+
+    return info;
   }
 
   @Override
   public List<String> getLocalizedDesc() {
-    return ImmutableList.of(Util.translate(LOC_MultiplierDesc),
-                            Util.translate(LOC_AmmoDesc));
+    List<String> info = Lists.newArrayList();
+
+    if(modifier != 0) info.add(Util.translate(LOC_MultiplierDesc));
+    if(bonusAmmo != 0) info.add(Util.translate(LOC_AmmoDesc));
+
+    return info;
   }
 
 
