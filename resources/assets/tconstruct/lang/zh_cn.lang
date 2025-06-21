@@ -279,7 +279,7 @@ item.tconstruct.edible.slimeball_magma.name=熔岩史莱姆球
 item.tconstruct.edible.slimeball_pink.name=粉色史莱姆球
 item.tconstruct.edible.jerky_beef.name=牛肉干
 item.tconstruct.edible.jerky_chicken.name=鸡肉干
-item.tconstruct.edible.jerky_chicken.tooltip=或者可以叫它干鸡?
+item.tconstruct.edible.jerky_chicken.tooltip=或者也可以称呼它为鸡其逝?
 item.tconstruct.edible.jerky_pork.name=培根干
 item.tconstruct.edible.jerky_mutton.name=羊肉干
 item.tconstruct.edible.jerky_rabbit.name=兔肉干
@@ -1057,6 +1057,11 @@ gui.jei.casting.consume=消耗铸模！
 gui.jei.drying.title=晾干架
 gui.jei.entitymelting.title=实体熔炼
 gui.jei.severing.title=躯体分割
+gui.jei.smeltery_damage.info=损失生命
+gui.jei.material.harvest=材料·一般统计数据
+gui.jei.material.ranged=材料·远程统计数据
+gui.jei.material.projectile=材料·射弹统计数据
+gui.jei.material.armor=材料·护甲统计数据
 
 gui.jei.severing.item_with_beheading=拥有斩首的工具或武器
 
