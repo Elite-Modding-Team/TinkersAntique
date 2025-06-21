@@ -22,12 +22,12 @@ public class SeveringRecipeChecker {
 			}
 			ItemStack spawnEgg = new ItemStack(Items.SPAWN_EGG);
 			ItemMonsterPlacer.applyEntityIdToItemStack(spawnEgg, rl);
-			ItemStack headStack = TinkerRegistry.getAllSeveringRecipes().get(entityClass);
-
-			if (headStack != null && !headStack.isEmpty()) {
-				headStack.setCount(1);
-				SeveringRecipe severingRecipe = new SeveringRecipe(rl, headStack, spawnEgg);
-				recipes.add(severingRecipe);
+			for (ItemStack headStack : TinkerRegistry.getAllSeveringRecipes().get(entityClass)) {
+				if (headStack != null && !headStack.isEmpty()) {
+					headStack.setCount(1);
+					SeveringRecipe severingRecipe = new SeveringRecipe(rl, headStack, spawnEgg);
+					recipes.add(severingRecipe);
+				}
 			}
 
 		}

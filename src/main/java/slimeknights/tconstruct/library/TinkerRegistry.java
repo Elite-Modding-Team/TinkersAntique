@@ -1,9 +1,7 @@
 package slimeknights.tconstruct.library;
 
 import com.google.common.base.CharMatcher;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.*;
 
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.Block;
@@ -475,8 +473,8 @@ public final class TinkerRegistry {
   | Modifiers                                                                 |
   ---------------------------------------------------------------------------*/
   private static final Map<String, IModifier> modifiers = new Object2ObjectOpenHashMap<>();
-  private static final Map<Class<? extends EntityLivingBase>, Function<EntityLivingBase,ItemStack>> headDrops = new Object2ObjectOpenHashMap<>();
-  private static final Map<Class<? extends EntityLivingBase>, ItemStack> headDropsRaw = new Object2ObjectOpenHashMap<>();
+  private static final Multimap<Class<? extends EntityLivingBase>, Function<EntityLivingBase,ItemStack>> headDrops = ArrayListMultimap.create();
+  private static final Multimap<Class<? extends EntityLivingBase>, ItemStack> headDropsRaw = ArrayListMultimap.create();
 
   public static void registerModifier(IModifier modifier) {
     registerModifierAlias(modifier, modifier.getIdentifier());
@@ -540,20 +538,25 @@ public final class TinkerRegistry {
   }
 
   /**
-   * Gets the head that would be dropped by an entity
+   * Gets the heads that would be dropped by an entity
    * @param entity  Entity to check
-   * @return  The entity's head
+   * @return  A collection of the entity's head drops
    */
-  public static ItemStack getHeadDrop(EntityLivingBase entity) {
-    Function<EntityLivingBase, ItemStack> callback = headDrops.get(entity.getClass());
-    if(callback != null) {
-      return callback.apply(entity).copy();
+  public static Collection<ItemStack> getHeadDrop(EntityLivingBase entity) {
+    Collection<ItemStack> drops = new ArrayList<>();
+    for(Map.Entry<Class<? extends EntityLivingBase>, Function<EntityLivingBase, ItemStack>> entry : headDrops.entries()) {
+      if(entry.getKey().isAssignableFrom(entity.getClass())) {
+        ItemStack stack = entry.getValue().apply(entity);
+        if (!stack.isEmpty()) {
+          drops.add(stack.copy());
+        }
+      }
     }
-    return ItemStack.EMPTY;
+    return drops;
   }
 
-  public static Map<Class<? extends EntityLivingBase>, ItemStack> getAllSeveringRecipes() {
-    return ImmutableMap.copyOf(headDropsRaw);
+  public static Map<Class<? extends EntityLivingBase>, Collection<ItemStack>> getAllSeveringRecipes() {
+    return headDropsRaw.asMap();
   }
 
   /*---------------------------------------------------------------------------
