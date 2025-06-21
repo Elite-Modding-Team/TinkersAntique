@@ -28,12 +28,11 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.mantle.util.RecipeMatch;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.CommonProxy;
 import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.gadgets.item.ItemPiggybackPack.CarryPotionEffect;
@@ -215,17 +214,30 @@ public class TinkerModifiers extends AbstractToolPulse {
   }
 
   private void registerMobHeadDrops() {
+    // Map to group drops by entity for multiple drop support
+    Map<String, List<ItemDrop>> entityDrops = new HashMap<>();
+    // Parse config entries
     for(String entry : Config.mobHeadDrops) {
       String[] parts = entry.split(";");
-      if(parts.length != 3) {
+      if(parts.length < 3) {
         log.error("Invalid mob head drop entry: {}", entry);
         continue;
       }
       String entityRL = parts[0];
       String subtypes = parts[1];
-      String[] itemParts = parts[2].split(":");
+      String itemResource = parts[2];
+      // Validate subtypes
+      boolean applyToSubtypes;
+      try {
+        applyToSubtypes = Boolean.parseBoolean(subtypes);
+      } catch(Exception e) {
+        log.error("Invalid subtypes value in mob head drop entry: {}", entry);
+        continue;
+      }
+      // Parse item (e.g. minecraft:skull:0)
+      String[] itemParts = itemResource.split(":");
       if(itemParts.length < 2 || itemParts.length > 3) {
-        log.error("Invalid item format in mob head drop entry: {}", entry);
+        log.error("Invalid item resource location in mob head drop entry: {}", entry);
         continue;
       }
       String itemName = itemParts[0] + ":" + itemParts[1];
@@ -235,6 +247,20 @@ public class TinkerModifiers extends AbstractToolPulse {
       } catch(NumberFormatException e) {
         log.error("Invalid metadata in mob head drop entry: {}", entry);
         continue;
+      }
+      // Parse max quantity
+      int maxQuantity = 1;
+      if(parts.length == 4) {
+        try {
+          maxQuantity = Integer.parseInt(parts[3]);
+          if(maxQuantity < 1) {
+            log.error("Invalid quantity value in mob head drop entry: {}", entry);
+            continue;
+          }
+        } catch(NumberFormatException e) {
+          log.error("Invalid quantity format in mob head drop entry: {}", entry);
+          continue;
+        }
       }
       ResourceLocation itemLocation;
       try {
@@ -251,15 +277,29 @@ public class TinkerModifiers extends AbstractToolPulse {
         log.error("Item not found for mob head drop: {}", itemName);
         continue;
       }
+      // Store drop information with subtypes
+      ItemDrop drop = new ItemDrop(headItem, metadata, maxQuantity, applyToSubtypes);
+      entityDrops.computeIfAbsent(entityRL, k -> new ArrayList<>()).add(drop);
+    }
+    // Register drops for each entity
+    for(Map.Entry<String, List<ItemDrop>> entry : entityDrops.entrySet()) {
+      String entityRL = entry.getKey();
+      List<ItemDrop> drops = entry.getValue();
       if(entityRL.equals("minecraft:player")) {
         // EntityPlayerMP is the one that shows in the living drop event rather than EntityPlayer
         TinkerRegistry.registerHeadDrop(EntityPlayerMP.class, entity -> {
-          ItemStack headStack = new ItemStack(headItem, 1, metadata);
-          if(entity instanceof EntityPlayer && headItem instanceof ItemSkull) {
-            NBTUtil.writeGameProfile(headStack.getOrCreateSubCompound("SkullOwner"), ((EntityPlayer) entity).getGameProfile());
+          List<ItemStack> dropStacks = new ArrayList<>();
+          for(ItemDrop drop : drops) {
+            ItemStack stack = new ItemStack(drop.item, drop.maxQuantity, drop.metadata);
+            if(entity instanceof EntityPlayer && drop.item instanceof ItemSkull) {
+              NBTUtil.writeGameProfile(stack.getOrCreateSubCompound("SkullOwner"), ((EntityPlayer) entity).getGameProfile());
+            }
+            dropStacks.add(stack);
           }
-          return headStack;
+          return dropStacks.isEmpty() ? null : dropStacks.get(TConstruct.random.nextInt(dropStacks.size()));
         });
+        drops.forEach(drop -> log.info("Registered mob head drop for {} into {} with metadata {} (quantity <={}, subtypes: {})",
+                entityRL, ForgeRegistries.ITEMS.getKey(drop.item), drop.metadata, drop.maxQuantity, drop.subtypes));
       } else {
         ResourceLocation entityLocation;
         try {
@@ -278,16 +318,34 @@ public class TinkerModifiers extends AbstractToolPulse {
         }
         Class<? extends Entity> entityClass = entityEntry.getEntityClass();
         if(!EntityLivingBase.class.isAssignableFrom(entityClass)) {
-          log.error("Entity class {} is not a suitable entity for mob head drop: {}", entityClass.getName(), entityRL);
+          log.error("Entity class {} is not a suitable entity for mob head drop: {}", entityClass.getName(), entry);
           continue;
         }
-        ItemStack headStack = new ItemStack(headItem, 1, metadata);
-        if(subtypes.equals("true")) {
-          TinkerRegistry.registerHeadDropForAll((Class<? extends EntityLivingBase>) entityClass, headStack);
-        } else {
-          TinkerRegistry.registerHeadDrop((Class<? extends EntityLivingBase>) entityClass, headStack);
+        for(ItemDrop drop : drops) {
+          ItemStack headStack = new ItemStack(drop.item, drop.maxQuantity, drop.metadata);
+          if(drop.subtypes) {
+            TinkerRegistry.registerHeadDropForAll((Class<? extends EntityLivingBase>) entityClass, headStack);
+          } else {
+            TinkerRegistry.registerHeadDrop((Class<? extends EntityLivingBase>) entityClass, headStack);
+          }
+          log.info("Registered mob head drop for {} into {} with metadata {} (quantity <={}, subtypes: {})",
+                  entityRL, ForgeRegistries.ITEMS.getKey(drop.item), drop.metadata, drop.maxQuantity, drop.subtypes);
         }
       }
+    }
+  }
+
+  private static class ItemDrop {
+    final Item item;
+    final int metadata;
+    final int maxQuantity;
+    final boolean subtypes;
+
+    ItemDrop(Item item, int metadata, int maxQuantity, boolean subtypes) {
+      this.item = item;
+      this.metadata = metadata;
+      this.maxQuantity = maxQuantity;
+      this.subtypes = subtypes;
     }
   }
 

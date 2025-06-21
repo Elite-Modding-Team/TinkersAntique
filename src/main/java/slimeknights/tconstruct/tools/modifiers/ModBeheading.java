@@ -15,6 +15,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
@@ -98,6 +99,8 @@ public class ModBeheading extends ToolModifier {
     int level = getBeheadingLevel(event.getSource());
     if(shouldDropHead(level)) {
       ItemStack head = TinkerRegistry.getHeadDrop(event.getEntityLiving());
+      if(head.getCount() > 1)
+        head.setCount(TConstruct.random.nextInt(head.getCount()) + 1);
       if(!head.isEmpty() && !alreadyContainsDrop(event, head)) {
         EntityItem entityitem = new EntityItem(event.getEntityLiving().getEntityWorld(), event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, head);
         entityitem.setDefaultPickupDelay();
@@ -115,6 +118,8 @@ public class ModBeheading extends ToolModifier {
 
       if(shouldDropHead(level)) {
         ItemStack head = TinkerRegistry.getHeadDrop(entity);
+        if(head.getCount() > 1)
+          head.setCount(TConstruct.random.nextInt(head.getCount()) + 1);
         if(!head.isEmpty()) {
           ((EntityPlayerMP) entity).dropItem(head, true);
         }

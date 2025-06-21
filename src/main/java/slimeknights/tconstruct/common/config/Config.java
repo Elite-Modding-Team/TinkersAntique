@@ -415,7 +415,7 @@ public final class Config {
       oldMattockAndKama = prop.getBoolean();
 
       prop = configFile.get(cat, "mobHeadDrops", mobHeadDrops);
-      prop.setComment("List of mob head drops in the format 'modid:entity;subtypes;modid:item:metadata'.");
+      prop.setComment("List of mob head drops in the format 'modid:entity;subtypes;modid:item[:metadata][;max_quantity]'. Example: 'minecraft:skeleton;true;minecraft:skull:0' or 'minecraft:chicken;false;minecraft:feather;2'");
       mobHeadDrops = prop.getStringList();
 
       prop = configFile.get(cat, "entityMelting", entityMelting);
