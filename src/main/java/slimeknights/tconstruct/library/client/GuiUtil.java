@@ -161,7 +161,7 @@ public class GuiUtil {
 
   public static void drawGuiTank(SmelteryTank liquids, int x, int y, int w, int height, float zLevel) {
     // draw liquids
-    if(liquids.getFluidAmount() > 0) {
+    if(liquids != null && liquids.getFluidAmount() > 0) {
       int capacity = Math.max(liquids.getFluidAmount(), liquids.getCapacity());
       int[] heights = calcLiquidHeights(liquids.getFluids(), capacity, height);
 

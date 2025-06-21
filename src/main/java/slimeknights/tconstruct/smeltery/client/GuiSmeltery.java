@@ -40,7 +40,7 @@ public class GuiSmeltery extends GuiHeatingStructureFuelTank implements IGuiLiqu
     super.updateScreen();
 
     // smeltery size changed
-    if(smeltery.getSizeInventory() != sideinventory.inventorySlots.inventorySlots.size()) {
+    if(smeltery == null || smeltery.getTank() == null || smeltery.getSizeInventory() != sideinventory.inventorySlots.inventorySlots.size()) {
       // close screen
       this.mc.player.closeScreen();
     }
