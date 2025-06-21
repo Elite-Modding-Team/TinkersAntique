@@ -71,7 +71,7 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
 				int amount = fluid.amount;
 				
 				// we always show mbs
-				GuiUtil.calcLiquidText(amount, 1, Util.translate("gui.smeltery.liquid.millibucket") + " / " + Util.translate("gui.jei.smeltery_damage.info"), text);
+				GuiUtil.calcLiquidText(amount, 1, Util.translate("gui.jei.smeltery_damage.info"), text);
 
 				// add mod name back
 				text.add(modName);
