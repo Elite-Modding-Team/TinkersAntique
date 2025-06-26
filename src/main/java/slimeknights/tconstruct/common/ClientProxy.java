@@ -13,11 +13,9 @@ import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
@@ -47,17 +45,12 @@ import slimeknights.tconstruct.library.client.model.ModifierModelLoader;
 import slimeknights.tconstruct.library.client.model.ToolModelLoader;
 import slimeknights.tconstruct.library.client.particle.EntitySlimeFx;
 import slimeknights.tconstruct.library.client.particle.Particles;
-import slimeknights.tconstruct.library.client.sound.SoundType;
-import slimeknights.tconstruct.library.client.sound.SoundFaucet;
-import slimeknights.tconstruct.library.client.sound.SoundSmeltery;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.materials.MaterialGUI;
 import slimeknights.tconstruct.library.tools.Pattern;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.client.ParticleEffect;
 import slimeknights.tconstruct.shared.client.ParticleEndspeed;
-import slimeknights.tconstruct.smeltery.tileentity.TileFaucet;
-import slimeknights.tconstruct.smeltery.tileentity.TileHeatingStructure;
 import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.common.client.particle.ParticleAttackCleaver;
 import slimeknights.tconstruct.tools.common.client.particle.ParticleAttackFrypan;
@@ -228,30 +221,10 @@ public abstract class ClientProxy extends CommonProxy {
   }
 
   @Override
-  public void playSound(SoundType soundType, BlockPos pos, float volume) {
-    ISound sound = createSound(soundType, pos, volume);
+  public void playSound(ISound sound) {
     if (sound != null) {
       mc.getSoundHandler().playSound(sound);
     }
-  }
-
-  private ISound createSound(SoundType soundType, BlockPos pos, float volume) {
-    TileEntity tile = mc.world.getTileEntity(pos);
-    switch(soundType) {
-      case FAUCET:
-        if (tile instanceof TileFaucet) {
-          return new SoundFaucet((TileFaucet) tile, volume);
-        }
-        // Unexpected tile
-        break;
-      case HEATING_STRUCTURE:
-        if (tile instanceof TileHeatingStructure) {
-          return new SoundSmeltery((TileHeatingStructure<?>) tile, volume);
-        }
-        // Unexpected tile
-        break;
-    }
-    return null;
   }
 
   @Override

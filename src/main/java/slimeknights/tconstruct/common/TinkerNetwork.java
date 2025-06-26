@@ -14,7 +14,6 @@ import slimeknights.mantle.network.NetworkWrapper;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.config.ConfigSyncPacket;
 import slimeknights.tconstruct.common.network.SpawnParticlePacket;
-import slimeknights.tconstruct.common.network.UpdateSoundPacket;
 import slimeknights.tconstruct.smeltery.network.ChannelConnectionPacket;
 import slimeknights.tconstruct.smeltery.network.ChannelFlowPacket;
 import slimeknights.tconstruct.smeltery.network.FaucetActivationPacket;
@@ -23,6 +22,7 @@ import slimeknights.tconstruct.smeltery.network.HeatingStructureFuelUpdatePacket
 import slimeknights.tconstruct.smeltery.network.SmelteryFluidClicked;
 import slimeknights.tconstruct.smeltery.network.SmelteryFluidUpdatePacket;
 import slimeknights.tconstruct.smeltery.network.SmelteryInventoryUpdatePacket;
+import slimeknights.tconstruct.smeltery.network.TileProcessingPacket;
 import slimeknights.tconstruct.tools.common.network.BouncedPacket;
 import slimeknights.tconstruct.tools.common.network.EntityMovementChangePacket;
 import slimeknights.tconstruct.tools.common.network.InventoryCraftingSyncPacket;
@@ -47,7 +47,6 @@ public class TinkerNetwork extends NetworkWrapper {
     // register all the packets
     registerPacketClient(ConfigSyncPacket.class);
     registerPacketClient(SpawnParticlePacket.class);
-    registerPacketClient(UpdateSoundPacket.class);
 
     // TOOLS
     registerPacket(StencilTableSelectionPacket.class);
@@ -69,6 +68,7 @@ public class TinkerNetwork extends NetworkWrapper {
     registerPacketClient(FaucetActivationPacket.class);
     registerPacketClient(ChannelConnectionPacket.class);
     registerPacketClient(ChannelFlowPacket.class);
+    registerPacketClient(TileProcessingPacket.class);
 
     // OTHER STUFF
     registerPacketServer(BouncedPacket.class);
@@ -92,6 +92,10 @@ public class TinkerNetwork extends NetworkWrapper {
 
   public static void sendToAllAround(AbstractPacket packet, NetworkRegistry.TargetPoint point) {
     instance.network.sendToAllAround(packet, point);
+  }
+
+  public static void sendToAllTracking(AbstractPacket packet, NetworkRegistry.TargetPoint point) {
+    instance.network.sendToAllTracking(packet, point);
   }
 
   public static void sendToDimension(AbstractPacket packet, int dimensionId) {

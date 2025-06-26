@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.smeltery.tileentity;
 
+import net.minecraft.client.audio.ISound;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.relauncher.Side;
@@ -9,21 +10,23 @@ import java.util.Arrays;
 
 import javax.annotation.Nonnull;
 
-import org.apache.commons.lang3.Validate;
-import slimeknights.tconstruct.common.network.UpdateSoundPacket;
-import slimeknights.tconstruct.library.client.sound.SoundType;
-import slimeknights.tconstruct.library.sound.IAudibleTile;
-import slimeknights.tconstruct.shared.TinkerCommons;
+import slimeknights.tconstruct.library.client.sound.SoundFading;
+import slimeknights.tconstruct.library.sound.ISoundSource;
+import slimeknights.tconstruct.library.sound.SoundType;
+import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.multiblock.MultiblockDetection;
+import slimeknights.tconstruct.smeltery.network.ITileInfoPacketHandler;
+import slimeknights.tconstruct.smeltery.network.TileProcessingPacket;
 
 /** Represents a structure that has an inventory where it heats its items. Like a smeltery. */
-public abstract class TileHeatingStructure<T extends MultiblockDetection> extends TileMultiblock<T> implements IAudibleTile {
+public abstract class TileHeatingStructure<T extends MultiblockDetection> extends TileMultiblock<T> implements ITileInfoPacketHandler, ISoundSource {
 
   public static final String TAG_FUEL = "fuel";
   public static final String TAG_TEMPERATURE = "temperature";
   public static final String TAG_NEEDS_FUEL = "needsFuel";
   public static final String TAG_ITEM_TEMPERATURES = "itemTemperatures";
   public static final String TAG_ITEM_TEMP_REQUIRED = "itemTempRequired";
+  public static final String TAG_IS_HEATING = "isHeating";
 
   protected static final int TIME_FACTOR = 8; // basically an "accuracy" so the heat can be more fine grained. required temp is multiplied by this
 
@@ -34,7 +37,7 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
   protected int[] itemTemperatures; // current temperature of each item in the corresponding slot
   protected int[] itemTempRequired; // Temperature where the items want to goooooo
 
-  public boolean isHeating;
+  protected boolean isHeating;
 
   public TileHeatingStructure(String name, int inventorySize, int maxStackSize) {
     super(name, inventorySize, maxStackSize);
@@ -120,16 +123,18 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
     if(heatedItem) {
       fuel--;
     }
-
-    boolean wasHeating = isHeating;
-    isHeating = heatedItem;
-    if (wasHeating != isHeating) {
-      sendSoundPacket(getWorld());
-    }
+    updateIfChanged(heatedItem);
   }
 
   protected int heatSlot(int i) {
     return temperature / 100; // if your heater has <100 heat then it deserves to not create any heat .
+  }
+
+  protected void updateIfChanged(boolean heatedItem) {
+    if (heatedItem != isHeating) {
+      isHeating = heatedItem;
+      sendTileInfo(world, pos);
+    }
   }
 
   public int getTemperature(int i) {
@@ -222,6 +227,7 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
     tags.setBoolean(TAG_NEEDS_FUEL, needsFuel);
     tags.setIntArray(TAG_ITEM_TEMPERATURES, itemTemperatures);
     tags.setIntArray(TAG_ITEM_TEMP_REQUIRED, itemTempRequired);
+    tags.setBoolean(TAG_IS_HEATING, isHeating);
     return tags;
   }
 
@@ -233,21 +239,48 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
     needsFuel = tags.getBoolean(TAG_NEEDS_FUEL);
     itemTemperatures = tags.getIntArray(TAG_ITEM_TEMPERATURES);
     itemTempRequired = tags.getIntArray(TAG_ITEM_TEMP_REQUIRED);
+    isHeating = tags.getBoolean(TAG_IS_HEATING);
   }
 
   @Override
-  public UpdateSoundPacket getSoundPacket() {
-    return new UpdateSoundPacket(SoundType.HEATING_STRUCTURE, this.pos, 0.8F,
-            this.isHeating ? 1 : 0);  // data[0]
+  public void handleUpdateTag(@Nonnull NBTTagCompound tag) {
+    boolean wasHeating = isHeating;
+    readFromNBT(tag);
+
+    // Check if the sound should be played on load
+    if (!wasHeating && isHeating) {
+      TinkerSmeltery.proxy.playSound(getSound());
+    }
   }
 
   @Override
-  public void onSoundPacket(UpdateSoundPacket packet) {
-    Validate.isTrue(packet.soundType == SoundType.HEATING_STRUCTURE
-            && packet.data.length == 1);
-    this.isHeating = packet.data[0] != 0;
-    if (isHeating) {
-      TinkerCommons.proxy.playSound(packet.soundType, packet.pos, packet.volume);
+  public SoundType getSoundType() {
+    return SoundType.HEATING_STRUCTURE;
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public ISound getSound() {
+    return new SoundFading(this, pos);
+  }
+
+  @Override
+  public boolean shouldPlaySound() {
+    return !this.isInvalid() && this.isActive() && this.isHeating;
+  }
+
+  @Override
+  public TileProcessingPacket getTileInfoPacket() {
+    return new TileProcessingPacket(pos, isHeating);
+  }
+
+  @Override
+  public void onTileInfoPacket(TileProcessingPacket packet) {
+    boolean wasHeating = isHeating;
+    isHeating = packet.isProcessing;
+
+    if (!wasHeating && isHeating) {
+      TinkerSmeltery.proxy.playSound(getSound());
     }
   }
 }
