@@ -83,7 +83,7 @@ public class TileSmeltery extends TileHeatingStructureFuelTank<MultiblockSmelter
       if(tick == 0) {
         checkMultiblockStructure();
       }
-      activeSound = false;
+      isHeating = false;
     }
     else {
       // smeltery structure is there.. do stuff with the current fuel

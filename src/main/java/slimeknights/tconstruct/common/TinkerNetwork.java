@@ -14,6 +14,7 @@ import slimeknights.mantle.network.NetworkWrapper;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.config.ConfigSyncPacket;
 import slimeknights.tconstruct.common.network.SpawnParticlePacket;
+import slimeknights.tconstruct.common.network.UpdateSoundPacket;
 import slimeknights.tconstruct.smeltery.network.ChannelConnectionPacket;
 import slimeknights.tconstruct.smeltery.network.ChannelFlowPacket;
 import slimeknights.tconstruct.smeltery.network.FaucetActivationPacket;
@@ -46,6 +47,7 @@ public class TinkerNetwork extends NetworkWrapper {
     // register all the packets
     registerPacketClient(ConfigSyncPacket.class);
     registerPacketClient(SpawnParticlePacket.class);
+    registerPacketClient(UpdateSoundPacket.class);
 
     // TOOLS
     registerPacket(StencilTableSelectionPacket.class);

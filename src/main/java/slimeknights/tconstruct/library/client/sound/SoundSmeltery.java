@@ -11,10 +11,10 @@ import slimeknights.tconstruct.smeltery.tileentity.TileHeatingStructure;
 
 @SideOnly(Side.CLIENT)
 public class SoundSmeltery extends PositionedSound implements ITickableSound {
-    protected TileHeatingStructure heatingStructure;
+    protected TileHeatingStructure<?> heatingStructure;
     protected BlockPos position;
 
-    public SoundSmeltery(TileHeatingStructure heatingStructure, float volume) {
+    public SoundSmeltery(TileHeatingStructure<?> heatingStructure, float volume) {
         super(Sounds.smeltery_loop, SoundCategory.BLOCKS);
         this.repeat = true;
         this.heatingStructure = heatingStructure;
@@ -27,7 +27,7 @@ public class SoundSmeltery extends PositionedSound implements ITickableSound {
 
     @Override
     public void update() {
-        if(this.heatingStructure.isInvalid() || !this.heatingStructure.isActive() || !this.heatingStructure.activeSound) {
+        if(this.heatingStructure.isInvalid() || !this.heatingStructure.isActive() || !this.heatingStructure.isHeating) {
             this.volume -= 0.02F;
         }
     }

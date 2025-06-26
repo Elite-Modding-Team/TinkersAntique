@@ -5,14 +5,18 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import slimeknights.tconstruct.common.network.UpdateSoundPacket;
 import slimeknights.tconstruct.library.Util;
 
 @Mod.EventBusSubscriber(modid = Util.MODID)
@@ -51,6 +55,20 @@ public abstract class Sounds {
 
   public static void playSoundForAll(Entity entity, SoundEvent sound, float volume, float pitch) {
     entity.getEntityWorld().playSound(null, entity.getPosition(), sound, entity.getSoundCategory(), volume, pitch);
+  }
+
+  public static void playSoundForAll(World world, UpdateSoundPacket packet) {
+    if (!world.isRemote) {
+      BlockPos pos = packet.pos;
+      TinkerNetwork.sendToAllAround(packet, new NetworkRegistry.TargetPoint(
+              world.provider.getDimension(),
+              pos.getX(),
+              pos.getY(),
+              pos.getZ(),
+              16.0D
+              )
+      );
+    }
   }
 
   public static void PlaySoundForPlayer(Entity entity, SoundEvent sound, float volume, float pitch) {

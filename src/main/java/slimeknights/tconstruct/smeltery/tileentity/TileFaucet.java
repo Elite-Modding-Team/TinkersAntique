@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.smeltery.tileentity;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -16,20 +15,23 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.Validate;
 import slimeknights.tconstruct.common.Sounds;
 import slimeknights.tconstruct.common.TinkerNetwork;
 import slimeknights.tconstruct.common.config.Config;
-import slimeknights.tconstruct.library.client.sound.SoundFaucet;
+import slimeknights.tconstruct.common.network.UpdateSoundPacket;
+import slimeknights.tconstruct.library.client.sound.SoundType;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.sound.IAudibleTile;
+import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.smeltery.block.BlockFaucet;
 import slimeknights.tconstruct.smeltery.network.FaucetActivationPacket;
 
 import javax.annotation.Nonnull;
 
-public class TileFaucet extends TileEntity implements ITickable {
+public class TileFaucet extends TileEntity implements ITickable, IAudibleTile {
 
   public static final int LIQUID_TRANSFER = Config.liquidTransferRate;
   public static final int TRANSACTION_AMOUNT = Material.VALUE_Ingot;
@@ -64,9 +66,7 @@ public class TileFaucet extends TileEntity implements ITickable {
 
     if(!getWorld().isRemote && drained != null) {
       getWorld().playSound(null, pos, Sounds.faucet_trigger, SoundCategory.BLOCKS, 1.0F, 0.8F + 0.4F * world.rand.nextFloat());
-      if (FMLLaunchHandler.side().isClient()) {
-        playActiveSound();
-      }
+      sendSoundPacket(getWorld());
     }
 
     return isPouring;
@@ -242,6 +242,17 @@ public class TileFaucet extends TileEntity implements ITickable {
   }
 
   @Override
+  public UpdateSoundPacket getSoundPacket() {
+    return new UpdateSoundPacket(SoundType.FAUCET, this.pos, 1.0F);
+  }
+
+  @Override
+  public void onSoundPacket(UpdateSoundPacket packet) {
+    Validate.isTrue(packet.soundType == SoundType.FAUCET);
+    TinkerCommons.proxy.playSound(packet.soundType, packet.pos, packet.volume);
+  }
+
+  @Override
   public SPacketUpdateTileEntity getUpdatePacket() {
     NBTTagCompound tag = new NBTTagCompound();
     writeToNBT(tag);
@@ -264,10 +275,5 @@ public class TileFaucet extends TileEntity implements ITickable {
   @Override
   public void handleUpdateTag(@Nonnull NBTTagCompound tag) {
     readFromNBT(tag);
-  }
-
-  @SideOnly(Side.CLIENT)
-  public void playActiveSound() {
-    Minecraft.getMinecraft().getSoundHandler().playSound(new SoundFaucet(this, 1.0F));
   }
 }

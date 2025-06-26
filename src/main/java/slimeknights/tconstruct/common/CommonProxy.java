@@ -3,6 +3,7 @@ package slimeknights.tconstruct.common;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -15,6 +16,7 @@ import slimeknights.mantle.network.AbstractPacket;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.network.SpawnParticlePacket;
 import slimeknights.tconstruct.library.client.particle.Particles;
+import slimeknights.tconstruct.library.client.sound.SoundType;
 import slimeknights.tconstruct.shared.client.ParticleEffect;
 
 /**
@@ -110,6 +112,10 @@ public class CommonProxy {
 
   public void registerFluidModels(Fluid fluid) {
 
+  }
+
+  public void playSound(SoundType soundType, BlockPos pos, float volume) {
+    // clientside only
   }
 
   public void preventPlayerSlowdown(Entity player, float originalSpeed, Item item) {

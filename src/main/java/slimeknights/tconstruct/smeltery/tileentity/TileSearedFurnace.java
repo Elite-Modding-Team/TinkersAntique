@@ -51,7 +51,7 @@ public class TileSearedFurnace extends TileHeatingStructureFuelTank<MultiblockSe
       if(tick == 0) {
         checkMultiblockStructure();
       }
-      activeSound = false;
+      isHeating = false;
     }
     else {
       // we have a lot less to do than a smeltery since the inside is unreachable and we have no liquids

@@ -1,9 +1,7 @@
 package slimeknights.tconstruct.smeltery.tileentity;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -11,11 +9,15 @@ import java.util.Arrays;
 
 import javax.annotation.Nonnull;
 
-import slimeknights.tconstruct.library.client.sound.SoundSmeltery;
+import org.apache.commons.lang3.Validate;
+import slimeknights.tconstruct.common.network.UpdateSoundPacket;
+import slimeknights.tconstruct.library.client.sound.SoundType;
+import slimeknights.tconstruct.library.sound.IAudibleTile;
+import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.smeltery.multiblock.MultiblockDetection;
 
 /** Represents a structure that has an inventory where it heats its items. Like a smeltery. */
-public abstract class TileHeatingStructure<T extends MultiblockDetection> extends TileMultiblock<T> {
+public abstract class TileHeatingStructure<T extends MultiblockDetection> extends TileMultiblock<T> implements IAudibleTile {
 
   public static final String TAG_FUEL = "fuel";
   public static final String TAG_TEMPERATURE = "temperature";
@@ -26,13 +28,13 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
   protected static final int TIME_FACTOR = 8; // basically an "accuracy" so the heat can be more fine grained. required temp is multiplied by this
 
   protected int fuel; // Ticks left until the current fuel is depleted and fuel is taken from the tanks. Depletes every tick
-  protected int temperature; // internal temperature of the smeltery == speed of the smeltery
+  protected int temperature; // internal temperature of the heater == speed of the heater
   protected boolean needsFuel; // If the last tick executed an operation that required fuel.
 
   protected int[] itemTemperatures; // current temperature of each item in the corresponding slot
   protected int[] itemTempRequired; // Temperature where the items want to goooooo
 
-  public boolean activeSound;
+  public boolean isHeating;
 
   public TileHeatingStructure(String name, int inventorySize, int maxStackSize) {
     super(name, inventorySize, maxStackSize);
@@ -106,7 +108,7 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
           else {
             // can't heat. no fuel. abort and try to get fuel for next tick
             this.needsFuel = true;
-            return;
+            break;
           }
         }
       }
@@ -117,17 +119,17 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
 
     if(heatedItem) {
       fuel--;
-      if(FMLLaunchHandler.side().isClient() && !activeSound) {
-        playActiveSound();
-        activeSound = true;
-      }
-    } else {
-      activeSound = false;
+    }
+
+    boolean wasHeating = isHeating;
+    isHeating = heatedItem;
+    if (wasHeating != isHeating) {
+      sendSoundPacket(getWorld());
     }
   }
 
   protected int heatSlot(int i) {
-    return temperature / 100; // if your smeltery has <100 heat then it deserves to not create any heat .
+    return temperature / 100; // if your heater has <100 heat then it deserves to not create any heat .
   }
 
   public int getTemperature(int i) {
@@ -233,8 +235,19 @@ public abstract class TileHeatingStructure<T extends MultiblockDetection> extend
     itemTempRequired = tags.getIntArray(TAG_ITEM_TEMP_REQUIRED);
   }
 
-  @SideOnly(Side.CLIENT)
-  public void playActiveSound() {
-    Minecraft.getMinecraft().getSoundHandler().playSound(new SoundSmeltery(this, 0.8F));
+  @Override
+  public UpdateSoundPacket getSoundPacket() {
+    return new UpdateSoundPacket(SoundType.HEATING_STRUCTURE, this.pos, 0.8F,
+            this.isHeating ? 1 : 0);  // data[0]
+  }
+
+  @Override
+  public void onSoundPacket(UpdateSoundPacket packet) {
+    Validate.isTrue(packet.soundType == SoundType.HEATING_STRUCTURE
+            && packet.data.length == 1);
+    this.isHeating = packet.data[0] != 0;
+    if (isHeating) {
+      TinkerCommons.proxy.playSound(packet.soundType, packet.pos, packet.volume);
+    }
   }
 }
