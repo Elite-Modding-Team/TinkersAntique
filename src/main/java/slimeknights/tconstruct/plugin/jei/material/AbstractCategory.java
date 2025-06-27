@@ -122,9 +122,15 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
             int width = ClientProxy.fontRenderer.getStringWidth(iTrait.getLocalizedName());
             if (isHovered(WIDTH - width, WIDTH, 3 + index, mouseX, mouseY)) {
                 String[] desc = iTrait.getLocalizedDesc().split("\\\\n");
-                String title = TextFormatting.GOLD + desc[0] + TextFormatting.RESET;
-                tooltip.add(title);
-                tooltip.addAll(formatTooltip(desc[1]));
+                if (desc.length > 1) {
+                    // It seems that some materials have a trait description that is just a single line.
+                    String title = TextFormatting.GOLD + desc[0] + TextFormatting.RESET;
+                    tooltip.add(title);
+                    tooltip.addAll(formatTooltip(desc[1]));
+                } else {
+                    // If the description is a single line, just add it directly.
+                    tooltip.addAll(formatTooltip(desc[0]));
+                }
             }
         });
         tooltip.addAll(additionalTooltips(materialWrapper.getStatInfos(relatedParts), materialWrapper.getStatDescriptions(relatedParts), mouseX, mouseY));
