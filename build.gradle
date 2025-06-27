@@ -33,10 +33,6 @@ repositories {
         name 'DVS1 Maven FS'
         url 'https://dvs1.progwml6.com/files/maven'
     }
-    maven { // TOP
-        name 'tterrag maven'
-        url 'https://maven.tterrag.com'
-    }
     maven { // compatlayer
         name 'K-4u maven'
         url 'https://maven.k-4u.nl'
@@ -56,6 +52,10 @@ repositories {
     maven { // HWYLA
         name = 'Curse Maven'
         url = 'https://cursemaven.com'
+    }
+    maven { // TOP
+        name "ModMaven"
+        url "https://modmaven.dev"
     }
 }
 

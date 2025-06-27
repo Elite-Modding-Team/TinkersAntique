@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.common;
 
+import net.minecraft.client.audio.ISound;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumHand;
@@ -110,6 +111,10 @@ public class CommonProxy {
 
   public void registerFluidModels(Fluid fluid) {
 
+  }
+
+  public void playSound(ISound sound) {
+    // clientside only
   }
 
   public void preventPlayerSlowdown(Entity player, float originalSpeed, Item item) {

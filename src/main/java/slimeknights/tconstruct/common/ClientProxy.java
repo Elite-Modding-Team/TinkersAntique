@@ -3,6 +3,7 @@ package slimeknights.tconstruct.common;
 import com.google.common.collect.ImmutableList;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.particle.Particle;
@@ -217,6 +218,13 @@ public abstract class ClientProxy extends CommonProxy {
     }
 
     return null;
+  }
+
+  @Override
+  public void playSound(ISound sound) {
+    if (sound != null) {
+      mc.getSoundHandler().playSound(sound);
+    }
   }
 
   @Override
