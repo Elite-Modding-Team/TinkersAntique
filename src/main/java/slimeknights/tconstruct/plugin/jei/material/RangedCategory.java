@@ -31,7 +31,7 @@ public class RangedCategory extends AbstractCategory {
 
     @Override
     protected void drawStats(LinkedList<String> statInfo, float lineNumber) {
-        String heading = getHeading(statInfo.size() == 3 ? "stat.bow.name" : "stat.bowstring.name");
+        String heading = getHeading(statInfo.size() >= 2 ? "stat.bow.name" : "stat.bowstring.name");
         drawComponent(heading, 0, lineNumber++, materialWrapper.material.materialTextColor, true);
         lineNumber += HEADING_SPACING;
         for (String s : statInfo) {

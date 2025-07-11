@@ -1062,6 +1062,7 @@ gui.jei.material.harvest=Material Harvest Stats
 gui.jei.material.ranged=Material Ranged Stats
 gui.jei.material.projectile=Material Projectile Stats
 gui.jei.material.armor=Material Armor Stats
+gui.jei.material.openbook=Open %s
 
 gui.jei.severing.item_with_beheading=Tool with Beheading
 

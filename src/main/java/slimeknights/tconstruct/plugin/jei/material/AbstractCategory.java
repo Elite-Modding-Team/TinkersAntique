@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.plugin.jei.material;
 
+import com.google.common.collect.Lists;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -7,6 +8,8 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -17,6 +20,7 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.ClientProxy;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.traits.ITrait;
+import slimeknights.tconstruct.shared.TinkerCommons;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
@@ -26,7 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public abstract class AbstractCategory implements IRecipeCategory<MaterialWrapper> {
-    ResourceLocation icon_location = new ResourceLocation(Util.MODID, "textures/gui/jei/materials.png");
+    protected ResourceLocation icon_location = new ResourceLocation(Util.MODID, "textures/gui/jei/materials.png");
 
     protected static final int LINE_HEIGHT = 10;
     protected static final float LINE_SPACING = 0.5f;
@@ -38,10 +42,14 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
     private static final int REPRES = 1;
     private static final int FLUID = 2;
 
-    String title, uuid;
-    IDrawable background, icon, slot;
-    MaterialWrapper materialWrapper;
-    List<String> relatedParts;
+    private static final int BUTTON_WIDTH = 18;
+    private static final int BUTTON_HEIGHT = 18;
+
+    protected String title, uuid;
+    protected int mouseX, mouseY;
+    protected IDrawable background, icon, slot;
+    protected MaterialWrapper materialWrapper;
+    protected final List<String> relatedParts;
 
     public AbstractCategory(IGuiHelper guiHelper, List<String> parts) {
         this.background = guiHelper.createBlankDrawable(WIDTH, HEIGHT);
@@ -91,7 +99,7 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
             stacks.init(REPRES, true, 0, 0);
             stacks.set(REPRES, item);
         }
-        stacks.init(PARTS, true, WIDTH - 16, 0);
+        stacks.init(PARTS, true, WIDTH - BUTTON_WIDTH * 2, 0);
         stacks.set(PARTS, recipeWrapper.getParts(relatedParts));
     }
 
@@ -99,7 +107,7 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
     public void drawExtras(@Nonnull Minecraft minecraft) {
         ItemStack item = materialWrapper.getMaterial().getRepresentativeItem();
         if (item != null && !item.isEmpty()) {
-            slot.draw(minecraft, WIDTH - 16, 0);
+            slot.draw(minecraft, WIDTH - BUTTON_WIDTH * 2, 0);
         }
         slot.draw(minecraft, 0, 0);
         if (materialWrapper.getMaterial().hasFluid()) {
@@ -110,11 +118,15 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
         lineNumber += 3;
         drawTraits(materialWrapper.getTraits(relatedParts), lineNumber);
         drawStats(materialWrapper.getStatInfos(relatedParts), lineNumber);
+        getGuideButton().setHover(mouseX, mouseY);
+        getGuideButton().drawButton(minecraft, mouseX, mouseY, 0);
     }
 
     @Nonnull
     @Override
     public List<String> getTooltipStrings(int mouseX, int mouseY) {
+        this.mouseX = mouseX;
+        this.mouseY = mouseY;
         List<String> tooltip = new ArrayList<>();
         LinkedList<ITrait> traits = materialWrapper.getTraits(relatedParts);
         traits.forEach(iTrait -> {
@@ -134,7 +146,18 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
             }
         });
         tooltip.addAll(additionalTooltips(materialWrapper.getStatInfos(relatedParts), materialWrapper.getStatDescriptions(relatedParts), mouseX, mouseY));
+
+        if (getGuideButton().mousePressed(mouseX, mouseY)) {
+            tooltip.add(getGuideButton().getTooltip());
+        }
         return tooltip;
+    }
+
+    protected GuideButton getGuideButton() {
+        if (materialWrapper.guideButton == null) {
+            materialWrapper.guideButton = new GuideButton(0, WIDTH - BUTTON_WIDTH, 0, BUTTON_WIDTH, BUTTON_HEIGHT, materialWrapper.material.identifier, new ItemStack(TinkerCommons.book));
+        }
+        return materialWrapper.guideButton;
     }
 
     protected abstract List<String> additionalTooltips(List<String> statInfo, List<String> statDesc, int mouseX, int mouseY);
