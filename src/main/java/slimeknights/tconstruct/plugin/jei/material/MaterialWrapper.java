@@ -3,6 +3,7 @@ package slimeknights.tconstruct.plugin.jei.material;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import slimeknights.tconstruct.library.TinkerRegistry;
@@ -12,12 +13,15 @@ import slimeknights.tconstruct.library.materials.MaterialTypes;
 import slimeknights.tconstruct.library.tools.IToolPart;
 import slimeknights.tconstruct.library.traits.ITrait;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MaterialWrapper implements IRecipeWrapper {
     final Material material;
+
+    protected GuideButton guideButton;
 
     public MaterialWrapper(Material material) {
         this.material = material;
@@ -74,6 +78,19 @@ public class MaterialWrapper implements IRecipeWrapper {
         return partList;
     }
 
+    public List<String> getUseableParts(List<String> parts) {
+        List<String> useableParts = new ArrayList<>();
+        for (String partType : parts) {
+            for (IToolPart part : TinkerRegistry.getToolParts()) {
+                if (part.hasUseForStat(partType) && part.canUseMaterial(material)) {
+                    useableParts.add(partType);
+                    break; // No need to check other parts if we found a match
+                }
+            }
+        }
+        return useableParts;
+    }
+
     public LinkedList<ITrait> getTraits(List<String> parts) {
         LinkedList<ITrait> traitList = new LinkedList<>();
         for (String part : parts) {
@@ -110,5 +127,15 @@ public class MaterialWrapper implements IRecipeWrapper {
         }).collect(Collectors.toCollection(LinkedList::new));
         internal_parts.forEach(part -> stats.add(material.getStats(part)));
         return stats.stream().filter(Objects::nonNull).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean handleClick(@Nonnull Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
+        // I have no idea why JEI want's to do all the user interaction in the wrapper instead of the category, but here we are.
+        if (guideButton != null && guideButton.mousePressed(minecraft, mouseX, mouseY)) {
+            guideButton.openBook();
+            return true;
+        }
+        return false;
     }
 }
