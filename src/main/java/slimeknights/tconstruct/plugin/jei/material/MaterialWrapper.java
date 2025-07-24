@@ -78,6 +78,19 @@ public class MaterialWrapper implements IRecipeWrapper {
         return partList;
     }
 
+    public List<String> getUseableParts(List<String> parts) {
+        List<String> useableParts = new ArrayList<>();
+        for (String partType : parts) {
+            for (IToolPart part : TinkerRegistry.getToolParts()) {
+                if (part.hasUseForStat(partType) && part.canUseMaterial(material)) {
+                    useableParts.add(partType);
+                    break; // No need to check other parts if we found a match
+                }
+            }
+        }
+        return useableParts;
+    }
+
     public LinkedList<ITrait> getTraits(List<String> parts) {
         LinkedList<ITrait> traitList = new LinkedList<>();
         for (String part : parts) {
@@ -123,6 +136,6 @@ public class MaterialWrapper implements IRecipeWrapper {
             guideButton.openBook();
             return true;
         }
-		return false;
-	}
+        return false;
+    }
 }

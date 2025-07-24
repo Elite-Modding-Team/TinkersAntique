@@ -16,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.text.WordUtils;
+import slimeknights.mantle.util.LocUtils;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.ClientProxy;
 import slimeknights.tconstruct.library.Util;
@@ -46,7 +47,7 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
     private static final int BUTTON_HEIGHT = 18;
 
     protected String title, uuid;
-    protected int mouseX, mouseY;
+    protected int mouseX, mouseY, btn_id;
     protected IDrawable background, icon, slot;
     protected MaterialWrapper materialWrapper;
     protected final List<String> relatedParts;
@@ -118,7 +119,6 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
         lineNumber += 3;
         drawTraits(materialWrapper.getTraits(relatedParts), lineNumber);
         drawStats(materialWrapper.getStatInfos(relatedParts), lineNumber);
-        getGuideButton().setHover(mouseX, mouseY);
         getGuideButton().drawButton(minecraft, mouseX, mouseY, 0);
     }
 
@@ -133,7 +133,8 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
             int index = traits.indexOf(iTrait);
             int width = ClientProxy.fontRenderer.getStringWidth(iTrait.getLocalizedName());
             if (isHovered(WIDTH - width, WIDTH, 3 + index, mouseX, mouseY)) {
-                String[] desc = iTrait.getLocalizedDesc().split("\\\\n");
+                // Use the same method to split the description as the guide book.
+                String[] desc = LocUtils.convertNewlines(iTrait.getLocalizedDesc()).split("\n");
                 if (desc.length > 1) {
                     // It seems that some materials have a trait description that is just a single line.
                     String title = TextFormatting.GOLD + desc[0] + TextFormatting.RESET;
@@ -155,7 +156,7 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
 
     protected GuideButton getGuideButton() {
         if (materialWrapper.guideButton == null) {
-            materialWrapper.guideButton = new GuideButton(0, WIDTH - BUTTON_WIDTH, 0, BUTTON_WIDTH, BUTTON_HEIGHT, materialWrapper.material.identifier, new ItemStack(TinkerCommons.book));
+            materialWrapper.guideButton = new GuideButton(btn_id++, WIDTH - BUTTON_WIDTH, 0, BUTTON_WIDTH, BUTTON_HEIGHT, uuid, materialWrapper.material.identifier, materialWrapper.getUseableParts(relatedParts), new ItemStack(TinkerCommons.book));
         }
         return materialWrapper.guideButton;
     }
