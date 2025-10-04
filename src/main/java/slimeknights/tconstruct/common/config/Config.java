@@ -51,6 +51,7 @@ public final class Config {
   public static int netherOresMiningLevel = 4;
   public static boolean deconstructTools = true;
   public static int deconstructXPRequirement = 0;
+  public static int deconstructLevelRequirement = 0;
   public static int heatItemsTickrateSmeltery = 4;
   public static int heatItemsTickrateSearedFurnace = 4;
   public static int liquidTransferRate = 6;
@@ -397,6 +398,10 @@ public final class Config {
       prop = configFile.get(cat, "deconstructXPRequirement", deconstructXPRequirement);
       prop.setComment("The XP requirement for deconstructing tools (if provided by Tinkers' Tool Leveling).");
       deconstructXPRequirement = prop.getInt();
+
+      prop = configFile.get(cat, "deconstructLevelRequirement", deconstructLevelRequirement);
+      prop.setComment("The level requirement for deconstructing tools (if provided by Tinkers' Tool Leveling).");
+      deconstructLevelRequirement = prop.getInt();
 
       prop = configFile.get(cat, "heatItemsTickrateSmeltery", heatItemsTickrateSmeltery);
       prop.setComment("The tickrate at which items are heated and alloys are created in the smeltery. Defaults to every 4th tick.");
