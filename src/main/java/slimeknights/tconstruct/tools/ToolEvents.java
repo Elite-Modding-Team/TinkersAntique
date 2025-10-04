@@ -17,6 +17,7 @@ import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.conditions.RandomChanceWithLooting;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.SetMetadata;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -27,6 +28,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import slimeknights.tconstruct.library.capability.projectile.CapabilityTinkerProjectile;
 import slimeknights.tconstruct.library.capability.projectile.ITinkerProjectile;
 import slimeknights.tconstruct.library.events.TinkerToolEvent;
+import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.tools.harvest.TinkerHarvestTools;
@@ -164,5 +166,12 @@ public class ToolEvents {
       return TinkerModifiers.modLuck.getLuckLevel(item);
     }
     return 0;
+  }
+
+  @SubscribeEvent
+  public void onAnvilRepair(AnvilUpdateEvent event) {
+    if(event.getLeft().getItem() instanceof ToolCore || event.getRight().getItem() instanceof ToolCore) {
+      event.setCanceled(true);
+    }
   }
 }
