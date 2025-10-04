@@ -591,6 +591,9 @@ public final class TinkerRegistry {
   }
 
   public static void registerMelting(MeltingRecipe recipe) {
+    if(Arrays.stream(Config.fluidIgnore).anyMatch(f -> f.equals(recipe.output.getFluid().getName()))) {
+      return;
+    }
     if(new TinkerRegisterEvent.MeltingRegisterEvent(recipe).fire()) {
       meltingRegistry.add(recipe);
     }
@@ -652,6 +655,9 @@ public final class TinkerRegistry {
 
   /** Registers a casting recipe for casting table */
   public static void registerTableCasting(ItemStack output, ItemStack cast, Fluid fluid, int amount) {
+    if(Arrays.stream(Config.fluidIgnore).anyMatch(f -> f.equals(fluid.getName()))) {
+      return;
+    }
     RecipeMatch rm = null;
     if(cast != ItemStack.EMPTY) {
       rm = RecipeMatch.ofNBT(cast);
@@ -688,6 +694,9 @@ public final class TinkerRegistry {
 
   /** Registers a casting recipe for the casting basin */
   public static void registerBasinCasting(ItemStack output, ItemStack cast, Fluid fluid, int amount) {
+    if(Arrays.stream(Config.fluidIgnore).anyMatch(f -> f.equals(fluid.getName()))) {
+      return;
+    }
     RecipeMatch rm = null;
     if(!cast.isEmpty()) {
       rm = RecipeMatch.ofNBT(cast);

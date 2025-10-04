@@ -823,6 +823,9 @@ public class TinkerSmeltery extends TinkerPulse {
    * @param knownOres  Set of pairs of an oredict name to a integer fluid amount
    */
   private static void addKnownOreFluid(Fluid fluid, Set<Pair<String, Integer>> knownOres) {
+    if(Arrays.stream(Config.fluidIgnore).anyMatch(f -> f.equals(fluid.getName()))) {
+      return;
+    }
     for(Pair<String, Integer> pair : knownOres) {
       TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(pair.getLeft(), pair.getRight()), fluid));
     }

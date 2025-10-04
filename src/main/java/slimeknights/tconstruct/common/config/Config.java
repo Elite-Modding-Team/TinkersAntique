@@ -172,10 +172,10 @@ public final class Config {
   public static String[] materialPriorities = {
           "tconstruct"
   };
-
   public static String[] entityJEIRendererTransformation = {
           "minecraft:ender_dragon;5.0",  
   };
+  public static String[] fluidIgnore = {};
 
   // Worldgen
   public static boolean genSlimeIslands = true;
@@ -373,6 +373,10 @@ public final class Config {
       prop = configFile.get(cat, "materialIgnore", materialIgnore);
       prop.setComment("List of materials to ignore, effectively preventing registration.");
       materialIgnore = prop.getStringList();
+
+      prop = configFile.get(cat, "fluidIgnore", fluidIgnore);
+      prop.setComment("List of fluids to ignore, effectively preventing registration of melting and casting recipes.");
+      fluidIgnore = prop.getStringList();
 
       prop = configFile.get(cat, "drainGaseousFluids", drainGaseousFluids);
       prop.setComment("If gaseous fluids are being transferable via faucets.");
