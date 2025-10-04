@@ -69,7 +69,7 @@ public class ModLuck extends ModifierTrait {
       return;
     }
     // we reward one chance per full heart damage dealt. No chance for 0.5 heart hits, sorry :(
-    for(int i = (int) (damageDealt / 2f); i > 0; i--) {
+    for(int i = (int) (Math.min(damageDealt, 50f) / 2f); i > 0; i--) {
       rewardProgress(tool);
     }
   }
