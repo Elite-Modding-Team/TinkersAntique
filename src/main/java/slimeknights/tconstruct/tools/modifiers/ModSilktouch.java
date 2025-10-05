@@ -37,8 +37,6 @@ public class ModSilktouch extends ToolModifier {
     ToolBuilder.addEnchantment(rootCompound, Enchantments.SILK_TOUCH);
 
     ToolNBT toolData = TagUtil.getToolStats(rootCompound);
-    toolData.speed = Math.max(1f, toolData.speed - 3f);
-    toolData.attack = Math.max(1f, toolData.attack - 3f);
 
     TagUtil.setToolTag(rootCompound, toolData.get());
   }
