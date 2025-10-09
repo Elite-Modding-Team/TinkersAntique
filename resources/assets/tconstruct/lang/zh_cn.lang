@@ -601,6 +601,7 @@ material.electrum.name=琥珀金
 material.steel.name=钢
 material.alubrass.name=铝黄铜
 material.alumite.name=耐酸铝
+material.bloodbone.name=血骨
 
 material.string.name=线
 material.vine.name=藤蔓
@@ -1062,6 +1063,7 @@ gui.jei.material.harvest=材料·一般统计数据
 gui.jei.material.ranged=材料·远程统计数据
 gui.jei.material.projectile=材料·射弹统计数据
 gui.jei.material.armor=材料·护甲统计数据
+gui.jei.material.openbook=跳转到匠魂宝典对应页
 
 gui.jei.severing.item_with_beheading=拥有斩首的工具或武器
 
@@ -1080,4 +1082,6 @@ option.tconstruct.progress=合成进度
 # Config
 config.synced.restart=你的配置已与服务器同步，请重启Minecraft。
 config.synced.ok=配置已与服务器同步。
+
+
 
