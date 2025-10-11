@@ -344,7 +344,7 @@ item.tconstruct.ingots.ardite.name=아르다이트 주괴
 item.tconstruct.ingots.manyullyn.name=마뉼린 주괴
 item.tconstruct.ingots.knightslime.name=나이트슬라임 주괴
 item.tconstruct.ingots.knightslime.tooltip=말랑말랑한 금속이라니, 놀랍네요.
-item.tconstruct.ingots.pigiron.name=선철 주괴
+item.tconstruct.ingots.pigiron.name=돼지철 주괴
 item.tconstruct.ingots.pigiron.tooltip=꿀꿀!
 item.tconstruct.ingots.alubrass.name=알루미늄 황동 주괴
 item.tconstruct.ingots.alumite.name=알루마이트 주괴
@@ -353,7 +353,7 @@ item.tconstruct.nuggets.cobalt.name=코발트 조각
 item.tconstruct.nuggets.ardite.name=아르다이트 조각
 item.tconstruct.nuggets.manyullyn.name=마뉼린 조각
 item.tconstruct.nuggets.knightslime.name=나이트슬라임 조각
-item.tconstruct.nuggets.pigiron.name=돼지선철 조각
+item.tconstruct.nuggets.pigiron.name=돼지철 조각
 item.tconstruct.nuggets.alubrass.name=알루미늄 황동 조각
 item.tconstruct.nuggets.alumite.name=알루마이트 조각
 
