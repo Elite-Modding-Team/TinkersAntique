@@ -18,6 +18,7 @@ import slimeknights.tconstruct.library.utils.RecipeUtil;
 import java.util.Collections;
 import java.util.Set;
 
+// NOTE: Be careful when changing any old config names as they can break certain addons or mods that add integration!
 public final class Config {
 
   public static ForgeCFG pulseConfig = new ForgeCFG("TinkerModules", "Modules");
@@ -415,10 +416,6 @@ public final class Config {
       prop.setComment("How much liquid is transferred by faucets and channels per pouring operation.");
       liquidTransferRate = prop.getInt();
 
-      prop = configFile.get(cat, "vanillaToolBreaking", vanillaToolBreaking);
-      prop.setComment("If true, tools will be fully destroyed like vanilla tools when durability is depleted. You monster!");
-      vanillaToolBreaking = prop.getBoolean();
-
       prop = configFile.get(cat, "oldMattockAndKama", oldMattockAndKama);
       prop.setComment("Restores old Mattock and Kama behavior (Mattock usable as a hoe, Kama is not)");
       oldMattockAndKama = prop.getBoolean();
@@ -560,6 +557,15 @@ public final class Config {
       prop = configFile.get(cat, "aluminumHeightMax", aluminumHeightMax);
       prop.setComment("Maximum Y level for aluminum ore generation.");
       aluminumHeightMax = prop.getInt();
+    }
+    // Experimental
+    {
+      String cat = "experimental";
+      Worldgen = configFile.getCategory(cat);
+
+      prop = configFile.get(cat, "vanillaToolBreaking", vanillaToolBreaking);
+      prop.setComment("[EXPERIMENTAL] If true, tools will be fully destroyed like vanilla tools when durability is depleted. You monster!");
+      vanillaToolBreaking = prop.getBoolean();
     }
     // Clientside
     {
