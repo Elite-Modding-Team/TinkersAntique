@@ -59,7 +59,6 @@ public final class Config {
   public static int liquidTransferRate = 6;
   public static boolean vanillaToolBreaking = false;
   public static boolean oldMattockAndKama = false;
-  public static boolean fancyJEIBeheadingAnimation = true;
 
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -225,6 +224,7 @@ public final class Config {
   public static boolean testIMC = false; // requires debug module
   public static boolean temperatureCelsius = true;
   public static boolean disableAllParticles = false;
+  public static boolean fancyJEIBeheadingAnimation = true;
   public static int minFluidHeight = 3;
   public static int columnsPartBuilder = 4;
   public static int columnsStencilTable = 4;
@@ -323,7 +323,7 @@ public final class Config {
       prop.setRequiresMcRestart(true);
       
       prop = configFile.get(cat, "steelAlloy", steelAlloy);
-      prop.setComment("Allows the creation of steel by pouring Blazin' Blood on iron ingots or blocks on a casting table or basin.");
+      prop.setComment("Allows the creation of steel by pouring Blazin' Blood on iron ingots or blocks on a casting table or basin. Note that this will always be disabled if the steel material added by Tinkers' Antique is also disabled.");
       obsidianAlloy = prop.getBoolean();
       prop.setRequiresMcRestart(true);
 
@@ -602,7 +602,7 @@ public final class Config {
       prop.setComment("If true, all material variants of the different tools will be listed in creative. Set to false to only have the first found material for all tools (usually wood).");
       listAllToolMaterials = prop.getBoolean();
 
-      prop = configFile.get(cat, "listAllPartMaterials", listAllToolMaterials); // property was split, so defailt to the value of tool materials
+      prop = configFile.get(cat, "listAllPartMaterials", listAllToolMaterials); // property was split, so default to the value of tool materials
       prop.setComment("If true, all material variants of the different parts will be listed in creative. Set to false to only have the first found material for all parts (usually wood).");
       listAllPartMaterials = prop.getBoolean();
 
@@ -651,13 +651,12 @@ public final class Config {
       disableAllParticles = prop.getBoolean();
       
       prop = configFile.get(cat, "fancyJEIBeheadingAnimation", fancyJEIBeheadingAnimation);
-      prop.setComment("If true, JEI tab for severing will use a fancy animation.");
+      prop.setComment("If true, the JEI tab for beheading will use a fancy animation.");
       fancyJEIBeheadingAnimation = prop.getBoolean();
 
       prop = configFile.get(cat, "entityJEIRendererScaleFactor", entityJEIRendererTransformation);
       prop.setComment("List of entity IDs that needs to be scaled when rendered in a GUI in the format 'modid:entity;scale'");
       entityJEIRendererTransformation = prop.getStringList();
-
     }
 
     // save changes if any
