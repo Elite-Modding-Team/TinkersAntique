@@ -45,34 +45,31 @@ public class GuideButton extends GuiIconButtonSmall {
          *
          * Maybe this can be improved in the future, when the guide book is reworked.
          */
-        switch (category) {
-            case Util.MODID + ":projectile_stats":
-                if (parts.size() == 1) {
-                    switch (parts.get(0)) {
-                        case "fletching":
-                            type = "bowmaterials.page3";
-                            break;
-                        case "shaft":
-                            type = "bowmaterials.page2";
-                            break;
-                    }
-                }
-                break;
-            case Util.MODID + ":ranged_stats":
-                if (parts.size() == 1) {
-                    switch (parts.get(0)) {
-                        case "bow":
-                            type = "bowmaterials.page0";
-                            break;
-                        case "bowstring":
-                            type = "bowmaterials.page1";
-                            break;
-                    }
-                }
-                break;
-        }
 
-        book.setString("page", String.format("%s", type == null ? "materials." + material : type));
+        //Category can be null and moving the parts size check to the outer logic since it is used by both.
+        if (category != null && parts != null && parts.size() == 1) {
+            String part = parts.get(0);
+            if (category.equals(Util.MODID + ":projectile_stats")) {
+                switch (part) {
+                    case "fletching":
+                        type = "bowmaterials.page3";
+                        break;
+                    case "shaft":
+                        type = "bowmaterials.page2";
+                        break;
+                }
+            } else if (category.equals(Util.MODID + ":ranged_stats")) {
+                switch (part) {
+                    case "bow":
+                        type = "bowmaterials.page0";
+                        break;
+                    case "bowstring":
+                        type = "bowmaterials.page1";
+                        break;
+                }
+            }
+        }
+        book.setString("page", (type == null ? "materials." + material : type));
         mantle.setTag("book", book);
         compound.setTag("mantle", mantle);
 
