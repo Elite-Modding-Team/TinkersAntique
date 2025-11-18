@@ -546,6 +546,17 @@ public class TinkerSmeltery extends TinkerPulse {
     
     TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.BONE), null, TinkerFluids.calcium, Material.VALUE_Ingot, 50));
     TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(Blocks.BONE_BLOCK), null, TinkerFluids.calcium, Material.VALUE_Ingot * 3, 100));
+    
+    if(TinkerCommons.isToolsLoaded()) {
+        TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matBloodyBone, RecipeMatch.of("bone"),
+                new FluidStack(TinkerFluids.blood, Material.VALUE_SlimeBall), true, false));
+        
+        TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matVenomousBone, RecipeMatch.of("bone"),
+                new FluidStack(TinkerFluids.venom, Material.VALUE_SlimeBall), true, false));
+        
+        TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matBlazingBone, RecipeMatch.of("boneWithered"),
+                new FluidStack(TinkerFluids.blazingBlood, 250), 12, true, false));
+      }
 
     // lavawood
     TinkerRegistry.registerBasinCasting(new CastingRecipe(TinkerCommons.lavawood, RecipeMatch.of("plankWood"),
@@ -573,16 +584,13 @@ public class TinkerSmeltery extends TinkerPulse {
       TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerCommons.blockSlimeCongealed, 1, BlockSlime.SlimeType.PURPLE.meta), null, TinkerFluids.purpleSlime, Material.VALUE_SlimeBall * 4, 100));
     }
     
-    // bone casting
-    if(TinkerCommons.isToolsLoaded()) {
-      TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matBloodyBone, RecipeMatch.of("bone"),
-              new FluidStack(TinkerFluids.blood, Material.VALUE_SlimeBall), true, false));
+    // steel casting (configurable)
+    if(Config.steelAlloy || Config.registerAllCommonMetals) {
+      TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.ingotSteel, RecipeMatch.of("ingotIron"),
+              new FluidStack(TinkerFluids.blazingBlood, 100), true, false));
       
-      TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matVenomousBone, RecipeMatch.of("bone"),
-              new FluidStack(TinkerFluids.venom, Material.VALUE_SlimeBall), true, false));
-      
-      TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.matBlazingBone, RecipeMatch.of("boneWithered"),
-              new FluidStack(TinkerFluids.blazingBlood, 250), 12, true, false));
+      TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.blockSteel, RecipeMatch.of("blockIron"),
+              new FluidStack(TinkerFluids.blazingBlood, 900), true, false));
     }
 
     // melt entities into a pulp
