@@ -11,8 +11,6 @@
     "不消耗强化槽"
   ],
   "demoTool": [
-    "tconstruct:pickaxe",
-    "tconstruct:shovel",
-    "tconstruct:hatchet"
+    "tconstruct:pickaxe"
   ]
 }

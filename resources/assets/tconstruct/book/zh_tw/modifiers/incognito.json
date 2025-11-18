@@ -11,8 +11,6 @@
     "Requires no modifier"
   ],
   "demoTool": [
-    "tconstruct:pickaxe",
-    "tconstruct:shovel",
-    "tconstruct:hatchet"
+    "tconstruct:pickaxe"
   ]
 }
