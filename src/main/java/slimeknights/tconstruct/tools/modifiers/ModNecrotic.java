@@ -16,7 +16,7 @@ import slimeknights.tconstruct.library.utils.TinkerUtil;
 public class ModNecrotic extends ModifierTrait {
 
   public ModNecrotic() {
-    super("necrotic", 0x5e0000, 10, 0);
+    super("necrotic", 0x5e0000, 5, 0);
   }
 
   @Override
@@ -31,7 +31,7 @@ public class ModNecrotic extends ModifierTrait {
 
   private float lifesteal(NBTTagCompound modifierNBT) {
     ModifierNBT data = new ModifierNBT(modifierNBT);
-    return 0.10f * data.level;
+    return 0.05F * data.level;
   }
 
   @Override
