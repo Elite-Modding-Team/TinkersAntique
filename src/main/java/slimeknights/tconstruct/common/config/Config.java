@@ -36,7 +36,7 @@ public final class Config {
   public static boolean reuseStencil = true;
   public static boolean craftCastableMaterials = false;
   public static boolean chestsKeepInventory = true;
-  public static boolean autosmeltlapis = true;
+  public static boolean autosmeltlapis = false;
   public static boolean obsidianAlloy = true;
   public static boolean steelAlloy = true;
   public static boolean claycasts = true;
