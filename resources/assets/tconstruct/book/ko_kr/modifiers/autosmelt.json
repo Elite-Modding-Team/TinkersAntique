@@ -1,0 +1,26 @@
+
+{
+  "modifier": "mod_autosmelt",
+  "text": [
+    {
+      "text": "Melting a lava crystal onto the end of a tool gives it the power of a furnace."
+    }
+  ],
+  "effects": [
+    "Smelts blocks as they're harvested",
+    "Not compatible with Silk Touch or the trait version of Autosmelt",
+    "Does not work for weapons",
+    "Single use"
+  ],
+  "demoTool": [
+    "tconstruct:pickaxe",
+    "tconstruct:shovel",
+    "tconstruct:hatchet",
+    "tconstruct:kama",
+    "tconstruct:mattock",
+    "tconstruct:hammer",
+    "tconstruct:lumberaxe",
+    "tconstruct:excavator",
+    "tconstruct:scythe"
+  ]
+}

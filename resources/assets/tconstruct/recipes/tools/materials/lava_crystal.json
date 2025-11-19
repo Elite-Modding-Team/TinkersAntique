@@ -1,0 +1,31 @@
+{
+    "conditions": [
+        {
+            "type": "tconstruct:is_pulse_loaded",
+            "pulse_name": "TinkerTools"
+        }
+    ],
+    "type": "forge:ore_shaped",
+    "group": "tconstruct:lava_crystal",
+    "pattern": [
+        "BFB",
+        "FWF",
+        "BFB"
+    ],
+    "key": {
+        "B": {
+            "item": "minecraft:blaze_rod"
+        },
+        "F": {
+            "item": "minecraft:fire_charge"
+        },
+        "W": {
+            "item": "tconstruct:firewood",
+            "data": 1
+        }
+    },
+    "result": {
+        "item": "tconstruct:materials",
+        "data": 23
+    }
+}

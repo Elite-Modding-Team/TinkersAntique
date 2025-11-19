@@ -1,0 +1,13 @@
+{
+    "textures": {
+        "excavator": "tconstruct:items/excavator/mod_autosmelt",
+        "hammer": "tconstruct:items/hammer/mod_autosmelt",
+        "hatchet": "tconstruct:items/hatchet/mod_autosmelt",
+        "kama": "tconstruct:items/kama/mod_autosmelt",
+        "lumberaxe": "tconstruct:items/lumberaxe/mod_autosmelt",
+        "mattock": "tconstruct:items/mattock/mod_autosmelt",
+        "pickaxe": "tconstruct:items/pickaxe/mod_autosmelt",
+        "scythe": "tconstruct:items/scythe/mod_autosmelt",
+        "shovel": "tconstruct:items/shovel/mod_autosmelt"
+    }
+}

@@ -82,6 +82,7 @@ public class TinkerModifiers extends AbstractToolPulse {
   public static Modifier modSharpness;
   public static Modifier modShulking;
   public static Modifier modSilktouch;
+  public static Modifier modAutosmelt;
   public static Modifier modWebbed;
   public static Modifier modSmite;
   public static Modifier modSoulbound;
@@ -181,6 +182,9 @@ public class TinkerModifiers extends AbstractToolPulse {
 
     modSilktouch = registerModifier(new ModSilktouch());
     modSilktouch.addItem(TinkerCommons.matSilkyJewel, 1, 1);
+    
+    modAutosmelt = registerModifier(new ModAutosmelt());
+    modAutosmelt.addItem(TinkerCommons.matLavaCrystal, 1, 1);
 
     modWebbed = registerModifier(new ModWebbed());
     modWebbed.addItem(Blocks.WEB, 1);

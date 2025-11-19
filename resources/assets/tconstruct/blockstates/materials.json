@@ -22,6 +22,7 @@
         "bloody_bone": [{ "textures": { "layer0": "tconstruct:items/materials/bloody_bone" }}],
         "venomous_bone": [{ "textures": { "layer0": "tconstruct:items/materials/venomous_bone" }}],
         "blazing_bone": [{ "textures": { "layer0": "tconstruct:items/materials/blazing_bone" }}],
+        "lava_crystal": [{ "textures": { "layer0": "tconstruct:items/materials/lava_crystal" }}],
         "creative_modifier": [{ "textures": { "layer0": "tconstruct:items/skull_char_gold" }}]
     }
 }

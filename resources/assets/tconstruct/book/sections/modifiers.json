@@ -29,6 +29,10 @@
   },
   {
     "type": "modifier",
+    "data": "modifiers/autosmelt.json"
+  },
+  {
+    "type": "modifier",
     "data": "modifiers/reinforced.json"
   },
   {

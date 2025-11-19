@@ -10,7 +10,7 @@
   ],
   "effects": [
     "Allows blocks to be harvested directly",
-    "Not compatible with Luck or Auto-Smelt",
+    "Not compatible with Luck or Autosmelt",
     "Single use"
   ],
   "demoTool": [
