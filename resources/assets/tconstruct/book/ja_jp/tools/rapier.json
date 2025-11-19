@@ -14,6 +14,7 @@
   "properties": [
     "高速、しかし低いダメージ",
     "装甲を50%貫通",
+    "Ignores invincibility frames",
     "右クリック：バックステップ",
     "オフハンド無効"
   ]
