@@ -40,6 +40,7 @@ public abstract class Sounds {
   public static final SoundEvent faucet_pour_loop = sound("faucet_pour_loop");
   public static final SoundEvent faucet_trigger = sound("faucet_trigger");
   public static final SoundEvent smeltery_loop = sound("smeltery_loop");
+  public static final SoundEvent sizzle = sound("sizzle");
 
   private static SoundEvent sound(String name) {
     ResourceLocation location = Util.getResource(name);

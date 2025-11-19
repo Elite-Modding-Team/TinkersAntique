@@ -77,5 +77,11 @@
      "sounds": [
        "tconstruct:smeltery_loop"
      ]
-   }
+   },
+  "sizzle": {
+    "category": "block",
+    "sounds": [
+      "tconstruct:sizzle"
+    ]
+  }
 }
