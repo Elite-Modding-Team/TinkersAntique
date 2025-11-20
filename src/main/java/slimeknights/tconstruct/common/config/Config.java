@@ -175,9 +175,19 @@ public final class Config {
           "tconstruct"
   };
   public static String[] entityJEIRendererTransformation = {
-          "minecraft:ender_dragon;5.0",  
+          "minecraft:ender_dragon;5.0"
   };
   public static String[] fluidIgnore = {};
+  public static String[] incognitoModBlacklist = {
+          "night_vision_armor",
+          "potion_belt_armor",
+          "soul_sight_armor",
+          "travel_belt_armor",
+          "travel_goggles_armor",
+          "travel_sack_armor",
+          "travel_slowfall_armor",
+          "travel_sneak_armor"
+  };
 
   // Worldgen
   public static boolean genSlimeIslands = true;
@@ -657,6 +667,10 @@ public final class Config {
       prop = configFile.get(cat, "entityJEIRendererScaleFactor", entityJEIRendererTransformation);
       prop.setComment("List of entity IDs that needs to be scaled when rendered in a GUI in the format 'modid:entity;scale'");
       entityJEIRendererTransformation = prop.getStringList();
+
+      prop = configFile.get(cat, "incognitoModBlacklist", incognitoModBlacklist);
+      prop.setComment("Modifiers that are still displayed despite an Incognito modifier being applied");
+      incognitoModBlacklist = prop.getStringList();
     }
 
     // save changes if any

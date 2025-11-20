@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -23,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Nonnull;
 
 import slimeknights.mantle.client.model.BakedWrapper;
+import slimeknights.tconstruct.TConstruct;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
@@ -145,20 +148,24 @@ public class BakedToolModel extends BakedWrapper.Perspective {
     }
 
     private void addModifierQuads(ItemStack stack, BakedToolModel original, ImmutableList.Builder<BakedQuad> quads) {
+      boolean incognito = false;
       NBTTagList modifiers = TagUtil.getBaseModifiersTagList(stack);
       if(modifiers.toString().contains("incognito")) {
-        return;
+        incognito = true;
       }
       Map<String, IBakedModel> modifierParts = original.modifierParts;
       for(int i = 0; i < modifiers.tagCount(); i++) {
         String modId = modifiers.getStringTagAt(i);
+        if(incognito && !modId.equals("incognito") && !Arrays.asList(Config.incognitoModBlacklist).contains(modId)) {
+            TConstruct.log.debug("Applying incognito for modifier {}", modId);
+            continue;
+        }
         IBakedModel modModel = modifierParts.get(modId);
         if(modModel != null) {
           quads.addAll(modModel.getQuads(null, null, 0));
         }
       }
     }
-
 
     protected void addExtraQuads(ItemStack stack, BakedToolModel original, ImmutableList.Builder<BakedQuad> quads, World world, EntityLivingBase entity) {
       // for custom stuff
