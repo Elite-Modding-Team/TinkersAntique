@@ -585,7 +585,7 @@ public class TinkerSmeltery extends TinkerPulse {
     }
     
     // steel casting (configurable)
-    if(Config.steelAlloy || Config.registerAllCommonMetals) {
+    if(Config.steelAlloy && Config.registerAllCommonMetals) {
       TinkerRegistry.registerTableCasting(new CastingRecipe(TinkerCommons.ingotSteel, RecipeMatch.of("ingotIron"),
               new FluidStack(TinkerFluids.blazingBlood, 100), true, false));
       
