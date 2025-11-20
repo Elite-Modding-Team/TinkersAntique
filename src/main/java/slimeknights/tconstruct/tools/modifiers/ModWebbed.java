@@ -15,7 +15,7 @@ public class ModWebbed extends ModifierTrait {
 
   @Override
   public void onHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, boolean isCritical) {
-    int duration = getData(tool).level * 20;
+    int duration = getData(tool).level * 60;
     target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, duration, 1));
   }
 }
