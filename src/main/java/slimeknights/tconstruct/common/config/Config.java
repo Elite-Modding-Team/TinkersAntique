@@ -210,15 +210,15 @@ public final class Config {
   public static boolean genArdite = true;
   public static int arditeRate = 20; // max. ardite per chunk
   public static boolean genCopper = true;
-  public static int copperRate = 4;
+  public static int copperRate = 8;
   public static int copperHeightMin = 20;
   public static int copperHeightMax = 60;
   public static boolean genTin = true;
-  public static int tinRate = 4;
+  public static int tinRate = 8;
   public static int tinHeightMin = 0;
   public static int tinHeightMax = 40;
   public static boolean genAluminum = true;
-  public static int aluminumRate = 6;
+  public static int aluminumRate = 8;
   public static int aluminumHeightMin = 0;
   public static int aluminumHeightMax = 64;
 
