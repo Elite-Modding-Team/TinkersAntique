@@ -3,14 +3,14 @@
   "modifier": "mod_autosmelt",
   "text": [
     {
-      "text": "Melting a lava crystal onto the end of a tool gives it the power of a furnace."
+      "text": "将熔岩史莱姆水晶熔铸到工具末端，即可赋予其熔炉的力量"
     }
   ],
   "effects": [
-    "Smelts blocks as they're harvested",
-    "Not compatible with Silk Touch or the trait version of Autosmelt",
-    "Does not work for weapons",
-    "Single use"
+    "挖掘方块后自动冶炼",
+    "与精准采集及材料上的自动冶炼冲突",
+    "在武器上不生效",
+    "只能强化一次"
   ],
   "demoTool": [
     "tconstruct:pickaxe",
