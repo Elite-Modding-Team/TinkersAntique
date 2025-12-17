@@ -1,9 +1,10 @@
 {
     "forge_marker": 1,
     "defaults": {
-        "transform": "forge:default-block"
+    "model": "tconstruct:toolforge"
     },
-	"variants": {
-        "normal": { "model": "tconstruct:toolforge" }
-    }
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
+  }
 }
