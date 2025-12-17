@@ -11,7 +11,7 @@ tile.tconstruct.tooltables.castchest.name=铸模箱
 tile.tconstruct.tooltables.patternchest.tooltip=破坏可以保留其中的模具
 tile.tconstruct.tooltables.partchest.name=部件箱
 tile.tconstruct.tooltables.partchest.tooltip=可以容纳大量的部件
-tile.tconstruct.toolforge.name=工具锻造台
+tile.tconstruct.toolforge.name=工匠砧
 
 tile.tconstruct.soil.grout.name=砖泥
 tile.tconstruct.soil.grout.tooltip=我就是渣渣！

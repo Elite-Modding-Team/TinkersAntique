@@ -1,81 +1,164 @@
 {
-    "textures": {
-            "particle": "tconstruct:blocks/toolforge_top",
-            "top": "tconstruct:blocks/toolforge_top",
-            "bottom": "minecraft:blocks/iron_block",
-            "leg": "minecraft:blocks/iron_block",
-            "legBottom": "minecraft:blocks/iron_block"
-    },
-    "elements": [
-        {
-          "from": [ 0, 15, 0 ],
-          "to": [ 16, 16, 16 ],
-          "faces": {
-            "up":    { "uv": [ 0,  0, 16, 16 ], "texture": "#top", "cullface": "up" },
-            "north": { "uv": [ 0,  0, 16,  1 ], "texture": "#top", "cullface": "north", "rotation": 180 },
-            "south": { "uv": [ 0, 15, 16, 16 ], "texture": "#top", "cullface": "south", "rotation": 0   },
-            "west":  { "uv": [ 0,  0,  1, 16 ], "texture": "#top", "cullface": "west",  "rotation": 270 },
-            "east":  { "uv": [15,  0, 16, 16 ], "texture": "#top", "cullface": "east",  "rotation": 90  }
-          },
-          "uvlock": true,
-          "__comment": "Table plate at the top"
-        },
-        {
-          "from": [ 0, 12, 0 ],
-          "to": [ 16, 15, 16 ],
-          "faces": {
-            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom" },
-            "north": { "uv": [ 0, 1, 16,  4 ], "texture": "#leg",   "cullface": "north"},
-            "south": { "uv": [ 0, 1, 16,  4 ], "texture": "#leg",   "cullface": "south"},
-            "west":  { "uv": [ 0, 1, 16,  4 ], "texture": "#leg",   "cullface": "west" },
-            "east":  { "uv": [ 0, 1, 16,  4 ], "texture": "#leg",   "cullface": "east" }
-          },
-          "uvlock": true,
-          "__comment": "Table top side"
-        },
-        {
-          "from": [ 0, 0, 0 ],
-          "to": [ 4, 12, 4 ],
-          "faces": {
-            "down":  { "uv": [  0, 12,  4, 16 ], "texture": "#legBottom", "cullface": "down"  },
-            "north": { "uv": [ 12,  4, 16, 16 ], "texture": "#leg",       "cullface": "north" },
-            "south": { "uv": [ 12,  4, 16, 16 ], "texture": "#leg" },
-            "west":  { "uv": [  0,  4,  4, 16 ], "texture": "#leg",       "cullface": "west"  },
-            "east":  { "uv": [  0,  4,  4, 16 ], "texture": "#leg" }
-          }
-        },
-        {
-          "from": [ 12, 0, 0 ],
-          "to": [ 16, 12, 4 ],
-          "faces": {
-            "down":  { "uv": [ 12, 12, 16, 16 ], "texture": "#legBottom", "cullface": "down"  },
-            "east":  { "uv": [ 12,  4, 16, 16 ], "texture": "#leg",       "cullface": "east"  },
-            "west":  { "uv": [ 12,  4, 16, 16 ], "texture": "#leg" },
-            "north": { "uv": [  0,  4,  4, 16 ], "texture": "#leg",       "cullface": "north" },
-            "south": { "uv": [  0,  4,  4, 16 ], "texture": "#leg" }
-          }
-        },
-        {
-          "from": [ 12, 0, 12 ],
-          "to": [ 16, 12, 16 ],
-          "faces": {
-            "down":  { "uv": [ 12, 0, 16,  4 ], "texture": "#legBottom", "cullface": "down"  },
-            "south": { "uv": [ 12, 4, 16, 16 ], "texture": "#leg",       "cullface": "south" },
-            "north": { "uv": [ 12, 4, 16, 16 ], "texture": "#leg" },
-            "east":  { "uv": [  0, 4,  4, 16 ], "texture": "#leg",       "cullface": "east"  },
-            "west":  { "uv": [  0, 4,  4, 16 ], "texture": "#leg" }
-          }
-        },
-        {
-          "from": [ 0, 0, 12 ],
-          "to": [ 4, 12, 16 ],
-          "faces": {
-            "down":  { "uv": [  0, 0,  4,  4 ], "texture": "#legBottom", "cullface": "down"  },
-            "west":  { "uv": [ 12, 4, 16, 16 ], "texture": "#leg",       "cullface": "west"  },
-            "east":  { "uv": [ 12, 4, 16, 16 ], "texture": "#leg" },
-            "south": { "uv": [  0, 4,  4, 16 ], "texture": "#leg",       "cullface": "south" },
-            "north": { "uv": [  0, 4,  4, 16 ], "texture": "#leg" }
-          }
-        }
-    ]
+	"textures": {
+		"leg": "blocks/iron_block",
+		"base": "tconstruct:blocks/table/toolforge_base",
+		"upper": "tconstruct:blocks/table/toolforge_base_upper",
+		"particle": "tconstruct:blocks/table/toolforge_base"
+	},
+	"elements": [
+		{
+			"name": "Anvil base",
+			"from": [2, 0, 2],
+			"to": [14, 4, 14],
+			"faces": {
+				"north": {"uv": [0, 12, 12, 16], "texture": "#base"},
+				"east": {"uv": [0, 12, 12, 16], "texture": "#base"},
+				"south": {"uv": [0, 12, 12, 16], "texture": "#base"},
+				"west": {"uv": [0, 12, 12, 16], "texture": "#base"},
+				"up": {"uv": [0, 0, 12, 12], "rotation": 90, "texture": "#base"},
+				"down": {"uv": [0, 0, 12, 12], "rotation": 270, "texture": "#base", "cullface": "down"}
+			}
+		},
+		{
+			"name": "Lower narrow portion",
+			"from": [3, 4, 4],
+			"to": [13, 5, 12],
+			"faces": {
+				"north": {"uv": [8, 0, 9, 10], "rotation": 90, "texture": "#upper"},
+				"east": {"uv": [0, 10, 8, 11], "texture": "#upper"},
+				"south": {"uv": [9, 0, 8, 10], "rotation": 270, "texture": "#upper"},
+				"west": {"uv": [0, 10, 8, 11], "texture": "#upper"},
+				"up": {"uv": [0, 0, 8, 10], "rotation": 270, "texture": "#upper"},
+				"down": {"uv": [0, 0, 8, 10], "rotation": 270, "texture": "#upper"}
+			}
+		},
+		{
+			"name": "Wider section beneath top portion",
+			"from": [4, 5, 6],
+			"to": [12, 10, 10],
+			"faces": {
+				"north": {"uv": [11, 16, 16, 8], "rotation": 90, "texture": "#upper"},
+				"east": {"uv": [12, 0, 16, 5], "texture": "#upper"},
+				"south": {"uv": [16, 8, 11, 16], "rotation": 270, "texture": "#upper"},
+				"west": {"uv": [12, 0, 16, 5], "texture": "#upper"},
+				"up": {"uv": [0, 0, 4, 8], "rotation": 90, "texture": "#upper"},
+				"down": {"uv": [0, 0, 4, 8], "rotation": 270, "texture": "#upper"}
+			}
+		},
+		{
+			"name": "Anvil top top right",
+			"from": [0, 13, 3],
+			"to": [16, 16, 8],
+			"faces": {
+				"north": {"uv": [0, 16, 3, 0], "rotation": 90, "texture": "#leg"},
+				"east": {"uv": [0, 16, 3, 11], "rotation": 90, "texture": "#leg"},
+				"south": {"uv": [0, 16, 3, 0], "rotation": 90, "texture": "#leg"},
+				"west": {"uv": [0, 5, 3, 0], "rotation": 90, "texture": "#leg"},
+				"up": {"uv": [0, 0, 5, 16], "rotation": 90, "texture": "#leg", "cullface": "up"},
+				"down": {"uv": [0, 0, 5, 16], "rotation": 270, "texture": "#leg"}
+			}
+		},
+		{
+			"name": "Anvil top top left",
+			"from": [0, 13, 8],
+			"to": [16, 16, 13],
+			"faces": {
+				"north": {"uv": [0, 16, 3, 0], "rotation": 90, "texture": "#leg"},
+				"east": {"uv": [0, 5, 3, 0], "rotation": 90, "texture": "#leg"},
+				"south": {"uv": [0, 16, 3, 0], "rotation": 90, "texture": "#leg"},
+				"west": {"uv": [0, 16, 3, 11], "rotation": 90, "texture": "#leg"},
+				"up": {"uv": [11, 0, 16, 16], "rotation": 90, "texture": "#leg", "cullface": "up"},
+				"down": {"uv": [11, 0, 16, 16], "rotation": 270, "texture": "#leg"}
+			}
+		},
+		{
+			"name": "Anvil top bottom right",
+			"from": [0, 10, 3],
+			"to": [16, 13, 8],
+			"faces": {
+				"north": {"uv": [13, 16, 16, 0], "rotation": 90, "texture": "#leg"},
+				"east": {"uv": [13, 16, 16, 11], "rotation": 90, "texture": "#leg"},
+				"south": {"uv": [13, 16, 16, 0], "rotation": 90, "texture": "#leg"},
+				"west": {"uv": [13, 5, 16, 0], "rotation": 90, "texture": "#leg"},
+				"up": {"uv": [0, 0, 5, 16], "rotation": 90, "texture": "#leg"},
+				"down": {"uv": [0, 0, 5, 16], "rotation": 270, "texture": "#leg"}
+			}
+		},
+		{
+			"name": "Anvil top bottom left",
+			"from": [0, 10, 8],
+			"to": [16, 13, 13],
+			"faces": {
+				"north": {"uv": [13, 16, 16, 0], "rotation": 90, "texture": "#leg"},
+				"east": {"uv": [13, 5, 16, 0], "rotation": 90, "texture": "#leg"},
+				"south": {"uv": [13, 16, 16, 0], "rotation": 90, "texture": "#leg"},
+				"west": {"uv": [13, 16, 16, 11], "rotation": 90, "texture": "#leg"},
+				"up": {"uv": [11, 0, 16, 16], "rotation": 90, "texture": "#leg"},
+				"down": {"uv": [11, 0, 16, 16], "rotation": 270, "texture": "#leg"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 135, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 135, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 135, 0],
+			"translation": [0, 0, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 135, 0],
+			"translation": [0, 0, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"gui": {
+			"rotation": [30, 135, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		}
+	},
+	"items": [
+		{
+			"center": [8, 16.25, 9],
+			"transform": "tconstruct:table",
+			"size": 7.5,
+			"x": 270
+		},
+		{
+			"center": [2.5, 17.5, 10.5],
+			"transform": "tconstruct:table",
+			"size": 3
+		},
+		{
+			"center": [2.5, 17.5, 5.5],
+			"transform": "tconstruct:table",
+			"size": 3
+		},
+		{
+			"center": [8, 17.5, 4.5],
+			"transform": "tconstruct:table",
+			"size": 3
+		},
+		{
+			"center": [13.5, 17.5, 5.5],
+			"transform": "tconstruct:table",
+			"size": 3
+		},
+		{
+			"center": [13.5, 17.5, 10.5],
+			"transform": "tconstruct:table",
+			"size": 3
+		}
+	]
 }
