@@ -110,7 +110,9 @@ public final class Config {
           "techguns:zombiesoldier;true;minecraft:skull:2",
           "thaumcraft:CultistCleric;false;minecraft:skull:2",
           "thaumcraft:CultistKnight;false;minecraft:skull:2",
-          "thaumcraft:CultistLeader;false;minecraft:skull:2"
+          "thaumcraft:CultistLeader;false;minecraft:skull:2",
+          "tropicraft:tropiskeleton;false;minecraft:skull:0",
+          "tropicraft:tropicreeper;false;minecraft:skull:4"
   };
   public static String[] entityMelting = {
           "minecraft:blaze;true;blazing_blood;20",
@@ -169,7 +171,8 @@ public final class Config {
           "natura:babyheatscarspider;false;blazing_blood;20",
           "natura:heatscarspider;false;blazing_blood;40",
           "thaumcraft:Firebat;false;blazing_blood;5",
-          "thaumcraft:Pech;true;gold;10"
+          "thaumcraft:Pech;true;gold;10",
+          "tropicraft:tropiskeleton;true;notmilk;20"
   };
   public static String[] materialPriorities = {
           "tconstruct"
