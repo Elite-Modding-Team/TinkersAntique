@@ -18,7 +18,7 @@ public class MaterialSectionTransformer extends AbstractMaterialSectionTransform
 
   @Override
   protected boolean isValidMaterial(Material material) {
-    return material.hasStats(MaterialTypes.HEAD) || material.hasStats(MaterialTypes.HEAD) || material.hasStats(MaterialTypes.HEAD);
+    return material.hasStats(MaterialTypes.HEAD);
   }
 
   @Override
