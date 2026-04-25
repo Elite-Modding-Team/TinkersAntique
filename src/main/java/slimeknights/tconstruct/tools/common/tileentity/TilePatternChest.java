@@ -48,10 +48,13 @@ public class TilePatternChest extends TileTinkerChest implements IInventoryGui {
   public void setInventorySlotContents(int slot, ItemStack itemstack) {
 	super.setInventorySlotContents(slot, itemstack);
 	boolean isCastChest = this.isCastChest();
-	boolean blockInWorldIsCastChest = world.getBlockState(pos).getValue(BlockToolTable.TABLES) == TableTypes.CastChest;
-	if (isCastChest != blockInWorldIsCastChest) { 
-	  setState(isCastChest, world, pos);
-	}
+    IBlockState state = world.getBlockState(pos);
+    if(state.getProperties().containsKey(BlockToolTable.TABLES)) {
+      boolean blockInWorldIsCastChest = state.getValue(BlockToolTable.TABLES) == TableTypes.CastChest;
+      if(isCastChest != blockInWorldIsCastChest) {
+        setState(isCastChest, world, pos);
+      }
+    }
   }
   
   public static void setState(boolean isCast, World worldIn, BlockPos pos) {
