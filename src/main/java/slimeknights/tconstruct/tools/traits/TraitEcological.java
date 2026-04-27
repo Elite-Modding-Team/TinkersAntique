@@ -14,7 +14,7 @@ import slimeknights.tconstruct.library.utils.ToolHelper;
 // This is a very weak version of repair/moss.. be careful not to catch any splinters!
 public class TraitEcological extends AbstractTrait {
 
-  private static int chance = 4; // 1/X chance of getting the effect
+  private static int chance = 20; // 1/X chance of getting the effect
 
   public TraitEcological() {
     super("ecological", TextFormatting.GREEN);
