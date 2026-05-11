@@ -119,6 +119,9 @@ public class TinkerGadgets extends TinkerPulse {
   public static Item stoneStick;
 
   public static ItemMetaDynamic spaghetti;
+  public static ItemStack hardSpaghetti;
+  public static ItemStack wetSpaghetti;
+  public static ItemStack coldSpaghetti;
   public static ItemMomsSpaghetti momsSpaghetti;
   public static Modifier modSpaghettiSauce;
   public static Modifier modSpaghettiMeat;
@@ -227,19 +230,14 @@ public class TinkerGadgets extends TinkerPulse {
     spaghetti = registerItem(registry, new ItemSpaghetti(), "spaghetti");
     momsSpaghetti = registerItem(registry, new ItemMomsSpaghetti(), "moms_spaghetti");
 
-    ItemStack hardSpaghetti = spaghetti.addMeta(0, "hard");
-    ItemStack wetSpaghetti = spaghetti.addMeta(1, "soggy");
-    ItemStack coldSpaghetti = spaghetti.addMeta(2, "cold");
+    hardSpaghetti = spaghetti.addMeta(0, "hard");
+    wetSpaghetti = spaghetti.addMeta(1, "soggy");
+    coldSpaghetti = spaghetti.addMeta(2, "cold");
 
     modSpaghettiSauce = new ModSpaghettiSauce();
 
     modSpaghettiMeat = new ModSpaghettiMeat();
     modSpaghettiMeat.addRecipeMatch(new RecipeMatch.ItemCombination(1, new ItemStack(Items.COOKED_BEEF), new ItemStack(Items.COOKED_CHICKEN), new ItemStack(Items.COOKED_MUTTON), new ItemStack(Items.COOKED_PORKCHOP)));
-
-    // Recipe for mom's spaghetti: soak em, dry em, cook em, eat em
-    TinkerRegistry.registerTableCasting(new CastingRecipe(wetSpaghetti, RecipeMatch.of(hardSpaghetti), new FluidStack(FluidRegistry.WATER, Fluid.BUCKET_VOLUME * 3), 15 * 60 * 20, true, false));
-    TinkerRegistry.registerDryingRecipe(wetSpaghetti, coldSpaghetti, 15 * 60 * 20);
-    GameRegistry.addSmelting(coldSpaghetti, new ItemStack(momsSpaghetti), 2.0f);
 
     MinecraftForge.EVENT_BUS.register(slimeBoots);
   }
@@ -265,6 +263,7 @@ public class TinkerGadgets extends TinkerPulse {
   @Subscribe
   public void init(FMLInitializationEvent event) {
     registerSmelting();
+    loseYourself();
 
     proxy.init();
   }
@@ -284,6 +283,13 @@ public class TinkerGadgets extends TinkerPulse {
     // smelting to get smooth and cracked
     GameRegistry.addSmelting(stackBrownstoneRough.copy(), stackBrownstoneSmooth.copy(), 0.1f);
     GameRegistry.addSmelting(stackBrownstoneBrick.copy(), stackBrownstoneBrickCracked.copy(), 0.1f);
+  }
+
+  private void loseYourself() {
+    // Recipe for mom's spaghetti: soak em, dry em, cook em, eat em
+    TinkerRegistry.registerTableCasting(new CastingRecipe(wetSpaghetti, RecipeMatch.of(hardSpaghetti), new FluidStack(FluidRegistry.WATER, Fluid.BUCKET_VOLUME * 3), 15 * 60 * 20, true, false));
+    TinkerRegistry.registerDryingRecipe(wetSpaghetti, coldSpaghetti, 15 * 60 * 20);
+    GameRegistry.addSmelting(coldSpaghetti, new ItemStack(momsSpaghetti), 2.0f);
   }
 
   // POST-INITIALIZATION
