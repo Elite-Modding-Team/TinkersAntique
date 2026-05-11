@@ -97,7 +97,7 @@ public class ModBeheading extends ToolModifier {
     // has beheading
     int level = getBeheadingLevel(event.getSource());
     if(shouldDropHead(level)) {
-      Collection<ItemStack> heads = TinkerRegistry.getHeadDrop(event.getEntityLiving());
+      Collection<ItemStack> heads = TinkerRegistry.getHeadDrops(event.getEntityLiving());
       if(!heads.isEmpty()) {
         // Pick one random ItemStack from the collection
         ItemStack head = heads.toArray(new ItemStack[0])[TConstruct.random.nextInt(heads.size())];
@@ -122,7 +122,7 @@ public class ModBeheading extends ToolModifier {
       int level = getBeheadingLevel(event.getSource());
 
       if(shouldDropHead(level)) {
-        Collection<ItemStack> heads = TinkerRegistry.getHeadDrop(entity);
+        Collection<ItemStack> heads = TinkerRegistry.getHeadDrops(entity);
         if(!heads.isEmpty()) {
           // Pick one random ItemStack from the collection
           ItemStack head = heads.toArray(new ItemStack[0])[TConstruct.random.nextInt(heads.size())];

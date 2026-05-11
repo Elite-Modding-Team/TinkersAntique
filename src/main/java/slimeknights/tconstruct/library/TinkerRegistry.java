@@ -542,7 +542,7 @@ public final class TinkerRegistry {
    * @param entity  Entity to check
    * @return  A collection of the entity's head drops
    */
-  public static Collection<ItemStack> getHeadDrop(EntityLivingBase entity) {
+  public static Collection<ItemStack> getHeadDrops(EntityLivingBase entity) {
     Collection<ItemStack> drops = new ArrayList<>();
     for(Map.Entry<Class<? extends EntityLivingBase>, Function<EntityLivingBase, ItemStack>> entry : headDrops.entries()) {
       if(entry.getKey().isAssignableFrom(entity.getClass())) {
@@ -553,6 +553,23 @@ public final class TinkerRegistry {
       }
     }
     return drops;
+  }
+
+  /**
+   * Gets the first head that would be dropped by an entity
+   * @param entity  Entity to check
+   * @return  The entity's head
+   */
+  public static ItemStack getHeadDrop(EntityLivingBase entity) {
+    for(Map.Entry<Class<? extends EntityLivingBase>, Function<EntityLivingBase, ItemStack>> entry : headDrops.entries()) {
+      if(entry.getKey().isAssignableFrom(entity.getClass())) {
+        ItemStack stack = entry.getValue().apply(entity);
+        if (!stack.isEmpty()) {
+          return stack.copy();
+        }
+      }
+    }
+    return ItemStack.EMPTY;
   }
 
   public static Map<Class<? extends EntityLivingBase>, Collection<ItemStack>> getAllSeveringRecipes() {
