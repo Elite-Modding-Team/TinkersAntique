@@ -22,7 +22,7 @@ import slimeknights.tconstruct.library.smeltery.ICastingRecipe;
 import slimeknights.tconstruct.plugin.jei.JEIPlugin;
 import slimeknights.tconstruct.shared.TinkerFluids;
 
-public class CastingTableRecipeChecker {
+public class CastingRecipeChecker {
 
   private static CastingRecipeWrapper recipeWrapper;
 
@@ -50,7 +50,7 @@ public class CastingTableRecipeChecker {
             List<ItemStack> list = Lists.newLinkedList();
             castDict.put(output, list);
 
-            recipeWrapper = new CastingRecipeWrapper(list, recipe, JEIPlugin.castingTableCategory.castingTable);
+            recipeWrapper = new CastingRecipeWrapper(list, recipe, JEIPlugin.castingCategory.castingTable);
 
             if(recipeWrapper.isValid(false)) {
               recipes.add(recipeWrapper);
@@ -60,7 +60,7 @@ public class CastingTableRecipeChecker {
           castDict.get(output).addAll(recipe.cast.getInputs());
         }
         else {
-          recipeWrapper = new CastingRecipeWrapper(recipe, JEIPlugin.castingTableCategory.castingTable);
+          recipeWrapper = new CastingRecipeWrapper(recipe, JEIPlugin.castingCategory.castingTable);
 
           if(recipeWrapper.isValid(true)) {
             recipes.add(recipeWrapper);

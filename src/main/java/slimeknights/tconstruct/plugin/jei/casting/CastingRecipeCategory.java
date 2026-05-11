@@ -25,7 +25,7 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.client.GuiUtil;
 import slimeknights.tconstruct.library.materials.Material;
 
-public class CastingTableRecipeCategory implements IRecipeCategory<CastingRecipeWrapper> {
+public class CastingRecipeCategory implements IRecipeCategory<CastingRecipeWrapper> {
 
   public static String CATEGORY = Util.prefix("casting_table");
   public static ResourceLocation background_loc = Util.getResource("textures/gui/jei/casting.png");
@@ -34,14 +34,16 @@ public class CastingTableRecipeCategory implements IRecipeCategory<CastingRecipe
   protected final IDrawableAnimated arrow;
 
   public final IDrawable castingTable;
+  public final IDrawable castingBasin;
 
-  public CastingTableRecipeCategory(IGuiHelper guiHelper) {
+  public CastingRecipeCategory(IGuiHelper guiHelper) {
     this.background = guiHelper.createDrawable(background_loc, 0, 0, 141, 61);
 
     IDrawableStatic arrowDrawable = guiHelper.createDrawable(background_loc, 141, 32, 24, 17);
     this.arrow = guiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
 
     this.castingTable = guiHelper.createDrawable(background_loc, 141, 0, 16, 16);
+    this.castingBasin = null;
   }
 
   @Nonnull

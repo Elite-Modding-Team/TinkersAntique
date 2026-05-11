@@ -85,7 +85,7 @@ public class JEIPlugin implements IModPlugin {
   public static ICraftingGridHelper craftingGridHelper;
   public static IRecipeRegistry recipeRegistry;
 
-  public static CastingTableRecipeCategory castingTableCategory;
+  public static CastingRecipeCategory castingCategory;
   public static CastingBasinRecipeCategory castingBasinCategory;
 
   @Override
@@ -138,10 +138,10 @@ public class JEIPlugin implements IModPlugin {
 
     // Smeltery
     if(TConstruct.pulseManager.isPulseLoaded(TinkerSmeltery.PulseId)) {
-      castingTableCategory = new CastingTableRecipeCategory(guiHelper);
+      castingCategory = new CastingRecipeCategory(guiHelper);
       castingBasinCategory = new CastingBasinRecipeCategory(guiHelper);
 
-      registry.addRecipeCategories(new SmeltingRecipeCategory(guiHelper), new AlloyRecipeCategory(guiHelper), castingTableCategory, castingBasinCategory, new EntityMeltingRecipeCategory(guiHelper));
+      registry.addRecipeCategories(new SmeltingRecipeCategory(guiHelper), new AlloyRecipeCategory(guiHelper), castingCategory, castingBasinCategory, new EntityMeltingRecipeCategory(guiHelper));
     }
 
     if(TConstruct.pulseManager.isPulseLoaded(TinkerGadgets.PulseId)) {
@@ -186,11 +186,11 @@ public class JEIPlugin implements IModPlugin {
 
       registry.handleRecipes(EntityMeltingRecipe.class, new EntityMeltingRecipeHandler(), EntityMeltingRecipeCategory.CATEGORY);
 
-      registry.handleRecipes(CastingRecipeWrapper.class, new CastingRecipeHandler(), CastingTableRecipeCategory.CATEGORY);
+      registry.handleRecipes(CastingRecipeWrapper.class, new CastingRecipeHandler(), CastingRecipeCategory.CATEGORY);
       registry.handleRecipes(CastingRecipeWrapper.class, new CastingRecipeHandler(), CastingBasinRecipeCategory.CATEGORY);
 
       registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.smelteryController), SmeltingRecipeCategory.CATEGORY, AlloyRecipeCategory.CATEGORY, EntityMeltingRecipeCategory.CATEGORY);
-      registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.castingBlock, 1, BlockCasting.CastingType.TABLE.meta), CastingTableRecipeCategory.CATEGORY);
+      registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.castingBlock, 1, BlockCasting.CastingType.TABLE.meta), CastingRecipeCategory.CATEGORY);
       registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.castingBlock, 1, BlockCasting.CastingType.BASIN.meta), CastingBasinRecipeCategory.CATEGORY);
       // add the seared furnace to the list with the vanilla furnace
       // note that this is just the smelting one, fuel is not relevant
@@ -203,7 +203,7 @@ public class JEIPlugin implements IModPlugin {
       registry.addRecipes(AlloyRecipeChecker.getAlloyRecipes(), AlloyRecipeCategory.CATEGORY);
 
       // casting
-      registry.addRecipes(CastingTableRecipeChecker.getCastingRecipes(), CastingTableRecipeCategory.CATEGORY);
+      registry.addRecipes(CastingRecipeChecker.getCastingRecipes(), CastingRecipeCategory.CATEGORY);
       registry.addRecipes(CastingBasinRecipeChecker.getCastingRecipes(), CastingBasinRecipeCategory.CATEGORY);
 
       // liquid recipe lookup for smeltery and tinker tank
