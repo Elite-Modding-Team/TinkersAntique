@@ -111,6 +111,7 @@ public abstract class TileHeatingStructureFuelTank<T extends MultiblockDetection
     }
 
     // nothing found, try again with new fuel
+    currentFuel = null;
     for(BlockPos pos : tanks) {
       if(hasTankWithFuel(pos, null)) {
         currentTank = pos;
@@ -127,10 +128,7 @@ public abstract class TileHeatingStructureFuelTank<T extends MultiblockDetection
     if(tank != null && tank.getFluid() != null) {
       if(tank.getFluidAmount() > 0 && TinkerRegistry.isSmelteryFuel(tank.getFluid())) {
         // if we have a preference, only use that
-        if(preference != null && tank.getFluid().isFluidEqual(preference)) {
-          return true;
-        }
-        else if(preference == null) {
+        if(preference == null || tank.getFluid().isFluidEqual(preference)) {
           return true;
         }
       }
