@@ -19,6 +19,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import slimeknights.mantle.util.LocUtils;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.ClientProxy;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.shared.TinkerCommons;
@@ -100,7 +101,8 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
             stacks.init(REPRES, true, 0, 0);
             stacks.set(REPRES, item);
         }
-        stacks.init(PARTS, true, WIDTH - BUTTON_WIDTH * 2, 0);
+        int xOff = Config.jeiGuidebookButton ? BUTTON_WIDTH * 2 : BUTTON_WIDTH;
+        stacks.init(PARTS, true, WIDTH - xOff, 0);
         stacks.set(PARTS, recipeWrapper.getParts(relatedParts));
     }
 
@@ -108,7 +110,8 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
     public void drawExtras(@Nonnull Minecraft minecraft) {
         ItemStack item = materialWrapper.getMaterial().getRepresentativeItem();
         if (item != null && !item.isEmpty()) {
-            slot.draw(minecraft, WIDTH - BUTTON_WIDTH * 2, 0);
+            int xOff = Config.jeiGuidebookButton ? BUTTON_WIDTH * 2 : BUTTON_WIDTH;
+            slot.draw(minecraft, WIDTH - xOff, 0);
         }
         slot.draw(minecraft, 0, 0);
         if (materialWrapper.getMaterial().hasFluid()) {
@@ -119,7 +122,9 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
         lineNumber += 3;
         drawTraits(materialWrapper.getTraits(relatedParts), lineNumber);
         drawStats(materialWrapper.getStatInfos(relatedParts), lineNumber);
-        getGuideButton().drawButton(minecraft, mouseX, mouseY, 0);
+        if (Config.jeiGuidebookButton) {
+          getGuideButton().drawButton(minecraft, mouseX, mouseY, 0);
+        }
     }
 
     @Nonnull
@@ -148,7 +153,7 @@ public abstract class AbstractCategory implements IRecipeCategory<MaterialWrappe
         });
         tooltip.addAll(additionalTooltips(materialWrapper.getStatInfos(relatedParts), materialWrapper.getStatDescriptions(relatedParts), mouseX, mouseY));
 
-        if (getGuideButton().mousePressed(mouseX, mouseY)) {
+        if (Config.jeiGuidebookButton && getGuideButton().mousePressed(mouseX, mouseY)) {
             tooltip.add(getGuideButton().getTooltip());
         }
         return tooltip;

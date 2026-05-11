@@ -59,6 +59,7 @@ public final class Config {
   public static int liquidTransferRate = 6;
   public static boolean vanillaToolBreaking = false;
   public static boolean oldMattockAndKama = false;
+  public static boolean jeiGuidebookButton = false;
 
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -250,10 +251,11 @@ public final class Config {
   static ConfigCategory Modules;
   static ConfigCategory Gameplay;
   static ConfigCategory Worldgen;
+  static ConfigCategory Experimental;
   static ConfigCategory ClientSide;
   
   public static void load(FMLPreInitializationEvent event) {
-    configFile = new Configuration(event.getSuggestedConfigurationFile(), "0.3", false);
+    configFile = new Configuration(event.getSuggestedConfigurationFile(), "0.4", false);
 
     MinecraftForge.EVENT_BUS.register(instance);
 
@@ -580,11 +582,15 @@ public final class Config {
     // Experimental
     {
       String cat = "experimental";
-      Worldgen = configFile.getCategory(cat);
+      Experimental = configFile.getCategory(cat);
 
       prop = configFile.get(cat, "vanillaToolBreaking", vanillaToolBreaking);
       prop.setComment("[EXPERIMENTAL] If true, tools will be fully destroyed like vanilla tools when durability is depleted. You monster!");
       vanillaToolBreaking = prop.getBoolean();
+
+      prop = configFile.get(cat, "jeiGuidebookButton", jeiGuidebookButton);
+      prop.setComment("[EXPERIMENTAL] If true, a button is added to JEI material pages that opens the 'Materials and You' book at the approximate location.");
+      jeiGuidebookButton = prop.getBoolean();
     }
     // Clientside
     {
