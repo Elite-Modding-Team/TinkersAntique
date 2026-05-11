@@ -22,7 +22,7 @@ import slimeknights.tconstruct.library.smeltery.ICastingRecipe;
 import slimeknights.tconstruct.plugin.jei.JEIPlugin;
 import slimeknights.tconstruct.shared.TinkerFluids;
 
-public class CastingRecipeChecker {
+public class CastingTableRecipeChecker {
 
   private static CastingRecipeWrapper recipeWrapper;
 
@@ -50,7 +50,7 @@ public class CastingRecipeChecker {
             List<ItemStack> list = Lists.newLinkedList();
             castDict.put(output, list);
 
-            recipeWrapper = new CastingRecipeWrapper(list, recipe, JEIPlugin.castingCategory.castingTable);
+            recipeWrapper = new CastingRecipeWrapper(list, recipe, JEIPlugin.castingTableCategory.castingTable);
 
             if(recipeWrapper.isValid(false)) {
               recipes.add(recipeWrapper);
@@ -60,23 +60,11 @@ public class CastingRecipeChecker {
           castDict.get(output).addAll(recipe.cast.getInputs());
         }
         else {
-          recipeWrapper = new CastingRecipeWrapper(recipe, JEIPlugin.castingCategory.castingTable);
+          recipeWrapper = new CastingRecipeWrapper(recipe, JEIPlugin.castingTableCategory.castingTable);
 
           if(recipeWrapper.isValid(true)) {
             recipes.add(recipeWrapper);
           }
-        }
-      }
-    }
-
-    for(ICastingRecipe irecipe : TinkerRegistry.getAllBasinCastingRecipes()) {
-      if(irecipe instanceof CastingRecipe) {
-        CastingRecipe recipe = (CastingRecipe) irecipe;
-
-        recipeWrapper = new CastingRecipeWrapper(recipe, JEIPlugin.castingCategory.castingBasin);
-
-        if(recipeWrapper.isValid(true)) {
-          recipes.add(recipeWrapper);
         }
       }
     }

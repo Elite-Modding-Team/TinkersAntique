@@ -44,10 +44,7 @@ import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.plugin.jei.alloy.AlloyRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.alloy.AlloyRecipeChecker;
 import slimeknights.tconstruct.plugin.jei.alloy.AlloyRecipeHandler;
-import slimeknights.tconstruct.plugin.jei.casting.CastingRecipeCategory;
-import slimeknights.tconstruct.plugin.jei.casting.CastingRecipeChecker;
-import slimeknights.tconstruct.plugin.jei.casting.CastingRecipeHandler;
-import slimeknights.tconstruct.plugin.jei.casting.CastingRecipeWrapper;
+import slimeknights.tconstruct.plugin.jei.casting.*;
 import slimeknights.tconstruct.plugin.jei.drying.DryingRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.drying.DryingRecipeChecker;
 import slimeknights.tconstruct.plugin.jei.drying.DryingRecipeHandler;
@@ -88,7 +85,8 @@ public class JEIPlugin implements IModPlugin {
   public static ICraftingGridHelper craftingGridHelper;
   public static IRecipeRegistry recipeRegistry;
 
-  public static CastingRecipeCategory castingCategory;
+  public static CastingTableRecipeCategory castingTableCategory;
+  public static CastingBasinRecipeCategory castingBasinCategory;
 
   @Override
   public void registerItemSubtypes(ISubtypeRegistry registry) {
@@ -140,9 +138,10 @@ public class JEIPlugin implements IModPlugin {
 
     // Smeltery
     if(TConstruct.pulseManager.isPulseLoaded(TinkerSmeltery.PulseId)) {
-      castingCategory = new CastingRecipeCategory(guiHelper);
+      castingTableCategory = new CastingTableRecipeCategory(guiHelper);
+      castingBasinCategory = new CastingBasinRecipeCategory(guiHelper);
 
-      registry.addRecipeCategories(new SmeltingRecipeCategory(guiHelper), new AlloyRecipeCategory(guiHelper), castingCategory, new EntityMeltingRecipeCategory(guiHelper));
+      registry.addRecipeCategories(new SmeltingRecipeCategory(guiHelper), new AlloyRecipeCategory(guiHelper), castingTableCategory, castingBasinCategory, new EntityMeltingRecipeCategory(guiHelper));
     }
 
     if(TConstruct.pulseManager.isPulseLoaded(TinkerGadgets.PulseId)) {
@@ -187,11 +186,12 @@ public class JEIPlugin implements IModPlugin {
 
       registry.handleRecipes(EntityMeltingRecipe.class, new EntityMeltingRecipeHandler(), EntityMeltingRecipeCategory.CATEGORY);
 
-      registry.handleRecipes(CastingRecipeWrapper.class, new CastingRecipeHandler(), CastingRecipeCategory.CATEGORY);
+      registry.handleRecipes(CastingRecipeWrapper.class, new CastingRecipeHandler(), CastingTableRecipeCategory.CATEGORY);
+      registry.handleRecipes(CastingRecipeWrapper.class, new CastingRecipeHandler(), CastingBasinRecipeCategory.CATEGORY);
 
       registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.smelteryController), SmeltingRecipeCategory.CATEGORY, AlloyRecipeCategory.CATEGORY, EntityMeltingRecipeCategory.CATEGORY);
-      registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.castingBlock, 1, BlockCasting.CastingType.TABLE.meta), CastingRecipeCategory.CATEGORY);
-      registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.castingBlock, 1, BlockCasting.CastingType.BASIN.meta), CastingRecipeCategory.CATEGORY);
+      registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.castingBlock, 1, BlockCasting.CastingType.TABLE.meta), CastingTableRecipeCategory.CATEGORY);
+      registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.castingBlock, 1, BlockCasting.CastingType.BASIN.meta), CastingBasinRecipeCategory.CATEGORY);
       // add the seared furnace to the list with the vanilla furnace
       // note that this is just the smelting one, fuel is not relevant
       registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.searedFurnaceController), VanillaRecipeCategoryUid.SMELTING);
@@ -203,7 +203,8 @@ public class JEIPlugin implements IModPlugin {
       registry.addRecipes(AlloyRecipeChecker.getAlloyRecipes(), AlloyRecipeCategory.CATEGORY);
 
       // casting
-      registry.addRecipes(CastingRecipeChecker.getCastingRecipes(), CastingRecipeCategory.CATEGORY);
+      registry.addRecipes(CastingTableRecipeChecker.getCastingRecipes(), CastingTableRecipeCategory.CATEGORY);
+      registry.addRecipes(CastingBasinRecipeChecker.getCastingRecipes(), CastingBasinRecipeCategory.CATEGORY);
 
       // liquid recipe lookup for smeltery and tinker tank
       registry.addAdvancedGuiHandlers(new TinkerGuiTankHandler<>(GuiTinkerTank.class), new TinkerGuiTankHandler<>(GuiSmeltery.class));

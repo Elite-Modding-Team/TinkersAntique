@@ -1,49 +1,39 @@
 package slimeknights.tconstruct.plugin.jei.casting;
 
 import com.google.common.collect.ImmutableList;
-
+import mezz.jei.api.IGuiHelper;
+import mezz.jei.api.gui.*;
+import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableStatic;
-import mezz.jei.api.gui.IGuiFluidStackGroup;
-import mezz.jei.api.gui.IGuiItemStackGroup;
-import mezz.jei.api.gui.IRecipeLayout;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeCategory;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.client.GuiUtil;
 import slimeknights.tconstruct.library.materials.Material;
 
-public class CastingRecipeCategory implements IRecipeCategory<CastingRecipeWrapper> {
+import javax.annotation.Nonnull;
+import java.util.List;
 
-  public static String CATEGORY = Util.prefix("casting_table");
+public class CastingBasinRecipeCategory implements IRecipeCategory<CastingRecipeWrapper> {
+
+  public static String CATEGORY = Util.prefix("casting_basin");
   public static ResourceLocation background_loc = Util.getResource("textures/gui/jei/casting.png");
 
   protected final IDrawable background;
   protected final IDrawableAnimated arrow;
 
-  public final IDrawable castingTable;
   public final IDrawable castingBasin;
 
-  public CastingRecipeCategory(IGuiHelper guiHelper) {
+  public CastingBasinRecipeCategory(IGuiHelper guiHelper) {
     this.background = guiHelper.createDrawable(background_loc, 0, 0, 141, 61);
 
     IDrawableStatic arrowDrawable = guiHelper.createDrawable(background_loc, 141, 32, 24, 17);
     this.arrow = guiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
 
-    this.castingTable = guiHelper.createDrawable(background_loc, 141, 0, 16, 16);
-    this.castingBasin = guiHelper.createDrawable(background_loc, 141, 16, 16, 16);
+    this.castingBasin = guiHelper.createDrawable(background_loc, 141, 0, 16, 16);
   }
 
   @Nonnull
