@@ -136,8 +136,8 @@ public class Scythe extends Kama {
 
   private List<Entity> getAoeEntities(EntityPlayer player, Entity target, TinkerToolEvent.ExtraBlockBreak event) {
     int width = (event.width - 1) / 2;
-    int height = (event.width - 1) / 2;
-    AxisAlignedBB box = new AxisAlignedBB(target.posX, target.posY, target.posZ, target.posX + 1.0D, target.posY + 1.0D, target.posZ + 1.0D).grow(width, height, width);
+    int height = (event.height - 1) / 2;
+    AxisAlignedBB box = target.getEntityBoundingBox().grow(width, height, width);
 
     return player.getEntityWorld().getEntitiesWithinAABBExcludingEntity(player, box);
   }
