@@ -60,6 +60,7 @@ public final class Config {
   public static boolean vanillaToolBreaking = false;
   public static boolean oldMattockAndKama = false;
   public static boolean jeiGuidebookButton = false;
+  public static boolean repairToolsOnAnvils = false;
 
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -452,6 +453,10 @@ public final class Config {
       prop = configFile.get(cat, "materialPriorities", materialPriorities);
       prop.setComment("List of mod IDs for material registration with descending priority. Highest mod ID wins!");
       materialPriorities = prop.getStringList();
+
+      prop = configFile.get(cat, "repairToolsOnAnvils", repairToolsOnAnvils);
+      prop.setComment("If tools can be repaired or upgraded on anvils like vanilla equipment.");
+      repairToolsOnAnvils = prop.getBoolean();
     }
     // Worldgen
     {

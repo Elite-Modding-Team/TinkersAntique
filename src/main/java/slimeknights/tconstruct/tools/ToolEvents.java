@@ -25,6 +25,7 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.capability.projectile.CapabilityTinkerProjectile;
 import slimeknights.tconstruct.library.capability.projectile.ITinkerProjectile;
 import slimeknights.tconstruct.library.events.TinkerToolEvent;
@@ -170,6 +171,7 @@ public class ToolEvents {
 
   @SubscribeEvent
   public void onAnvilRepair(AnvilUpdateEvent event) {
+    if(Config.repairToolsOnAnvils) return;
     if(event.getLeft().getItem() instanceof ToolCore || event.getRight().getItem() instanceof ToolCore) {
       event.setCanceled(true);
     }
