@@ -26,6 +26,7 @@ import net.minecraft.network.play.server.SPacketBlockChange;
 import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
@@ -247,9 +248,13 @@ public final class ToolHelper {
     RayTraceResult mop = ((ToolCore) stack.getItem()).rayTrace(world, player, true);
     if(mop == null || !origin.equals(mop.getBlockPos())) {
       mop = ((ToolCore) stack.getItem()).rayTrace(world, player, false);
-      if(mop == null || !origin.equals(mop.getBlockPos())) {
-        return ImmutableList.of();
-      }
+    }
+    EnumFacing sideHit;
+    if(mop != null && origin.equals(mop.getBlockPos())) {
+      sideHit = mop.sideHit;
+    } else {
+      // derive facing from player rotation as fallback for edge cases like very fast mining
+      sideHit = player.getHorizontalFacing().getOpposite();
     }
 
     // fire event
@@ -265,55 +270,50 @@ public final class ToolHelper {
     // we know the block and we know which side of the block we're hitting. time to calculate the depth along the different axes
     int x, y, z;
     BlockPos start = origin;
-    switch(mop.sideHit) {
+    boolean mopValid = mop != null && origin.equals(mop.getBlockPos());
+    switch(sideHit) {
       case DOWN:
       case UP:
         // x y depends on the angle we look?
         Vec3i vec = player.getHorizontalFacing().getDirectionVec();
         x = vec.getX() * height + vec.getZ() * width;
-        y = mop.sideHit.getAxisDirection().getOffset() * -depth;
+        y = sideHit.getAxisDirection().getOffset() * -depth;
         z = vec.getX() * width + vec.getZ() * height;
         start = start.add(-x / 2, 0, -z / 2);
         if(x % 2 == 0) {
-          if(x > 0 && mop.hitVec.x - mop.getBlockPos().getX() > 0.5d) {
-            start = start.add(1, 0, 0);
-          }
-          else if(x < 0 && mop.hitVec.x - mop.getBlockPos().getX() < 0.5d) {
-            start = start.add(-1, 0, 0);
-          }
+          double hitX = mopValid ? mop.hitVec.x - mop.getBlockPos().getX() : 0.5d;
+          if(x > 0 && hitX > 0.5d) start = start.add(1, 0, 0);
+          else if(x < 0 && hitX < 0.5d) start = start.add(-1, 0, 0);
         }
         if(z % 2 == 0) {
-          if(z > 0 && mop.hitVec.z - mop.getBlockPos().getZ() > 0.5d) {
-            start = start.add(0, 0, 1);
-          }
-          else if(z < 0 && mop.hitVec.z - mop.getBlockPos().getZ() < 0.5d) {
-            start = start.add(0, 0, -1);
-          }
+          double hitZ = mopValid ? mop.hitVec.z - mop.getBlockPos().getZ() : 0.5d;
+          if(z > 0 && hitZ > 0.5d) start = start.add(0, 0, 1);
+          else if(z < 0 && hitZ < 0.5d) start = start.add(0, 0, -1);
         }
         break;
       case NORTH:
       case SOUTH:
         x = width;
         y = height;
-        z = mop.sideHit.getAxisDirection().getOffset() * -depth;
+        z = sideHit.getAxisDirection().getOffset() * -depth;
         start = start.add(-x / 2, -y / 2, 0);
-        if(x % 2 == 0 && mop.hitVec.x - mop.getBlockPos().getX() > 0.5d) {
+        if(x % 2 == 0 && mopValid && mop.hitVec.x - mop.getBlockPos().getX() > 0.5d) {
           start = start.add(1, 0, 0);
         }
-        if(y % 2 == 0 && mop.hitVec.y - mop.getBlockPos().getY() > 0.5d) {
+        if(y % 2 == 0 && mopValid && mop.hitVec.y - mop.getBlockPos().getY() > 0.5d) {
           start = start.add(0, 1, 0);
         }
         break;
       case WEST:
       case EAST:
-        x = mop.sideHit.getAxisDirection().getOffset() * -depth;
+        x = sideHit.getAxisDirection().getOffset() * -depth;
         y = height;
         z = width;
-        start = start.add(-0, -y / 2, -z / 2);
-        if(y % 2 == 0 && mop.hitVec.y - mop.getBlockPos().getY() > 0.5d) {
+        start = start.add(0, -y / 2, -z / 2);
+        if(y % 2 == 0 && mopValid && mop.hitVec.y - mop.getBlockPos().getY() > 0.5d) {
           start = start.add(0, 1, 0);
         }
-        if(z % 2 == 0 && mop.hitVec.z - mop.getBlockPos().getZ() > 0.5d) {
+        if(z % 2 == 0 && mopValid && mop.hitVec.z - mop.getBlockPos().getZ() > 0.5d) {
           start = start.add(0, 0, 1);
         }
         break;
