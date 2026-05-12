@@ -110,9 +110,9 @@ public final class Config {
           "techguns:zombieminer;true;minecraft:skull:2",
           "techguns:zombiepoliceman;true;minecraft:skull:2",
           "techguns:zombiesoldier;true;minecraft:skull:2",
-          "thaumcraft:CultistCleric;false;minecraft:skull:2",
-          "thaumcraft:CultistKnight;false;minecraft:skull:2",
-          "thaumcraft:CultistLeader;false;minecraft:skull:2",
+          "thaumcraft:CultistCleric;false;minecraft:skull:3",
+          "thaumcraft:CultistKnight;false;minecraft:skull:3",
+          "thaumcraft:CultistLeader;false;minecraft:skull:3",
           "tropicraft:tropiskeleton;false;minecraft:skull:0",
           "tropicraft:tropicreeper;false;minecraft:skull:4"
   };
