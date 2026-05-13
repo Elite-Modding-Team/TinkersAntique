@@ -29,7 +29,9 @@ import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.events.TinkerEvent;
+import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.materials.MaterialTypes;
 import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.library.modifiers.TinkerGuiException;
 import slimeknights.tconstruct.library.tinkering.IRepairable;
@@ -41,6 +43,7 @@ import slimeknights.tconstruct.library.tools.Pattern;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.traits.ITrait;
+import slimeknights.tconstruct.tools.modifiers.ModFortify;
 
 public final class ToolBuilder {
 
@@ -290,7 +293,8 @@ public final class ToolBuilder {
     // materiallist has to be copied because it affects the actual NBT on the tool if it's changed
     final NBTTagList materialList = TagUtil.getBaseMaterialsTagList(toolStack).copy();
 
-    // assing each toolpart to a slot in the tool
+    Material newHeadMaterial = null;
+    // assign each toolpart to a slot in the tool
     for(int i = 0; i < toolParts.size(); i++) {
       ItemStack part = toolParts.get(i);
       if(part.isEmpty()) {
@@ -322,8 +326,15 @@ public final class ToolBuilder {
         }
       }
 
+      // if this part is a head type, capture its material for later fortify comparison
+      if(candidate >= 0) {
+        PartMaterialType pmt = tool.getRequiredComponents().get(candidate);
+        if(pmt.usesStat(MaterialTypes.HEAD)) {
+          newHeadMaterial = ((IToolPart) part.getItem()).getMaterial(part);
+        }
+      }
       // no assignment found for a part. Invalid input.
-      if(candidate < 0) {
+      else {
         return ItemStack.EMPTY;
       }
       assigned.put(i, candidate);
@@ -376,8 +387,23 @@ public final class ToolBuilder {
       }
     }
 
+    final NBTTagList modifierList = TagUtil.getBaseModifiersTagList(toolStack).copy();
+    for(int i = 0; i < modifierList.tagCount(); i++) {
+      String id = modifierList.getStringTagAt(i);
+      IModifier mod = TinkerRegistry.getModifier(id);
+      // if the new head's harvest level equals/exceeds the fortification level, it's no longer beneficial. good riddance!
+      if(newHeadMaterial != null && mod instanceof ModFortify) {
+        HeadMaterialStats newHeadStats = newHeadMaterial.getStats(MaterialTypes.HEAD);
+        HeadMaterialStats fortifyStats = ((ModFortify) mod).material.getStats(MaterialTypes.HEAD);
+        if(newHeadStats != null && fortifyStats != null && newHeadStats.harvestLevel >= fortifyStats.harvestLevel) {
+          modifierList.removeTag(i);
+        }
+      }
+    }
+
     ItemStack output = toolStack.copy();
     TagUtil.setBaseMaterialsTagList(output, materialList);
+    TagUtil.setBaseModifiersTagList(output, modifierList);
     NBTTagCompound tag = TagUtil.getTagSafe(output);
     rebuildTool(tag, (TinkersItem) output.getItem());
     output.setTagCompound(tag);
