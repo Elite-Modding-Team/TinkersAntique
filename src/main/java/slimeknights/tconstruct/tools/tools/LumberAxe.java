@@ -269,20 +269,14 @@ public class LumberAxe extends AoeToolCore {
           continue;
         }
 
-        // save its neighbours
-        for(EnumFacing facing : new EnumFacing[] { EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST }) {
-          BlockPos pos2 = pos.offset(facing);
-          if(!visited.contains(pos2)) {
-            blocks.add(pos2);
-          }
-        }
-
-        // also add the layer above.. stupid acacia trees
-        for(int x = 0; x < 3; x++) {
-          for(int z = 0; z < 3; z++) {
-            BlockPos pos2 = pos.add(-1 + x, 1, -1 + z);
-            if(!visited.contains(pos2)) {
-              blocks.add(pos2);
+        // save its neighbours and layers above
+        for(int x = -1; x <= 1; x++) {
+          for(int z = -1; z <= 1; z++) {
+            for(int y = 0; y <= 1; y++) {
+              BlockPos pos2 = pos.add(x, y, z);
+              if(!visited.contains(pos2)) {
+                blocks.add(pos2);
+              }
             }
           }
         }
