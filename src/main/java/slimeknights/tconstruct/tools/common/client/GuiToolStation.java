@@ -429,7 +429,9 @@ public class GuiToolStation extends GuiTinkerStation {
       ArrowLeft.draw(cornerX + 82, cornerY + 38);
     } else if (container.getTile().isInventoryEmpty()) {
       ArrowRight.draw(cornerX + 104, cornerY + 38);
-      ArrowLeft.draw(cornerX + 82, cornerY + 38);
+      if (Config.deconstructTools) {
+        ArrowLeft.draw(cornerX + 82, cornerY + 38);
+      }
     } else {
       ArrowRight.draw(cornerX + 104, cornerY + 38);
     }
