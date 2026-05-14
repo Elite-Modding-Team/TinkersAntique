@@ -453,10 +453,6 @@ public final class Config {
       prop = configFile.get(cat, "materialPriorities", materialPriorities);
       prop.setComment("List of mod IDs for material registration with descending priority. Highest mod ID wins!");
       materialPriorities = prop.getStringList();
-
-      prop = configFile.get(cat, "repairToolsOnAnvils", repairToolsOnAnvils);
-      prop.setComment("If tools can be repaired or upgraded on anvils like vanilla equipment.");
-      repairToolsOnAnvils = prop.getBoolean();
     }
     // Worldgen
     {
@@ -596,6 +592,10 @@ public final class Config {
       prop = configFile.get(cat, "jeiGuidebookButton", jeiGuidebookButton);
       prop.setComment("[EXPERIMENTAL] If true, a button is added to JEI material pages that opens the 'Materials and You' book at the approximate location.");
       jeiGuidebookButton = prop.getBoolean();
+
+      prop = configFile.get(cat, "repairToolsOnAnvils", repairToolsOnAnvils);
+      prop.setComment("[EXPERIMENTAL] If tools can be repaired or upgraded on anvils like vanilla equipment.");
+      repairToolsOnAnvils = prop.getBoolean();
     }
     // Clientside
     {
