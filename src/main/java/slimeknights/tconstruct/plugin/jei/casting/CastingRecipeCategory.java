@@ -55,7 +55,7 @@ public class CastingRecipeCategory implements IRecipeCategory<CastingRecipeWrapp
   @Nonnull
   @Override
   public String getTitle() {
-    return Util.translate("gui.jei.casting.title");
+    return Util.translate("gui.jei.casting.table.title");
   }
 
   @Nonnull

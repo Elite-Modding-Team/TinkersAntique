@@ -45,7 +45,7 @@ public class CastingBasinRecipeCategory implements IRecipeCategory<CastingRecipe
   @Nonnull
   @Override
   public String getTitle() {
-    return Util.translate("gui.jei.casting.title");
+    return Util.translate("gui.jei.casting.basin.title");
   }
 
   @Nonnull
