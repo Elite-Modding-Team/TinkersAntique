@@ -1060,6 +1060,7 @@ gui.jei.casting.title=Casting
 gui.jei.casting.table.title=Table Casting
 gui.jei.casting.basin.title=Basin Casting
 gui.jei.casting.consume=Consumes cast!
+gui.jei.casting.time=%d s
 gui.jei.drying.title=Drying
 gui.jei.entitymelting.title=Entity Melting
 gui.jei.severing.title=Beheading

@@ -77,7 +77,7 @@ public class CastingRecipeWrapper implements IRecipeWrapper {
   public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
     castingBlock.draw(minecraft, 59, 42);
 
-    String s = String.format("%d s", recipe.getTime() / 20);
+    String s = Util.translateFormatted("gui.jei.casting.time", recipe.getTime() / 20);
     int x = 92;
     x -= minecraft.fontRenderer.getStringWidth(s) / 2;
 
