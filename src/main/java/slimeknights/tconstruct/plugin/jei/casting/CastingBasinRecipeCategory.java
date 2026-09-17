@@ -33,7 +33,7 @@ public class CastingBasinRecipeCategory implements IRecipeCategory<CastingRecipe
     IDrawableStatic arrowDrawable = guiHelper.createDrawable(background_loc, 141, 32, 24, 17);
     this.arrow = guiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
 
-    this.castingBasin = guiHelper.createDrawable(background_loc, 141, 0, 16, 16);
+    this.castingBasin = guiHelper.createDrawable(background_loc, 141, 16, 16, 16);
   }
 
   @Nonnull
