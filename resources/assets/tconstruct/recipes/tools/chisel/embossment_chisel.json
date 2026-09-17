@@ -1,0 +1,25 @@
+{
+  "conditions": [
+    {
+      "type": "tconstruct:is_option_enabled",
+      "config_setting": "modifierChisels"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G",
+    "F "
+  ],
+  "key": {
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    }
+  },
+  "result": {
+    "item": "tconstruct:embossment_chisel"
+  }
+}

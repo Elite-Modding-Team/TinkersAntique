@@ -54,6 +54,16 @@ public final class Config {
   public static boolean deconstructTools = true;
   public static int deconstructXPRequirement = 0;
   public static int deconstructLevelRequirement = 0;
+  public static boolean modifierChisels = true;
+  public static boolean modifierChiselsSingleUse = false;
+  private static String[] modifierChiselModifierBlacklistArray = {
+      "toolleveling",   // Tinkers Tool Leveling mod
+      "extramodifier"   // Endearment modifier (Ender Dragon head)
+  };
+  private static String[] embossmentChiselMaterialBlacklistArray = {
+  };
+  public static Set<String> modifierChiselModifierBlacklist = Collections.emptySet();
+  public static Set<String> embossmentChiselMaterialBlacklist = Collections.emptySet();
   public static int heatItemsTickrateSmeltery = 4;
   public static int heatItemsTickrateSearedFurnace = 4;
   public static int liquidTransferRate = 6;
@@ -426,6 +436,28 @@ public final class Config {
       prop = configFile.get(cat, "deconstructLevelRequirement", deconstructLevelRequirement);
       prop.setComment("The level requirement for deconstructing tools (if provided by Tinkers' Tool Leveling).");
       deconstructLevelRequirement = prop.getInt();
+
+      prop = configFile.get(cat, "modifierChisels", modifierChisels);
+      prop.setComment("If modifier and embossment chisels exist. If false, they will not be available altogether.");
+      modifierChisels = prop.getBoolean();
+      prop.setRequiresMcRestart(true);
+
+      prop = configFile.get(cat, "modifierChiselsSingleUse", modifierChiselsSingleUse);
+      prop.setComment("If crafting with either chisel consumes it.");
+      modifierChiselsSingleUse = prop.getBoolean();
+
+      prop = configFile.get(cat, "modifierChiselModifierBlacklist", modifierChiselModifierBlacklistArray);
+      prop.setComment("Modifier IDs that the modifier chisel should not remove. toolleveling is "
+          + "kept by default to preserve its XP and level data.");
+      modifierChiselModifierBlacklistArray = prop.getStringList();
+      modifierChiselModifierBlacklist = Sets.newHashSet(modifierChiselModifierBlacklistArray);
+      prop.setRequiresMcRestart(true);
+
+      prop = configFile.get(cat, "embossmentChiselMaterialBlacklist", embossmentChiselMaterialBlacklistArray);
+      prop.setComment("Material IDs that the embossment chisel should not remove.");
+      embossmentChiselMaterialBlacklistArray = prop.getStringList();
+      embossmentChiselMaterialBlacklist = Sets.newHashSet(embossmentChiselMaterialBlacklistArray);
+      prop.setRequiresMcRestart(true);
 
       prop = configFile.get(cat, "heatItemsTickrateSmeltery", heatItemsTickrateSmeltery);
       prop.setComment("The tickrate at which items are heated and alloys are created in the smeltery. Defaults to every 4th tick.");

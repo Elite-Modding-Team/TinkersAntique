@@ -106,5 +106,15 @@
   {
     "type": "modifier",
     "data": "modifiers/incognito.json"
+  },
+  {
+    "name": "modifier_chisel",
+    "type": "text",
+    "data": "modifiers/modifier_chisel.json"
+  },
+  {
+    "name": "embossment_chisel",
+    "type": "text",
+    "data": "modifiers/embossment_chisel.json"
   }
 ]

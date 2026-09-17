@@ -8,7 +8,7 @@
   "effects": [
     "Adds traits of another part",
     "Traits are equal to swapping the part",
-    "The embossment is final and can't be changed",
+    "Use an Embossment Chipping Chisel to remove the embossment",
     "Requires no modifier"
   ],
   "demoTool": [

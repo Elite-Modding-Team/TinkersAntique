@@ -22,6 +22,8 @@ public class IsConfigOptionEnabledConditionFactory implements IConditionFactory 
         return () -> Config.gravelFlintRecipe;
       case "matchVanillaSlimeblock":
         return () -> Config.matchVanillaSlimeblock;
+      case "modifierChisels":
+        return () -> Config.modifierChisels;
       default:
         throw new RuntimeException(String.format("Invalid config setting: %s", configSetting));
     }

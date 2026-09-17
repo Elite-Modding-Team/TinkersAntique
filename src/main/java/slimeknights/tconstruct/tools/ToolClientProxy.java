@@ -61,6 +61,12 @@ public class ToolClientProxy extends ClientProxy {
     ModelRegisterUtil.registerPartModel(shard);
     ModelRegisterUtil.registerPartModel(sharpeningKit);
 
+    // items
+    if(TinkerTools.modifierChisel != null) {
+      ModelRegisterUtil.registerItemModel(TinkerTools.modifierChisel);
+      ModelRegisterUtil.registerItemModel(TinkerTools.embossmentChisel);
+    }
+
     // custom handling for the bolts because of GUI stuff
     final ModelResourceLocation boltCoreModelLocation = Util.getModelResource("parts/bolt_core" + ToolModelLoader.EXTENSION, ModelRegisterUtil.VARIANT_INVENTORY);
     final ModelResourceLocation boltCoreGuiModelLocation = Util.getModelResource("parts/bolt_core_gui", ModelRegisterUtil.VARIANT_INVENTORY);

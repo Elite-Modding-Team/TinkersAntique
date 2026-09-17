@@ -57,6 +57,7 @@ public final class Tags {
   public static final String RESET_FLAG = "ResetFlag";
 
   public static final String NO_RENAME = "NoRename";
+  public static final String NO_CHISEL = "NoChisel";
 
   private Tags() {
   }

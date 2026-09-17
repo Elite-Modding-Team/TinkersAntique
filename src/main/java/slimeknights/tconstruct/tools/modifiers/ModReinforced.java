@@ -23,17 +23,21 @@ public class ModReinforced extends ModifierTrait {
     super("reinforced", 0x502e83, 5, 0);
   }
 
-  private float getReinforcedChance(NBTTagCompound modifierTag) {
+  private static float getReinforcedChance(NBTTagCompound modifierTag) {
     ModifierNBT data = ModifierNBT.readTag(modifierTag);
 
     return (float) data.level * chancePerLevel;
+  }
+
+  public static boolean isUnbreakable(NBTTagCompound modifierTag) {
+    return getReinforcedChance(modifierTag) >= 1f;
   }
 
   @Override
   public void applyEffect(NBTTagCompound rootCompound, NBTTagCompound modifierTag) {
     super.applyEffect(rootCompound, modifierTag);
 
-    if(getReinforcedChance(modifierTag) >= 1f) {
+    if(isUnbreakable(modifierTag)) {
       rootCompound.setBoolean(TAG_UNBREAKABLE, true);
     }
   }

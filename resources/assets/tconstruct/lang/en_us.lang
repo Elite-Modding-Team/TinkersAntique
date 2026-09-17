@@ -372,6 +372,12 @@ item.tconstruct.cast_custom.gear.name=Gear Cast
 
 item.tconstruct.sharpening_kit.name=Sharpening Kit
 item.tconstruct.sharpening_kit.tooltip=Combine with a flint\nUpgrades your tool to the material's mining level.
+item.tconstruct.modifier_chisel.name=Modifier Removal Chisel
+item.tconstruct.embossment_chisel.name=Embossment Chipping Chisel
+item.tconstruct.modifier_chisel.tooltip=Combine with a tool to wipe modifiers and refunds their slots\nKeeps embossments and added modifier slots
+item.tconstruct.embossment_chisel.tooltip=Combine with a tool to wipe embossments
+item.tconstruct.chisel.single_use=§eConsumed on use
+item.tconstruct.chisel.reusable=§aReusable
 
 item.forge.bucketFilled.blood=Bucket o' Blood
 item.forge.bucketFilled.venom=Bucket o' Venom

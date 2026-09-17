@@ -42,12 +42,16 @@ import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.tileentity.TileTable;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
+import slimeknights.tconstruct.tools.common.EmbossmentChiselRecipe;
+import slimeknights.tconstruct.tools.common.ModifierChiselRecipe;
 import slimeknights.tconstruct.tools.common.RepairRecipe;
 import slimeknights.tconstruct.tools.common.TableRecipeFactory.TableRecipe;
 import slimeknights.tconstruct.tools.common.block.BlockToolForge;
 import slimeknights.tconstruct.tools.common.block.BlockToolTable;
 import slimeknights.tconstruct.tools.common.block.BlockToolTable.TableTypes;
 import slimeknights.tconstruct.tools.common.item.ItemBlockTable;
+import slimeknights.tconstruct.tools.common.item.EmbossmentChisel;
+import slimeknights.tconstruct.tools.common.item.ModifierChisel;
 import slimeknights.tconstruct.tools.common.item.SharpeningKit;
 import slimeknights.tconstruct.tools.common.tileentity.TileCraftingStation;
 import slimeknights.tconstruct.tools.common.tileentity.TilePartBuilder;
@@ -75,6 +79,8 @@ public class TinkerTools extends AbstractToolPulse {
   public static Pattern pattern;
   public static Shard shard;
   public static SharpeningKit sharpeningKit;
+  public static Item modifierChisel;
+  public static Item embossmentChisel;
 
   // Tool Parts
   public static ToolPart pickHead;
@@ -141,6 +147,10 @@ public class TinkerTools extends AbstractToolPulse {
     sharpeningKit.setCreativeTab(TinkerRegistry.tabParts);
     TinkerRegistry.registerToolPart(sharpeningKit);
     TinkerRegistry.registerToolPart(shard);
+    if(Config.modifierChisels) {
+      modifierChisel = registerItem(registry, new ModifierChisel(), "modifier_chisel");
+      embossmentChisel = registerItem(registry, new EmbossmentChisel(), "embossment_chisel");
+    }
 
     super.registerItems(event);
 
@@ -166,6 +176,10 @@ public class TinkerTools extends AbstractToolPulse {
     IForgeRegistry<IRecipe> registry = event.getRegistry();
 
     registry.register(new RepairRecipe());
+    if(Config.modifierChisels) {
+      registry.register(new ModifierChiselRecipe("remove_modifiers", modifierChisel));
+      registry.register(new EmbossmentChiselRecipe("remove_embossment", embossmentChisel));
+    }
   }
 
   @SubscribeEvent

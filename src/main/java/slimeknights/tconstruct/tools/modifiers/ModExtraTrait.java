@@ -70,6 +70,10 @@ public class ModExtraTrait extends ToolModifier {
     return material.getIdentifier() + traitString;
   }
 
+  public String getMaterialIdentifier() {
+    return material.getIdentifier();
+  }
+
   @Override
   public boolean canApplyTogether(Enchantment enchantment) {
     for(ITrait trait : traits) {
