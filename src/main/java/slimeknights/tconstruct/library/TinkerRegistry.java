@@ -616,7 +616,7 @@ public final class TinkerRegistry {
     }
     else {
       try {
-        String input = recipe.input.getInputs().stream().findFirst().map(ItemStack::getUnlocalizedName).orElse("?");
+        String input = recipe.input.getInputs().stream().findFirst().map(ItemStack::getTranslationKey).orElse("?");
         log.debug("Registration of melting recipe for " + recipe.getResult().getUnlocalizedName() + " from " + input + " has been cancelled by event");
       } catch(Exception e) {
         log.error("Error when logging melting event", e);
@@ -688,7 +688,7 @@ public final class TinkerRegistry {
     }
     else {
       try {
-        String output = Optional.ofNullable(recipe.getResult(ItemStack.EMPTY, FluidRegistry.WATER)).map(ItemStack::getUnlocalizedName).orElse("Unknown");
+        String output = Optional.ofNullable(recipe.getResult(ItemStack.EMPTY, FluidRegistry.WATER)).map(ItemStack::getTranslationKey).orElse("Unknown");
         log.debug("Registration of table casting recipe for " + output + " has been cancelled by event");
       } catch(Exception e) {
         log.error("Error when logging table casting event", e);
@@ -727,7 +727,7 @@ public final class TinkerRegistry {
     }
     else {
       try {
-        String output = Optional.ofNullable(recipe.getResult(ItemStack.EMPTY, FluidRegistry.WATER)).map(ItemStack::getUnlocalizedName).orElse("Unknown");
+        String output = Optional.ofNullable(recipe.getResult(ItemStack.EMPTY, FluidRegistry.WATER)).map(ItemStack::getTranslationKey).orElse("Unknown");
         log.debug("Registration of basin casting recipe for " + output + " has been cancelled by event");
       } catch(Exception e) {
         log.error("Error when logging basin casting event", e);
@@ -828,7 +828,7 @@ public final class TinkerRegistry {
       ResourceLocation entityLocation;
       try {
         entityLocation = new ResourceLocation(entityRL);
-        if(!Loader.isModLoaded(entityLocation.getResourceDomain())) {
+        if(!Loader.isModLoaded(entityLocation.getNamespace())) {
           continue;
         }
       } catch(Exception e) {
@@ -997,8 +997,8 @@ public final class TinkerRegistry {
     }
     else {
       try {
-        String input = recipe.input.getInputs().stream().findFirst().map(ItemStack::getUnlocalizedName).orElse("?");
-        String output = recipe.getResult().getUnlocalizedName();
+        String input = recipe.input.getInputs().stream().findFirst().map(ItemStack::getTranslationKey).orElse("?");
+        String output = recipe.getResult().getTranslationKey();
         log.debug("Registration of drying rack recipe for " + output + " from " + input + " has been cancelled by event");
       } catch(Exception e) {
         log.error("Error when logging drying rack event", e);

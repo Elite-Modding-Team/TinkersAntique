@@ -97,7 +97,7 @@ public class EntityFancyItemFrame extends EntityItemFrame implements IEntityAddi
 
   @Override
   public void readSpawnData(ByteBuf additionalData) {
-    EnumFacing facing = EnumFacing.getHorizontal(additionalData.readShort());
+    EnumFacing facing = EnumFacing.byHorizontalIndex(additionalData.readShort());
     updateFacingWithBoundingBox(facing);
     this.type = FrameType.values()[additionalData.readShort()];
   }

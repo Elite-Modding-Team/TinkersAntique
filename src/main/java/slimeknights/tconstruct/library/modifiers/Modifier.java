@@ -169,7 +169,7 @@ public abstract class Modifier extends RecipeMatchRegistry implements IModifier 
     updateNBT(modifierTag);
 
     // some modifiers might not save data, don't save them
-    if(!modifierTag.hasNoTags()) {
+    if(!modifierTag.isEmpty()) {
       // but if they do, ensure that the identifier is correct
       ModifierNBT data = ModifierNBT.readTag(modifierTag);
       if(!identifier.equals(data.identifier)) {

@@ -34,7 +34,7 @@ public class BlockOre extends EnumBlock<BlockOre.OreTypes> {
   @Nonnull
   @Override
   @SideOnly(Side.CLIENT)
-  public BlockRenderLayer getBlockLayer() {
+  public BlockRenderLayer getRenderLayer() {
     return BlockRenderLayer.CUTOUT_MIPPED;
   }
 

@@ -136,7 +136,7 @@ public class EntityMeltingRecipeWrapper implements IRecipeWrapper {
 		if (mouseX > 21 && mouseY > 5 && mouseX < 49 && mouseY < 41 && entityInst != null) {
 			List<String> list = new ArrayList<>();
 			list.add(entityInst.getName());
-			ModContainer mod = Loader.instance().getIndexedModList().get(entity.getResourceDomain());
+			ModContainer mod = Loader.instance().getIndexedModList().get(entity.getNamespace());
 			if (Minecraft.getMinecraft().gameSettings.advancedItemTooltips) {
 				list.add(TextFormatting.DARK_GRAY + entity.toString());
 			}

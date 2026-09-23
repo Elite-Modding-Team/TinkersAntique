@@ -44,7 +44,7 @@ public class MaterialModelLoader implements ICustomModelLoader {
 
   @Override
   public boolean accepts(ResourceLocation modelLocation) {
-    return modelLocation.getResourcePath()
+    return modelLocation.getPath()
                         .endsWith(EXTENSION); // tinkermaterialmodel extension. Foo.tmat.json
   }
 
@@ -82,8 +82,8 @@ public class MaterialModelLoader implements ICustomModelLoader {
   }
 
   public static ResourceLocation getReducedPath(ResourceLocation location) {
-    String path = location.getResourcePath();
+    String path = location.getPath();
     path = path.substring("models/item/".length());
-    return new ResourceLocation(location.getResourceDomain(), path);
+    return new ResourceLocation(location.getNamespace(), path);
   }
 }

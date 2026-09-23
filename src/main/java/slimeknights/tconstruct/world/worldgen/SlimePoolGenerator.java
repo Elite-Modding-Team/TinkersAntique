@@ -63,7 +63,7 @@ public class SlimePoolGenerator extends WorldGenerator implements IWorldGenerato
         }
         pos.setPos(chunkX + 16, 0, chunkZ + 16);
         Biome biome = world.getBiome(pos);
-        if(biome.getTemperature() >= 0.8f && biome.getRainfall() >= 0.9f && random.nextInt(Config.slimePoolRate / 4 + 1) == 0) {
+        if(biome.getDefaultTemperature() >= 0.8f && biome.getRainfall() >= 0.9f && random.nextInt(Config.slimePoolRate / 4 + 1) == 0) {
             int height = random.nextInt(Config.slimePoolHeightMax * 3);
             pos.setPos(chunkX + 8 + random.nextInt(8), height, chunkZ + 8 + random.nextInt(8));
             this.generate(world, random, pos);

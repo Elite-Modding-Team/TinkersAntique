@@ -223,9 +223,9 @@ public class CustomTextureCreator implements IResourceManagerReloadListener {
         }
         else {
           ResourceLocation modelLocation = item.getRegistryName();
-          IModel partModel = ModelLoaderRegistry.getModel(new ResourceLocation(modelLocation.getResourceDomain(),
+          IModel partModel = ModelLoaderRegistry.getModel(new ResourceLocation(modelLocation.getNamespace(),
                                                                                "item/parts/" + modelLocation
-                                                                                   .getResourcePath()
+                                                                                   .getPath()
                                                                                + MaterialModelLoader.EXTENSION));
           ResourceLocation partTexture = partModel.getTextures().iterator().next();
 
@@ -250,7 +250,7 @@ public class CustomTextureCreator implements IResourceManagerReloadListener {
     List<IResource> resources = null;
     try {
       ResourceLocation loc = new ResourceLocation(res);
-      loc = new ResourceLocation(loc.getResourceDomain(), "textures/" + loc.getResourcePath() + ".png");
+      loc = new ResourceLocation(loc.getNamespace(), "textures/" + loc.getPath() + ".png");
       resources = Minecraft.getMinecraft().getResourceManager().getAllResources(loc);
     } catch(IOException e) {
       return false;
@@ -284,7 +284,7 @@ public class CustomTextureCreator implements IResourceManagerReloadListener {
         Optional<ResourceLocation> storedResourceLocation = MaterialModelLoader.getToolPartModelLocation(toolpart);
         if(storedResourceLocation.isPresent()) {
           ResourceLocation stored = storedResourceLocation.get();
-          ResourceLocation modelLocation = new ResourceLocation(stored.getResourceDomain(), "item/" + stored.getResourcePath());
+          ResourceLocation modelLocation = new ResourceLocation(stored.getNamespace(), "item/" + stored.getPath());
           IModel partModel = ModelLoaderRegistry.getModel(modelLocation);
 
           // the actual texture of the part

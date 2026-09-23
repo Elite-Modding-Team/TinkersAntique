@@ -97,7 +97,7 @@ public class TinkerDebug {
     // check all blocks if all metadatas are supported
     for(ResourceLocation identifier : Block.REGISTRY.getKeys()) {
       // only our own stuff
-      if(!identifier.getResourceDomain().equals(Util.RESOURCE)) {
+      if(!identifier.getNamespace().equals(Util.RESOURCE)) {
         continue;
       }
 
@@ -115,7 +115,7 @@ public class TinkerDebug {
     // same for items
     for(ResourceLocation identifier : Item.REGISTRY.getKeys()) {
       // only our own stuff
-      if(!identifier.getResourceDomain().equals(Util.RESOURCE)) {
+      if(!identifier.getNamespace().equals(Util.RESOURCE)) {
         continue;
       }
 

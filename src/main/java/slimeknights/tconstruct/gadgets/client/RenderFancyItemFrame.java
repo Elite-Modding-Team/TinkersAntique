@@ -73,7 +73,7 @@ public class RenderFancyItemFrame extends RenderItemFrame {
     this.renderItem(entity);
     GlStateManager.popMatrix();
     assert entity.facingDirection != null;
-    this.renderName(entity, x + entity.facingDirection.getFrontOffsetX() * 0.3F, y - 0.25D, z + entity.facingDirection.getFrontOffsetZ() * 0.3F);
+    this.renderName(entity, x + entity.facingDirection.getXOffset() * 0.3F, y - 0.25D, z + entity.facingDirection.getZOffset() * 0.3F);
   }
 
   private static class Factory implements IRenderFactory<EntityFancyItemFrame> {

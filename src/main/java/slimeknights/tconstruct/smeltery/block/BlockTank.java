@@ -135,7 +135,7 @@ public class BlockTank extends BlockEnumSmeltery<BlockTank.TankType> implements 
   public boolean removedByPlayer(@Nonnull IBlockState state, World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player, boolean willHarvest) {
     // we pull up a few calls to this point in time because we still have the TE here
     // the execution otherwise is equivalent to vanilla order
-    this.onBlockDestroyedByPlayer(world, pos, state);
+    this.onPlayerDestroy(world, pos, state);
     if(willHarvest) {
       this.harvestBlock(world, player, pos, state, world.getTileEntity(pos), player.getHeldItemMainhand());
     }
@@ -161,7 +161,7 @@ public class BlockTank extends BlockEnumSmeltery<BlockTank.TankType> implements 
   @Nonnull
   @Override
   @SideOnly(Side.CLIENT)
-  public BlockRenderLayer getBlockLayer() {
+  public BlockRenderLayer getRenderLayer() {
     return BlockRenderLayer.CUTOUT;
   }
 

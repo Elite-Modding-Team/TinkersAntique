@@ -107,7 +107,7 @@ public class TinkerNetwork extends NetworkWrapper {
   }
 
   public static void sendToClients(WorldServer world, BlockPos pos, AbstractPacket packet) {
-    Chunk chunk = world.getChunkFromBlockCoords(pos);
+    Chunk chunk = world.getChunk(pos);
     for(EntityPlayer player : world.playerEntities) {
       // only send to relevant players
       if(!(player instanceof EntityPlayerMP)) {

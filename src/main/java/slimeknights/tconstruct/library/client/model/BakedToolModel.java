@@ -83,7 +83,7 @@ public class BakedToolModel extends BakedWrapper.Perspective {
     public IBakedModel handleItemState(@Nonnull IBakedModel originalModel, final ItemStack stack, final World world, final EntityLivingBase entity) {
       NBTTagCompound baseTag = TagUtil.getBaseTag(stack);
       IBakedModel outputModel = originalModel;
-      if(!baseTag.hasNoTags()) {
+      if(!baseTag.isEmpty()) {
         final BakedToolModel original = getBaseModel((BakedToolModel) originalModel, stack, world, entity);
 
         CacheKey key = getCacheKey(stack, original, world, entity);

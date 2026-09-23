@@ -54,7 +54,7 @@ public class ToolClientProxy extends ClientProxy {
 
     // patterns
     final ResourceLocation patternLoc = ToolClientEvents.locBlankPattern;
-    CustomTextureCreator.patternModelLocation = new ResourceLocation(patternLoc.getResourceDomain(), "item/" + patternLoc.getResourcePath());
+    CustomTextureCreator.patternModelLocation = new ResourceLocation(patternLoc.getNamespace(), "item/" + patternLoc.getPath());
     ModelLoader.setCustomMeshDefinition(TinkerTools.pattern, new PatternMeshDefinition(patternLoc));
 
     // parts

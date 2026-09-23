@@ -40,7 +40,7 @@ public class ChannelConnectionPacket extends AbstractPacketThreadsafe {
   @Override
   public void fromBytes(ByteBuf buf) {
     pos = readPos(buf);
-    side = EnumFacing.getFront(buf.readByte());
+    side = EnumFacing.byIndex(buf.readByte());
     connect = buf.readBoolean();
   }
 

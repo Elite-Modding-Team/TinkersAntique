@@ -61,7 +61,7 @@ public class ModifierModelLoader implements ICustomModelLoader {
 
   @Override
   public boolean accepts(ResourceLocation modelLocation) {
-    return modelLocation.getResourcePath().endsWith(EXTENSION); // tinkermodifier extension. Foo.mod.json
+    return modelLocation.getPath().endsWith(EXTENSION); // tinkermodifier extension. Foo.mod.json
   }
 
   @Override
@@ -69,7 +69,7 @@ public class ModifierModelLoader implements ICustomModelLoader {
     // this function is actually getting called on a PER TOOL basis, not per modifier
     // we therefore need to look through all modifiers to construct a model containing all modifiers for that tool
 
-    String toolname = FilenameUtils.getBaseName(modelLocation.getResourcePath());
+    String toolname = FilenameUtils.getBaseName(modelLocation.getPath());
     toolname = toolname.toLowerCase(Locale.US);
 
     // we only load once. Without cache we'd have to load ALL modifier files again for each tool!
@@ -79,8 +79,8 @@ public class ModifierModelLoader implements ICustomModelLoader {
     }
 
     // next, try overrides from the tool .mod files
-    String location = modelLocation.getResourcePath().substring(17); // remove models/modifiers/
-    ResourceLocation toolModifiers = new ResourceLocation(modelLocation.getResourceDomain(), "models/item/" + location);
+    String location = modelLocation.getPath().substring(17); // remove models/modifiers/
+    ResourceLocation toolModifiers = new ResourceLocation(modelLocation.getNamespace(), "models/item/" + location);
     try {
       Map<String, String> textureEntries = ModelHelper.loadTexturesFromJson(toolModifiers);
 

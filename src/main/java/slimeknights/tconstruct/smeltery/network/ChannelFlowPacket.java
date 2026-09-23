@@ -41,7 +41,7 @@ public class ChannelFlowPacket extends AbstractPacketThreadsafe {
   @Override
   public void fromBytes(ByteBuf buf) {
     pos = readPos(buf);
-    side = EnumFacing.getFront(buf.readByte());
+    side = EnumFacing.byIndex(buf.readByte());
     flow = buf.readBoolean();
   }
 

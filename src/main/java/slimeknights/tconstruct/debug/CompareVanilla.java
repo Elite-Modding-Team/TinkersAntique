@@ -218,8 +218,8 @@ public class CompareVanilla extends CommandBase {
   protected String testToolSpeed(Block block, ItemStack tinker, ItemStack vanilla) {
     IBlockState state = block.getDefaultState();
 
-    float speed1 = tinker.getItem().getStrVsBlock(tinker, state);
-    float speed2 = vanilla.getItem().getStrVsBlock(vanilla, state);
+    float speed1 = tinker.getItem().getDestroySpeed(tinker, state);
+    float speed2 = vanilla.getItem().getDestroySpeed(vanilla, state);
     int efficiencyLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, vanilla);
     if(efficiencyLevel > 0) {
       speed2 += efficiencyLevel * efficiencyLevel + 1;

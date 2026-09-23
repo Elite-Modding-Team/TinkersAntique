@@ -69,7 +69,7 @@ public class BlockSearedFurnaceController extends BlockMultiblockController {
   @Nonnull
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    EnumFacing enumfacing = EnumFacing.getHorizontal(meta);
+    EnumFacing enumfacing = EnumFacing.byHorizontalIndex(meta);
 
     return this.getDefaultState().withProperty(FACING, enumfacing);
   }

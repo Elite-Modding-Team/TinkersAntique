@@ -63,7 +63,7 @@ public class TinkerPiggybackSerializer implements ICapabilitySerializable<NBTTag
     }
 
     tagCompound.setTag("riders", riderList);
-    if(riderList.hasNoTags()) {
+    if(riderList.isEmpty()) {
       return new NBTTagCompound();
     }
     return tagCompound;

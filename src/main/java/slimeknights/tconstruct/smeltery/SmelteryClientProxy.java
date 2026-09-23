@@ -115,13 +115,13 @@ public class SmelteryClientProxy extends ClientProxy {
 
     // Items
     final ResourceLocation castLoc = SmelteryClientEvents.locBlankCast;
-    CustomTextureCreator.castModelLocation = new ResourceLocation(castLoc.getResourceDomain(), "item/" + castLoc.getResourcePath());
+    CustomTextureCreator.castModelLocation = new ResourceLocation(castLoc.getNamespace(), "item/" + castLoc.getPath());
     ModelLoader.setCustomMeshDefinition(TinkerSmeltery.cast, new PatternMeshDefinition(castLoc));
 
     if(Config.claycasts) {
       final ResourceLocation clayCastLoc = SmelteryClientEvents.locClayCast;
-      CustomTextureCreator.castModelLocation = new ResourceLocation(clayCastLoc.getResourceDomain(),
-                                                                    "item/" + clayCastLoc.getResourcePath());
+      CustomTextureCreator.castModelLocation = new ResourceLocation(clayCastLoc.getNamespace(),
+                                                                    "item/" + clayCastLoc.getPath());
       ModelLoader.setCustomMeshDefinition(TinkerSmeltery.clayCast, new PatternMeshDefinition(clayCastLoc));
     }
 

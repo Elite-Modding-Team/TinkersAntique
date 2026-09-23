@@ -66,7 +66,7 @@ public class ItemBlockTable extends ItemBlockMeta {
 
     NBTTagList items = inventory.getTagList("Items", 10);
 
-    if(items.hasNoTags()) {
+    if(items.isEmpty()) {
       return; // Items tag list with no items?!
     }
 

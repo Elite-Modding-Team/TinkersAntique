@@ -21,7 +21,7 @@ public class BlockSearedStairs extends BlockStairsBase implements ITileEntityPro
   public BlockSearedStairs(IBlockState modelState) {
     super(modelState);
     this.block = modelState.getBlock();
-    this.isBlockContainer = true; // has TE
+    this.hasTileEntity = true; // has TE
   }
 
   @Nonnull

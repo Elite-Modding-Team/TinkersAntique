@@ -15,7 +15,7 @@ public class TinkerPotion extends Potion {
 
   public TinkerPotion(ResourceLocation location, boolean badEffect, boolean showInInventory, int color) {
     super(badEffect, color);
-    setPotionName("potion." + location.getResourcePath());
+    setPotionName("potion." + location.getPath());
 
     this.setRegistryName(location);
 

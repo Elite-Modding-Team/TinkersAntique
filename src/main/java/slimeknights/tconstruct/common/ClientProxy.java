@@ -265,8 +265,8 @@ public abstract class ClientProxy extends CommonProxy {
         suffix = Pattern.getTextureIdentifier(item);
       }
 
-      return new ModelResourceLocation(new ResourceLocation(baseLocation.getResourceDomain(),
-                                                            baseLocation.getResourcePath() + suffix),
+      return new ModelResourceLocation(new ResourceLocation(baseLocation.getNamespace(),
+                                                            baseLocation.getPath() + suffix),
                                        "inventory");
     }
   }

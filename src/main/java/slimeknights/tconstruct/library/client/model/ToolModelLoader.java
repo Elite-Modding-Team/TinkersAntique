@@ -42,7 +42,7 @@ public class ToolModelLoader implements ICustomModelLoader {
 
   @Override
   public boolean accepts(ResourceLocation modelLocation) {
-    return modelLocation.getResourcePath().endsWith(EXTENSION); // tinkertoolmodel extension. Foo.tcon.json
+    return modelLocation.getPath().endsWith(EXTENSION); // tinkertoolmodel extension. Foo.tcon.json
   }
 
   @Override
@@ -136,11 +136,11 @@ public class ToolModelLoader implements ICustomModelLoader {
       }
 
       // remove models/item/ and .tcon
-      String toolName = FilenameUtils.removeExtension(modelLocation.getResourcePath().substring(12));
+      String toolName = FilenameUtils.removeExtension(modelLocation.getPath().substring(12));
       IModel mods;
       ModifierModel modifiers = null;
       try {
-        mods = ModelLoaderRegistry.getModel(ModifierModelLoader.getLocationForToolModifiers(modelLocation.getResourceDomain(), toolName));
+        mods = ModelLoaderRegistry.getModel(ModifierModelLoader.getLocationForToolModifiers(modelLocation.getNamespace(), toolName));
 
         if(mods == null || !(mods instanceof ModifierModel)) {
           TinkerRegistry.log.trace(
@@ -153,7 +153,7 @@ public class ToolModelLoader implements ICustomModelLoader {
           for(ToolModelOverride toolModelOverride : overrides) {
             if(toolModelOverride.modifierSuffix != null) {
               String modifierName = toolName + toolModelOverride.modifierSuffix;
-              IModel extraModel = ModelLoaderRegistry.getModel(ModifierModelLoader.getLocationForToolModifiers(modelLocation.getResourceDomain(), modifierName));
+              IModel extraModel = ModelLoaderRegistry.getModel(ModifierModelLoader.getLocationForToolModifiers(modelLocation.getNamespace(), modifierName));
               if(extraModel instanceof ModifierModel) {
                 ModifierModel overriddenModifierModel = new ModifierModel();
                 // fill in non-overridden modifiers

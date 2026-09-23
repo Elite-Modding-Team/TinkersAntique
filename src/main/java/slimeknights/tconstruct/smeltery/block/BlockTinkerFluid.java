@@ -24,12 +24,12 @@ public class BlockTinkerFluid extends BlockFluidClassic {
 
   @Nonnull
   @Override
-  public String getUnlocalizedName() {
+  public String getTranslationKey() {
     Fluid fluid = FluidRegistry.getFluid(fluidName);
     if(fluid != null) {
       return fluid.getUnlocalizedName();
     }
-    return super.getUnlocalizedName();
+    return super.getTranslationKey();
   }
 
   @Override

@@ -65,11 +65,11 @@ public class Hatchet extends AoeToolCore {
 
   // hatches 1 : leaves 0
   @Override
-  public float getStrVsBlock(ItemStack stack, IBlockState state) {
+  public float getDestroySpeed(ItemStack stack, IBlockState state) {
     if(state.getBlock().getMaterial(state) == net.minecraft.block.material.Material.LEAVES) {
       return ToolHelper.calcDigSpeed(stack, state);
     }
-    return super.getStrVsBlock(stack, state);
+    return super.getDestroySpeed(stack, state);
   }
 
   @Override

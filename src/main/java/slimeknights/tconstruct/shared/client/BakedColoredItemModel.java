@@ -40,7 +40,7 @@ public class BakedColoredItemModel extends BakedWrapper {
     boolean didColorQuads = false;
 
     for(int i = 0; i < MAX_SUPPORTED_TINT_INDEX; i++) {
-      int color = Minecraft.getMinecraft().getItemColors().getColorFromItemstack(itemStack, i);
+      int color = Minecraft.getMinecraft().getItemColors().colorMultiplier(itemStack, i);
       if(color == -1) {
         continue;
       }

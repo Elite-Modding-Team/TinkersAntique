@@ -62,7 +62,7 @@ public abstract class TinkerPulse {
     }
 
     String prefixedName = Util.prefix(name);
-    block.setUnlocalizedName(prefixedName);
+    block.setTranslationKey(prefixedName);
 
     register(registry, block, name);
     return block;
@@ -76,7 +76,7 @@ public abstract class TinkerPulse {
 
     ItemBlock itemBlock = new ItemBlockMeta(block);
 
-    itemBlock.setUnlocalizedName(block.getUnlocalizedName());
+    itemBlock.setTranslationKey(block.getTranslationKey());
 
     register(registry, itemBlock, block.getRegistryName());
     return block;
@@ -85,7 +85,7 @@ public abstract class TinkerPulse {
   protected static <T extends EnumBlock<?>> T registerEnumItemBlock(IForgeRegistry<Item> registry, T block) {
     ItemBlock itemBlock = new ItemBlockMeta(block);
 
-    itemBlock.setUnlocalizedName(block.getUnlocalizedName());
+    itemBlock.setTranslationKey(block.getTranslationKey());
 
     register(registry, itemBlock, block.getRegistryName());
     ItemBlockMeta.setMappingProperty(block, block.prop);
@@ -94,7 +94,7 @@ public abstract class TinkerPulse {
 
   @SuppressWarnings("unchecked")
   protected static <T extends Block> T registerItemBlock(IForgeRegistry<Item> registry, ItemBlock itemBlock) {
-    itemBlock.setUnlocalizedName(itemBlock.getBlock().getUnlocalizedName());
+    itemBlock.setTranslationKey(itemBlock.getBlock().getTranslationKey());
 
     register(registry, itemBlock, itemBlock.getBlock().getRegistryName());
     return (T) itemBlock.getBlock();
@@ -102,7 +102,7 @@ public abstract class TinkerPulse {
 
   @SuppressWarnings("unchecked")
   protected static <T extends Block> T registerItemBlockProp(IForgeRegistry<Item> registry, ItemBlock itemBlock, IProperty<?> property) {
-    itemBlock.setUnlocalizedName(itemBlock.getBlock().getUnlocalizedName());
+    itemBlock.setTranslationKey(itemBlock.getBlock().getTranslationKey());
 
     register(registry, itemBlock, itemBlock.getBlock().getRegistryName());
     ItemBlockMeta.setMappingProperty(itemBlock.getBlock(), property);
@@ -113,7 +113,7 @@ public abstract class TinkerPulse {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     ItemBlock itemBlock = new ItemBlockSlab(block);
 
-    itemBlock.setUnlocalizedName(block.getUnlocalizedName());
+    itemBlock.setTranslationKey(block.getTranslationKey());
 
     register(registry, itemBlock, block.getRegistryName());
     ItemBlockMeta.setMappingProperty(block, block.prop);
@@ -128,7 +128,7 @@ public abstract class TinkerPulse {
       throw new IllegalArgumentException(String.format("Unlocalized names need to be all lowercase! Item: %s", name));
     }
 
-    item.setUnlocalizedName(Util.prefix(name));
+    item.setTranslationKey(Util.prefix(name));
     item.setRegistryName(Util.getResource(name));
     registry.register(item);
     return item;

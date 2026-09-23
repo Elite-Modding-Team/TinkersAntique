@@ -32,7 +32,7 @@ public class BlockSearedSlab2 extends EnumBlockSlab<BlockSearedSlab2.SearedType>
     this.setHardness(3F);
     this.setResistance(20F);
     this.setSoundType(SoundType.METAL);
-    this.isBlockContainer = true; // has TE
+    this.hasTileEntity = true; // has TE
   }
 
   @Override

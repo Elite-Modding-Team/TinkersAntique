@@ -38,7 +38,7 @@ public class PropertyStateMapper extends StateMapperBase {
     for(IProperty<?> ignored : ignore) {
       map.remove(ignored);
     }
-    ResourceLocation res = new ResourceLocation(Block.REGISTRY.getNameForObject(state.getBlock()).getResourceDomain(), name + state.getValue(prop).getName());
+    ResourceLocation res = new ResourceLocation(Block.REGISTRY.getNameForObject(state.getBlock()).getNamespace(), name + state.getValue(prop).getName());
 
     return new ModelResourceLocation(res, this.getPropertyString(map));
   }

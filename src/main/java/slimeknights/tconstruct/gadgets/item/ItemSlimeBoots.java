@@ -99,13 +99,13 @@ public class ItemSlimeBoots extends ItemArmorTooltip {
 
   @Nonnull
   @Override
-  public String getUnlocalizedName(ItemStack stack) {
+  public String getTranslationKey(ItemStack stack) {
     int meta = stack.getMetadata(); // should call getMetadata below
     if(meta < SlimeType.values().length) {
-      return super.getUnlocalizedName(stack) + "." + LocUtils.makeLocString(SlimeType.values()[meta].name());
+      return super.getTranslationKey(stack) + "." + LocUtils.makeLocString(SlimeType.values()[meta].name());
     }
     else {
-      return super.getUnlocalizedName(stack);
+      return super.getTranslationKey(stack);
     }
   }
 

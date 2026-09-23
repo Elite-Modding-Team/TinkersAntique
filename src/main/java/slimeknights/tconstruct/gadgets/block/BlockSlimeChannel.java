@@ -63,7 +63,7 @@ public class BlockSlimeChannel extends EnumBlock<SlimeType> implements ITileEnti
     this.setSoundType(SoundType.SLIME);
 
     this.setCreativeTab(TinkerRegistry.tabGadgets);
-    this.isBlockContainer = true; // has TE
+    this.hasTileEntity = true; // has TE
   }
 
   /* Block state */
@@ -285,7 +285,7 @@ public class BlockSlimeChannel extends EnumBlock<SlimeType> implements ITileEnti
    * Called When an Entity Collided with the Block
    */
   @Override
-  public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+  public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
     if(!state.getValue(POWERED)) {
       // bounding box to check
       AxisAlignedBB entityAABB = entity.getCollisionBoundingBox();
@@ -543,7 +543,7 @@ public class BlockSlimeChannel extends EnumBlock<SlimeType> implements ITileEnti
   @Nonnull
   @Override
   @SideOnly(Side.CLIENT)
-  public BlockRenderLayer getBlockLayer() {
+  public BlockRenderLayer getRenderLayer() {
     return BlockRenderLayer.TRANSLUCENT;
   }
 

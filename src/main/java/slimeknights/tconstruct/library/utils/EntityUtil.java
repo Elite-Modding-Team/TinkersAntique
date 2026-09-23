@@ -23,9 +23,9 @@ public final class EntityUtil {
   // based on EntityRenderer.getMouseOver
   public static RayTraceResult raytraceEntity(Entity entity, Vec3d start, Vec3d look, double range, boolean ignoreCanBeCollidedWith) {
     //Vec3 look = entity.getLook(partialTicks);
-    Vec3d direction = start.addVector(look.x * range, look.y * range, look.z * range);
+    Vec3d direction = start.add(look.x * range, look.y * range, look.z * range);
 
-    //Vec3 direction = vec3.addVector(vec31.x * d0, vec31.y * d0, vec31.z * d0);
+    //Vec3 direction = vec3.add(vec31.x * d0, vec31.y * d0, vec31.z * d0);
     Entity pointedEntity = null;
     Vec3d hit = null;
     AxisAlignedBB bb = entity.getEntityBoundingBox().expand(look.x * range, look.y * range, look.z * range).expand(1, 1, 1);

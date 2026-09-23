@@ -35,7 +35,7 @@ public class BlockEnumSmeltery<T extends Enum<T> & EnumBlock.IEnumMeta & IString
     this.setResistance(20F);
     this.setSoundType(SoundType.METAL);
     this.setCreativeTab(TinkerRegistry.tabSmeltery);
-    this.isBlockContainer = true; // has TE
+    this.hasTileEntity = true; // has TE
   }
 
   @Nonnull

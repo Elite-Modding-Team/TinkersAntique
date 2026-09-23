@@ -80,7 +80,7 @@ public class BlockSearedLadder extends BlockEnumSmeltery<BlockSearedLadder.Ladde
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState()
                 .withProperty(BOTTOM, (meta & 1) == 1)
-                .withProperty(FACING, EnumFacing.getHorizontal(meta >> 1));
+                .withProperty(FACING, EnumFacing.byHorizontalIndex(meta >> 1));
     }
 
     @Nonnull

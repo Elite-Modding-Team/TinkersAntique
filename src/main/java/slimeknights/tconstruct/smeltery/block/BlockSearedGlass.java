@@ -65,7 +65,7 @@ public class BlockSearedGlass extends BlockEnumSmeltery<BlockSearedGlass.GlassTy
   @Nonnull
   @Override
   @SideOnly(Side.CLIENT)
-  public BlockRenderLayer getBlockLayer() {
+  public BlockRenderLayer getRenderLayer() {
     return BlockRenderLayer.CUTOUT;
   }
 

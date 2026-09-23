@@ -86,7 +86,7 @@ public abstract class EntityProjectileBase extends EntityArrow implements IEntit
     this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
     this.motionZ = +MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
     this.motionY = -MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI);
-    this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed, inaccuracy);
+    this.shoot(this.motionX, this.motionY, this.motionZ, speed, inaccuracy);
 
     // our stuff
     tinkerProjectile.setItemStack(stack);
@@ -186,7 +186,7 @@ public abstract class EntityProjectileBase extends EntityArrow implements IEntit
     this.setIsCritical(false);
 
     if(iblockstate.getMaterial() != Material.AIR) {
-      this.inTile.onEntityCollidedWithBlock(this.getEntityWorld(), blockpos, iblockstate, this);
+      this.inTile.onEntityCollision(this.getEntityWorld(), blockpos, iblockstate, this);
     }
 
     defuse(); // defuse it so it doesn't hit stuff anymore, being weird

@@ -269,7 +269,7 @@ public class TinkerModifiers extends AbstractToolPulse {
       ResourceLocation itemLocation;
       try {
         itemLocation = new ResourceLocation(itemName);
-        if(!Loader.isModLoaded(itemLocation.getResourceDomain())) {
+        if(!Loader.isModLoaded(itemLocation.getNamespace())) {
           continue;
         }
       } catch(Exception e) {
@@ -308,7 +308,7 @@ public class TinkerModifiers extends AbstractToolPulse {
         ResourceLocation entityLocation;
         try {
           entityLocation = new ResourceLocation(entityRL);
-          if(!Loader.isModLoaded(entityLocation.getResourceDomain())) {
+          if(!Loader.isModLoaded(entityLocation.getNamespace())) {
             continue;
           }
         } catch(Exception e) {

@@ -159,7 +159,7 @@ public class TileTable extends TileInventory {
   }
 
   public EnumFacing getFacing() {
-    return EnumFacing.getFront(getTileData().getInteger(FACE_TAG));
+    return EnumFacing.byIndex(getTileData().getInteger(FACE_TAG));
   }
 
   public void updateTextureBlock(NBTTagCompound tag) {

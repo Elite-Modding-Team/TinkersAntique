@@ -255,7 +255,7 @@ public class BlockWoodenHopper extends BlockContainer {
 
   public static EnumFacing getFacing(int meta)
   {
-    return EnumFacing.getFront(meta & 7);
+    return EnumFacing.byIndex(meta & 7);
   }
 
   @SideOnly(Side.CLIENT)
@@ -275,7 +275,7 @@ public class BlockWoodenHopper extends BlockContainer {
   }
 
   @SideOnly(Side.CLIENT)
-  public BlockRenderLayer getBlockLayer()
+  public BlockRenderLayer getRenderLayer()
   {
     return BlockRenderLayer.CUTOUT_MIPPED;
   }

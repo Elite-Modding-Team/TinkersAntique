@@ -101,7 +101,7 @@ public class TileChannel extends MantleTileEntity implements ITickable, IFluidPa
       if(isFlowing[i] > 0) {
         isFlowing[i]--;
         if(isFlowing[i] == 0) {
-          TinkerNetwork.sendToClients((WorldServer) world, pos, new ChannelFlowPacket(pos, EnumFacing.getHorizontal(i), false));
+          TinkerNetwork.sendToClients((WorldServer) world, pos, new ChannelFlowPacket(pos, EnumFacing.byHorizontalIndex(i), false));
         }
       }
     }

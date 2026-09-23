@@ -51,7 +51,7 @@ public class ModBeheading extends ToolModifier {
   public void applyEffect(NBTTagCompound rootCompound, NBTTagCompound modifierTag) {
     // remove the cleaver beheading if present and add it to the beheading modifier
     NBTTagCompound tag = TinkerUtil.getModifierTag(rootCompound, CLEAVER_MODIFIER_ID);
-    if(!tag.hasNoTags()) {
+    if(!tag.isEmpty()) {
       // update level if it hasn't been done before
       if(!modifierTag.getBoolean("absorbedCleaver")) {
         ModifierNBT data = ModifierNBT.readTag(modifierTag);

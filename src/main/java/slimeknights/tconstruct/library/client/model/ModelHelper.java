@@ -75,7 +75,7 @@ public class ModelHelper extends slimeknights.mantle.client.ModelHelper {
   }
 
   public static Reader getReaderForResource(ResourceLocation location, IResourceManager resourceManager) throws IOException {
-    ResourceLocation file = new ResourceLocation(location.getResourceDomain(), location.getResourcePath() + ".json");
+    ResourceLocation file = new ResourceLocation(location.getNamespace(), location.getPath() + ".json");
     IResource iresource = resourceManager.getResource(file);
     return new BufferedReader(new InputStreamReader(iresource.getInputStream(), Charsets.UTF_8));
   }
@@ -200,7 +200,7 @@ public class ModelHelper extends slimeknights.mantle.client.ModelHelper {
   }
 
   public static ResourceLocation getModelLocation(ResourceLocation location) {
-    return new ResourceLocation(location.getResourceDomain(), "models/" + location.getResourcePath() + ".json");
+    return new ResourceLocation(location.getNamespace(), "models/" + location.getPath() + ".json");
   }
 
 }

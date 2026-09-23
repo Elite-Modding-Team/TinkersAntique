@@ -60,7 +60,7 @@ public class BlockGlow extends Block {
   @Nonnull
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+    return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
   }
 
   @Nonnull
@@ -186,7 +186,7 @@ public class BlockGlow extends Block {
   @Nonnull
   @Override
   @SideOnly(Side.CLIENT)
-  public BlockRenderLayer getBlockLayer() {
+  public BlockRenderLayer getRenderLayer() {
     return BlockRenderLayer.TRANSLUCENT;
   }
 

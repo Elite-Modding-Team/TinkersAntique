@@ -50,10 +50,10 @@ public class ItemFancyItemFrame extends ItemHangingEntity {
 
   @Nonnull
   @Override
-  public String getUnlocalizedName(ItemStack stack) {
+  public String getTranslationKey(ItemStack stack) {
     String type = EntityFancyItemFrame.FrameType.fromMeta(stack.getMetadata()).toString().toLowerCase();
 
-    return super.getUnlocalizedName(stack) + "." + type;
+    return super.getTranslationKey(stack) + "." + type;
   }
 
   @Nonnull

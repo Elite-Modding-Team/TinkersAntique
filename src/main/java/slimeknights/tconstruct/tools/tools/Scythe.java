@@ -121,7 +121,7 @@ public class Scythe extends Kama {
     boolean hit = false;
     // we cache the cooldown here since it resets as soon as the first entity is hit
     for(Entity entity : getAoeEntities(player, target, event)) {
-      if(distance < 0 || entity.getDistanceToEntity(target) <= distance) {
+      if(distance < 0 || entity.getDistance(target) <= distance) {
         hit |= ToolHelper.attackEntity(stack, this, player, entity, null, false);
       }
     }
@@ -163,7 +163,7 @@ public class Scythe extends Kama {
 
     int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
     for(Entity entity : getAoeEntities(player, target, event)) {
-      if(distance < 0 || entity.getDistanceToEntity(target) <= distance) {
+      if(distance < 0 || entity.getDistance(target) <= distance) {
         shorn |= shearEntity(stack, player.getEntityWorld(), player, entity, fortune);
       }
     }

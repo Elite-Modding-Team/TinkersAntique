@@ -68,26 +68,26 @@ public class ItemThrowball extends ItemSnowball {
 
   public void launchThrowball(World world, EntityPlayer player, ThrowballType type, EnumHand hand) {
     EntityThrowball entity = new EntityThrowball(world, player, type);
-    entity.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0.0F, 2.1F, 0.5F);
+    entity.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 2.1F, 0.5F);
     world.spawnEntity(entity);
   }
 
   @Nonnull
   @Override
-  public String getUnlocalizedName(ItemStack stack) {
+  public String getTranslationKey(ItemStack stack) {
     int meta = stack.getMetadata(); // should call getMetadata below
     if(meta < ThrowballType.values().length) {
-      return super.getUnlocalizedName(stack) + "." + LocUtils.makeLocString(ThrowballType.values()[meta].name());
+      return super.getTranslationKey(stack) + "." + LocUtils.makeLocString(ThrowballType.values()[meta].name());
     }
     else {
-      return super.getUnlocalizedName(stack);
+      return super.getTranslationKey(stack);
     }
   }
 
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-    if(I18n.canTranslate(this.getUnlocalizedName(stack) + ".tooltip")) {
-      tooltip.add(TextFormatting.GRAY.toString() + LocUtils.translateRecursive(this.getUnlocalizedName(stack) + ".tooltip"));
+    if(I18n.canTranslate(this.getTranslationKey(stack) + ".tooltip")) {
+      tooltip.add(TextFormatting.GRAY.toString() + LocUtils.translateRecursive(this.getTranslationKey(stack) + ".tooltip"));
     }
   }
 

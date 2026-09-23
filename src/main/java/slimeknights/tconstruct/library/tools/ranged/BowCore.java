@@ -227,7 +227,7 @@ public abstract class BowCore extends ProjectileLauncherCore implements IAmmoUse
     }
     else if(ammo.getItem() instanceof ItemArrow) {
       EntityArrow projectile = ((ItemArrow) ammo.getItem()).createArrow(world, ammo, player);
-      projectile.setAim(player, player.rotationPitch, player.rotationYaw, 0.0F, power, inaccuracy);
+      projectile.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, power, inaccuracy);
       if(player.capabilities.isCreativeMode) {
         projectile.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
       }

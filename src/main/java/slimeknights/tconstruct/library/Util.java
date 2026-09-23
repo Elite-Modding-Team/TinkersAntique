@@ -27,11 +27,12 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 import slimeknights.mantle.util.RecipeMatchRegistry;
+import slimeknights.tconstruct.Tags;
 
 @SuppressWarnings("deprecation")
 public class Util {
 
-  public static final String MODID = "tconstruct";
+  public static final String MODID = Tags.MOD_ID;
   public static final String RESOURCE = MODID.toLowerCase(Locale.US);
 
   public static final DecimalFormat df = new DecimalFormat("#,###,###.##", DecimalFormatSymbols.getInstance(Locale.US));

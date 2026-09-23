@@ -383,7 +383,7 @@ public final class ToolHelper {
     if(player.capabilities.isCreativeMode) {
       block.onBlockHarvested(world, pos, state, player);
       if(block.removedByPlayer(state, world, pos, player, false)) {
-        block.onBlockDestroyedByPlayer(world, pos, state);
+        block.onPlayerDestroy(world, pos, state);
       }
 
       // send update to client
@@ -419,7 +419,7 @@ public final class ToolHelper {
       TileEntity tileEntity = world.getTileEntity(pos);
       // ItemInWorldManager.removeBlock
       if(block.removedByPlayer(state, world, pos, player, true)) { // boolean is if block can be harvested, checked above
-        block.onBlockDestroyedByPlayer(world, pos, state);
+        block.onPlayerDestroy(world, pos, state);
         block.harvestBlock(world, player, pos, state, tileEntity, stack);
         block.dropXpOnBlockBreak(world, pos, xp);
       }
@@ -435,7 +435,7 @@ public final class ToolHelper {
       // following code can be found in PlayerControllerMP.onPlayerDestroyBlock
       world.playBroadcastSound(2001, pos, Block.getStateId(state));
       if(block.removedByPlayer(state, world, pos, player, true)) {
-        block.onBlockDestroyedByPlayer(world, pos, state);
+        block.onPlayerDestroy(world, pos, state);
       }
       // callback to the tool
       stack.onBlockDestroyed(world, state, pos, player);

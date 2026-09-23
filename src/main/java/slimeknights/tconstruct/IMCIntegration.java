@@ -194,7 +194,7 @@ public abstract class IMCIntegration {
     }
     else if(message.isItemStackMessage()) {
       TinkerSmeltery.meltingBlacklist.add(message.getItemStackValue());
-      log.debug("Blacklisted " + message.getItemStackValue().getUnlocalizedName() + " from melting");
+      log.debug("Blacklisted " + message.getItemStackValue().getTranslationKey() + " from melting");
     } else {
       log.error("Got invalid blacklistMelting IMC from {}, expected string or ItemStack message", message.getSender());
     }
@@ -225,13 +225,13 @@ public abstract class IMCIntegration {
         ItemStack input = new ItemStack(tag.getCompoundTag("input"));
         if(!input.isEmpty()) {
           TinkerRegistry.registerDryingRecipe(input, output, time);
-          log.debug("Added drying rack recipe from " + input.getUnlocalizedName() + " to " + output.getUnlocalizedName());
+          log.debug("Added drying rack recipe from " + input.getTranslationKey() + " to " + output.getTranslationKey());
         }
       } else {
         String ore = tag.getString("input");
         if(!ore.isEmpty()) {
           TinkerRegistry.registerDryingRecipe(ore, output, time);
-          log.debug("Added drying rack recipe from oredictionary " + ore + " to " + output.getUnlocalizedName());
+          log.debug("Added drying rack recipe from oredictionary " + ore + " to " + output.getTranslationKey());
         } else {
           log.error("Got invalid addDryingRecipe IMC from {}, missing input, must be a string or ItemStack", message.getSender());
         }

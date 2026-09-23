@@ -101,9 +101,9 @@ public final class ModelRegisterUtil {
       return null;
     }
     ResourceLocation itemLocation = tool.getRegistryName();
-    String path = "tools/" + itemLocation.getResourcePath() + ToolModelLoader.EXTENSION;
+    String path = "tools/" + itemLocation.getPath() + ToolModelLoader.EXTENSION;
 
-    ResourceLocation location = new ResourceLocation(itemLocation.getResourceDomain(), path);
+    ResourceLocation location = new ResourceLocation(itemLocation.getNamespace(), path);
     ToolModelLoader.addPartMapping(location, tool);
 
     return registerToolModel(tool, location);
@@ -111,7 +111,7 @@ public final class ModelRegisterUtil {
 
   /** Manual registration of a tool model. You probably shouldn't be using this. */
   public static ResourceLocation registerToolModel(Item item, final ResourceLocation location) {
-    if(!location.getResourcePath().endsWith(ToolModelLoader.EXTENSION)) {
+    if(!location.getPath().endsWith(ToolModelLoader.EXTENSION)) {
       TConstruct.log.error("The material-model " + location.toString() + " does not end with '"
                            + ToolModelLoader.EXTENSION
                            + "' and will therefore not be loaded by the custom model loader!");
@@ -129,8 +129,8 @@ public final class ModelRegisterUtil {
     }
     ResourceLocation itemLocation = item.getRegistryName();
 
-    String path = "parts/" + itemLocation.getResourcePath() + MaterialModelLoader.EXTENSION;
-    ResourceLocation location = new ResourceLocation(itemLocation.getResourceDomain(), path);
+    String path = "parts/" + itemLocation.getPath() + MaterialModelLoader.EXTENSION;
+    ResourceLocation location = new ResourceLocation(itemLocation.getNamespace(), path);
 
     MaterialModelLoader.addPartMapping(location, item);
 
@@ -145,15 +145,15 @@ public final class ModelRegisterUtil {
       return null;
     }
     ResourceLocation itemLocation = item.getRegistryName();
-    itemLocation = new ResourceLocation(itemLocation.getResourceDomain(),
-                                        itemLocation.getResourcePath() + MaterialModelLoader.EXTENSION);
+    itemLocation = new ResourceLocation(itemLocation.getNamespace(),
+                                        itemLocation.getPath() + MaterialModelLoader.EXTENSION);
 
     return registerMaterialModel(item, itemLocation);
   }
 
   /** Manual registration of a material model. You probably shouldn't be using this. */
   static ResourceLocation registerMaterialModel(Item item, final ResourceLocation location) {
-    if(!location.getResourcePath().endsWith(MaterialModelLoader.EXTENSION)) {
+    if(!location.getPath().endsWith(MaterialModelLoader.EXTENSION)) {
       TConstruct.log.error("The material-model " + location.toString() + " does not end with '"
                            + MaterialModelLoader.EXTENSION
                            + "' and will therefore not be loaded by the custom model loader!");

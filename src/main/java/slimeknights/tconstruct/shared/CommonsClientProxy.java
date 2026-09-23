@@ -68,7 +68,7 @@ public class CommonsClientProxy extends ClientProxy {
         new IItemColor() {
           @SuppressWarnings("deprecation")
           @Override
-          public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
+          public int colorMultiplier(@Nonnull ItemStack stack, int tintIndex) {
             IBlockState iblockstate = ((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
             return blockColors.colorMultiplier(iblockstate, null, null, tintIndex);
           }

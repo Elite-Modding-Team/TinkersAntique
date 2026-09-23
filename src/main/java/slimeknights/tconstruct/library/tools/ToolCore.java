@@ -168,11 +168,11 @@ public abstract class ToolCore extends TinkersItem implements IToolStationDispla
   }
 
   @Override
-  public float getStrVsBlock(ItemStack stack, IBlockState state) {
+  public float getDestroySpeed(ItemStack stack, IBlockState state) {
     if(isEffective(state) || ToolHelper.isToolEffective(stack, state)) {
       return ToolHelper.calcDigSpeed(stack, state);
     }
-    return super.getStrVsBlock(stack, state);
+    return super.getDestroySpeed(stack, state);
   }
 
   public boolean isEffective(IBlockState state) {
@@ -469,13 +469,13 @@ public abstract class ToolCore extends TinkersItem implements IToolStationDispla
 
   /** A simple string identifier for the tool, used for identification in texture generation etc. */
   public String getIdentifier() {
-    return getRegistryName().getResourcePath();
+    return getRegistryName().getPath();
   }
 
   /** The tools name completely without material information */
   @Override
   public String getLocalizedToolName() {
-    return Util.translate(getUnlocalizedName() + ".name");
+    return Util.translate(getTranslationKey() + ".name");
   }
 
   /** The tools name with the given material. e.g. "Wooden Pickaxe" */
@@ -485,7 +485,7 @@ public abstract class ToolCore extends TinkersItem implements IToolStationDispla
 
   /** Returns info about the Tool. Displayed in the tool stations etc. */
   public String getLocalizedDescription() {
-    return Util.translate(getUnlocalizedName() + ".desc");
+    return Util.translate(getTranslationKey() + ".desc");
   }
 
   @Override

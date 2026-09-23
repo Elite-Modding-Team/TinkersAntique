@@ -75,8 +75,8 @@ import java.util.Random;
 public class TConstruct {
 
   public static final String modID = Util.MODID;
-  public static final String modVersion = "${version}";
-  public static final String modName = "Tinkers' Antique";
+  public static final String modVersion = Tags.VERSION;
+  public static final String modName = Tags.MOD_NAME;
 
   public static final Logger log = LogManager.getLogger(modID);
   public static final Random random = new Random();
@@ -199,7 +199,7 @@ public class TConstruct {
       }
 
       // wooder hopper, moved from skyblock to tic
-      if(entry.key.getResourceDomain().equals(TINKERS_SKYBLOCK_MODID) && entry.key.getResourcePath().equals(WOODEN_HOPPER)) {
+      if(entry.key.getNamespace().equals(TINKERS_SKYBLOCK_MODID) && entry.key.getPath().equals(WOODEN_HOPPER)) {
         entry.remap(Item.getItemFromBlock(TinkerGadgets.woodenHopper));
       }
     }
@@ -209,7 +209,7 @@ public class TConstruct {
   public void missingBlockMappings(RegistryEvent.MissingMappings<Block> event) {
     for(RegistryEvent.MissingMappings.Mapping<Block> entry : event.getAllMappings()) {
       // wooder hopper, moved from skyblock to tic
-      if(entry.key.getResourceDomain().equals(TINKERS_SKYBLOCK_MODID) && entry.key.getResourcePath().equals(WOODEN_HOPPER)) {
+      if(entry.key.getNamespace().equals(TINKERS_SKYBLOCK_MODID) && entry.key.getPath().equals(WOODEN_HOPPER)) {
         entry.remap(TinkerGadgets.woodenHopper);
       }
     }

@@ -131,7 +131,7 @@ public class VillageLoot {
                                 )
                         },
                         new LootCondition[0],
-                        part.getRegistryName().getResourcePath() + "_" + material.getIdentifier()
+                        part.getRegistryName().getPath() + "_" + material.getIdentifier()
                 ));
 
             }
