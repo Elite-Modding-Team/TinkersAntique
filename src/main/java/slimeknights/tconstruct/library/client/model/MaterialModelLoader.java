@@ -70,8 +70,10 @@ public class MaterialModelLoader implements ICustomModelLoader {
 
       return model;
     } catch(IOException e) {
-      TinkerRegistry.log.error("Could not load material model {}", modelLocation.toString());
-      TinkerRegistry.log.debug(e);
+      //TinkerRegistry.log.error("Could not load material model {}", modelLocation.toString());
+      //TinkerRegistry.log.debug(e);
+      // NOOP due to false positives introduced by https://github.com/MinecraftForge/MinecraftForge/pull/4898
+      // See https://github.com/SlimeKnights/TinkersConstruct/issues/3651
     }
     return ModelLoaderRegistry.getMissingModel();
   }

@@ -176,7 +176,9 @@ public class ToolModelLoader implements ICustomModelLoader {
 
       return new ToolModel(defaultTextureListBuilder.build(), parts, brokenParts, rotations, modifiers, transforms, overrides, ammoPosition);
     } catch(IOException e) {
-      TinkerRegistry.log.error("Could not load multimodel {}", modelLocation.toString());
+      //TinkerRegistry.log.error("Could not load multimodel {}", modelLocation.toString());
+      // NOOP due to false positives introduced by https://github.com/MinecraftForge/MinecraftForge/pull/4898
+      // See https://github.com/SlimeKnights/TinkersConstruct/issues/3651
     }
     return ModelLoaderRegistry.getMissingModel();
   }
