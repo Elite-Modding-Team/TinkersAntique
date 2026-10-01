@@ -24,7 +24,6 @@ public class SeveringRecipeChecker {
 			ItemMonsterPlacer.applyEntityIdToItemStack(spawnEgg, rl);
 			for (ItemStack headStack : TinkerRegistry.getAllSeveringRecipes().get(entityClass)) {
 				if (headStack != null && !headStack.isEmpty()) {
-					headStack.setCount(1);
 					SeveringRecipe severingRecipe = new SeveringRecipe(rl, headStack, spawnEgg);
 					recipes.add(severingRecipe);
 				}
