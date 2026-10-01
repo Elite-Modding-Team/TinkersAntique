@@ -151,6 +151,6 @@ public abstract class TinkerPulse {
       throw new IllegalArgumentException(String.format("Unlocalized names need to be all lowercase! TE: %s", name));
     }
 
-    GameRegistry.registerTileEntity(teClazz, Util.prefix(name));
+    GameRegistry.registerTileEntity(teClazz, new ResourceLocation(Util.MODID, name));
   }
 }

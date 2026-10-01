@@ -9,10 +9,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.datafix.FixTypes;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -49,6 +52,7 @@ import slimeknights.tconstruct.shared.block.BlockOre;
 import slimeknights.tconstruct.shared.block.BlockSlime;
 import slimeknights.tconstruct.shared.block.BlockSlimeCongealed;
 import slimeknights.tconstruct.shared.block.BlockSoil;
+import slimeknights.tconstruct.shared.datafix.TEDataFixer;
 import slimeknights.tconstruct.shared.item.ItemMetaDynamicTinkers;
 import slimeknights.tconstruct.shared.worldgen.NetherOreGenerator;
 import slimeknights.tconstruct.shared.worldgen.OverworldOreGenerator;
@@ -517,6 +521,9 @@ public class TinkerCommons extends TinkerPulse {
     MinecraftForge.EVENT_BUS.register(new AchievementEvents());
     MinecraftForge.EVENT_BUS.register(new BlockEvents());
     MinecraftForge.EVENT_BUS.register(new PlayerDataEvents());
+
+    ModFixs modFixer = FMLCommonHandler.instance().getDataFixer().init(Util.MODID, 1);
+    modFixer.registerFix(FixTypes.BLOCK_ENTITY, new TEDataFixer());
   }
 
   // POST-INITIALIZATION
