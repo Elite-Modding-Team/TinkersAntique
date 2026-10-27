@@ -3,7 +3,6 @@ package slimeknights.tconstruct.tools.melee.item;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -26,9 +25,7 @@ import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.library.tools.SwordCore;
 import slimeknights.tconstruct.library.tools.ToolNBT;
 import slimeknights.tconstruct.tools.TinkerTools;
-import slimeknights.tconstruct.tools.melee.TinkerMeleeWeapons;
 import slimeknights.tconstruct.tools.modifiers.ModBeheading;
-import slimeknights.tconstruct.tools.ranged.TinkerRangedWeapons;
 
 public class Cleaver extends SwordCore {
 
@@ -43,17 +40,11 @@ public class Cleaver extends SwordCore {
     addCategory(Category.WEAPON);
   }
 
+  // no offhand for you
   @Nonnull
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
     ItemStack itemStackIn = playerIn.getHeldItem(hand);
-    if (hand == EnumHand.MAIN_HAND) {
-      ItemStack offhand = playerIn.getHeldItemOffhand();
-      Item offhandItem = offhand.getItem();
-      if (!offhand.isEmpty() && (offhandItem == TinkerMeleeWeapons.battleSign || offhandItem.isShield(offhand, playerIn) || offhandItem == TinkerRangedWeapons.shuriken)) {
-        return ActionResult.newResult(EnumActionResult.FAIL, itemStackIn);
-      }
-    }
     return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
   }
 
