@@ -36,6 +36,7 @@ tile.tconstruct.common_ore.aluminum.name=アルミニウム鉱石
 
 tile.tconstruct.ore.cobalt.name=コバルト鉱石
 tile.tconstruct.ore.ardite.name=アーダイト鉱石
+tile.tconstruct.common_metal.tooltip=ビーコンの土台に使用可能
 
 tile.tconstruct.metal.tooltip=ビーコンの土台に使用可能
 
@@ -307,6 +308,8 @@ item.tconstruct.materials.expander_w.name=エキスパンダー(垂直)
 item.tconstruct.materials.expander_w.tooltip=レッグデーはさぼるな！
 item.tconstruct.materials.expander_h.name=エキスパンダー(水平)
 item.tconstruct.materials.expander_h.tooltip=持ち上げられる？
+item.tconstruct.materials.lava_crystal.name=溶岩のクリスタル
+item.tconstruct.materials.lava_crystal.tooltip=自動精錬
 item.tconstruct.materials.reinforcement.name=補強
 item.tconstruct.materials.reinforcement.tooltip=補強を付与する
 item.tconstruct.materials.silky_cloth.name=シルクの布
@@ -373,6 +376,7 @@ item.tconstruct.sharpening_kit.name=シャープニングキット
 item.tconstruct.sharpening_kit.tooltip=火打石と合わせると、採掘レベルを\nシャープニングキットの素材製の道具と\n同じにする。
 
 item.forge.bucketFilled.blood=血液バケツ
+item.forge.bucketFilled.venom=毒入りバケツ
 
 # Tools
 item.tconstruct.pickaxe.name=ツルハシ
@@ -462,7 +466,8 @@ item.tconstruct.slime_boots.magma.name=マグマスライムブーツ
 item.tconstruct.slime_boots.pink.name=ピンクスライムブーツ
 item.tconstruct.slime_boots.tooltip=着地時に跳ねる
 item.tconstruct.slimesling.green.name=緑色のスライムスリング
-item.tconstruct.slimesling.blue.name=青色のスライムスリングitem.tconstruct.slimesling.purple.name=紫色スライムスリング
+item.tconstruct.slimesling.blue.name=青色のスライムスリング
+item.tconstruct.slimesling.purple.name=紫色スライムスリング
 item.tconstruct.slimesling.blood.name=凝固した血液スリング
 item.tconstruct.slimesling.magma.name=マグマスライムスリング
 item.tconstruct.slimesling.pink.name=ピンクスライムスリング
@@ -507,6 +512,7 @@ item.tconstruct.spaghetti.soggy.name=水浸しの麺
 item.tconstruct.spaghetti.soggy.tooltip=十分濡れているので、腕で曲げることができる。\n吊るして乾燥させよう。
 item.tconstruct.spaghetti.cold.name=冷たい乾麺
 item.tconstruct.spaghetti.cold.tooltip=だいぶ良くなったが、まだまだ粗末だ。\n温めて食べられるようにすべきだ。\nそれはあなたの弱い膝を取り除くのにも十分かもしれない。
+entity.ItemFrame.name=額縁
 
 #################
 #   Entities    #
@@ -740,7 +746,8 @@ modifier.crude.extra=対非武装Mob: +%s
 modifier.crumbling.name=粉砕
 modifier.crumbling.desc=§oバラバラに砕く§r\nこの道具は、道具を必要としない柔らかいブロックをより早く壊す。
 modifier.dense.name=高密度
-modifier.dense.desc=§oより固く。§r\n耐久度が減るに従って長持ちするようになる。modifier.depthdigger.name=深度採掘者
+modifier.dense.desc=§oより固く。§r\n耐久度が減るに従って長持ちするようになる。
+modifier.depthdigger.name=深度採掘者
 modifier.depthdigger.desc=§o鉱夫の友！§r\n道具は深く採掘するほど速く採掘する。
 modifier.duritos.name=固く脆い
 modifier.duritos.desc=§o名前ほど良くはない。§r\nほとんどの場合、道具が長持ちする。
@@ -780,6 +787,8 @@ modifier.poisonous.name=有毒
 modifier.poisonous.desc=§o必ずしも鉛フリーではない！§r\n相手に毒を与える。
 modifier.prickly.name=チクチク
 modifier.prickly.desc=§o痛っ！§r\nこの棘から逃れられるものはいない。相手により多くのダメージを与える。
+modifier.raging.name=激昂
+modifier.raging.desc=§o窮地の切り札！§r\n体力が低いほど、道具が与えるダメージが増加する。
 modifier.sharp.name=切れ味抜群
 modifier.sharp.desc=§o言葉も切れる！§r\nダメージを与えた敵を出血させ、短時間継続ダメージを与える。
 modifier.shocking.name=ショッキング
@@ -819,6 +828,8 @@ modifier.hovering.name=ホバリング
 modifier.hovering.desc=§o風のように自由に§r\n飛翔体の飛翔速度が下がるが、重力の影響を受けなくなる。
 modifier.splitting.name=スプリット
 modifier.splitting.desc=§o1から2！§r\n矢を打つと2つに分割することがある。
+modifier.mod_autosmelt.name=自動精錬
+modifier.mod_autosmelt.desc=§o道具の形をしたかまど！§r\n採掘したブロックが製錬された状態でドロップする。
 
 #################
 #   Modifiers   #
@@ -835,7 +846,8 @@ modifier.blasting.extra=爆発力: %s
 modifier.diamond.name=ダイヤモンド
 modifier.diamond.desc=ピカピカ！§r\n耐久度が増加する。
 modifier.emerald.name=エメラルド
-modifier.emerald.desc=§oファンシー！§r\n道具の基本能力に応じて耐久度が増加する。modifier.extramodifier.name=愛着
+modifier.emerald.desc=§oファンシー！§r\n道具の基本能力に応じて耐久度が増加する。
+modifier.extramodifier.name=愛着
 modifier.extramodifier.desc=§oエンダードラゴンの頭で愛着を持った！§r\nエンダードラゴンの頭で愛着を持ち、追加の改造スロットを与える。
 modifier.extratrait.name=エンボス
 modifier.extratrait.desc=§o魔法のようだが、それより良い！§r\n%sをエンボスし、素材が持つ能力を追加する。
@@ -860,6 +872,8 @@ modifier.haste.name4=超超超加速
 modifier.haste.name5=超超超超加速
 modifier.haste.desc=§oうおおおお！§r\nレッドストーンの衝動で道具をより早く動かせるようになる。
 modifier.haste.extra=速度増加: +%s
+modifier.incognito.name=隠蔽
+modifier.incognito.desc=§o洗い流してすっきり！§r\n改造による見た目の変化を隠す。
 modifier.knockback.name=ノックバック
 modifier.knockback.desc=§oホームラン！§r\n空を飛ぶクールな方法を相手に教える。
 modifier.luck.name=運
@@ -963,6 +977,7 @@ death.attack.bleed=%1$sは%2$sからの攻撃で出血して死んだ
 death.attack.bleed.item=%1$sは%2$sの%3$sによる攻撃で出血して死んだ
 
 message.mending_moss.not_enough_levels=修復の苔を作るには %s レベル以上である必要があります
+message.piggybackpack.cannot_pick_up=このMobは持ち上げられません
 tconstruct.channel.connected.in=手前側に流れるように設定
 tconstruct.channel.connected.out=奥側に流れるように設定
 tconstruct.channel.connected.none=流れないように設定
@@ -1000,6 +1015,8 @@ gui.error.incompatible_enchantments=%sは%sのエンチャントと同時に付�
 
 # General things used in multiple GUIs
 gui.general.hover=詳細についてはエントリの上にマウスを移動してください。
+gui.general.temperature.celsius=%s°C
+gui.general.temperature.kelvin=%sK
 
 # Creative Tabs
 itemGroup.TinkerGeneral=TiC: 通常アイテム
@@ -1042,6 +1059,7 @@ gui.partchest.name=部品チェスト
 # Smeltery
 gui.smeltery.name=溶解炉
 gui.smeltery.progress.no_recipe=このアイテムは溶かせません
+gui.smeltery.progress.no_fuel=溶解炉に使用可能な燃料がありません
 gui.smeltery.progress.no_heat=このアイテムを溶かすために必要な温度に達していません
 gui.smeltery.progress.no_space=溶解炉の容量に空きが足りません
 gui.smeltery.fuel=燃料
@@ -1063,6 +1081,8 @@ gui.smeltery.liquid.gem=個分
 gui.searedfurnace.name=焼成かまど
 gui.searedfurnace.progress.complete=製錬が完了しました
 gui.searedfurnace.progress.no_recipe=このアイテムは製錬できません
+gui.searedfurnace.progress.no_fuel=焼成かまどに使用可能な燃料がありません
+gui.searedfurnace.progress.no_heat=このアイテムを製錬するために必要な温度に達していません
 gui.searedfurnace.progress.no_space=製錬後のアイテムを格納できる容量がありません
 
 # Tinker Tank
@@ -1076,7 +1096,10 @@ gui.dryingrack.name=乾燥ラック
 gui.jei.smelting.title=溶解炉
 gui.jei.alloy.title=合金
 gui.jei.casting.title=鋳造
+gui.jei.casting.table.title=鋳造台での鋳造
+gui.jei.casting.basin.title=鋳造鉢での鋳造
 gui.jei.casting.consume=素材を消費します！
+gui.jei.casting.time=%d 秒
 gui.jei.drying.title=乾燥
 gui.jei.entitymelting.title=エンティティ溶解
 gui.jei.severing.title=切断

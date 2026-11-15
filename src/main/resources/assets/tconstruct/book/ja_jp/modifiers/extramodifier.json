@@ -2,13 +2,13 @@
   "modifier": "extramodifier",
   "text": [
     {
-      "text": "You're a seasoned adventurer, you've beaten the End, and you got your elytra. How about an extra modifier slot to show off how far you got in your world?"
+      "text": "エンドを制覇し、エリトラも手に入れた、熟練の冒険者であるあなた。この世界での冒険の成果を示すために、改造スロットをもう1つ増やしてみませんか？"
     }
   ],
   "effects": [
-    "Adds an extra modifier",
-    "Makes good use of Ender Dragon heads",
-    "Requires no modifier (duh!)"
+    "改造スロットを1つ追加する",
+    "エンダードラゴンの頭を有効活用できる",
+    "改造スロットを消費しない（当然！）"
   ],
   "demoTool": [
     "tconstruct:pickaxe"

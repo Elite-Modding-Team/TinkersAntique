@@ -2,13 +2,13 @@
   "modifier": "incognito",
   "text": [
     {
-      "text": "It's more reality than illusion! For the seasoned tinkerer who aims for ingenious perks but a tidy appearance."
+      "text": "ただの見せかけではありません！巧みな改造の効果と、すっきりした外見を両立したい熟練のティンカーへ。"
     }
   ],
   "effects": [
-    "Hides all modifiers visually",
-    "Makes good use of wet sponges",
-    "Requires no modifier"
+    "すべての改造による見た目の変化を隠す",
+    "濡れたスポンジを有効活用できる",
+    "改造スロットを消費しない"
   ],
   "demoTool": [
     "tconstruct:pickaxe"

@@ -2,7 +2,7 @@
   "title":"",
   "text": [
     {
-      "text": "You can shape a non-metal material in a part builder with the pattern, then combine the parts in the tool station. Patterns can be stored and accessing the pattern chest and spare tool parts in the part chest. Lastly you can convert your trusty old crafting table into a crafting station to keep your in progress projects stashed in it so you don't have to put the materials away should you need to walk away."
+      "text": "部品作成台では、木型を使って金属以外の素材から部品を作れます。できた部品は道具組立台で組み合わせましょう。木型はパターンチェストに、予備の道具部品は部品チェストに保管できます。また、使い慣れた作業台を改良作業台に作り替えると、作業途中の素材を置いたままにできます。これなら、途中で席を外すたびに素材を片付ける必要はありません。"
     },
     {
       "text": "\n"
@@ -11,7 +11,7 @@
       "text": "\n"
     },
     {
-      "text": "Together these make the Tool Workshop. It is recommended you keep all of these nearby when using any of them. I will now cover how to make each item from the Tool Workshop and show you how best they work together."
+      "text": "これらをひとまとめにしたものが、道具工房です。どれかを使うときにほかの設備にも手が届くよう、近くにまとめて設置することをおすすめします。ここからは、各設備の作り方と、組み合わせて上手に使う方法を紹介します。"
     }
   ]
 }
