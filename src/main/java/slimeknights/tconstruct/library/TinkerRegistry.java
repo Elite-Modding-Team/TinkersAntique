@@ -780,20 +780,20 @@ public final class TinkerRegistry {
     return false;
   }
 
-  /** Returns an Entry\<FluidStack, Integer\> where the key represents the liquid to consume and the value, the duration. */
+  /** Returns an immutable Entry\<FluidStack, Integer\> where the key represents the liquid to consume and the value, the duration. */
   public static Map.Entry<FluidStack, Integer> getFuelEntry(FluidStack in){
     for(Map.Entry<FluidStack, Integer> entry : smelteryFuels.entrySet()) {
       if(entry.getKey().isFluidEqual(in)) {
         FluidStack fuel = entry.getKey();
         if(in.amount < fuel.amount) {
-          Map.Entry<FluidStack, Integer> out = new AbstractMap.SimpleEntry<>(entry.getKey().copy(), entry.getValue());
-          out.getKey().amount = in.amount;
+          FluidStack fuelOut = entry.getKey().copy();
+          fuelOut.amount = in.amount;
           float coeff = (float) in.amount / (float) fuel.amount;
-          out.setValue(Math.round(coeff * in.amount));
-          return out;
+          int fuelAmount = Math.round(coeff * in.amount);
+          return new AbstractMap.SimpleImmutableEntry<>(fuelOut, fuelAmount);
         }
         else {
-          return entry;
+          return new AbstractMap.SimpleImmutableEntry<>(entry.getKey().copy(), entry.getValue());
         }
       }
     }
