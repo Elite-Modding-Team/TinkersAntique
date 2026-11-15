@@ -3,14 +3,14 @@
   "modifier": "mod_autosmelt",
   "text": [
     {
-      "text": "Melting a lava crystal onto the end of a tool gives it the power of a furnace."
+      "text": "道具の先端に溶岩のクリスタルを溶かし付けると、かまどの力が宿ります。"
     }
   ],
   "effects": [
-    "Smelts blocks as they're harvested",
-    "Not compatible with Silk Touch or the trait version of Autosmelt",
-    "Does not work for weapons",
-    "Single use"
+    "採掘したブロックをその場で製錬する",
+    "シルクタッチや、素材特性の自動精錬とは併用不可",
+    "武器には効果なし",
+    "適用は1回まで"
   ],
   "demoTool": [
     "tconstruct:pickaxe",

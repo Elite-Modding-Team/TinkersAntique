@@ -1,56 +1,56 @@
 {
-  "title": "Entity Melting",
+  "title": "エンティティの溶解",
   "text": [
     {
-      "text": "You can obtain certain liquids by melting trapped entities in an active smeltery. Here are a few liquids you can try out:"
+      "text": "稼働中の溶解炉に閉じ込めたエンティティを溶かすと、特定の液体が手に入ります。得られる液体をいくつか紹介します。"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lBlood"
+      "text": "§l血液"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Melt down most entities or rotten flesh."
+      "text": "ほとんどのエンティティや、腐った肉を溶かすと手に入ります。"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lMolten §lEmerald"
+      "text": "§l溶融§lエメラルド"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Melt down emeralds or villagers (illagers included)."
+      "text": "エメラルドや村人（邪悪な村人も含む）を溶かすと手に入ります。"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lLiquid §lSlime"
+      "text": "§l液体§lスライム"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Melt down slimes or find some in slime islands. This liquid functions as a slime spawner and comes in various colors."
+      "text": "スライムを溶かすか、スライム島で見つけられます。この液体からはスライムがスポーンし、さまざまな色があります。"
     },
     {
       "text": "\n"
     },
     {
-      "text": "§lBlazin' §lBlood"
+      "text": "§lブレイジング・§lブラッド"
     },
     {
       "text": "\n"
     },
     {
-      "text": "Melt down blazes. This liquid is also used as a stronger fuel source in comparison to lava."
+      "text": "ブレイズを溶かすと手に入ります。この液体は、溶岩よりも強力な燃料としても利用できます。"
     }
   ]
 }
