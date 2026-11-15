@@ -67,10 +67,8 @@ public class SmeltingRecipeCategory implements IRecipeCategory<SmeltingRecipeWra
     fluids.addTooltipCallback(GuiUtil::onFluidTooltip);
 
     fluids.init(0, false, 115, 6, 18, 32, Material.VALUE_Block, false, null);
+    fluids.init(1, true, 72, 38, 16, 16, 1000, false, tankOverlay);
     fluids.set(ingredients);
-
-    fluids.init(1, false, 72, 38, 16, 16, 1000, false, tankOverlay);
-    fluids.set(1, recipe.fuels);
   }
 
   @Override

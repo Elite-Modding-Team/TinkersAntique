@@ -22,7 +22,7 @@ public class SmeltingRecipeWrapper implements IRecipeWrapper {
   protected final List<List<ItemStack>> inputs;
   protected final List<FluidStack> outputs;
   protected final int temperature;
-  protected final List<FluidStack> fuels;
+  protected final List<List<FluidStack>> fuels;
 
   public SmeltingRecipeWrapper(MeltingRecipe recipe) {
     this.inputs = ImmutableList.of(recipe.input.getInputs());
@@ -37,12 +37,13 @@ public class SmeltingRecipeWrapper implements IRecipeWrapper {
         builder.add(fs);
       }
     }
-    fuels = builder.build();
+    fuels = ImmutableList.of(builder.build());
   }
 
   @Override
   public void getIngredients(IIngredients ingredients) {
     ingredients.setInputLists(ItemStack.class, inputs);
+    ingredients.setInputLists(FluidStack.class, fuels);
     ingredients.setOutputs(FluidStack.class, outputs);
   }
 

@@ -80,10 +80,8 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
 		});
 
 		fluids.init(0, false, 115, 11, 16, 32, recipe.outputAmount, false, null);
+		fluids.init(1, true, 75, 43, 16, 16, 1000, false, tankOverlay);
 		fluids.set(ingredients);
-
-		fluids.init(1, false, 75, 43, 16, 16, 1000, false, tankOverlay);
-		fluids.set(1, recipe.fuels);
 	}
 
 	@Override
