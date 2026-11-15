@@ -1,7 +1,7 @@
 package slimeknights.tconstruct.plugin.jei.entitymelting;
 
 import java.util.List;
-
+import java.util.Map;
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.ImmutableList;
@@ -14,7 +14,10 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fluids.FluidStack;
 import slimeknights.tconstruct.TConstruct;
+import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.client.GuiUtil;
 
@@ -72,6 +75,28 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
 				
 				// we always show mbs
 				GuiUtil.calcLiquidText(amount, 1, Util.translate("gui.jei.smeltery_damage.info"), text);
+
+				// add mod name back
+				text.add(modName);
+			} else if (slotIndex == 1){
+				// first, store the original name and mod name from JEI
+				String ingredientName = text.get(0);
+				String modName = text.get(text.size() - 1);
+				text.clear();
+				text.add(ingredientName);
+
+				// next, determine smeltery amounts to show
+				Map.Entry<FluidStack, Integer> fuelEntry = TinkerRegistry.getFuelEntry(fluid);
+				int amount = fuelEntry.getKey().amount;
+
+				// we always show mbs
+				GuiUtil.calcLiquidText(amount, 1, Util.translate("gui.smeltery.liquid.millibucket"), text);
+
+				// then, we add heat and duration
+				int temperature = fluid.getFluid().getTemperature(fluid);
+				int duration = fuelEntry.getValue();
+				text.add(TextFormatting.GRAY + Util.temperatureString(temperature));
+				GuiUtil.calcLiquidText(duration, 1, Util.translate("gui.smeltery.fuel.burn_ticks"), text);
 
 				// add mod name back
 				text.add(modName);
