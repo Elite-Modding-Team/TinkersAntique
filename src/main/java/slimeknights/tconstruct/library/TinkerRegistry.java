@@ -780,6 +780,26 @@ public final class TinkerRegistry {
     return false;
   }
 
+  /** Returns an immutable Entry\<FluidStack, Integer\> where the key represents the liquid to consume and the value, the duration. */
+  public static Map.Entry<FluidStack, Integer> getFuelEntry(FluidStack in){
+    for(Map.Entry<FluidStack, Integer> entry : smelteryFuels.entrySet()) {
+      if(entry.getKey().isFluidEqual(in)) {
+        FluidStack fuel = entry.getKey();
+        if(in.amount < fuel.amount) {
+          FluidStack fuelOut = entry.getKey().copy();
+          fuelOut.amount = in.amount;
+          float coeff = (float) in.amount / (float) fuel.amount;
+          int fuelAmount = Math.round(coeff * in.amount);
+          return new AbstractMap.SimpleImmutableEntry<>(fuelOut, fuelAmount);
+        }
+        else {
+          return new AbstractMap.SimpleImmutableEntry<>(entry.getKey().copy(), entry.getValue());
+        }
+      }
+    }
+    return null;
+  }
+
   /** Reduces the fluidstack by one increment of the fuel and returns how much fuel duration it gives. */
   public static int consumeSmelteryFuel(FluidStack in) {
     for(Map.Entry<FluidStack, Integer> entry : smelteryFuels.entrySet()) {
