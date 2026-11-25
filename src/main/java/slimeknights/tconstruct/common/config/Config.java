@@ -61,6 +61,7 @@ public final class Config {
   public static boolean oldMattockAndKama = false;
   public static boolean jeiGuidebookButton = false;
   public static boolean noAnvilSafeguards = false;
+  public static boolean entityMeltingBlood = true;
 
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -450,6 +451,10 @@ public final class Config {
       prop = configFile.get(cat, "entityMelting", entityMelting);
       prop.setComment("List of entity melting entries in the format 'modid:entity;subtypes;fluid;amount'.");
       entityMelting = prop.getStringList();
+
+      prop = configFile.get(cat, "entityMeltingBlood", entityMeltingBlood);
+      prop.setComment("If entities should melt into blood by default when no other liquid is defined.");
+      entityMeltingBlood = prop.getBoolean();
 
       prop = configFile.get(cat, "materialPriorities", materialPriorities);
       prop.setComment("List of mod IDs for material registration with descending priority. Highest mod ID wins!");

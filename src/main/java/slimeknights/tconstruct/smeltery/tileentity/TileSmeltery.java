@@ -253,7 +253,7 @@ public class TileSmeltery extends TileHeatingStructureFuelTank<MultiblockSmelter
           // hurt it
           if(entity.attackEntityFrom(smelteryDamage, 2f)) {
             // spill the blood
-            liquids.fill(fluid.copy(), true);
+            liquids.fill(fluid.copy(), Config.entityMeltingBlood);
           }
         } else {
           needsFuel = true;
