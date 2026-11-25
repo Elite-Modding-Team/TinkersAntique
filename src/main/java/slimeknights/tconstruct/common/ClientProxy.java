@@ -140,10 +140,8 @@ public abstract class ClientProxy extends CommonProxy {
     FontRenderer bookRenderer = new CustomFontRenderer(mc.gameSettings,
                                                        new ResourceLocation("textures/font/ascii.png"),
                                                        mc.renderEngine);
+    bookRenderer.onResourceManagerReload(resourceManager);
     bookRenderer.setUnicodeFlag(true);
-    if(mc.gameSettings.language != null) {
-      fontRenderer.setBidiFlag(mc.getLanguageManager().isCurrentLanguageBidirectional());
-    }
     TinkerBook.INSTANCE.fontRenderer = bookRenderer;
 
     MinecraftForge.EVENT_BUS.register(CrosshairRenderEvents.INSTANCE);
