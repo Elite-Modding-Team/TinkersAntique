@@ -171,7 +171,7 @@ public class ToolEvents {
 
   @SubscribeEvent
   public void onAnvilRepair(AnvilUpdateEvent event) {
-    if(Config.repairToolsOnAnvils) return;
+    if(Config.noAnvilSafeguards) return;
     if(event.getLeft().getItem() instanceof ToolCore || event.getRight().getItem() instanceof ToolCore) {
       event.setCanceled(true);
     }

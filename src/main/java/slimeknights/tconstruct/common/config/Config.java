@@ -60,7 +60,7 @@ public final class Config {
   public static boolean vanillaToolBreaking = false;
   public static boolean oldMattockAndKama = false;
   public static boolean jeiGuidebookButton = false;
-  public static boolean repairToolsOnAnvils = false;
+  public static boolean noAnvilSafeguards = false;
 
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -257,7 +257,7 @@ public final class Config {
   static ConfigCategory ClientSide;
   
   public static void load(FMLPreInitializationEvent event) {
-    configFile = new Configuration(event.getSuggestedConfigurationFile(), "0.4", false);
+    configFile = new Configuration(event.getSuggestedConfigurationFile(), "0.5", false);
 
     MinecraftForge.EVENT_BUS.register(instance);
 
@@ -599,9 +599,9 @@ public final class Config {
       prop.setComment("[EXPERIMENTAL] If true, a button is added to JEI material pages that opens the 'Materials and You' book at the approximate location.");
       jeiGuidebookButton = prop.getBoolean();
 
-      prop = configFile.get(cat, "repairToolsOnAnvils", repairToolsOnAnvils);
-      prop.setComment("[EXPERIMENTAL] If tools can be repaired or upgraded on anvils like vanilla equipment.");
-      repairToolsOnAnvils = prop.getBoolean();
+      prop = configFile.get(cat, "noAnvilSafeguards", noAnvilSafeguards);
+      prop.setComment("[EXPERIMENTAL] If true, additional safeguards preventing tools to be unlawfully modified on anvils are disabled.");
+      noAnvilSafeguards = prop.getBoolean();
     }
     // Clientside
     {
