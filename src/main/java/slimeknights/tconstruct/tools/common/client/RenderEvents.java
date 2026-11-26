@@ -108,7 +108,8 @@ public class RenderEvents implements IResourceManagerReloadListener {
 
     renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     //preRenderDamagedBlocks BEGIN
-    GlStateManager.tryBlendFuncSeparate(774, 768, 1, 0);
+    boolean blendWasEnabled = GL11.glIsEnabled(GL11.GL_BLEND);
+    GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.DST_COLOR, GlStateManager.DestFactor.SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
     GlStateManager.enableBlend();
     GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
     GlStateManager.doPolygonOffset(-3.0F, -3.0F);
@@ -154,6 +155,11 @@ public class RenderEvents implements IResourceManagerReloadListener {
     GlStateManager.enableAlpha();
     GlStateManager.depthMask(true);
     GlStateManager.popMatrix();
+    GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    if(!blendWasEnabled) {
+      GlStateManager.disableBlend();
+    }
     // postRenderDamagedBlocks END
   }
 
