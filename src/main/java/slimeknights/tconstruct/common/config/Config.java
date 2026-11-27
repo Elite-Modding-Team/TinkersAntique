@@ -610,7 +610,7 @@ public final class Config {
       noAnvilSafeguards = prop.getBoolean();
 
       prop = configFile.get(cat, "modernTERegistration", modernTERegistration);
-      prop.setComment("[EXPERIMENTAL] If true, tile entities get properly registered under the tconstruct namespace. Can break existing third-party mod configs or quests.");
+      prop.setComment("[EXPERIMENTAL] If true, tile entities get properly registered under the tconstruct namespace. Only recommended for new modpacks, because it can break existing third-party mod configs or quests.");
       modernTERegistration = prop.getBoolean();
     }
     // Clientside
