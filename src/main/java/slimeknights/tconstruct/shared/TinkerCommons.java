@@ -522,8 +522,10 @@ public class TinkerCommons extends TinkerPulse {
     MinecraftForge.EVENT_BUS.register(new BlockEvents());
     MinecraftForge.EVENT_BUS.register(new PlayerDataEvents());
 
-    ModFixs modFixer = FMLCommonHandler.instance().getDataFixer().init(Util.MODID, 1);
-    modFixer.registerFix(FixTypes.BLOCK_ENTITY, new TEDataFixer());
+    if(Config.modernTERegistration) {
+      ModFixs modFixer = FMLCommonHandler.instance().getDataFixer().init(Util.MODID, 1);
+      modFixer.registerFix(FixTypes.BLOCK_ENTITY, new TEDataFixer());
+    }
   }
 
   // POST-INITIALIZATION

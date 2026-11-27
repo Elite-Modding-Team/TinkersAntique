@@ -62,6 +62,7 @@ public final class Config {
   public static boolean jeiGuidebookButton = false;
   public static boolean noAnvilSafeguards = false;
   public static boolean entityMeltingBlood = true;
+  public static boolean modernTERegistration = false;
 
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
@@ -607,6 +608,10 @@ public final class Config {
       prop = configFile.get(cat, "noAnvilSafeguards", noAnvilSafeguards);
       prop.setComment("[EXPERIMENTAL] If true, additional safeguards preventing tools to be unlawfully modified on anvils are disabled.");
       noAnvilSafeguards = prop.getBoolean();
+
+      prop = configFile.get(cat, "modernTERegistration", modernTERegistration);
+      prop.setComment("[EXPERIMENTAL] If true, tile entities get properly registered under the tconstruct namespace. Can break existing third-party mod configs or quests.");
+      modernTERegistration = prop.getBoolean();
     }
     // Clientside
     {

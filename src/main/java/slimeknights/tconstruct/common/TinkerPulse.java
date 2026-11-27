@@ -19,6 +19,7 @@ import slimeknights.mantle.block.EnumBlockSlab;
 import slimeknights.mantle.item.ItemBlockMeta;
 import slimeknights.mantle.item.ItemBlockSlab;
 import slimeknights.tconstruct.TConstruct;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.gadgets.TinkerGadgets;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.plugin.Chisel;
@@ -151,6 +152,10 @@ public abstract class TinkerPulse {
       throw new IllegalArgumentException(String.format("Unlocalized names need to be all lowercase! TE: %s", name));
     }
 
-    GameRegistry.registerTileEntity(teClazz, Util.getResource(name));
+    if(Config.modernTERegistration) {
+      GameRegistry.registerTileEntity(teClazz, Util.getResource(name));
+    } else {
+      GameRegistry.registerTileEntity(teClazz, Util.prefix(name));
+    }
   }
 }
