@@ -1027,6 +1027,7 @@ gui.smeltery.fuel=Fuel
 gui.smeltery.fuel.empty=No fuel found
 gui.smeltery.fuel.invalid=§4%s is not a valid smeltery fuel!
 gui.smeltery.fuel.heat=Temperature: %d
+gui.smeltery.fuel.burn_ticks=burn ticks
 gui.smeltery.capacity=Capacity:
 gui.smeltery.capacity_available=Free:
 gui.smeltery.capacity_used=Used:

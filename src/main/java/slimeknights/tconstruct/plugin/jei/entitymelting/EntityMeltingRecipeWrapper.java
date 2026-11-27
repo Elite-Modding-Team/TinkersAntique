@@ -31,7 +31,7 @@ public class EntityMeltingRecipeWrapper implements IRecipeWrapper {
 	protected double renderScale = -1;
 	protected final ResourceLocation entity;
 	protected final List<FluidStack> outputs;
-	protected final List<FluidStack> fuels;
+	protected final List<List<FluidStack>> fuels;
 	protected final List<List<ItemStack>> inputs;
 
 	private String configStr;
@@ -56,12 +56,13 @@ public class EntityMeltingRecipeWrapper implements IRecipeWrapper {
 			fs.amount = 1000;
 			builder.add(fs);
 		}
-		fuels = builder.build();
+		fuels = ImmutableList.of(builder.build());
 	}
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 		ingredients.setInputLists(ItemStack.class, inputs);
+		ingredients.setInputLists(FluidStack.class, fuels);
 		ingredients.setOutputs(FluidStack.class, outputs);
 	}
 
